@@ -16,7 +16,7 @@ class LocalidadSeeder extends Seeder
     {
         $localidades = [
             'UNAH-CAMPUS CHOLUTECA',
-            'UNAH-CAMPUS CORTES',
+            'Hotel Gualiqueme',
             'UNAH-CAMPUS DANLI',
             'UNAH-CAMPUS CEIBA', 
             'UNAH-CAMPUS COMAYAGUA', 
