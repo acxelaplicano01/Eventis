@@ -1,3 +1,3 @@
 <a href="/">
-    <img src="{{ asset('Logo/Eventis_Logo.png') }}" alt="Logo" height="215px" width="215px" />
+    <img src="{{ asset('Logo/banerl.jpg') }}" alt="Logo" class="bg-transparent" height="215px" width="215px" />
 </a>

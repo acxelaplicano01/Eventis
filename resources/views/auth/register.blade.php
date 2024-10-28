@@ -398,10 +398,12 @@
     <x-nav />
 
     <div class="containers max mt-20 bg-white dark:bg-gray-800">
+        <div class="flex content-center mt-8 mx-24 items-center">
+            <x-application-mark />
+        </div>
         <div class="forms bg-white dark:bg-gray-800">
             <div class="form login active bg-white dark:bg-gray-800">
                 <span class="title text-black dark:text-white">Registro De Usuario</span>
-
                 <form method="POST" action="{{ route('registerpost') }}">
                     @csrf
                     <div class="input-field">
@@ -428,7 +430,7 @@
                         <i class="uil uil-lock text-black dark:text-white icon"></i>
                         <i class="uil uil-eye-slash text-black dark:text-white showHidePw"></i>
                     </div>
-                    
+
                     <div class="input-field button text">
                         <input type="submit" style="text-align: center;" value="Siguiente"
                             class="bg-yellow-500 hover:bg-yellow-600 text-white dark:bg-yellow-600 dark:hover:bg-yellow-700">
