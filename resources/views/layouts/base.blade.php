@@ -27,6 +27,7 @@
             document.documentElement.classList.remove('dark')
         }
     </script>
+    @livewireStyles
 </head>
 
 <body class="font-sans antialiased" class="bg-gray-100 dark:bg-gray-900">

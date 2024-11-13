@@ -23,7 +23,7 @@
 
                 @if($isOpen)
                     @include('livewire.Evento.create')
-                @endif
+                @endif               
 
 
 
