@@ -162,10 +162,31 @@
                                         <h3 class="mb-1 text-xl font-bold text-gray-900 dark:text-white">
                                             "{{$tarjetasEvento->nombreevento}}" tiene un costo
                                         </h3>
-                                        <p class="text-gray-500 dark:text-gray-400 mb-6">Por favor, sube tu comprobante de pago para
-                                            completar tu
-                                            inscripción.
-                                        <p>
+                                        <div class="payment-section p-4 bg-gray-100 rounded-lg shadow-lg dark:bg-gray-800">
+                                            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Realiza tu pago</h3>
+                                            <ul class="list-disc pl-5 text-gray-700 dark:text-gray-300">
+                                                <li>
+                                                    Tesorería UNAH con código de pago <strong>1078</strong>
+                                                </li>
+                                                <li>
+                                                    Pago en Banco Lafise con código de pago <strong>1078</strong>
+                                                </li>
+                                                <li class="mt-2">
+                                                    <span>Pago en línea:</span>
+                                                    <a href="https://pagos.unah.edu.hn/#/productos/101" target="_blank"
+                                                        class="inline-flex items-center px-4 py-2 mt-2 text-sm font-medium text-white bg-yellow-600 rounded-lg shadow hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600">
+                                                        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                            stroke-width="2" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M17 9V7a4 4 0 1 0-8 0v2M5 9h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2zm6 3v4m-3-2h6" />
+                                                        </svg>
+                                                        Pagar en línea
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <p class="mt-4 text-gray-600 dark:text-gray-400">Por favor, sube tu comprobante de pago para completar tu inscripción.</p>
+                                        </div>
+
                                             <!-- Modal footer -->
                                         <div class="flex items-center mt-6 space-x-4 rtl:space-x-reverse">
                                             <button data-modal-hide="progress-modal-{{ $tarjetasEvento->id }}" type="button"
