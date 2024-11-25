@@ -162,39 +162,31 @@
                                         <h3 class="mb-1 text-xl font-bold text-gray-900 dark:text-white">
                                             "{{$tarjetasEvento->nombreevento}}" tiene un costo
                                         </h3>
-                                        <div class="my-4 w-full">
-                                            <div
-                                                class="max-w-sm p-6 w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                                                <a href="#">
-                                                    <h5
-                                                        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                                        Realiza
-                                                        tu pago: </h5>
-                                                </a>
-                                                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                                                    Tesorería UNAH con código de pago <span
-                                                        class="text-xl font-semibold">1078</span></span>
-                                                <div class="mb-2 block">
-                                                    <span>Pago en Banco Lafise con código <span
-                                                            class="text-xl font-semibold">1078</span></span>
-                                                </div>
-                                                </p>
-                                                <a href="https://pagos.unah.edu.hn/#/productos/101"
-                                                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-600 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
-                                                    Pago en línea
-                                                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                                                    </svg>
-                                                </a>
-                                            </div>
-
+                                        <div class="payment-section p-4 bg-gray-100 rounded-lg shadow-lg dark:bg-gray-800">
+                                            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Realiza tu pago</h3>
+                                            <ul class="list-disc pl-5 text-gray-700 dark:text-gray-300">
+                                                <li>
+                                                    Tesorería UNAH con código de pago <strong>1078</strong>
+                                                </li>
+                                                <li>
+                                                    Pago en Banco Lafise con código de pago <strong>1078</strong>
+                                                </li>
+                                                <li class="mt-2">
+                                                    <span>Pago en línea:</span>
+                                                    <a href="https://pagos.unah.edu.hn/#/productos/101" target="_blank"
+                                                        class="inline-flex items-center px-4 py-2 mt-2 text-sm font-medium text-white bg-yellow-600 rounded-lg shadow hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600">
+                                                        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                            stroke-width="2" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M17 9V7a4 4 0 1 0-8 0v2M5 9h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2zm6 3v4m-3-2h6" />
+                                                        </svg>
+                                                        Pagar en línea
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <p class="mt-4 text-gray-600 dark:text-gray-400">Por favor, sube tu comprobante de pago para completar tu inscripción.</p>
                                         </div>
-                                        <p class="text-gray-500 dark:text-gray-400 mb-6">Por favor, sube tu comprobante de pago para
-                                            completar tu
-                                            inscripción.
-                                        <p>
+
                                             <!-- Modal footer -->
                                         <div class="flex items-center mt-6 space-x-4 rtl:space-x-reverse">
                                             <button data-modal-hide="progress-modal-{{ $tarjetasEvento->id }}" type="button"
