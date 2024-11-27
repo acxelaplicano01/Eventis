@@ -18,12 +18,17 @@
             @if ($isOpen)
                 @include('livewire.Persona.create')
             @endif
-
+            <div class="flex justify-end mb-4">
+                        <button wire:click="exportarExcel" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                            Exportar a Excel
+                        </button>
+            </div>
             <div class="relative overflow-x-auto sm:rounded-lg dark:bg-gray-800">
                 <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
                     <div>
                         <button wire:click="create()" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded my-3">Nuevo</button>
                     </div>
+                  
                     <label for="table-search" class="sr-only dark:text-white">Buscar</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">

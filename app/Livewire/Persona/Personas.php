@@ -11,7 +11,8 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Hash;
 use Livewire\WithFileUploads;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PersonasExport;
 class Personas extends Component
 {
     use WithPagination, WithFileUploads;
@@ -31,7 +32,12 @@ class Personas extends Component
         $this->nacionalidades = Nacionalidad::all();
         $this->tipoperfiles = Tipoperfil::all();
     }
-
+    
+    
+    public function exportarExcel()
+    {
+        return Excel::download(new PersonasExport, 'personas.xlsx');
+    }
     public function render()
     {
         $personas = Persona::with('user', 'nacionalidad', 'tipoperfil')
