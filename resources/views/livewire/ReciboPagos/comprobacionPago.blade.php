@@ -33,8 +33,8 @@
 
                 <div class="relative overflow-x-auto sm:rounded-lg dark:bg-gray-800">
                     <div
-                        class="flex flex-row sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center pb-2">
-                        <div class="mr-2">
+                        class="flex flex-row sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center mt-1 pb-2">
+                        <div class="mr-2 ml-1">
                             <button wire:click="marcarTodos('Aceptado')"
                                 class="mb-1 w-full py-2 px-4 text-sm font-bold text-white inline-flex items-center bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 rounded text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800">
                                 <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
