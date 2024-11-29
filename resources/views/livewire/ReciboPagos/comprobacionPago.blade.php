@@ -104,7 +104,7 @@
                                         </button>
                                         @if($inscripcion->Status == 'Aceptado')
                                             <td class="px-6 py-4 dark:text-gray-900 text-center">
-                                                <button wire:click="descargarDiploma({{ $inscripcion->id }})"
+                                                <button wire:click="descargarDiplomas({{ $inscripcion->id }})"
                                                     class="mb-1 w-full px-3 py-2 text-sm font-medium text-white inline-flex items-center bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
                                                     Diploma
                                                     <svg class="w-6 h-6 text-white ms-2 dark:text-white" aria-hidden="true"

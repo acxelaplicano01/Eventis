@@ -98,20 +98,20 @@ class AsistenciasConferencias extends Component
             session()->flash('error', 'La persona no tiene asistencia registrada.');
             return;
         }
-    
+
         $diploma = DiplomaGenerado::where('IdAsistencia', $asistencia->id)->first();
         if (!$diploma) {
             session()->flash('error', 'Diploma no encontrado para esta persona.');
             return;
         }
-    
+
         $uuid = $diploma->uuid;
-    
+
         // Generar QR code
         $qrcode = QRCodeService::generateTextQRCode(
             config('app.url') . '/validarDiploma/' . $uuid
         );
-    
+
         // Datos del diploma
         $data = [
             'Nombre' => $asistencia->suscripcion->persona->nombre,
@@ -135,13 +135,13 @@ class AsistenciasConferencias extends Component
             'uuid' => $uuid,
             'qrcode' => $qrcode,
         ];
-    
+
         // Generar PDF
         $pdf = PDF::loadView('livewire.descargarDiploma', $data)->setPaper('a4', 'landscape');
-    
-        return response()->streamDownload(fn() => print($pdf->output()), 'diploma_' . $data['Nombre'] . '.pdf');
+
+        return response()->streamDownload(fn() => print ($pdf->output()), 'diploma_' . $data['Nombre'] . '.pdf');
     }
-    
+
     public function descargarDiplomas($conferenciaId)
     {
         // Obtener las personas con asistencia 1 para la conferencia específica
@@ -183,7 +183,7 @@ class AsistenciasConferencias extends Component
                     'Sello1' => $asistencia->suscripcion->conferencia->evento->diploma->Sello1,
                     'Sello2' => $asistencia->suscripcion->conferencia->evento->diploma->Sello2,
                     'FirmaConferencista' => $asistencia->suscripcion->conferencia->conferencista->firma,
-                    'SelloConferencista' =>$asistencia->suscripcion->conferencia->conferencista->sello,
+                    'SelloConferencista' => $asistencia->suscripcion->conferencia->conferencista->sello,
                     'uuid' => $uuid,
                     'qrcode' => $qrcode,
                 ];

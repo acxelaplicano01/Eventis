@@ -6,6 +6,8 @@ use App\Models\Inscripcion;
 use Illuminate\Support\Facades\Storage;
 use App\Services\QRCodeService;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use setasign\Fpdi\Fpdi;
+use setasign\Fpdi\PdfParser\StreamReader;
 use Carbon\Carbon;
 use App\Models\DiplomaEvento;
 use Livewire\Component;
@@ -159,7 +161,73 @@ class ComprobacionPago extends Component
     }
 
 
-
+    
+    public function descargarDiplomas($eventoId)
+    {
+        // Obtener las personas con estatus aceptado para el evento específico
+        $eventopersona = Inscripcion::where('Status', 'Aceptado')
+            ->where('IdEvento', $eventoId)
+            ->get();
+    
+        if ($eventopersona->isEmpty()) {
+            // Manejar el caso en que no se encuentren inscripciones aceptadas
+            session()->flash('error', 'No se encontraron inscripciones aceptadas para el evento especificado');
+            return;
+        }
+    
+        $pdf = new \Dompdf\Dompdf();
+        $html = '';
+    
+        foreach ($eventopersona as $inscripcion) {
+            // Obtener el UUID del diploma generado
+            $diplomaEvento = DiplomaEvento::where('inscripcionId', $inscripcion->id)->first();
+    
+            if (!$diplomaEvento) {
+                continue; // Saltar si no se encuentra el diploma generado
+            }
+    
+            $uuidDiploma = $diplomaEvento->uuid;
+    
+            // Generar el código QR
+            $qrcode = QRCodeService::generateTextQRCode(
+                config('app.url') . '/validarDiploma/' . $uuidDiploma
+            );
+    
+            // Generar el HTML del diploma
+            $html .= view('livewire.diploma-evento', [
+                'Nombre' => $inscripcion->persona->nombre,
+                'Apellido' => $inscripcion->persona->apellido,
+                'FechaInicio' => $inscripcion->evento->fechainicio,
+                'Organizador' => $inscripcion->evento->organizador,
+                'Evento' => $inscripcion->evento->nombreevento,
+                'NombreFirma1' => $inscripcion->evento->diploma->NombreFirma1,
+                'NombreFirma2' => $inscripcion->evento->diploma->NombreFirma2,
+                'Titulo1' => $inscripcion->evento->diploma->Titulo1,
+                'Titulo2' => $inscripcion->evento->diploma->Titulo2,
+                'Plantilla' => $inscripcion->evento->diploma->Plantilla,
+                'Firma1' => $inscripcion->evento->diploma->Firma1,
+                'Firma2' => $inscripcion->evento->diploma->Firma2,
+                'Sello1' => $inscripcion->evento->diploma->Sello1,
+                'Sello2' => $inscripcion->evento->diploma->Sello2,
+                'uuid' => $uuidDiploma,
+                'qrcode' => $qrcode,
+            ])->render();
+    
+            $html .= '<div style="page-break-after: always;"></div>'; // Agregar un salto de página después de cada diploma
+        }
+    
+        // Generar el PDF con todo el HTML
+        $pdf->loadHtml($html);
+        $pdf->setPaper('a4', 'landscape');
+        $pdf->render();
+    
+        // Guardar el PDF temporalmente
+        $pdfPath = 'Diplomas ' . $inscripcion->evento->nombreevento . '.pdf';
+        Storage::put('public/' . $pdfPath, $pdf->output());
+    
+        // Descargar el PDF
+        return response()->download(storage_path('app/public/' . $pdfPath))->deleteFileAfterSend(true);
+    }
 
     public function render()
     {
