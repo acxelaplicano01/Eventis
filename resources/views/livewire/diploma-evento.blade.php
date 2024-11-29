@@ -46,13 +46,12 @@
                 .certificado-header,
                 .certificado-body,
                 .firmas,
-                .sello,
-                .codigo {
+                .sello{
                     margin-top: 20px;
                     position: relative;
                     text-align: center;
-                    z-index: 2;
                     color: black;
+                    z-index: 2;
                 }
 
                 .certificado-title {
@@ -83,7 +82,7 @@
                     font-weight: 400;
                     letter-spacing: 3px;
                     font-family: 'Great Vibes', cursive;
-                  
+                    margin-top: 150px;
                 }
 
                 .certificado-body {
@@ -147,10 +146,16 @@
                     font-size: 12px;
                     margin-top: 45px;
                     text-align: center;
-                    left: 120px;
+                    left: 80px;
                     position: absolute;
-                    margin-right: 410px;
-                    z-index: 2;
+                    margin-top: 222px;
+
+                    
+                    /* margin-top: 20px; */
+                    /* position: relative; */
+                    /* text-align: center; */
+                    color: black;
+                    z-index = 3;
                 }
             </style>
         </header>
@@ -161,21 +166,17 @@
                     <img class="fondo" src="{{$Plantilla}}" alt="Diploma">
                 </div>
                 <div class="certificado-header">
-                    <div class="certificado-title">CERTIFICADO</div>
-                    <div class="certificado-title2">DE RECONOCIMIENTO</div>
-                    <div class="certificado-title3">OTORGADO A:</div>
-                    <div class="recipient-name">{{ $Nombre }} {{ $Apellido }}</div>
-                </div>
-                <div class="certificado-body">
-                    Por su destacada asistencia y participación en el "{{ $Evento }}",  organizado por {{$Organizador}} realizado el {{ \Carbon\Carbon::parse($FechaInicio)->locale('es')->isoFormat('D [de] MMMM [de] YYYY') }}.
-                    <div>
+                    <div style="padding-left: 750px;">
                         <img class="qr-code" src="data:image/png;base64,{{ $qrcode }}" alt="Código QR">
                     </div>
                 </div>
+                
+                <div class="recipient-name" style="z-index: 3">A: {{ $Nombre }} {{ $Apellido }}</div>
+              
                 <div class="firmass">
                     <table style="width: 100%; text-align: center;">
                         <tr>
-                        @if($Firma1 || $Sello1 || $NombreFirma1 || $Titulo1)
+                        <!-- @if($Firma1 || $Sello1 || $NombreFirma1 || $Titulo1)
                             <td class="firmas">
                                 <div class="firma">
                                     <img class="fondo" src="{{ $Firma1 }}" />
@@ -204,10 +205,10 @@
                             </td>
                             @endif
                            
-                        </tr>
+                        </tr> -->
                     </table>
                 </div>
-                <p class="codigo">Código: {{$uuid}}</p>
+                <p class="codigo" style="z-index: 5">Código: {{$uuid}}</p>
             </div>
         </body>
     </x-layouts.reportes>

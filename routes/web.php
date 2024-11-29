@@ -82,7 +82,7 @@ Route::post('/registrar', [RegistrarUsarioController::class, 'store'])->name('re
 Route::post('/nueva-persona', [RegistrarUsarioController::class, 'registrarPersona'])->name('nueva-persona');
 // VALIDAR DIPLOMA
 Route::get('/validarDiploma/{uuid}', [ValidarDiplomaController::class, 'validarDiploma'])->name('validarDiploma');
-
+Route::get('/validarDiplomaEvento/{uuid}', [ValidarDiplomaController::class, 'validarDiplomaEvento'])->name('validarDiplomaEvento');
 Route::get('/', [WelcomeController::class, 'index'])->name('pagina-inicial');
 Route::get('/temascongreso', [TemasCongresoController::class, 'index'])->name('temascongreso');
 Route::get('/conferencistas-congreso', [ConferencistasCongresoController::class, 'index'])->name('conferencistas-congreso');

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Inscripcion;
+use App\Models\DiplomaEvento;
 use App\Models\Asistencia;
 use App\Models\DiplomaGenerado;
 
@@ -10,6 +12,8 @@ class ValidarDiplomaController extends Controller
     public $conferencia;
     public $codigoDiploma;
     public $asistencia;
+    public $evento;
+    public $inscripcion;
     public $uuid;
 
    
@@ -40,4 +44,27 @@ class ValidarDiplomaController extends Controller
             'asistencia' => null,
         ]);
     }
+
+
+
+    public function validarDiplomaEvento($uuid)
+    {
+        $this->uuid = $uuid;
+        $diploma = DiplomaEvento::where('uuid', $this->uuid)->first();
+        if ($diploma) {
+            $inscripcion = Inscripcion::where('id', $diploma->id)->first(); // Acceder al primer elemento de la colección
+            if ($inscripcion) {
+                $this->persona = $inscripcion->persona;
+                $this->evento = $inscripcion->evento;
+                $this->codigoDiploma = $inscripcion->evento->diploma;
+                
+                return view('livewire.validar-diploma-evento', [
+                    'persona' => $this->persona,
+                    'evento' => $this->evento,
+                    'uuid' => $this->uuid,
+                    'inscripcion' => $this->inscripcion,
+                ]);
+            }
+        }
+        }
 }

@@ -202,8 +202,7 @@
                                 <div>{{ $NombreFirma2 }}</div>
                                 <div>{{ $Titulo2 }}</div>
                             </td>
-                            @endif
-                           
+                            @endif    
                         </tr>
                     </table>
                 </div>
