@@ -30,8 +30,42 @@
                     </div>
                 </div>
 
-                <div class="relative overflow-x-auto sm:rounded-lg">
-                    <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center pb-4">
+
+                <div class="relative overflow-x-auto sm:rounded-lg dark:bg-gray-800">
+                    <div
+                        class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
+                        <div>
+                            <button wire:click="create()"
+                                class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded my-3">Nuevo</button>
+                        </div>
+                        <div class="flex justify-end mb-4 space-x-2">
+                            <button wire:click="marcarTodos('Aceptado')"
+                                class="mb-1 w-full py-2 px-4 text-sm font-bold text-white inline-flex items-center bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-lg text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800">
+                                <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-6 7 2 2 4-4m-5-9v4h4V3h-4Z" />
+                                </svg>
+                                Aceptar Todos
+                            </button>
+                        </div>
+                        <div>
+                            <button wire:click="descargarDiplomas({{ $evento_id }})"
+                                class="mb-1 w-full py-2 px-4 text-sm font-bold text-white inline-flex items-center bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
+                                Todos los diplomas
+                                <svg class="w-6 h-6 text-white ms-2 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2m-8 1V4m0 12-4-4m4 4 4-4" />
+                                </svg>
+                            </button>
+
+                        </div>
+
                         <label for="table-search" class="sr-only dark:text-white">Buscar</label>
                         <div class="relative">
                             <div
@@ -45,22 +79,7 @@
                             <input wire:model.live="search" type="text" id="table-search-users"
                                 class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-700 dark:text-white"
                                 placeholder="Buscar...">
-
-
                         </div>
-                        <div class="mr-56"></div>
-                        <button wire:click="marcarTodos('Aceptado')"
-                            class="mb-1 px-3 py-2 text-sm ml-96 font-medium text-white inline-flex items-center bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-lg text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800">
-                            <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M15 4h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3m0 3h6m-6 7 2 2 4-4m-5-9v4h4V3h-4Z" />
-                            </svg>
-                            Aceptar Todos
-                        </button>
-
                     </div>
 
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -86,12 +105,23 @@
                                         {{ $inscripcion->evento->nombreevento }}
                                     </td>
                                     <td class="px-6 py-4 dark:text-white">
-                                        {{ $inscripcion->Status }}
+
+                                        @if($inscripcion->Status == "Pendiente")
+                                            <span
+                                                class="bg-yellow-100 text-yellow-800 text-xs font-bold me-2 px-3 py-1 rounded-full dark:bg-yellow-900 dark:text-yellow-300">Pendiente</span>
+                                        @elseif($inscripcion->Status == "Rechazado")
+                                            <span
+                                                class="bg-red-100 text-red-800 text-xs font-bold me-2 px-3 py-1 rounded-full dark:bg-red-900 dark:text-red-300">Rechazado</span>
+                                        @elseif($inscripcion->Status == "Aceptado")
+                                            <span
+                                                class="bg-green-100 text-green-800 text-xs font-bold me-2 px-3 py-1 rounded-full dark:bg-green-900 dark:text-green-300">Aceptado</span>
+                                        @endif
+
                                     </td>
                                     <td class="px-6 py-4 dark:text-gray-900 text-center">
                                         <button data-modal-target="large-modal-{{$inscripcion->id}}"
                                             data-modal-toggle="large-modal-{{$inscripcion->id}}"
-                                            class="mb-1 px-3 py-2 text-sm font-medium text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-lg text-center dark:bg-green-700 dark:hover:bg-green-800 dark:focus:ring-green-800"
+                                            class="mb-1 px-3 py-2 text-sm font-bold text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-lg text-center dark:bg-green-700 dark:hover:bg-green-800 dark:focus:ring-green-800"
                                             type="button">
                                             <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -104,8 +134,8 @@
                                         </button>
                                         @if($inscripcion->Status == 'Aceptado')
                                             <td class="px-6 py-4 dark:text-gray-900 text-center">
-                                                <button wire:click="descargarDiplomas({{ $inscripcion->id }})"
-                                                    class="mb-1 w-full px-3 py-2 text-sm font-medium text-white inline-flex items-center bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
+                                                <button wire:click="descargarDiploma({{ $inscripcion->id }})"
+                                                    class="mb-1 w-full px-3 py-2 text-sm font-bold text-white inline-flex items-center bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
                                                     Diploma
                                                     <svg class="w-6 h-6 text-white ms-2 dark:text-white" aria-hidden="true"
                                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -178,7 +208,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="px-6 py-4 text-center">No hay inscripciones registradas.</td>
+                                    <td colspan="5" class="px-6 py-4 text-center">No hay coincidencias registradas.</td>
                                 </tr>
                             @endforelse
                         </tbody>

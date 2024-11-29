@@ -26,22 +26,57 @@
                     class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
                     <div>
                         <button wire:click="create()"
-                            class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded my-3">Nuevo</button>
+                            class="mb-1 w-full ml-0.5 py-2 px-4 text-sm inline-flex items-center bg-yellow-500 hover:bg-yellow-600 text-white font-bold rounded">
+                            <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M5 12h14m-7 7V5" />
+                            </svg>
+                            Nueva persona</button>
                     </div>
-                    <div class="flex justify-end mb-4 space-x-2">
+                    <div>
                         <button wire:click="exportarExcel"
-                            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-                            Exportar a Excel
-                        </button>
-                        <button wire:click="suscribirATodos"
-                            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                            Suscribir a Todos a las conferencias
-                        </button>
-                        <button wire:click="inscribirATodos"
-                            class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
-                            Inscribir a Todos al Evento
+                            class="mb-1 w-full py-2 px-4 text-sm inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold rounded">
+                            <svg class="w-6 h-6 text-white mr-1 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2M12 4v12m0-12 4 4m-4-4L8 8" />
+                            </svg>
+                            Exportar
                         </button>
                     </div>
+                    <div>
+                        <button wire:click="inscribirATodos"
+                            class="mb-1 w-full py-2 px-4 text-sm inline-flex items-center bg-green-500 font-bold text-white rounded hover:bg-green-600">
+                            <svg class="w-6 h-6 text-white mr-1 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M16 12h4m-2 2v-4M4 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+
+                            Evento
+                        </button>
+                    </div>
+                    <div>
+                        <button wire:click="suscribirATodos"
+                            class="mb-1 w-full py-2 px-4 text-sm inline-flex items-center bg-blue-500 text-white font-bold rounded hover:bg-blue-600">
+                            <svg class="w-6 h-6 text-white mr-1 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M16 12h4m-2 2v-4M4 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+
+                            Conferencias
+                        </button>
+                    </div>
+                    
 
                     <label for="table-search" class="sr-only dark:text-white">Buscar</label>
                     <div class="relative">
@@ -84,24 +119,33 @@
                             <tr
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $persona->id }}</td>
+                                    {{ $persona->id }}
+                                </td>
                                 <td class="px-6 py-4">{{ $persona->user ? $persona->user->name : 'Sin Usuario' }}</td>
                                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $persona->dni }}</td>
+                                    {{ $persona->dni }}
+                                </td>
                                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $persona->nombre }}</td>
+                                    {{ $persona->nombre }}
+                                </td>
                                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $persona->apellido }}</td>
+                                    {{ $persona->apellido }}
+                                </td>
                                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $persona->correo }}</td>
+                                    {{ $persona->correo }}
+                                </td>
                                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $persona->correoInstitucional }}</td>
+                                    {{ $persona->correoInstitucional }}
+                                </td>
                                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $persona->numeroCuenta }}</td>
+                                    {{ $persona->numeroCuenta }}
+                                </td>
                                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $persona->fechaNacimiento }}</td>
+                                    {{ $persona->fechaNacimiento }}
+                                </td>
                                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $persona->sexo }}</td>
+                                    {{ $persona->sexo }}
+                                </td>
                                 <td class="px-6 py-4">
                                     @if($persona->foto)
 
@@ -112,15 +156,17 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $persona->telefono }}</td>
+                                    {{ $persona->telefono }}
+                                </td>
                                 <td class="px-6 py-4">
                                     {{ $persona->nacionalidad ? $persona->nacionalidad->nombreNacionalidad : 'Sin Nacionalidad' }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $persona->tipoperfil ? $persona->tipoperfil->tipoperfil : 'Sin Perfil' }}</td>
+                                    {{ $persona->tipoperfil ? $persona->tipoperfil->tipoperfil : 'Sin Perfil' }}
+                                </td>
                                 <td class="px-6 py-4">
                                     <button wire:click="edit({{ $persona->id }})"
-                                        class="mb-1 px-3 py-2 text-sm font-medium text-white inline-flex items-center bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-300 rounded-lg text-center dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-800">
+                                        class="mb-1 px-3 py-2 text-sm font-bold text-white inline-flex items-center bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-300 rounded-lg text-center dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-800">
                                         <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                             viewBox="0 0 24 24">
@@ -133,7 +179,7 @@
                                         Editar
                                     </button>
                                     <button wire:click="confirmDelete({{ $persona->id }})"
-                                        class="px-3 py-2 text-sm font-medium text-white inline-flex items-center bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
+                                        class="px-3 py-2 text-sm font-bold text-white inline-flex items-center bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
                                         <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                             viewBox="0 0 24 24">
