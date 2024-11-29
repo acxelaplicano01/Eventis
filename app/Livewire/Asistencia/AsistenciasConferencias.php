@@ -91,7 +91,57 @@ class AsistenciasConferencias extends Component
         $this->modalMessage = 'Todas las asistencias fueron marcadas.';
         $this->modalOpen = true;
     }
-
+    public function descargarDiploma($suscripcionId)
+    {
+        $asistencia = Asistencia::where('IdSuscripcion', $suscripcionId)->where('Asistencia', 1)->first();
+        if (!$asistencia) {
+            session()->flash('error', 'La persona no tiene asistencia registrada.');
+            return;
+        }
+    
+        $diploma = DiplomaGenerado::where('IdAsistencia', $asistencia->id)->first();
+        if (!$diploma) {
+            session()->flash('error', 'Diploma no encontrado para esta persona.');
+            return;
+        }
+    
+        $uuid = $diploma->uuid;
+    
+        // Generar QR code
+        $qrcode = QRCodeService::generateTextQRCode(
+            config('app.url') . '/validarDiploma/' . $uuid
+        );
+    
+        // Datos del diploma
+        $data = [
+            'Nombre' => $asistencia->suscripcion->persona->nombre,
+            'Apellido' => $asistencia->suscripcion->persona->apellido,
+            'Conferencia' => $asistencia->suscripcion->conferencia->nombre,
+            'Conferencista' => $asistencia->suscripcion->conferencia->conferencista->persona->nombre . ' ' . $asistencia->suscripcion->conferencia->conferencista->persona->apellido,
+            'TituloConferencista' => $asistencia->suscripcion->conferencia->conferencista->titulo,
+            'FechaConferencia' => $asistencia->suscripcion->conferencia->fecha,
+            'Evento' => $asistencia->suscripcion->conferencia->evento->nombreevento,
+            'NombreFirma1' => $asistencia->suscripcion->conferencia->evento->diploma->NombreFirma1,
+            'NombreFirma2' => $asistencia->suscripcion->conferencia->evento->diploma->NombreFirma2,
+            'Titulo1' => $asistencia->suscripcion->conferencia->evento->diploma->Titulo1,
+            'Titulo2' => $asistencia->suscripcion->conferencia->evento->diploma->Titulo2,
+            'Plantilla' => $asistencia->suscripcion->conferencia->evento->diploma->Plantilla,
+            'Firma1' => $asistencia->suscripcion->conferencia->evento->diploma->Firma1,
+            'Firma2' => $asistencia->suscripcion->conferencia->evento->diploma->Firma2,
+            'Sello1' => $asistencia->suscripcion->conferencia->evento->diploma->Sello1,
+            'Sello2' => $asistencia->suscripcion->conferencia->evento->diploma->Sello2,
+            'FirmaConferencista' => $asistencia->suscripcion->conferencia->conferencista->firma,
+            'SelloConferencista' => $asistencia->suscripcion->conferencia->conferencista->sello,
+            'uuid' => $uuid,
+            'qrcode' => $qrcode,
+        ];
+    
+        // Generar PDF
+        $pdf = PDF::loadView('livewire.descargarDiploma', $data)->setPaper('a4', 'landscape');
+    
+        return response()->streamDownload(fn() => print($pdf->output()), 'diploma_' . $data['Nombre'] . '.pdf');
+    }
+    
     public function descargarDiplomas($conferenciaId)
     {
         // Obtener las personas con asistencia 1 para la conferencia específica

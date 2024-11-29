@@ -18,11 +18,20 @@
             @if ($isOpen)
                 @include('livewire.Persona.create')
             @endif
-            <div class="flex justify-end mb-4">
-                        <button wire:click="exportarExcel" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-                            Exportar a Excel
-                        </button>
+            <div class="flex justify-end mb-4 space-x-2">
+                <button wire:click="exportarExcel" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                    Exportar a Excel
+                </button>
+                <button wire:click="suscribirATodos" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    Suscribir a Todos a las conferencias
+                </button>
+                <button wire:click="inscribirATodos" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+                    Inscribir a Todos al Evento
+                </button>
             </div>
+
+
+
             <div class="relative overflow-x-auto sm:rounded-lg dark:bg-gray-800">
                 <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
                     <div>

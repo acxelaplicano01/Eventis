@@ -203,20 +203,7 @@
                                 <div>{{ $Titulo2 }}</div>
                             </td>
                             @endif
-                            @if($FirmaConferencista || $SelloConferencista || $Conferencista || $TituloConferencista)
-                            <td class="firmas">
-                                <div class="firma">
-                                    <img class="fondo" src="{{ $FirmaConferencista }}" />
-                                </div>
-                                <p>______________________________</p>
-                                <div></div>
-                                <div class="sello">
-                                    <img class="fondo" src="{{ $SelloConferencista }}" />
-                                </div>
-                                <div>{{ $Conferencista }}</div>
-                                <div>{{ $TituloConferencista }}</div>
-                            </td>
-                            @endif
+                           
                         </tr>
                     </table>
                 </div>

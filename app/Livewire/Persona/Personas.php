@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Hash;
 use Livewire\WithFileUploads;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PersonasExport;
+use App\Models\Conferencia;
+use App\Models\Suscripcion;
+use App\Models\Evento;
+use App\Models\Recibopago;
+use App\Models\Inscripcion;
 class Personas extends Component
 {
     use WithPagination, WithFileUploads;
@@ -32,7 +37,51 @@ class Personas extends Component
         $this->nacionalidades = Nacionalidad::all();
         $this->tipoperfiles = Tipoperfil::all();
     }
-    
+
+
+    public function inscribirATodos()
+    {
+        
+        $evento = Evento::first();
+
+        if (!$evento) {
+            session()->flash('error', 'No hay eventos disponibles.');
+            return;
+        }
+
+       
+        $personas = Persona::all();
+
+        foreach ($personas as $persona) {
+            
+            $yaInscrita = Inscripcion::where('IdEvento', $evento->id)
+                ->where('IdPersona', $persona->id)
+                ->exists();
+
+            if (!$yaInscrita) {
+                
+                $recibo = Recibopago::create([
+                    'idEvento' => $evento->id,
+                    'idPersona' => $persona->id,
+                    'fecha' => now(),
+                    'foto' => 'https://picsum.photos/200',
+                    'created_by' => auth()->id(),
+                ]);
+
+               
+                Inscripcion::create([
+                    'IdEvento' => $evento->id,
+                    'IdPersona' => $persona->id,
+                    'IdRecibo' => $recibo->id,
+                    'Status' => 'Aceptado', 
+                    'created_by' => auth()->id(),
+                ]);
+            }
+        }
+
+        session()->flash('message', 'Todas las personas han sido inscritas correctamente en el evento.');
+    }
+
     
     public function exportarExcel()
     {
@@ -91,81 +140,109 @@ class Personas extends Component
     }
 
     public function store()
-{
-    // Validar solo si el usuario debe ser creado
-    $userValidation = [
-        'name' => 'nullable|string|max:255',
-        'email' => 'nullable|email|unique:users,email',
-        'password' => 'nullable|string|min:8',
-    ];
+    {
+        // Validar solo si el usuario debe ser creado
+        $userValidation = [
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|email|unique:users,email',
+            'password' => 'nullable|string|min:8',
+        ];
 
-    // Validaciones para el campo de persona
-    $personaValidation = [
-        'dni' => 'required|unique:personas,dni,' . $this->persona_id,
-        'foto' => $this->persona_id ? 'nullable|image|mimes:jpeg,png,jpg,gif,jfif' : 'required|image|mimes:jpeg,png,jpg,gif,jfif',
-        'nombre' => 'required',
-        'apellido' => 'required',
-        'correo' => 'required|email|unique:personas,correo,' . $this->persona_id,
-        'correoInstitucional' => 'nullable|email',
-        'fechaNacimiento' => 'required|date',
-        'sexo' => 'required',
-        'direccion' => 'required',
-        'telefono' => 'required',
-        'numeroCuenta' => 'nullable',
-        'IdNacionalidad' => 'required|exists:nacionalidads,id',
-        'IdTipoPerfil' => 'required|exists:tipoperfils,id',
-    ];
+        // Validaciones para el campo de persona
+        $personaValidation = [
+            'dni' => 'required|unique:personas,dni,' . $this->persona_id,
+            'foto' => $this->persona_id ? 'nullable|image|mimes:jpeg,png,jpg,gif,jfif' : 'nullable|image|mimes:jpeg,png,jpg,gif,jfif',
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'correo' => 'required|email|unique:personas,correo,' . $this->persona_id,
+            'correoInstitucional' => 'nullable|email',
+            'fechaNacimiento' => 'required|date',
+            'sexo' => 'required',
+            'direccion' => 'required',
+            'telefono' => 'required',
+            'numeroCuenta' => 'nullable',
+            'IdNacionalidad' => 'required|exists:nacionalidads,id',
+            'IdTipoPerfil' => 'required|exists:tipoperfils,id',
+        ];
+        
+        $this->validate($personaValidation);
 
-    $this->validate($personaValidation);
+        if ($this->foto) {
+            $path = $this->foto->store('persona', 'public');
+        } else {
+            // Si no se ha subido una nueva foto, conservar la foto existente
+            $persona = Persona::find($this->persona_id);
+            $path = $persona ? $persona->foto : null; // Mantener la foto existente
+        }
 
-    if ($this->foto) {
-        $path = $this->foto->store('persona', 'public');
-    } else {
-        // Si no se ha subido una nueva foto, conservar la foto existente
-        $persona = Persona::find($this->persona_id);
-        $path = $persona ? $persona->foto : null; // Mantener la foto existente
-    }
+        // Solo crear el usuario si se proporciona el nombre, email y password
+        if ($this->name && $this->email && $this->password) {
+            $user = User::create([
+                'name' => $this->name,
+                'email' => $this->email,
+                'password' => Hash::make($this->password),
+            ]);
 
-    // Solo crear el usuario si se proporciona el nombre, email y password
-    if ($this->name && $this->email && $this->password) {
-        $user = User::create([
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => Hash::make($this->password),
+            $role = Role::where('name', 'Participante')->first();
+            if ($role) {
+                $user->roles()->attach($role->id);
+            }
+        } else {
+            $user = null;
+        }
+        
+        // Crear o actualizar la persona
+        $persona = Persona::updateOrCreate(['id' => $this->persona_id], [
+            'IdUsuario' => $user ? $user->id : ($this->IdUsuario ?: null),
+            'dni' => $this->dni,
+            'foto' => $path?: null,
+            'nombre' => $this->nombre,
+            'apellido' => $this->apellido,
+            'correo' => $this->correo,
+            'correoInstitucional' => $this->correoInstitucional,
+            'fechaNacimiento' => $this->fechaNacimiento,
+            'sexo' => $this->sexo,
+            'direccion' => $this->direccion,
+            'telefono' => $this->telefono,
+            'numeroCuenta' => $this->numeroCuenta,
+            'IdNacionalidad' => $this->IdNacionalidad,
+            'IdTipoPerfil' => $this->IdTipoPerfil,
         ]);
 
-        $role = Role::where('name', 'Participante')->first();
-        if ($role) {
-            $user->roles()->attach($role->id);
-        }
-    } else {
-        $user = null;
+        session()->flash('message', $this->persona_id ? 'Persona actualizada correctamente!' : 'Persona creada correctamente!');
+        $this->closeModal();
+        $this->resetInputFields();
     }
-    
-    // Crear o actualizar la persona
-    $persona = Persona::updateOrCreate(['id' => $this->persona_id], [
-        'IdUsuario' => $user ? $user->id : ($this->IdUsuario ?: null),
-        'dni' => $this->dni,
-        'foto' => $path,
-        'nombre' => $this->nombre,
-        'apellido' => $this->apellido,
-        'correo' => $this->correo,
-        'correoInstitucional' => $this->correoInstitucional,
-        'fechaNacimiento' => $this->fechaNacimiento,
-        'sexo' => $this->sexo,
-        'direccion' => $this->direccion,
-        'telefono' => $this->telefono,
-        'numeroCuenta' => $this->numeroCuenta,
-        'IdNacionalidad' => $this->IdNacionalidad,
-        'IdTipoPerfil' => $this->IdTipoPerfil,
-    ]);
 
-    session()->flash('message', $this->persona_id ? 'Persona actualizada correctamente!' : 'Persona creada correctamente!');
-    $this->closeModal();
-    $this->resetInputFields();
-}
+    public function suscribirATodos()
+    {
+        // Obtener todas las conferencias
+        $conferencias = Conferencia::all();
 
+        // Obtener todas las personas
+        $personas = Persona::all();
 
+        foreach ($personas as $persona) {
+            foreach ($conferencias as $conferencia) {
+                // Verificar si ya está suscrito
+                $yaInscrito = Suscripcion::where('IdConferencia', $conferencia->id)
+                    ->where('IdPersona', $persona->id)
+                    ->exists();
+
+                if (!$yaInscrito) {
+                    // Crear la suscripción
+                    Suscripcion::create([
+                        'IdConferencia' => $conferencia->id,
+                        'IdPersona' => $persona->id,
+                        'created_by' => auth()->id(), // Suponiendo que usas autenticación
+                    ]);
+                }
+            }
+        }
+
+        // Mostrar mensaje de éxito
+        session()->flash('message', 'Todas las personas han sido suscritas a todas las conferencias correctamente.');
+    }
     public function edit($id)
     {
         $persona = Persona::findOrFail($id);

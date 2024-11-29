@@ -229,20 +229,7 @@
                             <img class="fondo" src="{{ asset(str_replace('public', 'storage', $conferencia->conferencista->firma)) }}" />
                         </div>
                         @endif
-
-                        @if($conferencia->conferencista->sello)
-                        <div class="sello">
-                            <img class="fondo" src="{{ asset(str_replace('public', 'storage', $conferencia->conferencista->sello)) }}" />
-                        </div>
-                        @endif
-                        <p>______________________________</p>
-                        @if($conferencia->conferencista->persona->nombre)
-                        <div id="conferencista-name-2">{{ $conferencia->conferencista->persona->nombre }} {{$conferencia->conferencista->persona->apellido}}</div>
-                        @endif
-
-                        @if($conferencia->conferencista->titulo)
-                        <div>{{$conferencia->conferencista->titulo}}</div>
-                        @endif
+                        
                     </div>
                     @endif
                 </div>

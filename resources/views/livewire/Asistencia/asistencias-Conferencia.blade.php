@@ -107,17 +107,20 @@
                                                             <td class="px-6 py-4 text-center">
                                                                 <div class="flex space-x-2 justify-center">
                                                                     <button wire:click="marcarAsistencia({{ $suscripcion->id }})"
-                                                                        class="px-3 py-1 w-28 h-10 bg-green-500 text-white rounded-lg hover:bg-green-600">Asistió</button>
+                                                                        class="px-3 py-1 w-28 h-10 bg-green-500 text-white rounded-lg hover:bg-green-600">
+                                                                        Asistió
+                                                                    </button>
                                                                     <button wire:click="marcarAusencia({{ $suscripcion->id }})"
-                                                                        class="px-3 py-1 w-28 h-10 bg-red-600 text-white rounded-lg hover:bg-red-700">No
-                                                                        Asistió</button>
-                                                                  {{--@if ($asistencia && $asistencia->Asistencia)
-                                                                        <a href="{{ route('vistaDiploma', ['asistencia' => $asistencia->id]) }}"
-                                                                            class="px-3 py-3 w-28 h-10 text-center bg-blue-600 text-white rounded-lg hover:bg-blue-700">Ver
-                                                                            Diploma</a>
-                                                                    @endif--}}  
+                                                                        class="px-3 py-1 w-28 h-10 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                                                                        Ausente
+                                                                    </button>
+                                                                    <button wire:click="descargarDiploma({{ $suscripcion->id }})"
+                                                                        class="px-3 py-1 w-28 h-10 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                                                                        Descargar Diploma
+                                                                    </button>
                                                                 </div>
                                                             </td>
+
                                                         </tr>
                             @empty
                                 <tr>
