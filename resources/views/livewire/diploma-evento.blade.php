@@ -155,7 +155,7 @@
                     /* position: relative; */
                     /* text-align: center; */
                     color: black;
-                    z-index = 3;
+                    z-index: 3;
                 }
             </style>
         </header>

@@ -3,6 +3,7 @@ namespace App\Livewire;
 
 use App\Models\Asistencia;
 use App\Models\DiplomaEvento;
+use App\Models\Inscripcion;
 use Livewire\Component;
 
 class ValidarDiplomaEvento extends Component
@@ -10,6 +11,7 @@ class ValidarDiplomaEvento extends Component
     public $persona;
     public $conferencia;
     public $codigoDiploma;
+    public $asistencia;
     public $diploma;
     public $uuid;
     public function mount($uuid)
@@ -19,9 +21,9 @@ class ValidarDiplomaEvento extends Component
         if ($diploma) {
             $diploma = Inscripcion::where('id', $diploma->id)->first(); // Acceder al primer elemento de la colección
             if ($diploma) {
-                $this->persona = $asistencia->suscripcion->persona;
-                $this->conferencia = $asistencia->suscripcion->conferencia;
-                $this->codigoDiploma = $asistencia->suscripcion->conferencia->evento->diploma;
+                $this->persona = $diploma->persona;
+                $this->conferencia = $diploma->suscripcion->conferencia;
+                $this->codigoDiploma = $diploma->suscripcion->conferencia->evento->diploma;
                 $this->asistencia = $diploma;
             }
         }
