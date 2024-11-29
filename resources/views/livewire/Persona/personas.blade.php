@@ -5,7 +5,7 @@
 
     <div class="dark:bg-gray-900">
         <div
-            class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4 dark:bg-gray-800 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+            class="bg-white overflow-hidden border sm:rounded-lg px-4 py-4 dark:bg-gray-800 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
             @if (session()->has('message'))
                 <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
                     role="alert">
@@ -22,9 +22,8 @@
             @endif
 
             <div class="relative overflow-x-auto sm:rounded-lg dark:bg-gray-800">
-                <div
-                    class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
-                    <div>
+                <div class="flex flex-row sm:flex-row flex-wrap space-y-2 sm:space-y-0 items-center pb-2">
+                    <div class="mr-2">
                         <button wire:click="create()"
                             class="mb-1 w-full ml-0.5 py-2 px-4 text-sm inline-flex items-center bg-yellow-500 hover:bg-yellow-600 text-white font-bold rounded">
                             <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
@@ -35,7 +34,7 @@
                             </svg>
                             Nueva persona</button>
                     </div>
-                    <div>
+                    <div class="mr-2">
                         <button wire:click="exportarExcel"
                             class="mb-1 w-full py-2 px-4 text-sm inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold rounded">
                             <svg class="w-6 h-6 text-white mr-1 dark:text-white" aria-hidden="true"
@@ -48,7 +47,7 @@
                             Exportar
                         </button>
                     </div>
-                    <div>
+                    <div class="mr-2">
                         <button wire:click="inscribirATodos"
                             class="mb-1 w-full py-2 px-4 text-sm inline-flex items-center bg-green-500 font-bold text-white rounded hover:bg-green-600">
                             <svg class="w-6 h-6 text-white mr-1 dark:text-white" aria-hidden="true"
@@ -62,7 +61,7 @@
                             Evento
                         </button>
                     </div>
-                    <div>
+                    <div class="mr-2">
                         <button wire:click="suscribirATodos"
                             class="mb-1 w-full py-2 px-4 text-sm inline-flex items-center bg-blue-500 text-white font-bold rounded hover:bg-blue-600">
                             <svg class="w-6 h-6 text-white mr-1 dark:text-white" aria-hidden="true"
@@ -76,22 +75,24 @@
                             Conferencias
                         </button>
                     </div>
-                    
 
-                    <label for="table-search" class="sr-only dark:text-white">Buscar</label>
-                    <div class="relative">
-                        <div
-                            class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                            </svg>
+                    <div class="lg:ml-52 sm:ml-2 md:ml-2">
+                        <label for="table-search" class="sr-only dark:text-white">Buscar</label>
+                        <div class="relative">
+                            <div
+                                class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                </svg>
+                            </div>
+                            <input wire:model.live="search" type="text" id="table-search-users"
+                                class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-700 dark:text-white"
+                                placeholder="Buscar...">
                         </div>
-                        <input wire:model.live="search" type="text" id="table-search-users"
-                            class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-700 dark:text-white"
-                            placeholder="Buscar...">
                     </div>
+
                 </div>
 
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

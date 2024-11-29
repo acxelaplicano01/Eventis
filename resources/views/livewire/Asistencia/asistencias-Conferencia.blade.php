@@ -5,8 +5,8 @@
     </h2>
 
     <div class="dark:bg-gray-900">
-        <div class="">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4 dark:bg-gray-800">
+        <div>
+            <div class="bg-white overflow-hidden border sm:rounded-lg px-4 py-4 dark:bg-gray-800">
 
                 <!-- Modal -->
                 <div x-show="showModal" x-cloak @keydown.escape.window="showModal = false"

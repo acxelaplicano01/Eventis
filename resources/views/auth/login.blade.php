@@ -13,7 +13,7 @@
         <br>
         {{-- Alerta de error de Flowbite --}}
         @if ($errors->any())
-            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-red-800 dark:text-red-300" role="alert">
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg z-50 bg-red-50 dark:bg-red-800 dark:text-red-300" role="alert">
                 <span class="font-medium">Error:</span> Las credenciales ingresadas son incorrectas. Por favor, inténtalo de
                 nuevo.
             </div>

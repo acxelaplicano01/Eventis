@@ -22,7 +22,6 @@
                 width: calc(100% / 4 - 15px);
                 padding: 15px 14px;
                 border-radius: 12px;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             }
 
             .overview-boxes .box-topic {
@@ -107,7 +106,6 @@
                 padding: 20px 30px;
                 margin: 0 20px;
                 border-radius: 12px;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             }
 
             .sales-boxes .sales-details {
@@ -173,7 +171,6 @@
                 padding: 20px 30px;
                 margin: 0 20px 0 0;
                 border-radius: 12px;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             }
 
             .sales-boxes .top-sales li {
