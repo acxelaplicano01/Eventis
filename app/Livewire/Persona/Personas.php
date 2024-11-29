@@ -91,6 +91,7 @@ class Personas extends Component
     {
         $personas = Persona::with('user', 'nacionalidad', 'tipoperfil')
             ->where('nombre', 'like', '%' . $this->search . '%')
+            ->orWhere('dni', 'like', '%' . $this->search . '%')
             ->orderBy('id', 'DESC')
             ->paginate(5);
 

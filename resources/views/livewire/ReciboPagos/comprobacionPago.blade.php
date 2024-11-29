@@ -32,7 +32,7 @@
 
                 <div class="relative overflow-x-auto sm:rounded-lg">
                     <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center pb-4">
-                        <label for="table-search" class="sr-only">Buscar</label>
+                        <label for="table-search" class="sr-only dark:text-white">Buscar</label>
                         <div class="relative">
                             <div
                                 class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -42,11 +42,12 @@
                                         stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                 </svg>
                             </div>
-                            <input wire:model="search" type="text" id="table-search-inscripciones"
+                            <input wire:model.live="search" type="text" id="table-search-users"
                                 class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-700 dark:text-white"
                                 placeholder="Buscar...">
-                        </div>
 
+
+                        </div>
                         <div class="mr-56"></div>
                         <button wire:click="marcarTodos('Aceptado')"
                             class="mb-1 px-3 py-2 text-sm ml-96 font-medium text-white inline-flex items-center bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-lg text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800">
@@ -69,7 +70,7 @@
                                 <th scope="col" class="px-6 py-3">Persona</th>
                                 <th scope="col" class="px-6 py-3">Evento</th>
                                 <th scope="col" class="px-6 py-3">Estado</th>
-                                <th scope="col" class="px-6 py-3">Comprobante</th>
+                                <th scope="col" class="px-6 py-3">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,7 +89,8 @@
                                         {{ $inscripcion->Status }}
                                     </td>
                                     <td class="px-6 py-4 dark:text-gray-900 text-center">
-                                        <button data-modal-target="large-modal-{{$inscripcion->id}}" data-modal-toggle="large-modal-{{$inscripcion->id}}"
+                                        <button data-modal-target="large-modal-{{$inscripcion->id}}"
+                                            data-modal-toggle="large-modal-{{$inscripcion->id}}"
                                             class="mb-1 px-3 py-2 text-sm font-medium text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-lg text-center dark:bg-green-700 dark:hover:bg-green-800 dark:focus:ring-green-800"
                                             type="button">
                                             <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
@@ -100,7 +102,23 @@
                                             </svg>
                                             Ver comprobante
                                         </button>
+                                        @if($inscripcion->Status == 'Aceptado')
+                                            <td class="px-6 py-4 dark:text-gray-900 text-center">
+                                                <button wire:click="descargarDiploma({{ $inscripcion->id }})"
+                                                    class="mb-1 w-full px-3 py-2 text-sm font-medium text-white inline-flex items-center bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
+                                                    Diploma
+                                                    <svg class="w-6 h-6 text-white ms-2 dark:text-white" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2m-8 1V4m0 12-4-4m4 4 4-4" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        @endif
                                     </td>
+
                                     <!-- Extra Large Modal -->
                                     <div id="large-modal-{{$inscripcion->id}}" tabindex="-1"
                                         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -148,7 +166,8 @@
                                                             <button wire:click="marcarComprobado({{$inscripcion->id}})"
                                                                 onclick="handleButtonClick()"
                                                                 class="px-3 py-1 w-28 h-10 bg-green-500 text-white rounded-lg hover:bg-green-600">Aceptar</button>
-                                                            <button wire:click="rechazarComprobacion({{ $inscripcion->id}})" onclick="handleButtonClick()"
+                                                            <button wire:click="rechazarComprobacion({{ $inscripcion->id}})"
+                                                                onclick="handleButtonClick()"
                                                                 class="px-3 py-1 w-28 h-10 bg-red-600 text-white rounded-lg hover:bg-red-700">Rechazar</button>
                                                         </div>
                                                     </div>
