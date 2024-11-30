@@ -153,6 +153,11 @@ class AsistenciasConferencias extends Component
         // Crear un array para almacenar los PDFs individuales
         $pdfs = [];
 
+        if ($asistentes->isEmpty()) {
+            session()->flash('error', 'No hay asistentes para esta conferencia.');
+            return;
+        }
+
         foreach ($asistentes as $asistencia) {
             // Obtener el UUID del diploma generado
             $diploma = DiplomaGenerado::where('IdAsistencia', $asistencia->id)->first();
@@ -209,7 +214,7 @@ class AsistenciasConferencias extends Component
         $combinedPdf->Output($tempFilePath, 'F');
 
         // Descargar el PDF combinado
-        return response()->download($tempFilePath, 'diplomas.pdf')->deleteFileAfterSend(true);
+        return response()->download($tempFilePath, 'Diplomas '. $asistencia->suscripcion->conferencia->nombre .'.pdf')->deleteFileAfterSend(true);
     }
 
 

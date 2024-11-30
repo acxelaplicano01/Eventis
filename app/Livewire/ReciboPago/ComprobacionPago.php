@@ -161,40 +161,32 @@ class ComprobacionPago extends Component
     }
 
 
-    
+
     public function descargarDiplomas($eventoId)
     {
         // Obtener las personas con estatus aceptado para el evento específico
         $eventopersona = Inscripcion::where('Status', 'Aceptado')
             ->where('IdEvento', $eventoId)
             ->get();
-    
-        if ($eventopersona->isEmpty()) {
-            // Manejar el caso en que no se encuentren inscripciones aceptadas
-            session()->flash('error', 'No se encontraron inscripciones aceptadas para el evento especificado');
-            return;
-        }
-    
-        $pdf = new \Dompdf\Dompdf();
-        $html = '';
-    
+        // Crear un array para almacenar los PDFs individuales
+        $pdfs = [];
         foreach ($eventopersona as $inscripcion) {
             // Obtener el UUID del diploma generado
-            $diplomaEvento = DiplomaEvento::where('inscripcionId', $inscripcion->id)->first();
-    
+            $diplomaEvento = DiplomaEvento::where('id', $inscripcion->id)->first();
+
             if (!$diplomaEvento) {
                 continue; // Saltar si no se encuentra el diploma generado
             }
-    
+
             $uuidDiploma = $diplomaEvento->uuid;
-    
+
             // Generar el código QR
             $qrcode = QRCodeService::generateTextQRCode(
                 config('app.url') . '/validarDiplomaEvento/' . $uuidDiploma
             );
-    
+
             // Generar el HTML del diploma
-            $html .= view('livewire.diploma-evento', [
+            $data = [
                 'Nombre' => $inscripcion->persona->nombre,
                 'Apellido' => $inscripcion->persona->apellido,
                 'FechaInicio' => $inscripcion->evento->fechainicio,
@@ -211,22 +203,30 @@ class ComprobacionPago extends Component
                 'Sello2' => $inscripcion->evento->diploma->Sello2,
                 'uuid' => $uuidDiploma,
                 'qrcode' => $qrcode,
-            ])->render();
-    
-            $html .= '<div style="page-break-after: always;"></div>'; // Agregar un salto de página después de cada diploma
+            ];
+
+            $pdf = PDF::loadView('livewire.diploma-evento', $data)->setPaper('a4', 'landscape');
+            $pdfs[] = $pdf->output();
         }
-    
-        // Generar el PDF con todo el HTML
-        $pdf->loadHtml($html);
-        $pdf->setPaper('a4', 'landscape');
-        $pdf->render();
-    
-        // Guardar el PDF temporalmente
-        $pdfPath = 'Diplomas ' . $inscripcion->evento->nombreevento . '.pdf';
-        Storage::put('public/' . $pdfPath, $pdf->output());
-    
-        // Descargar el PDF
-        return response()->download(storage_path('app/public/' . $pdfPath))->deleteFileAfterSend(true);
+
+        // Combinar todos los PDFs en uno solo usando FPDI
+        $combinedPdf = new Fpdi();
+        foreach ($pdfs as $pdf) {
+            $pageCount = $combinedPdf->setSourceFile(StreamReader::createByString($pdf));
+            for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+                $templateId = $combinedPdf->importPage($pageNo);
+                $size = $combinedPdf->getTemplateSize($templateId);
+                $combinedPdf->AddPage('L', [$size['width'], $size['height']]);
+                $combinedPdf->useTemplate($templateId);
+            }
+        }
+
+        // Generar el contenido del PDF combinado como una cadena
+        $tempFilePath = tempnam(sys_get_temp_dir(), 'diplomas') . '.pdf';
+        $combinedPdf->Output($tempFilePath, 'F');
+
+        // Descargar el PDF combinado
+        return response()->download($tempFilePath, 'Diplomas '. $inscripcion->evento->nombreevento .'.pdf')->deleteFileAfterSend(true);
     }
 
     public function render()

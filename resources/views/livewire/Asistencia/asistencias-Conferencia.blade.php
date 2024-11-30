@@ -22,7 +22,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="relative overflow-x-auto sm:rounded-lg">
                     <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center pb-4">
                         <label for="table-search" class="sr-only">Search</label>
@@ -87,24 +86,24 @@
                                                             $rowClass = $asistencia ? ($asistencia->Asistencia ? 'dark:bg-green-400 bg-green-200' : 'dark:bg-red-400 bg-red-200') : 'bg-gray-100';
                                                         @endphp
                                                         <tr
-                                                            class="{{ $rowClass }} border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-200">
-                                                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray-900">
+                                                            class="{{ $rowClass }} border-b dark:border-gray-700 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray-400">
                                                                 {{ $suscripcion->id }}
                                                             </td>
-                                                            <td class="px-6 py-4 dark:text-gray-900">
+                                                            <td class="px-6 py-4 dark:text-gray-400">
                                                                 {{ $suscripcion->persona->nombre }} {{ $suscripcion->persona->apellido }}
                                                             </td>
-                                                            <td class="px-6 py-4 dark:text-gray-900">
+                                                            <td class="px-6 py-4 dark:text-gray-400">
                                                                 {{ $suscripcion->conferencia->nombre }}
                                                             </td>
-                                                            <td class="px-6 py-4 dark:text-gray-900">
+                                                            <td class="px-6 py-4 dark:text-gray-400">
                                                                 @if($asistencia)
                                                                     {{ $asistencia->Asistencia ? 'Presente' : 'Ausente' }}
                                                                 @else
                                                                     No registrada
                                                                 @endif
                                                             </td>
-                                                            <td class="px-6 py-4 text-center">
+                                                            <td class="px-6 py-4 text-cente">
                                                                 <div class="flex space-x-2 justify-center">
                                                                     <button wire:click="marcarAsistencia({{ $suscripcion->id }})"
                                                                         class="px-3 py-1 w-28 h-10 bg-green-500 text-white rounded-lg hover:bg-green-600">
@@ -114,13 +113,21 @@
                                                                         class="px-3 py-1 w-28 h-10 bg-red-600 text-white rounded-lg hover:bg-red-700">
                                                                         Ausente
                                                                     </button>
-                                                                    <button wire:click="descargarDiploma({{ $suscripcion->id }})"
-                                                                        class="px-3 py-1 w-28 h-10 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-                                                                        Descargar Diploma
-                                                                    </button>
+                                                                    @if($asistencia->Asistencia == 1)
+                                                                        <button wire:click="descargarDiploma({{ $suscripcion->id }})"
+                                                                            class="mb-1 px-3 py-2 ml-2 text-sm font-medium text-white inline-flex items-center bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
+                                                                            <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
+                                                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                                                                viewBox="0 0 24 24">
+                                                                                <path stroke="currentColor" stroke-linecap="round"
+                                                                                    stroke-linejoin="round" stroke-width="2"
+                                                                                    d="M4 15v2a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-2m-8 1V4m0 12-4-4m4 4 4-4" />
+                                                                            </svg>
+                                                                            Diploma
+                                                                        </button>
+                                                                    @endif
                                                                 </div>
                                                             </td>
-
                                                         </tr>
                             @empty
                                 <tr>

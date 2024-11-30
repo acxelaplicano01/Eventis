@@ -147,9 +147,9 @@
                                         </svg>
                                     </button>
                                     @elseif($inscripcion->Status == 'Pendiente')
-                                    <p>Esperando...</p>
+                                    <p class="text-black dark:text-white">Esperando...</p>
                                     @elseif($inscripcion->Status == 'Rechazado')
-                                    <p>No disponible</p>
+                                    <p class="text-black dark:text-white">No disponible</p>
                                     @endif
                                 </td>
                                 </td>
