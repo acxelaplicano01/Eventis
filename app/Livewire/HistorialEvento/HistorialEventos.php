@@ -85,7 +85,7 @@ class HistorialEventos extends Component
 
         // Generar el código QR
         $qrcode = QRCodeService::generateTextQRCode(
-            config('app.url') . '/validarDiploma/' . $uuidDiploma
+            config('app.url') . '/validarDiplomaEvento/' . $uuidDiploma
         );
 
         // Generar el PDF del diploma
