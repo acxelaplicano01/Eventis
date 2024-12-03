@@ -3,6 +3,7 @@
 namespace App\Livewire\HistorialEvento;
 
 use App\Models\DiplomaEvento;
+use App\Models\Evento;
 use Livewire\Component;
 use App\Models\Inscripcion;
 use Illuminate\Support\Facades\Auth;

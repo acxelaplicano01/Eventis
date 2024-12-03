@@ -91,6 +91,35 @@ class AsistenciasConferencias extends Component
         $this->modalMessage = 'Todas las asistencias fueron marcadas.';
         $this->modalOpen = true;
     }
+
+
+    public function desmarcarTodos()
+    {
+        $suscripciones = Suscripcion::where('IdConferencia', $this->conferencia_id)->get();
+
+        if ($suscripciones->isEmpty()) {
+            $this->modalMessage = 'No hay suscripciones para desmarcar asistencia.';
+            $this->modalOpen = true;
+            return;
+        }
+
+        foreach ($suscripciones as $suscripcion) {
+            $asistencia = Asistencia::where('IdSuscripcion', $suscripcion->id)->first();
+
+            if ($asistencia && $asistencia->Asistencia == 1) {
+                Asistencia::updateOrCreate(
+                    ['IdSuscripcion' => $suscripcion->id],
+                    ['Fecha' => now(), 'Asistencia' => 0]
+                );
+            }
+        }
+
+        $this->modalMessage = 'Todas las asistencias fueron desmarcadas.';
+        $this->modalOpen = true;
+    }
+
+
+
     public function descargarDiploma($suscripcionId)
     {
         $asistencia = Asistencia::where('IdSuscripcion', $suscripcionId)->where('Asistencia', 1)->first();
@@ -139,7 +168,7 @@ class AsistenciasConferencias extends Component
         // Generar PDF
         $pdf = PDF::loadView('livewire.descargarDiploma', $data)->setPaper('a4', 'landscape');
 
-        return response()->streamDownload(fn() => print ($pdf->output()), 'diploma_' . $data['Nombre'] . '.pdf');
+        return response()->streamDownload(fn() => print ($pdf->output()), 'Diploma ' . $data['Nombre'] . " " . $data['Apellido'] . '.pdf');
     }
 
     public function descargarDiplomas($conferenciaId)
@@ -214,7 +243,7 @@ class AsistenciasConferencias extends Component
         $combinedPdf->Output($tempFilePath, 'F');
 
         // Descargar el PDF combinado
-        return response()->download($tempFilePath, 'Diplomas '. $asistencia->suscripcion->conferencia->nombre .'.pdf')->deleteFileAfterSend(true);
+        return response()->download($tempFilePath, 'Diplomas ' . $asistencia->suscripcion->conferencia->nombre . '.pdf')->deleteFileAfterSend(true);
     }
 
 

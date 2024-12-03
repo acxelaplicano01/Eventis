@@ -21,7 +21,7 @@
                     <div
                         class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
 
-                        <label for="table-search" class="sr-only">Buscar</label>
+                       <!-- <label for="table-search" class="sr-only">Buscar</label>
                         <div class="relative">
                             <div
                                 class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -34,7 +34,7 @@
                             <input wire:model.debounce.300ms="search" type="text" id="table-search-conferencias"
                                 class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-700 dark:text-white"
                                 placeholder="Buscar...">
-                        </div>
+                        </div>-->
                         <div class="mr-32"></div>
                         <a  href="{{ route('historial-eventos') }}"
                             class="mb-1 px-3 py-2 text-sm ml-96 font-medium text-white inline-flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">

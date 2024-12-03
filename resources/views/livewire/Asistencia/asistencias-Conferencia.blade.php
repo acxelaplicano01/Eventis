@@ -39,9 +39,9 @@
                                 placeholder="Buscar...">
                         </div>
 
-                        <div class="mr-32"></div>
+                        <div class="mr-16"></div>
                         <button wire:click="marcarTodos"
-                            class="mb-1 px-3 py-2 text-sm ml-96 font-medium text-white inline-flex items-center bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-lg text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800">
+                            class="mb-1 px-3 py-2 text-sm ml-72 font-medium text-white inline-flex items-center bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 rounded-lg text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800">
                             <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 viewBox="0 0 24 24">
@@ -53,7 +53,18 @@
                             Marcar Todos
                         </button>
 
+                        <button wire:click="desmarcarTodos"
+                            class="mb-1 px-3 py-2 text-sm ml-2 font-medium text-white inline-flex items-center bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 rounded-lg text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
+                            <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M3 9h13a5 5 0 0 1 0 10H7M3 9l4-4M3 9l4 4" />
+                            </svg>
 
+
+                            Quitar asistencias
+                        </button>
 
                         <button wire:click="descargarDiplomas({{$idConferencia}})"
                             class="mb-1 px-3 py-2 ml-2 text-sm font-medium text-white inline-flex items-center bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
@@ -113,7 +124,7 @@
                                                                         class="px-3 py-1 w-28 h-10 bg-red-600 text-white rounded-lg hover:bg-red-700">
                                                                         Ausente
                                                                     </button>
-                                                                    @if($asistencia->Asistencia == 1)
+                                                                    @if($asistencia && $asistencia->Asistencia == 1)
                                                                         <button wire:click="descargarDiploma({{ $suscripcion->id }})"
                                                                             class="mb-1 px-3 py-2 ml-2 text-sm font-medium text-white inline-flex items-center bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
                                                                             <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true"

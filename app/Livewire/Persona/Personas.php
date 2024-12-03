@@ -64,12 +64,12 @@ class Personas extends Component
                     'idEvento' => $evento->id,
                     'idPersona' => $persona->id,
                     'fecha' => now(),
-                    'foto' => 'https://picsum.photos/200',
+                    'foto' => 'https://ui-avatars.com/api/?name=YA&amp;color=000&amp;background=facc15',
                     'created_by' => auth()->id(),
                 ]);
 
                
-                Inscripcion::create([
+                Inscripcion::updateOrCreate([
                     'IdEvento' => $evento->id,
                     'IdPersona' => $persona->id,
                     'IdRecibo' => $recibo->id,
@@ -233,7 +233,7 @@ class Personas extends Component
 
                 if (!$yaInscrito) {
                     // Crear la suscripción
-                    Suscripcion::create([
+                    Suscripcion::updateOrCreate([
                         'IdConferencia' => $conferencia->id,
                         'IdPersona' => $persona->id,
                         'created_by' => auth()->id(), // Suponiendo que usas autenticación
@@ -245,6 +245,8 @@ class Personas extends Component
         // Mostrar mensaje de éxito
         session()->flash('message', 'Todas las personas han sido suscritas a todas las conferencias correctamente.');
     }
+
+
     public function edit($id)
     {
         $persona = Persona::findOrFail($id);
