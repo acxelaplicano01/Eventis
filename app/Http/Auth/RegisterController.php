@@ -69,6 +69,6 @@ class RegisterController extends Controller
         session()->flash('message', $data['name']? 'Usuario actualizado correctamente!' : 'Usuario creado correctamente!');
         $user->roles()->attach($defaultRoleId);
         // redireccionar a la ruta practica
-        return redirect()->route('practica');
+        return redirect()->route('dashboard');
     }
 }
