@@ -6,7 +6,7 @@
         <!-- Page Content -->
         <main class="dark:bg-gray-900">
             <div class="">
-                <div class=" mx-auto sm:px-6 lg:px-8 ">
+                <div class=" mx-auto">
                     {{ $slot }}
                 </div>
             </div>

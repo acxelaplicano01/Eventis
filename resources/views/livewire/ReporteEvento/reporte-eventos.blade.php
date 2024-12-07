@@ -2,13 +2,39 @@
     <x-layouts.reportes>
         <section class="bg-center bg-no-repeat bg-gray-700 bg-blend-multiply"
             style="background-image: url('{{ asset(str_replace('public', 'storage', $evento->logo)) }}');">
-            <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
-                <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
-                    {{ $evento->nombreevento }}
-                </h1>
+            <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-36">
                 <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
                     {{ $evento->organizador }}
                 </p>
+                <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
+                    {{ $evento->nombreevento }}
+                </h1>
+
+                <div class="mb-12">
+                    <div class="flex items-center justify-center">
+                        <div class="w-20 h-20 -mr-6 overflow-hidden bg-gray-300 rounded-full">
+                            <img class="object-cover w-full h-full"
+                                src="https://cdn.rareblocks.xyz/collection/celebration/images/cta/2/female-avatar-1.jpg"
+                                alt="" />
+                        </div>
+
+                        <div class="relative overflow-hidden bg-gray-300 border-8 border-white rounded-full w-28 h-28">
+                            <img class="object-cover w-full h-full"
+                                src="https://cdn.rareblocks.xyz/collection/celebration/images/cta/2/male-avatar-1.jpg"
+                                alt="" />
+                        </div>
+
+                        <div class="w-20 h-20 -ml-6 overflow-hidden bg-gray-300 rounded-full">
+                            <img class="object-cover w-full h-full"
+                                src="https://cdn.rareblocks.xyz/collection/celebration/images/cta/2/female-avatar-2.jpg"
+                                alt="" />
+                        </div>
+                    </div>
+                    <h2 class="mt-8 text-3xl font-bold leading-tight text-white lg:mt-12 sm:text-4xl lg:text-5xl">
+                        Se han inscrito <span class="border-b-8 border-yellow-300">5,482</span> participantes</h2>
+                </div>
+
+
                 <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
                     <a href="#"
                         class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
@@ -27,10 +53,12 @@
             </div>
         </section>
 
+
+
         <section class="py-10 bg-gray-50 sm:py-16 lg:py-24">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="max-w-xl mx-auto text-center">
-                    <p class="text-sm font-semibold tracking-widest text-blue-600 uppercase">Este evento es
+                    <p class="text-sm font-semibold tracking-widest text-yellow-500 uppercase">Este evento es
                         {{$evento->estado}}
                     </p>
 
@@ -41,11 +69,13 @@
                 <div class="grid items-center grid-cols-1 mt-12 gap-y-10 lg:grid-cols-5 sm:mt-20 gap-x-4">
                     <div class="space-y-8 lg:pr-16 xl:pr-24 lg:col-span-2 lg:space-y-12">
                         <div class="flex items-start">
-                            <svg class="flex-shrink-0 text-green-500 w-9 h-9" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                            <svg class="flex-shrink-0 w-9 h-9 text-green-600 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M18 6h-8m8 4H6m12 4h-8m8 4H6" />
                             </svg>
+
                             <div class="ml-5">
                                 <h3 class="text-xl font-semibold text-black">Descripción</h3>
                                 <p class="mt-3 text-base text-gray-600">{{$evento->descripcion}}</p>
@@ -53,13 +83,15 @@
                         </div>
 
                         <div class="flex items-start">
-                            <svg class="flex-shrink-0 text-blue-600 w-9 h-9" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            <svg class="flex-shrink-0 w-9 h-9 text-blue-500" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
+
                             <div class="ml-5">
-                                <h3 class="text-xl font-semibold text-black">Hora:</h3>
+                                <h3 class="text-xl font-semibold text-black">Hora</h3>
                                 <p class="mt-3 text-base text-gray-600">
                                     {{ \Carbon\Carbon::parse($evento->fechainicio)->locale('es')->isoFormat('D [de] MMMM [de] YYYY ') }}Hora:
                                     <strong>{{$evento->horainicio}}</strong>
@@ -70,13 +102,36 @@
                                 </p>
                             </div>
                         </div>
-
                         <div class="flex items-start">
-                            <svg class="flex-shrink-0 text-red-500 w-9 h-9" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            <svg class="flex-shrink-0 w-9 h-9 text-red-500 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z" />
                             </svg>
+
+                            <div class="ml-5">
+                                <h3 class="text-xl font-semibold text-black">Localidad / Modalidad</h3>
+                                <p class="mt-3 text-base text-gray-600">
+                                    {{$evento->localidad->localidad}}
+                                </p>
+                                <p class="mt-3 text-base text-gray-600">
+                                    {{$evento->modalidad->modalidad}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="flex-shrink-0 w-9 h-9 text-yellow-500 " aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M8 7H5a2 2 0 0 0-2 2v4m5-6h8M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m0 0h3a2 2 0 0 1 2 2v4m0 0v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-6m18 0s-4 2-9 2-9-2-9-2m9-2h.01" />
+                            </svg>
+
                             <div class="ml-5">
                                 <h3 class="text-xl font-semibold text-black">¿Cómo contactar al organizador?</h3>
                                 <p class="mt-4 text-base text-gray-700">
@@ -89,18 +144,199 @@
                     </div>
 
                     <div class="lg:col-span-3">
-                        <h3 class="text-xl font-semibold text-black">Localidad del evento</h3>
-                        <p class="text-gray-700 dark:text-gray-300"><strong>Modalidad:</strong>
-                            {{ $evento->modalidad->modalidad }}</p>
                         <img class="w-full rounded-lg shadow-xl"
-                            src="https://cdn.rareblocks.xyz/collection/celebration/images/features/7/dashboard-screenshot.png"
-                            alt="" />
-                        <p class="text-gray-700 dark:text-gray-300"><strong>Localidad:</strong>
-                            {{ $evento->localidad->localidad }}</p>
+                            src="{{ asset(str_replace('public', 'storage', $evento->diploma->Plantilla)) }}"
+                            alt="Diploma" />
                     </div>
                 </div>
             </div>
         </section>
+
+        <section class="py-10 bg-gray-100 sm:py-16 lg:py-24">
+            <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="max-w-2xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold leading-tight text-gray-800 sm:text-4xl lg:text-5xl">Conferencistas
+                        del evento <span class="text-yellow-500">{{$evento->nombreevento}}</span></h2>
+                </div>
+
+                <div
+                    class="grid max-w-xl grid-cols-1 mx-auto mt-8 text-center lg:max-w-full sm:mt-12 lg:mt-20 lg:grid-cols-3 gap-x-6 xl:gap-x-12 gap-y-6">
+                    <div class="overflow-hidden bg-white rounded-md shadow">
+                        <div class="px-8 py-12">
+                            <div class="relative w-24 h-24 mx-auto">
+                                <img class="relative object-cover w-24 h-24 mx-auto rounded-full"
+                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/1/avatar-1.jpg"
+                                    alt="" />
+                                <div
+                                    class="absolute text-white top-0 left-16 flex items-center justify-center bg-yellow-500 rounded-full p-2 w-auto h-7">
+                                    Hondureño
+                                </div>
+                            </div>
+                            <p class="text-base font-semibold tex-tblack mt-9">Jenny Wilson</p>
+                            <p class="mt-1 text-base text-gray-600">Project Manager at Microsoft</p>
+                            <blockquote class="mt-7">
+                                <p class="text-lg text-black">“Amet minim mollit non deserunt ullam co est sit aliqua
+                                    dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation
+                                    veniam consequat”</p>
+                            </blockquote>
+                        </div>
+                    </div>
+
+                    <div class="overflow-hidden bg-white rounded-md shadow">
+                        <div class="px-8 py-12">
+                            <div class="relative w-24 h-24 mx-auto">
+                                <img class="relative object-cover w-24 h-24 mx-auto rounded-full"
+                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/1/avatar-2.jpg"
+                                    alt="" />
+                                <div
+                                    class="absolute text-white top-0 left-16 flex items-center justify-center bg-yellow-500 rounded-full p-2 w-auto h-7">
+                                    Hondureño
+                                </div>
+                            </div>
+                            <p class="text-base font-semibold tex-tblack mt-9">Robert Fox</p>
+                            <p class="mt-1 text-base text-gray-600">Founder at Brain.co</p>
+                            <blockquote class="mt-7">
+                                <p class="text-lg text-black">“Amet minim mollit non deserunt ullam co est sit aliqua
+                                    dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation
+                                    veniam consequat”</p>
+                            </blockquote>
+                        </div>
+                    </div>
+
+                    <div class="overflow-hidden bg-white rounded-md shadow">
+                        <div class="px-8 py-12">
+                            <div class="relative w-24 h-24 mx-auto">
+                                <img class="relative object-cover w-24 h-24 mx-auto rounded-full"
+                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/1/avatar-3.jpg"
+                                    alt="" />
+                                <div
+                                    class="absolute text-white top-0 left-16 flex items-center justify-center bg-yellow-500 rounded-full p-2 w-auto h-7">
+                                    Guatemalteco
+                                </div>
+                            </div>
+                            <p class="text-base font-semibold tex-tblack mt-9">Kristin Watson</p>
+                            <p class="mt-1 text-base text-gray-600">UX Designer at Google</p>
+                            <blockquote class="mt-7">
+                                <p class="text-lg text-black">“Amet minim mollit non deserunt ullam co est sit aliqua
+                                    dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation
+                                    veniam consequat”</p>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+        <section class="py-10 bg-gray-100 sm:py-16 lg:py-24">
+            <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div
+                    class="grid items-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 sm:gap-x-12 gap-y-12">
+                    <div class="lg:col-span-2">
+                        <h2
+                            class="text-3xl font-bold leading-tight text-gray-800 sm:text-4xl lg:text-5xl lg:leading-tight">
+                            Conoce a los <br />
+                            organizadores y <br />
+                            patrocinadores<br />
+                        </h2>
+                        <p class="mt-6 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua
+                            dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam
+                            consequat sunt nostrud amet.</p>
+                    </div>
+
+                    <div class="lg:col-span-3 xl:col-span-4">
+                        <div class="grid items-center max-w-4xl grid-cols-2 mx-auto lg:grid-cols-4 gap-x-10 gap-y-16">
+                            <div>
+                                <img class="object-contain w-full h-12 mx-auto"
+                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-2.png"
+                                    alt="" />
+                            </div>
+
+                            <div>
+                                <img class="object-contain w-full h-12 mx-auto"
+                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-2.png"
+                                    alt="" />
+                            </div>
+
+                            <div>
+                                <img class="object-contain w-full h-12 mx-auto"
+                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-3.png"
+                                    alt="" />
+                            </div>
+
+                            <div>
+                                <img class="object-contain w-full mx-auto h-7"
+                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-4.png"
+                                    alt="" />
+                            </div>
+
+                            <div class="hidden lg:block">
+                                <img class="object-contain w-full h-12 mx-auto"
+                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-5.png"
+                                    alt="" />
+                            </div>
+
+                            <div class="hidden lg:block">
+                                <img class="object-contain w-full h-12 mx-auto"
+                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-6.png"
+                                    alt="" />
+                            </div>
+
+                            <div class="hidden lg:block">
+                                <img class="object-contain w-full h-12 mx-auto"
+                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-7.png"
+                                    alt="" />
+                            </div>
+
+                            <div class="hidden lg:block">
+                                <img class="object-contain w-full h-12 mx-auto"
+                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-8.png"
+                                    alt="" />
+                            </div>
+
+                            <div class="hidden lg:block">
+                                <img class="object-contain w-full h-12 mx-auto"
+                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-9.png"
+                                    alt="" />
+                            </div>
+
+                            <div class="hidden lg:block">
+                                <img class="object-contain w-full mx-auto h-12"
+                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-10.png"
+                                    alt="" />
+                            </div>
+
+                            <div class="hidden lg:block">
+                                <img class="object-contain w-full h-12 mx-auto"
+                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-11.png"
+                                    alt="" />
+                            </div>
+
+                            <div class="hidden lg:block">
+                                <img class="object-contain w-full h-12 mx-auto"
+                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-12.png"
+                                    alt="" />
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-start mt-10 space-x-3 lg:hidden">
+                            <div class="w-2.5 h-2.5 rounded-full bg-blue-600 block"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-gray-300 block"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-gray-300 block"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
 
 
         <section class="py-10 bg-gray-50 sm:py-16 lg:py-24">
@@ -109,205 +345,64 @@
                     <div class="flex-1 text-center lg:text-left">
                         <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Más eventos
                         </h2>
-                        <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600 lg:mx-0">Puede que tambien te interesen estos eventos.
+                        <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600 lg:mx-0">Puede que
+                            tambien te interesen estos eventos.
                         </p>
-                    </div>
-
-                    <div class="hidden lg:flex lg:items-center lg:space-x-3">
-                        <button type="button"
-                            class="flex items-center justify-center text-gray-400 transition-all duration-200 bg-transparent border border-gray-300 rounded w-9 h-9 hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-
-                        <button type="button"
-                            class="flex items-center justify-center text-gray-400 transition-all duration-200 bg-transparent border border-gray-300 rounded w-9 h-9 hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
                     </div>
                 </div>
 
                 <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full">
-                <div class="overflow-hidden bg-white rounded shadow">
-                        <div>
-                            <div class="relative">
-                                <a href="#" title="" class="block aspect-w-4 aspect-h-3">
-                                    <img class="object-cover w-full h-full"
-                                        src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-2.jpg"
-                                        alt="" />
-                                </a>
-
-                                <div class="absolute top-4 left-4">
-                                    <span
-                                        class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
-                                        Marketing </span>
-                                </div>
-                            </div>
-                            <div class="p-5">
-                            <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase">
-                                April 04, 2020 </span>
-                            <p class="mt-5 text-2xl font-semibold">
-                                <a href="#" title="" class="text-black"> Ho7 Tips to run your remote team faster and
-                                    better. </a>
-                            </p>
-                            <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
-                                aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
-                            </div>
-                            
-                            <div class="border-t border-gray-200">
-                                <div class="flex">
-                                    <div class="flex items-center flex-1 px-6 py-5">
-                                        <img class="object-cover w-8 h-8 rounded-full"
-                                            src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/3/avatar-3.jpg"
+                    @foreach($Eventos as $evento)
+                        <div class="overflow-hidden bg-white rounded shadow">
+                            <div>
+                                <div class="relative">
+                                    <a href="#" title="" class="block aspect-w-4 aspect-h-3">
+                                        <img class="object-cover w-full h-full"
+                                            src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-2.jpg"
                                             alt="" />
-                                        <span
-                                            class="flex-1 block min-w-0 ml-3 text-base font-semibold text-gray-900 truncate">
-                                            Jenny Wilson </span>
-                                    </div>
-
-                                    <a href="#" title=""
-                                        class="inline-flex items-center flex-shrink-0 px-4 py-5 text-base font-semibold transition-all duration-200 bg-white border-l border-gray-200 hover:bg-blue-600 hover:text-white">
-                                        Read more
-                                        <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                            fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
                                     </a>
+
+                                    <div class="absolute top-4 left-4">
+                                        <span
+                                            class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-yellow-500 rounded-full">
+                                            {{$evento->modalidad->modalidad}} </span>
+                                    </div>
+                                </div>
+                                <div class="p-5">
+                                    <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase">
+                                        {{$evento->fechainicio}} </span>
+                                    <p class="mt-5 text-2xl font-semibold">
+                                        <a href="#" title="" class="text-black">{{$evento->nombreevento}} </a>
+                                    </p>
+                                    <p class="mt-4 text-base text-gray-600">{{$evento->descripcion}}</p>
+                                </div>
+
+                                <div class="border-t border-gray-200">
+                                    <div class="flex">
+                                        <div class="flex items-center flex-1 px-6 py-5">
+                                            <img class="object-cover w-8 h-8 rounded-full"
+                                                src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/3/avatar-3.jpg"
+                                                alt="" />
+                                            <span
+                                                class="flex-1 block min-w-0 ml-3 text-base font-semibold text-gray-900 truncate">
+                                                {{$evento->organizador}}</span>
+                                        </div>
+
+                                        <a href="{{ route('reporteEvento', ['evento' => $evento->id]) }}"
+                                            class="inline-flex items-center flex-shrink-0 px-4 py-5 text-base font-semibold transition-all duration-200 bg-white border-l border-gray-200 hover:bg-yellow-500 hover:text-white">
+                                            Ver evento
+                                            <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="overflow-hidden bg-white rounded shadow">
-                        <div>
-                            <div class="relative">
-                                <a href="#" title="" class="block aspect-w-4 aspect-h-3">
-                                    <img class="object-cover w-full h-full"
-                                        src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-2.jpg"
-                                        alt="" />
-                                </a>
-
-                                <div class="absolute top-4 left-4">
-                                    <span
-                                        class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
-                                        Marketing </span>
-                                </div>
-                            </div>
-                            <div class="p-5">
-                            <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase">
-                                April 04, 2020 </span>
-                            <p class="mt-5 text-2xl font-semibold">
-                                <a href="#" title="" class="text-black"> Ho7 Tips to run your remote team faster and
-                                    better. </a>
-                            </p>
-                            <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
-                                aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
-                            </div>
-                            
-                            <div class="border-t border-gray-200">
-                                <div class="flex">
-                                    <div class="flex items-center flex-1 px-6 py-5">
-                                        <img class="object-cover w-8 h-8 rounded-full"
-                                            src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/3/avatar-3.jpg"
-                                            alt="" />
-                                        <span
-                                            class="flex-1 block min-w-0 ml-3 text-base font-semibold text-gray-900 truncate">
-                                            Jenny Wilson </span>
-                                    </div>
-
-                                    <a href="#" title=""
-                                        class="inline-flex items-center flex-shrink-0 px-4 py-5 text-base font-semibold transition-all duration-200 bg-white border-l border-gray-200 hover:bg-blue-600 hover:text-white">
-                                        Read more
-                                        <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                            fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="overflow-hidden bg-white rounded shadow">
-                        <div>
-                            <div class="relative">
-                                <a href="#" title="" class="block aspect-w-4 aspect-h-3">
-                                    <img class="object-cover w-full h-full"
-                                        src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-2.jpg"
-                                        alt="" />
-                                </a>
-
-                                <div class="absolute top-4 left-4">
-                                    <span
-                                        class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
-                                        Marketing </span>
-                                </div>
-                            </div>
-                            <div class="p-5">
-                            <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase">
-                                April 04, 2020 </span>
-                            <p class="mt-5 text-2xl font-semibold">
-                                <a href="#" title="" class="text-black"> Ho7 Tips to run your remote team faster and
-                                    better. </a>
-                            </p>
-                            <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
-                                aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
-                            </div>
-                            
-                            <div class="border-t border-gray-200">
-                                <div class="flex">
-                                    <div class="flex items-center flex-1 px-6 py-5">
-                                        <img class="object-cover w-8 h-8 rounded-full"
-                                            src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/3/avatar-3.jpg"
-                                            alt="" />
-                                        <span
-                                            class="flex-1 block min-w-0 ml-3 text-base font-semibold text-gray-900 truncate">
-                                            Jenny Wilson </span>
-                                    </div>
-
-                                    <a href="#" title=""
-                                        class="inline-flex items-center flex-shrink-0 px-4 py-5 text-base font-semibold transition-all duration-200 bg-white border-l border-gray-200 hover:bg-blue-600 hover:text-white">
-                                        Read more
-                                        <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                            fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex items-center justify-center mt-8 space-x-3 lg:hidden">
-                    <button type="button"
-                        class="flex items-center justify-center text-gray-400 transition-all duration-200 bg-transparent border border-gray-300 rounded w-9 h-9 hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-
-                    <button type="button"
-                        class="flex items-center justify-center text-gray-400 transition-all duration-200 bg-transparent border border-gray-300 rounded w-9 h-9 hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
+                    @endforeach
                 </div>
             </div>
         </section>
