@@ -4,6 +4,7 @@ use App\Http\Controllers\ValidarDiplomaController;
 use App\Livewire\Conferencista\Perfilconferencista;
 use App\Livewire\ConferencistasCongreso;
 use App\Livewire\DescargarDiploma;
+use App\Livewire\EventoConferencias;
 use App\Livewire\Gafete\Gafetes;
 use App\Livewire\HistorialEvento\HistorialEventos;
 use App\Livewire\PaginaInicial;
@@ -73,6 +74,7 @@ Route::middleware([
     Route::get('/historial-eventos', HistorialEventos::class)->name('historial-eventos');
     Route::get('/gafete/{evento}', Gafetes::class)->name('gafete');
     Route::get('/perfilconferencista', Perfilconferencista::class)->name('perfilconferencista');
+    Route::get('/eventoConferencias', EventoConferencias::class)->name('eventoConferencias');
 });
 
 

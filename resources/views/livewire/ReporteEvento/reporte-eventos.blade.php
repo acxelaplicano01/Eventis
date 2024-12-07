@@ -1,139 +1,524 @@
 <div>
     <x-layouts.reportes>
-        <section class="dark:bg-gray-900">
-            <div class="py-8 px-4 w-full mx-auto max-w-screen-lg text-center lg:py-16 z-10 relative">
-                <div
-                    class="flex  items-center p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md mb-8">
-                    <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
-                        <img class="w-48 h-48 object-cover rounded"
-                            src="{{ asset(str_replace('public', 'storage', $evento->logo)) }}" alt="Logo del Evento">
-                    </div>
-                    <div class="flex-1">
-                        <h1 class="text-3xl font-bold tracking-tight leading-none text-gray-900 dark:text-white mb-4">
-                            {{ $evento->nombreevento }}
-                        </h1>
-                        <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-200 mb-4">
-                            {{ $evento->descripcion }}
-                        </p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <p class="text-gray-700 dark:text-gray-300"><strong>Costo:</strong>
-                                    {{ $evento->estado }}
-                                </p>
-                                <p class="text-gray-700 dark:text-gray-300"><strong>Organizador:</strong>
-                                    {{ $evento->organizador }}
-                                </p>
+        <section class="bg-center bg-no-repeat bg-gray-700 bg-blend-multiply"
+            style="background-image: url('{{ asset(str_replace('public', 'storage', $evento->logo)) }}');">
+            <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
+                <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
+                    {{ $evento->nombreevento }}
+                </h1>
+                <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
+                    {{ $evento->organizador }}
+                </p>
+                <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+                    <a href="#"
+                        class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                        Inscribirse
+                        <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M1 5h12m0 0L9 1m4 4L9 9" />
+                        </svg>
+                    </a>
+                    <a href="#"
+                        class="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
+                        Conferencias
+                    </a>
+                </div>
+            </div>
+        </section>
 
-                                <p class="text-gray-700 dark:text-gray-300"><strong>Fecha de Inicio:</strong>
-                                    {{ \Carbon\Carbon::parse($evento->fechainicio)->locale('es')->isoFormat('D [de] MMMM [de] YYYY') }}
+        <section class="py-10 bg-gray-50 sm:py-16 lg:py-24">
+            <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="max-w-xl mx-auto text-center">
+                    <p class="text-sm font-semibold tracking-widest text-blue-600 uppercase">Este evento es
+                        {{$evento->estado}}
+                    </p>
+
+                    <h2 class="mt-6 text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Acerca del
+                        evento</h2>
+                </div>
+
+                <div class="grid items-center grid-cols-1 mt-12 gap-y-10 lg:grid-cols-5 sm:mt-20 gap-x-4">
+                    <div class="space-y-8 lg:pr-16 xl:pr-24 lg:col-span-2 lg:space-y-12">
+                        <div class="flex items-start">
+                            <svg class="flex-shrink-0 text-green-500 w-9 h-9" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                            </svg>
+                            <div class="ml-5">
+                                <h3 class="text-xl font-semibold text-black">Descripción</h3>
+                                <p class="mt-3 text-base text-gray-600">{{$evento->descripcion}}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <svg class="flex-shrink-0 text-blue-600 w-9 h-9" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <div class="ml-5">
+                                <h3 class="text-xl font-semibold text-black">Hora:</h3>
+                                <p class="mt-3 text-base text-gray-600">
+                                    {{ \Carbon\Carbon::parse($evento->fechainicio)->locale('es')->isoFormat('D [de] MMMM [de] YYYY ') }}Hora:
+                                    <strong>{{$evento->horainicio}}</strong>
                                 </p>
-                                <p class="text-gray-700 dark:text-gray-300"><strong>Fecha Final:</strong>
-                                    {{ \Carbon\Carbon::parse($evento->fechafinal)->locale('es')->isoFormat('D [de] MMMM [de] YYYY') }}
+                                <p class="mt-3 text-base text-gray-600">
+                                    {{ \Carbon\Carbon::parse($evento->fechafinal)->locale('es')->isoFormat('D [de] MMMM [de] YYYY ') }}Hora:
+                                    <strong>{{$evento->horafin}}</strong>
                                 </p>
                             </div>
-                            <div>
-                                <p class="text-gray-700 dark:text-gray-300"><strong>Hora de Inicio:</strong>
-                                    {{ $evento->horainicio }}
-                                </p>
+                        </div>
 
-                                <p class="text-gray-700 dark:text-gray-300"><strong>Hora Final:</strong>
-                                    {{ $evento->horafin }}
+                        <div class="flex items-start">
+                            <svg class="flex-shrink-0 text-red-500 w-9 h-9" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                            <div class="ml-5">
+                                <h3 class="text-xl font-semibold text-black">¿Cómo contactar al organizador?</h3>
+                                <p class="mt-4 text-base text-gray-700">
+                                    Visita nuestro sitio web: <a href="#"
+                                        class="text-blue-600 hover:underline">dreamworldwide.net</a>.
+                                    Para más detalles, consulta nuestra sección de preguntas frecuentes.
                                 </p>
+                            </div>
+                        </div>
+                    </div>
 
-                                <p class="text-gray-700 dark:text-gray-300"><strong>Modalidad:</strong>
-                                    {{ $evento->modalidad->modalidad }}</p>
-                                <p class="text-gray-700 dark:text-gray-300"><strong>Localidad:</strong>
-                                    {{ $evento->localidad->localidad }}</p>
+                    <div class="lg:col-span-3">
+                        <h3 class="text-xl font-semibold text-black">Localidad del evento</h3>
+                        <p class="text-gray-700 dark:text-gray-300"><strong>Modalidad:</strong>
+                            {{ $evento->modalidad->modalidad }}</p>
+                        <img class="w-full rounded-lg shadow-xl"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/features/7/dashboard-screenshot.png"
+                            alt="" />
+                        <p class="text-gray-700 dark:text-gray-300"><strong>Localidad:</strong>
+                            {{ $evento->localidad->localidad }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="py-10 bg-gray-50 sm:py-16 lg:py-24">
+            <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+                <div class="flex items-end justify-between">
+                    <div class="flex-1 text-center lg:text-left">
+                        <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Más eventos
+                        </h2>
+                        <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600 lg:mx-0">Puede que tambien te interesen estos eventos.
+                        </p>
+                    </div>
+
+                    <div class="hidden lg:flex lg:items-center lg:space-x-3">
+                        <button type="button"
+                            class="flex items-center justify-center text-gray-400 transition-all duration-200 bg-transparent border border-gray-300 rounded w-9 h-9 hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+
+                        <button type="button"
+                            class="flex items-center justify-center text-gray-400 transition-all duration-200 bg-transparent border border-gray-300 rounded w-9 h-9 hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full">
+                <div class="overflow-hidden bg-white rounded shadow">
+                        <div>
+                            <div class="relative">
+                                <a href="#" title="" class="block aspect-w-4 aspect-h-3">
+                                    <img class="object-cover w-full h-full"
+                                        src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-2.jpg"
+                                        alt="" />
+                                </a>
+
+                                <div class="absolute top-4 left-4">
+                                    <span
+                                        class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
+                                        Marketing </span>
+                                </div>
+                            </div>
+                            <div class="p-5">
+                            <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase">
+                                April 04, 2020 </span>
+                            <p class="mt-5 text-2xl font-semibold">
+                                <a href="#" title="" class="text-black"> Ho7 Tips to run your remote team faster and
+                                    better. </a>
+                            </p>
+                            <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
+                                aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+                            </div>
+                            
+                            <div class="border-t border-gray-200">
+                                <div class="flex">
+                                    <div class="flex items-center flex-1 px-6 py-5">
+                                        <img class="object-cover w-8 h-8 rounded-full"
+                                            src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/3/avatar-3.jpg"
+                                            alt="" />
+                                        <span
+                                            class="flex-1 block min-w-0 ml-3 text-base font-semibold text-gray-900 truncate">
+                                            Jenny Wilson </span>
+                                    </div>
+
+                                    <a href="#" title=""
+                                        class="inline-flex items-center flex-shrink-0 px-4 py-5 text-base font-semibold transition-all duration-200 bg-white border-l border-gray-200 hover:bg-blue-600 hover:text-white">
+                                        Read more
+                                        <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="overflow-hidden bg-white rounded shadow">
+                        <div>
+                            <div class="relative">
+                                <a href="#" title="" class="block aspect-w-4 aspect-h-3">
+                                    <img class="object-cover w-full h-full"
+                                        src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-2.jpg"
+                                        alt="" />
+                                </a>
+
+                                <div class="absolute top-4 left-4">
+                                    <span
+                                        class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
+                                        Marketing </span>
+                                </div>
+                            </div>
+                            <div class="p-5">
+                            <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase">
+                                April 04, 2020 </span>
+                            <p class="mt-5 text-2xl font-semibold">
+                                <a href="#" title="" class="text-black"> Ho7 Tips to run your remote team faster and
+                                    better. </a>
+                            </p>
+                            <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
+                                aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+                            </div>
+                            
+                            <div class="border-t border-gray-200">
+                                <div class="flex">
+                                    <div class="flex items-center flex-1 px-6 py-5">
+                                        <img class="object-cover w-8 h-8 rounded-full"
+                                            src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/3/avatar-3.jpg"
+                                            alt="" />
+                                        <span
+                                            class="flex-1 block min-w-0 ml-3 text-base font-semibold text-gray-900 truncate">
+                                            Jenny Wilson </span>
+                                    </div>
+
+                                    <a href="#" title=""
+                                        class="inline-flex items-center flex-shrink-0 px-4 py-5 text-base font-semibold transition-all duration-200 bg-white border-l border-gray-200 hover:bg-blue-600 hover:text-white">
+                                        Read more
+                                        <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="overflow-hidden bg-white rounded shadow">
+                        <div>
+                            <div class="relative">
+                                <a href="#" title="" class="block aspect-w-4 aspect-h-3">
+                                    <img class="object-cover w-full h-full"
+                                        src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-2.jpg"
+                                        alt="" />
+                                </a>
+
+                                <div class="absolute top-4 left-4">
+                                    <span
+                                        class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
+                                        Marketing </span>
+                                </div>
+                            </div>
+                            <div class="p-5">
+                            <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase">
+                                April 04, 2020 </span>
+                            <p class="mt-5 text-2xl font-semibold">
+                                <a href="#" title="" class="text-black"> Ho7 Tips to run your remote team faster and
+                                    better. </a>
+                            </p>
+                            <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
+                                aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+                            </div>
+                            
+                            <div class="border-t border-gray-200">
+                                <div class="flex">
+                                    <div class="flex items-center flex-1 px-6 py-5">
+                                        <img class="object-cover w-8 h-8 rounded-full"
+                                            src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/3/avatar-3.jpg"
+                                            alt="" />
+                                        <span
+                                            class="flex-1 block min-w-0 ml-3 text-base font-semibold text-gray-900 truncate">
+                                            Jenny Wilson </span>
+                                    </div>
+
+                                    <a href="#" title=""
+                                        class="inline-flex items-center flex-shrink-0 px-4 py-5 text-base font-semibold transition-all duration-200 bg-white border-l border-gray-200 hover:bg-blue-600 hover:text-white">
+                                        Read more
+                                        <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="relative overflow-x-auto sm:rounded-lg">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <caption
-                            class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                            Conferencias del evento
-                        </caption>
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    Conferencista
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Conferencia
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Fecha y hora
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Lugar
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($conferencias as $conferencia)
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <td class="flex items-center px-6 py-4 text-gray-900 dark:text-white">
-                                        <img class="w-10 h-10 rounded-full mr-3"
-                                            src="{{ asset(str_replace('public', 'storage', $conferencia->conferencista->foto)) }}"
-                                            alt="Foto conferencista">
-                                        <div class="text-base font-semibold">
-                                            @if ($conferencia->conferencista)
-                                                @if ($conferencia->conferencista->persona)
-                                                    {{ $conferencia->conferencista->persona->nombre }}
-                                                    {{ $conferencia->conferencista->persona->apellido ?? '' }}
-                                                @else
-                                                    N/A
-                                                @endif
-                                            @else
-                                                N/A
-                                            @endif
-                                        </div>
-                                    </td>
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                                        {{ $conferencia->nombre }}
-                                    </th>
-                                    <td class="px-6 py-4">
+                <div class="flex items-center justify-center mt-8 space-x-3 lg:hidden">
+                    <button type="button"
+                        class="flex items-center justify-center text-gray-400 transition-all duration-200 bg-transparent border border-gray-300 rounded w-9 h-9 hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
 
-                                        {{ \Carbon\Carbon::parse($conferencia->fecha)->locale('es')->isoFormat('D [de] MMMM [de] YYYY') }}
-                                        <br>
-                                        {{ $conferencia->horaInicio }} - {{ $conferencia->horaFin }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ $conferencia->lugar }}
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <button type="button"
+                        class="flex items-center justify-center text-gray-400 transition-all duration-200 bg-transparent border border-gray-300 rounded w-9 h-9 hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
                 </div>
             </div>
-            <div class="bg-gradient-to-b z-0 from-blue-50 to-transparent dark:from-blue-900 w-full h-full absolute top-0 left-0"></div>
-            <a  id="botonRegresar" href="{{ route('eventos') }}"
-                class="absolute z-50 top-4 left-4 inline-flex items-center px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800 rounded-lg">
-                Regresar
-            </a>
-            <button  id="botonImprimir" onclick="ocultarBotones()" onclick="window.print()" 
-                class="absolute z-50 top-4 right-4 inline-flex items-center px-4 py-2 text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800 rounded-lg">
-                Imprimir
-            </button>
         </section>
-        <script>
-            function ocultarBotones() {
-                // Ocultar botones
-                document.getElementById("botonImprimir").style.display = "none";
-                document.getElementById("botonRegresar").style.display = "none";
 
-                // Imprimir la página
-                window.print();
 
-                // Mostrar botones nuevamente después de imprimir
-                setTimeout(function () {
-                    document.getElementById("botonImprimir").style.display = "inline-block";
-                    document.getElementById("botonRegresar").style.display = "inline-block";
-                }, 1000);
-            }
-        </script>
+
+
+        <section class="py-10 bg-white sm:pt-16 lg:pt-24">
+            <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-y-12 gap-x-8 xl:gap-x-12">
+                    <div class="col-span-2 md:col-span-4 xl:pr-8">
+                        <img class="w-auto h-9" src="https://cdn.rareblocks.xyz/collection/celebration/images/logo.svg"
+                            alt="" />
+
+                        <p class="text-base leading-relaxed text-gray-600 mt-7">Amet minim mollit non deserunt ullamco
+                            est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+
+                        <a href="#" title=""
+                            class="inline-flex items-center justify-center px-6 py-4 font-semibold text-white transition-all duration-200 bg-blue-600 rounded-md hover:bg-blue-700 focus:bg-blue-700 mt-7">
+                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                            </svg>
+                            Start Live Chat
+                        </a>
+                    </div>
+
+                    <div class="lg:col-span-2">
+                        <p class="text-base font-semibold text-gray-900">Company</p>
+
+                        <ul class="mt-6 space-y-5">
+                            <li>
+                                <a href="#" title=""
+                                    class="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600">
+                                    About </a>
+                            </li>
+
+                            <li>
+                                <a href="#" title=""
+                                    class="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600">
+                                    Features </a>
+                            </li>
+
+                            <li>
+                                <a href="#" title=""
+                                    class="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600">
+                                    Works </a>
+                            </li>
+
+                            <li>
+                                <a href="#" title=""
+                                    class="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600">
+                                    Career </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="lg:col-span-2">
+                        <p class="text-base font-semibold text-gray-900">Help</p>
+
+                        <ul class="mt-6 space-y-4">
+                            <li>
+                                <a href="#" title=""
+                                    class="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600">
+                                    Customer Support </a>
+                            </li>
+
+                            <li>
+                                <a href="#" title=""
+                                    class="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600">
+                                    Delivery Details </a>
+                            </li>
+
+                            <li>
+                                <a href="#" title=""
+                                    class="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600">
+                                    Terms & Conditions </a>
+                            </li>
+
+                            <li>
+                                <a href="#" title=""
+                                    class="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600">
+                                    Privacy Policy </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="lg:col-span-2">
+                        <p class="text-base font-semibold text-gray-900">Resources</p>
+
+                        <ul class="mt-6 space-y-5">
+                            <li>
+                                <a href="#" title=""
+                                    class="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600">
+                                    Free eBooks </a>
+                            </li>
+
+                            <li>
+                                <a href="#" title=""
+                                    class="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600">
+                                    Development Tutorial </a>
+                            </li>
+
+                            <li>
+                                <a href="#" title=""
+                                    class="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600">
+                                    How to - Blog </a>
+                            </li>
+
+                            <li>
+                                <a href="#" title=""
+                                    class="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600">
+                                    YouTube Playlist </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="lg:col-span-2">
+                        <p class="text-base font-semibold text-gray-900">Extra Links</p>
+
+                        <ul class="mt-6 space-y-5">
+                            <li>
+                                <a href="#" title=""
+                                    class="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600">
+                                    Customer Support </a>
+                            </li>
+
+                            <li>
+                                <a href="#" title=""
+                                    class="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600">
+                                    Delivery Details </a>
+                            </li>
+
+                            <li>
+                                <a href="#" title=""
+                                    class="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600">
+                                    Terms & Conditions </a>
+                            </li>
+
+                            <li>
+                                <a href="#" title=""
+                                    class="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600">
+                                    Privacy Policy </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr class="mt-16 mb-10 border-gray-200" />
+
+                <div class="sm:flex sm:items-center sm:justify-between">
+                    <p class="text-sm text-gray-600">© Copyright 2021, All Rights Reserved by Postcraft</p>
+
+                    <ul class="flex items-center mt-5 space-x-3 md:order-3 sm:mt-0">
+                        <li>
+                            <a href="#" title=""
+                                class="flex items-center justify-center text-gray-800 transition-all duration-200 bg-transparent border border-gray-300 rounded-full w-7 h-7 focus:bg-orange-600 hover:text-white focus:text-white hover:bg-orange-600 hover:border-orange-600 focus:border-orange-600">
+                                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    fill="currentColor">
+                                    <path
+                                        d="M19.633 7.997c.013.175.013.349.013.523 0 5.325-4.053 11.461-11.46 11.461-2.282 0-4.402-.661-6.186-1.809.324.037.636.05.973.05a8.07 8.07 0 0 0 5.001-1.721 4.036 4.036 0 0 1-3.767-2.793c.249.037.499.062.761.062.361 0 .724-.05 1.061-.137a4.027 4.027 0 0 1-3.23-3.953v-.05c.537.299 1.16.486 1.82.511a4.022 4.022 0 0 1-1.796-3.354c0-.748.199-1.434.548-2.032a11.457 11.457 0 0 0 8.306 4.215c-.062-.3-.1-.611-.1-.923a4.026 4.026 0 0 1 4.028-4.028c1.16 0 2.207.486 2.943 1.272a7.957 7.957 0 0 0 2.556-.973 4.02 4.02 0 0 1-1.771 2.22 8.073 8.073 0 0 0 2.319-.624 8.645 8.645 0 0 1-2.019 2.083z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" title=""
+                                class="flex items-center justify-center text-gray-800 transition-all duration-200 bg-transparent border border-gray-300 rounded-full w-7 h-7 focus:bg-orange-600 hover:text-white focus:text-white hover:bg-orange-600 hover:border-orange-600 focus:border-orange-600">
+                                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    fill="currentColor">
+                                    <path
+                                        d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0 0 14.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" title=""
+                                class="flex items-center justify-center text-gray-800 transition-all duration-200 bg-transparent border border-gray-300 rounded-full w-7 h-7 focus:bg-orange-600 hover:text-white focus:text-white hover:bg-orange-600 hover:border-orange-600 focus:border-orange-600">
+                                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    fill="currentColor">
+                                    <path
+                                        d="M11.999 7.377a4.623 4.623 0 1 0 0 9.248 4.623 4.623 0 0 0 0-9.248zm0 7.627a3.004 3.004 0 1 1 0-6.008 3.004 3.004 0 0 1 0 6.008z">
+                                    </path>
+                                    <circle cx="16.806" cy="7.207" r="1.078"></circle>
+                                    <path
+                                        d="M20.533 6.111A4.605 4.605 0 0 0 17.9 3.479a6.606 6.606 0 0 0-2.186-.42c-.963-.042-1.268-.054-3.71-.054s-2.755 0-3.71.054a6.554 6.554 0 0 0-2.184.42 4.6 4.6 0 0 0-2.633 2.632 6.585 6.585 0 0 0-.419 2.186c-.043.962-.056 1.267-.056 3.71 0 2.442 0 2.753.056 3.71.015.748.156 1.486.419 2.187a4.61 4.61 0 0 0 2.634 2.632 6.584 6.584 0 0 0 2.185.45c.963.042 1.268.055 3.71.055s2.755 0 3.71-.055a6.615 6.615 0 0 0 2.186-.419 4.613 4.613 0 0 0 2.633-2.633c.263-.7.404-1.438.419-2.186.043-.962.056-1.267.056-3.71s0-2.753-.056-3.71a6.581 6.581 0 0 0-.421-2.217zm-1.218 9.532a5.043 5.043 0 0 1-.311 1.688 2.987 2.987 0 0 1-1.712 1.711 4.985 4.985 0 0 1-1.67.311c-.95.044-1.218.055-3.654.055-2.438 0-2.687 0-3.655-.055a4.96 4.96 0 0 1-1.669-.311 2.985 2.985 0 0 1-1.719-1.711 5.08 5.08 0 0 1-.311-1.669c-.043-.95-.053-1.218-.053-3.654 0-2.437 0-2.686.053-3.655a5.038 5.038 0 0 1 .311-1.687c.305-.789.93-1.41 1.719-1.712a5.01 5.01 0 0 1 1.669-.311c.951-.043 1.218-.055 3.655-.055s2.687 0 3.654.055a4.96 4.96 0 0 1 1.67.311 2.991 2.991 0 0 1 1.712 1.712 5.08 5.08 0 0 1 .311 1.669c.043.951.054 1.218.054 3.655 0 2.436 0 2.698-.043 3.654h-.011z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" title=""
+                                class="flex items-center justify-center text-gray-800 transition-all duration-200 bg-transparent border border-gray-300 rounded-full w-7 h-7 focus:bg-orange-600 hover:text-white focus:text-white hover:bg-orange-600 hover:border-orange-600 focus:border-orange-600">
+                                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
     </x-layouts.reportes>
 </div>

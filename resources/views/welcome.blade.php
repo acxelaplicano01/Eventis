@@ -2,6 +2,16 @@
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
+<style>
+    .perspective {
+      perspective: 1000px;
+    }
+
+    .image-wrapper {
+      transform-style: preserve-3d;
+      transition: transform 0.2s ease-out;
+    }
+  </style>
 @endsection
 
 @section('content')
@@ -46,8 +56,8 @@
                 </div>
             </div>
 
-            <div>
-                <img class="w-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/1/hero-img.png"
+            <div onmousemove="handleMouseMove(event)" onmouseleave="resetTransform(event)" class="perspective">
+                <img class="w-full image-wrapper" src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/1/hero-img.png"
                     alt="" />
             </div>
         </div>
@@ -517,4 +527,24 @@
         </div>
     </div>
 </section>
+<script>
+        const handleMouseMove = (event) => {
+            const container = event.currentTarget;
+            const rect = container.getBoundingClientRect();
+            const wrapper = container.querySelector('.image-wrapper');
+
+            const x = event.clientX - rect.left - rect.width / 2;
+            const y = event.clientY - rect.top - rect.height / 2;
+
+            const rotationX = (-y / rect.height) * 20; // Adjust the multiplier for intensity
+            const rotationY = (x / rect.width) * 20;
+
+            wrapper.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+        };
+
+        const resetTransform = (event) => {
+            const wrapper = event.currentTarget.querySelector('.image-wrapper');
+            wrapper.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        };
+    </script>
 @endsection

@@ -11,6 +11,16 @@
     @section('styles')
     {{--
     <link rel="stylesheet" href="{{ asset('css/fondo.css') }}"> --}}
+    <style>
+    .perspective {
+      perspective: 1000px;
+    }
+
+    .image-wrapper {
+      transform-style: preserve-3d;
+      transition: transform 0.2s ease-out;
+    }
+  </style>
     <link rel="stylesheet" href="{{ asset('css/loginStyles.css') }}">
     @endsection
 </head>
@@ -30,7 +40,7 @@
                 <div class="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto">
                     <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl">Registrate gratis</h2>
                     <p class="mt-2 text-base text-gray-600">Ya tienes una cuenta? <a href="{{ route('login') }}" title=""
-                            class="font-medium text-yellow-600 transition-all duration-200 hover:text-yellow-700 hover:underline focus:text-yellow-700">Login</a>
+                            class="font-medium text-yellow-600 transition-all duration-200 hover:text-yellow-700 hover:underline focus:text-yellow-700">Iniciar</a>
                     </p>
 
                     <form method="POST" action="{{ route('registerpost') }}">
@@ -92,15 +102,14 @@
                 </div>
             </div>
 
-            <div class="flex items-center justify-center px-4 py-10 sm:py-16 lg:py-24 bg-gray-50 sm:px-6 lg:px-8">
-                <div>
-                    <img class="w-full mx-auto"
+            <div class="flex items-center justify-center px-4 py-10 sm:py-16 lg:py-24 bg-gradient-to-b from-yellow-50 to-yellow-100 sm:px-6 lg:px-8">
+                <div onmousemove="handleMouseMove(event)" onmouseleave="resetTransform(event)" class="perspective">
+                    <img class="w-full mx-auto image-wrapper"
                     src="{{ asset('Logo/logolo.png') }}" alt="" />
 
                     <div class="w-full max-w-md mx-auto xl:max-w-xl">
                         <h3 class="text-2xl font-bold text-center text-black">Certificate en cada evento</h3>
-                        <p class="leading-relaxed text-center text-gray-500 mt-2.5">Amet minim mollit non deserunt
-                            ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
+                        <p class="leading-relaxed text-center text-gray-500 mt-2.5">Con Eventis, los asistentes pueden registrarse fácilmente, acceder a contenido exclusivo y recibir certificados personalizados al finalizar su participación.</p>
 
                         <div class="flex items-center justify-center mt-10 space-x-3">
                             <div class="bg-yellow-500 rounded-full w-20 h-1.5"></div>
@@ -116,5 +125,24 @@
     </section>
 
 </body>
+<script>
+        const handleMouseMove = (event) => {
+            const container = event.currentTarget;
+            const rect = container.getBoundingClientRect();
+            const wrapper = container.querySelector('.image-wrapper');
 
+            const x = event.clientX - rect.left - rect.width / 2;
+            const y = event.clientY - rect.top - rect.height / 2;
+
+            const rotationX = (-y / rect.height) * 20; // Adjust the multiplier for intensity
+            const rotationY = (x / rect.width) * 20;
+
+            wrapper.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+        };
+
+        const resetTransform = (event) => {
+            const wrapper = event.currentTarget.querySelector('.image-wrapper');
+            wrapper.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        };
+    </script>
 </html>
