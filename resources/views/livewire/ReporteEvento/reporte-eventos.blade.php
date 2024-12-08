@@ -757,7 +757,7 @@ $yaInscrito = $estadoInscripcion === 'Aceptado';
 
 
 
-        <section class="py-2 bg-gray-50 dark:bg-gray-900 sm:py-2 lg:py-2">
+        <section class="py-8 bg-gray-50 dark:bg-gray-900 sm:py-2 lg:py-8">
             <div class="px-6 mx-auto sm:px-6 lg:px-8 max-w-7xl">
                 <div class="flex items-end justify-between">
                     <div class="flex-1 text-center lg:text-left">
@@ -799,6 +799,7 @@ $yaInscrito = $estadoInscripcion === 'Aceptado';
                                 <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full text-yellow-500 bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300">Gafete</span>
                                     </a>
                                     @endif
+                                    <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full text-yellow-500 bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300">{{$evento->estado}}</span>
                                 <span class="block mt-4 text-sm font-semibold tracking-widest text-gray-500 dark:text-gray-400">
                                     <?php
     // Obtener el timestamp de la fecha

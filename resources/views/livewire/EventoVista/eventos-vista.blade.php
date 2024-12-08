@@ -37,19 +37,23 @@
                                     </div>
                                 </div>
                                 @php
-                                $inscripcion = Auth::user()->persona->inscripciones()->where('IdEvento', $evento->id)->first();
-                                $estadoInscripcion = $inscripcion ? $inscripcion->Status : null;
-                                $yaInscrito = $estadoInscripcion === 'Aceptado';
-                            @endphp
+                                    $inscripcion = Auth::user()->persona->inscripciones()->where('IdEvento', $evento->id)->first();
+                                    $estadoInscripcion = $inscripcion ? $inscripcion->Status : null;
+                                    $yaInscrito = $estadoInscripcion === 'Aceptado';
+                                @endphp
                                 <div class="p-5">
                                     @if ($evento->estado  === 'Pagado')
-                                    <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full {{ $estadoInscripcion === 'Aceptado' ? 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300' : 'text-red-600 bg-red-100' }}"> {{ $estadoInscripcion ?? 'No inscrito' }} </span>
+                                        <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full {{ $estadoInscripcion === 'Aceptado' ? 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300' : 'text-red-600 bg-red-100' }}"> 
+                                            {{ $estadoInscripcion ?? 'No inscrito' }} 
+                                        </span>
                                     @endif
+
                                     @if ($estadoInscripcion === 'Aceptado')
                                     <a href="{{ route('gafete', ['evento' => $evento->id]) }}">
-                                <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full text-yellow-500 bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300">Gafete</span>
+                                        <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full text-yellow-500 bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300">Gafete</span>
                                     </a>
                                     @endif
+                                    <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full text-yellow-500 bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300">{{$evento->estado}}</span>
                                 <span class="block mt-4 text-sm font-semibold tracking-widest text-gray-500 dark:text-gray-400">
                                     <?php
 // Obtener el timestamp de la fecha
@@ -85,7 +89,7 @@ $diaSemanaEsp = $diasSemana[$diaSemana];
 
                                 <div class="border-t border-gray-200 dark:border-gray-700">
                                     <div class="flex">
-                                        <div class="flex items-center flex-1 px-6 py-5">
+                                        <div class="flex items-center flex-1 pl-6 pr-1 py-5">
                                             <img class="object-cover w-8 h-8 rounded-full"
                                                 src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/3/avatar-3.jpg"
                                                 alt="" />
@@ -95,7 +99,7 @@ $diaSemanaEsp = $diasSemana[$diaSemana];
                                         </div>
 
                                         <a href="{{ route('reporteEvento', ['evento' => $evento->id]) }}"
-                                            class="inline-flex items-center flex-shrink-0 px-4 py-5 text-base font-semibold transition-all duration-200 bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 hover:bg-yellow-500 dark:hover:bg-yellow-600 text-gray-300 hover:text-white">
+                                            class="inline-flex items-center flex-shrink-0 px-4 py-5 text-base font-semibold transition-all duration-200 bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 hover:bg-yellow-500 dark:hover:bg-yellow-600 text-gray-900 hover:text-white">
                                             Ver evento
                                             <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                 fill="currentColor">
