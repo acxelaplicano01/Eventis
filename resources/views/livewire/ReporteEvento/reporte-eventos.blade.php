@@ -18,9 +18,9 @@
                                 alt="" />
                         </div>
 
-                        <div class="relative overflow-hidden bg-gray-300 border-8 border-white rounded-full w-28 h-28">
+                        <div class="relative overflow-hidden bg-gray-300 border-8 border-yellow-500 rounded-full w-28 h-28">
                             <img class="object-cover w-full h-full"
-                                src="https://cdn.rareblocks.xyz/collection/celebration/images/cta/2/male-avatar-1.jpg"
+                                src="{{ asset(str_replace('public', 'storage', $evento->logo)) }}"
                                 alt="" />
                         </div>
 
@@ -31,13 +31,13 @@
                         </div>
                     </div>
                     <h2 class="mt-8 text-3xl font-bold leading-tight text-white lg:mt-12 sm:text-4xl lg:text-5xl">
-                        Se han inscrito <span class="border-b-8 border-yellow-300">5,482</span> participantes</h2>
+                        Se han inscrito <span class="border-b-8 border-yellow-300"> {{ $evento->inscripciones->count() }}</span> participantes</h2>
                 </div>
 
 
                 <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
                     <a href="#"
-                        class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                        class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-200 dark:focus:ring-yellow-800">
                         Inscribirse
                         <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -142,7 +142,13 @@
                             </div>
                         </div>
                     </div>
-
+                    <!--<div class="w-full h-[200px] md:h-[450px] ">
+                        <div class="fluid-width-video-wrapper" style="padding-top: 36%;"><iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4019.0807429007573!2d-87.1941431248207!3d13.313927907280377!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f703d1a0569519d%3A0x45b3a77ef135ae3a!2sHotel%20Gualiqueme!5e1!3m2!1ses!2shn!4v1731765668105!5m2!1ses!2shn"
+                                class="w-full h-full border-0" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade" id="fitvid0">
+                            </iframe></div>
+                    </div>-->
                     <div class="lg:col-span-3">
                         <img class="w-full rounded-lg shadow-xl"
                             src="{{ asset(str_replace('public', 'storage', $evento->diploma->Plantilla)) }}"
@@ -161,172 +167,418 @@
 
                 <div
                     class="grid max-w-xl grid-cols-1 mx-auto mt-8 text-center lg:max-w-full sm:mt-12 lg:mt-20 lg:grid-cols-3 gap-x-6 xl:gap-x-12 gap-y-6">
-                    <div class="overflow-hidden bg-white rounded-md shadow">
-                        <div class="px-8 py-12">
-                            <div class="relative w-24 h-24 mx-auto">
-                                <img class="relative object-cover w-24 h-24 mx-auto rounded-full"
-                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/1/avatar-1.jpg"
-                                    alt="" />
+                    @foreach ($conferencias as $conferencia)
+                        <div class="overflow-hidden bg-white rounded-md shadow">
+                            <div class="relative">
+                                <!-- Contenido de la tarjeta -->
                                 <div
-                                    class="absolute text-white top-0 left-16 flex items-center justify-center bg-yellow-500 rounded-full p-2 w-auto h-7">
-                                    Hondureño
+                                    class="absolute text-white m-4 top-0 right-0 flex items-center justify-center bg-yellow-500 rounded-full p-2 w-auto h-7">
+                                    {{$conferencia->conferencista->persona->nacionalidad->nombreNacionalidad}}
                                 </div>
                             </div>
-                            <p class="text-base font-semibold tex-tblack mt-9">Jenny Wilson</p>
-                            <p class="mt-1 text-base text-gray-600">Project Manager at Microsoft</p>
-                            <blockquote class="mt-7">
-                                <p class="text-lg text-black">“Amet minim mollit non deserunt ullam co est sit aliqua
-                                    dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation
-                                    veniam consequat”</p>
-                            </blockquote>
-                        </div>
-                    </div>
-
-                    <div class="overflow-hidden bg-white rounded-md shadow">
-                        <div class="px-8 py-12">
-                            <div class="relative w-24 h-24 mx-auto">
-                                <img class="relative object-cover w-24 h-24 mx-auto rounded-full"
-                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/1/avatar-2.jpg"
-                                    alt="" />
-                                <div
-                                    class="absolute text-white top-0 left-16 flex items-center justify-center bg-yellow-500 rounded-full p-2 w-auto h-7">
-                                    Hondureño
+                            <div class="px-8 py-12">
+                                <div class="relative w-52 h-52 mx-auto">
+                                    <img class="relative object-cover w-full h-full mx-auto rounded-full"
+                                        src="{{ asset(str_replace('public', 'storage', $conferencia->conferencista->foto)) }}"
+                                        alt="" />
                                 </div>
+                                <p class="text-base font-semibold tex-tblack mt-4">
+                                    {{ $conferencia->conferencista->persona->nombre }}
+                                    {{ $conferencia->conferencista->persona->apellido ?? '' }}
+                                </p>
+                                <p class="mt-1 text-base text-gray-600">
+                                    {{$conferencia->conferencista->titulo}}
+                                </p>
+                                <blockquote class="mt-5">
+                                    <p class="text-lg text-black">“Amet minim mollit non deserunt ullam co est sit aliqua
+                                        dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation
+                                        veniam consequat”</p>
+                                </blockquote>
                             </div>
-                            <p class="text-base font-semibold tex-tblack mt-9">Robert Fox</p>
-                            <p class="mt-1 text-base text-gray-600">Founder at Brain.co</p>
-                            <blockquote class="mt-7">
-                                <p class="text-lg text-black">“Amet minim mollit non deserunt ullam co est sit aliqua
-                                    dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation
-                                    veniam consequat”</p>
-                            </blockquote>
                         </div>
-                    </div>
-
-                    <div class="overflow-hidden bg-white rounded-md shadow">
-                        <div class="px-8 py-12">
-                            <div class="relative w-24 h-24 mx-auto">
-                                <img class="relative object-cover w-24 h-24 mx-auto rounded-full"
-                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/1/avatar-3.jpg"
-                                    alt="" />
-                                <div
-                                    class="absolute text-white top-0 left-16 flex items-center justify-center bg-yellow-500 rounded-full p-2 w-auto h-7">
-                                    Guatemalteco
-                                </div>
-                            </div>
-                            <p class="text-base font-semibold tex-tblack mt-9">Kristin Watson</p>
-                            <p class="mt-1 text-base text-gray-600">UX Designer at Google</p>
-                            <blockquote class="mt-7">
-                                <p class="text-lg text-black">“Amet minim mollit non deserunt ullam co est sit aliqua
-                                    dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation
-                                    veniam consequat”</p>
-                            </blockquote>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>
-
-
-
 
 
         <section class="py-10 bg-gray-100 sm:py-16 lg:py-24">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div
-                    class="grid items-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 sm:gap-x-12 gap-y-12">
-                    <div class="lg:col-span-2">
-                        <h2
-                            class="text-3xl font-bold leading-tight text-gray-800 sm:text-4xl lg:text-5xl lg:leading-tight">
-                            Conoce a los <br />
-                            organizadores y <br />
-                            patrocinadores<br />
-                        </h2>
-                        <p class="mt-6 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua
-                            dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam
-                            consequat sunt nostrud amet.</p>
+               
+            </div>
+        </section>
+
+        <section>
+            <div class="py-10 bg-gradient-to-r from-yellow-500 to-yellow-600">
+                <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <h2 class="text-3xl font-bold leading-tight text-center text-white sm:text-4xl lg:text-5xl">
+                        Participantes</h2>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-4 md:grid-cols-6 xl:grid-cols-11">
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-1.jpg"
+                            alt="" />
                     </div>
+                </div>
 
-                    <div class="lg:col-span-3 xl:col-span-4">
-                        <div class="grid items-center max-w-4xl grid-cols-2 mx-auto lg:grid-cols-4 gap-x-10 gap-y-16">
-                            <div>
-                                <img class="object-contain w-full h-12 mx-auto"
-                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-2.png"
-                                    alt="" />
-                            </div>
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-2.jpg"
+                            alt="" />
+                    </div>
+                </div>
 
-                            <div>
-                                <img class="object-contain w-full h-12 mx-auto"
-                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-2.png"
-                                    alt="" />
-                            </div>
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-3.jpg"
+                            alt="" />
+                    </div>
+                </div>
 
-                            <div>
-                                <img class="object-contain w-full h-12 mx-auto"
-                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-3.png"
-                                    alt="" />
-                            </div>
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-4.jpg"
+                            alt="" />
+                    </div>
+                </div>
 
-                            <div>
-                                <img class="object-contain w-full mx-auto h-7"
-                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-4.png"
-                                    alt="" />
-                            </div>
-
-                            <div class="hidden lg:block">
-                                <img class="object-contain w-full h-12 mx-auto"
-                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-5.png"
-                                    alt="" />
-                            </div>
-
-                            <div class="hidden lg:block">
-                                <img class="object-contain w-full h-12 mx-auto"
-                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-6.png"
-                                    alt="" />
-                            </div>
-
-                            <div class="hidden lg:block">
-                                <img class="object-contain w-full h-12 mx-auto"
-                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-7.png"
-                                    alt="" />
-                            </div>
-
-                            <div class="hidden lg:block">
-                                <img class="object-contain w-full h-12 mx-auto"
-                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-8.png"
-                                    alt="" />
-                            </div>
-
-                            <div class="hidden lg:block">
-                                <img class="object-contain w-full h-12 mx-auto"
-                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-9.png"
-                                    alt="" />
-                            </div>
-
-                            <div class="hidden lg:block">
-                                <img class="object-contain w-full mx-auto h-12"
-                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-10.png"
-                                    alt="" />
-                            </div>
-
-                            <div class="hidden lg:block">
-                                <img class="object-contain w-full h-12 mx-auto"
-                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-11.png"
-                                    alt="" />
-                            </div>
-
-                            <div class="hidden lg:block">
-                                <img class="object-contain w-full h-12 mx-auto"
-                                    src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-12.png"
-                                    alt="" />
-                            </div>
+                <div>
+                    <div class="bg-orange-500 aspect-w-1 aspect-h-1">
+                        <div class="p-3 sm:p-5 xl:py-6 2xl:py-8 2xl:px-5">
+                            <p class="text-sm font-semibold leading-tight text-white sm:text-lg sm:leading-tight">
+                                {{$evento->nombreevento}}</p>
+                            <p class="mt-2 text-sm text-white truncate">¡Inscribete!</p>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="flex items-center justify-start mt-10 space-x-3 lg:hidden">
-                            <div class="w-2.5 h-2.5 rounded-full bg-blue-600 block"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-gray-300 block"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-gray-300 block"></div>
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-5.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-6.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-7.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-8.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-9.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-10.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-11.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-12.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="bg-blue-500 aspect-w-1 aspect-h-1">
+                        <div class="p-3 sm:p-5 xl:py-6 2xl:py-8 2xl:px-5">
+                            <p class="text-sm font-semibold leading-tight text-white sm:text-lg sm:leading-tight">¡Sé
+                                parte de la experiencia que hará la diferencia!</p>
                         </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-13.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-14.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-15.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-16.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="bg-gray-700 aspect-w-1 aspect-h-1">
+                        <div class="p-3 sm:p-5 xl:py-6 2xl:py-8 2xl:px-5">
+                            <p class="text-sm font-semibold leading-tight text-white sm:text-lg sm:leading-tight">
+                                Aprovecha la oportunidad de destacar.</p>
+                            <p class="mt-2 text-sm text-white truncate">¡Participa ahora!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-17.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-18.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-19.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-20.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-21.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-22.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-23.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-24.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="bg-green-400 aspect-w-1 aspect-h-1">
+                        <div class="p-3 sm:p-5 xl:py-6 2xl:py-8 2xl:px-5">
+                            <p class="text-sm font-semibold leading-tight text-white sm:text-lg sm:leading-tight">El
+                                éxito te está esperando.</p>
+                            <p class="mt-2 text-sm text-white truncate">¡Inscribete!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-25.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-26.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-27.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="bg-red-500 aspect-w-1 aspect-h-1">
+                        <div class="p-3 sm:p-5 xl:py-6 2xl:py-8 2xl:px-5">
+                            <p class="text-sm font-semibold leading-tight text-white sm:text-lg sm:leading-tight">
+                                Hazlo por ti, hazlo por tu futuro.</p>
+                            <p class="mt-2 text-sm text-white truncate">¡Inscribete ya!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-28.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-29.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="bg-gray-800 aspect-w-1 aspect-h-1">
+                        <div class="p-3 sm:p-5 xl:py-6 2xl:py-8 2xl:px-5">
+                            <p class="text-sm font-semibold leading-tight text-white sm:text-lg sm:leading-tight">
+                                Grandes cosas suceden cuando tomas acción.</p>
+                            <p class="mt-2 text-sm text-white truncate">¡Inscríbete!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-30.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-31.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-32.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-33.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-34.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="bg-indigo-500 aspect-w-1 aspect-h-1">
+                        <div class="p-3 sm:p-5 xl:py-6 2xl:py-8 2xl:px-5">
+                            <p class="text-sm font-semibold leading-tight text-white sm:text-lg sm:leading-tight">
+                                Conecta, aprende y crece.</p>
+                            <p class="mt-2 text-sm text-white truncate">¡Inscribete!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-35.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-200"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-4.jpg"
+                            alt="" />
+                    </div>
+                </div>
+
+                <div>
+                    <div class="aspect-w-1 aspect-h-1">
+                        <img class="bg-gray-300"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/testimonials/3/avatar-3.jpg"
+                            alt="" />
                     </div>
                 </div>
             </div>
@@ -334,8 +586,85 @@
 
 
 
+        <section class="py-10 bg-white sm:py-16 lg:py-24">
+            <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="max-w-2xl mx-auto text-center">
+                    <h2 class="text-2xl font-bold text-gray-800 sm:text-4xl sm:leading-tight">Conoce nuestros
+                        patrocinadores y organizadores</h2>
+                </div>
 
+                <div
+                    class="grid items-center max-w-4xl grid-cols-2 mx-auto mt-12 md:mt-20 md:grid-cols-4 gap-x-10 gap-y-16">
+                    <div>
+                        <img class="object-contain w-full h-6 mx-auto"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-1.png" alt="" />
+                    </div>
 
+                    <div>
+                        <img class="object-contain w-full h-8 mx-auto"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-2.png" alt="" />
+                    </div>
+
+                    <div>
+                        <img class="object-contain w-full h-8 mx-auto"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-3.png" alt="" />
+                    </div>
+
+                    <div>
+                        <img class="object-contain w-full mx-auto h-7"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-4.png" alt="" />
+                    </div>
+
+                    <div class="hidden md:block">
+                        <img class="object-contain w-full h-8 mx-auto"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-5.png" alt="" />
+                    </div>
+
+                    <div class="hidden md:block">
+                        <img class="object-contain w-full h-8 mx-auto"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-6.png" alt="" />
+                    </div>
+
+                    <div class="hidden md:block">
+                        <img class="object-contain w-full h-8 mx-auto"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-7.png" alt="" />
+                    </div>
+
+                    <div class="hidden md:block">
+                        <img class="object-contain w-full h-8 mx-auto"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-8.png" alt="" />
+                    </div>
+
+                    <div class="hidden md:block">
+                        <img class="object-contain w-full h-8 mx-auto"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-9.png" alt="" />
+                    </div>
+
+                    <div class="hidden md:block">
+                        <img class="object-contain w-full mx-auto h-7"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-10.png" alt="" />
+                    </div>
+
+                    <div class="hidden md:block">
+                        <img class="object-contain w-full h-8 mx-auto"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-11.png" alt="" />
+                    </div>
+
+                    <div class="hidden md:block">
+                        <img class="object-contain w-full h-8 mx-auto"
+                            src="https://cdn.rareblocks.xyz/collection/celebration/images/logos/3/logo-12.png" alt="" />
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-center mt-10 space-x-3 md:hidden">
+                    <div class="w-2.5 h-2.5 rounded-full bg-blue-600 block"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-gray-300 block"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-gray-300 block"></div>
+                </div>
+
+                <p class="mt-10 text-base text-center text-gray-500 md:mt-20">and, 1000+ more companies</p>
+            </div>
+        </section>
 
 
 
@@ -343,14 +672,13 @@
             <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
                 <div class="flex items-end justify-between">
                     <div class="flex-1 text-center lg:text-left">
-                        <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Más eventos
+                        <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Otros eventos
                         </h2>
                         <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600 lg:mx-0">Puede que
                             tambien te interesen estos eventos.
                         </p>
                     </div>
                 </div>
-
                 <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full">
                     @foreach($Eventos as $evento)
                         <div class="overflow-hidden bg-white rounded shadow">
@@ -370,11 +698,32 @@
                                 </div>
                                 <div class="p-5">
                                     <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase">
-                                        {{$evento->fechainicio}} </span>
+                                    <?php
+// Obtener el timestamp de la fecha
+$timestamp = strtotime($evento->fechainicio);
+
+// Obtener el día de la semana en formato textual completo (por ejemplo, "Sunday")
+$diaSemana = date('l', $timestamp);
+
+// Traducir el día de la semana al español
+$diasSemana = [
+    'Monday' => 'Lunes',
+    'Tuesday' => 'Martes',
+    'Wednesday' => 'Miércoles',
+    'Thursday' => 'Jueves',
+    'Friday' => 'Viernes',
+    'Saturday' => 'Sábado',
+    'Sunday' => 'Domingo'
+];
+
+$diaSemanaEsp = $diasSemana[$diaSemana];
+?>
+                                    
+                                    {{$diaSemanaEsp}}, {{ \Carbon\Carbon::parse($evento->fechainicio)->format('d \d\e F \d\e Y') }} </span>
                                     <p class="mt-5 text-2xl font-semibold">
                                         <a href="#" title="" class="text-black">{{$evento->nombreevento}} </a>
                                     </p>
-                                    <p class="mt-4 text-base text-gray-600">{{$evento->descripcion}}</p>
+                                    <p class="mt-4 text-base text-gray-600 truncate">{{$evento->descripcion}}</p>
                                 </div>
 
                                 <div class="border-t border-gray-200">

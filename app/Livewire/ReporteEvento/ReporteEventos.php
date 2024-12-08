@@ -39,5 +39,5 @@ class ReporteEventos extends Component
             ->paginate(9);
         Auth::user()->persona->suscripciones;
         return view('livewire.ReporteEvento.reporte-eventos', ['Eventos' => $Eventos]);
-    }
+    }  
 }

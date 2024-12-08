@@ -74,7 +74,6 @@ Route::middleware([
     Route::get('/historial-eventos', HistorialEventos::class)->name('historial-eventos');
     Route::get('/gafete/{evento}', Gafetes::class)->name('gafete');
     Route::get('/perfilconferencista', Perfilconferencista::class)->name('perfilconferencista');
-    Route::get('/eventoConferencias', EventoConferencias::class)->name('eventoConferencias');
 });
 
 
