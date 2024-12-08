@@ -36,7 +36,14 @@
 
 
                 <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
-                    <a href="#"
+                @if ($evento->estado === 'Pagado')
+                @php
+                $yaInscrito = Auth::user()->persona->inscripciones()
+                ->where('IdEvento', $evento->id)
+                ->exists();
+                @endphp
+                @if ($yaInscrito)
+                <p data-modal-target="inscrito-modal-{{ $evento->id }}" data-modal-toggle="inscrito-modal-{{ $evento->id }}"
                         class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-200 dark:focus:ring-yellow-800">
                         Inscribirse
                         <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
@@ -44,7 +51,103 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M1 5h12m0 0L9 1m4 4L9 9" />
                         </svg>
-                    </a>
+                </p>
+                @else
+                <p data-modal-target="progress-modal-{{ $evento->id }}" data-modal-toggle="progress-modal-{{ $evento->id }}"
+                        class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-200 dark:focus:ring-yellow-800">
+                        Inscribirse
+                        <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M1 5h12m0 0L9 1m4 4L9 9" />
+                        </svg>
+                </p>
+                    @endif
+                    @endif
+                    <!-- Modal para ya inscrito -->
+                    <div id="inscrito-modal-{{ $evento->id }}" tabindex="-1" aria-hidden="true"
+                                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                        <!-- Fondo opaco -->
+                                        <div class="fixed inset-0 bg-black opacity-50"></div>
+                                        <div class="relative p-4 w-full max-w-md max-h-full mx-auto">
+                                            <!-- Modal content -->
+                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                <div class="p-4 md:p-5">
+                                                    <h3 class="mb-1 text-xl font-bold text-gray-900 dark:text-white">
+                                                        Ya estas inscrito a "{{ $evento->nombreevento }}"
+                                                    </h3>
+                                                    <p class="text-gray-500 dark:text-gray-400 mb-6">Si tu comprobante de pago ya
+                                                        fue
+                                                        aceptado ya debes poder inscribirte a las conferencias de este evento.</p>
+                                                    <!-- Modal footer -->
+                                                    @php
+                                $inscripcion = Auth::user()->persona->inscripciones()->where('IdEvento', $evento->id)->first();
+                                $estadoInscripcion = $inscripcion ? $inscripcion->Status : null;
+                                $yaInscrito = $estadoInscripcion === 'Aceptado';
+                            @endphp
+                                                    <div class="flex items-center mt-6 space-x-4 rtl:space-x-reverse">
+                                                        <button data-modal-hide="inscrito-modal-{{ $evento->id }}"
+                                                            type="button"
+                                                            class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-yellow-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cerrar</button>
+                                                        @if ($estadoInscripcion == 'Aceptado')
+                                                            <a href="{{ route('vistaconferencia', ['evento' => $evento->id]) }}"
+                                                                data-modal-hide="inscrito-modal-{{ $evento->id }}" type="button"
+                                                                class="text-white bg-yellow-600 hover:bg-yellow-700 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Ver
+                                                                conferencias</a>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="progress-modal-{{ $evento->id}}" tabindex="-1" aria-hidden="true"
+                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                            <div class="fixed inset-0 bg-black opacity-50"></div>
+                            <div class="relative p-4 w-full max-w-md max-h-full">
+                                <!-- Modal content -->
+                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                    <div class="p-4 md:p-5">
+                                        <h3 class="mb-1 text-xl font-bold text-gray-900 dark:text-white">
+                                            "{{$evento->nombreevento}}" tiene un costo
+                                        </h3>
+                                        <div class="payment-section p-4 bg-gray-100 rounded-lg shadow-lg dark:bg-gray-800">
+                                            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Realiza tu pago</h3>
+                                            <ul class="list-disc pl-5 text-gray-700 dark:text-gray-300">
+                                                <li>
+                                                    Tesorería UNAH con código de pago <strong>1078</strong>
+                                                </li>
+                                                <li>
+                                                    Pago en Banco Lafise con código de pago <strong>1078</strong>
+                                                </li>
+                                                <li class="mt-2">
+                                                    <span>Pago en línea:</span>
+                                                    <a href="https://pagos.unah.edu.hn/#/productos/101" target="_blank"
+                                                        class="inline-flex items-center px-4 py-2 mt-2 text-sm font-medium text-white bg-yellow-600 rounded-lg shadow hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600">
+                                                        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                            stroke-width="2" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M17 9V7a4 4 0 1 0-8 0v2M5 9h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2zm6 3v4m-3-2h6" />
+                                                        </svg>
+                                                        Pagar en línea
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <p class="mt-4 text-gray-600 dark:text-gray-400">Por favor, sube tu comprobante de pago para completar tu inscripción.</p>
+                                        </div>
+
+                                            <!-- Modal footer -->
+                                        <div class="flex items-center mt-6 space-x-4 rtl:space-x-reverse">
+                                            <button data-modal-hide="progress-modal-{{ $evento->id }}" type="button"
+                                                class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-yellow-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cerrar</button>
+                                            <a href="{{ route('recibo', ['evento' => $evento->id]) }}"
+                                                data-modal-hide="progress-modal-{{ $evento->id }}" type="button"
+                                                class="text-white bg-yellow-600 hover:bg-yellow-700 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Subir
+                                                Comprobante</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <a href="#"
                         class="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
                         Conferencias
@@ -684,11 +787,11 @@
                         <div class="overflow-hidden bg-white rounded shadow">
                             <div>
                                 <div class="relative">
-                                    <a href="#" title="" class="block aspect-w-4 aspect-h-3">
-                                        <img class="object-cover w-full h-full"
-                                            src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-2.jpg"
+                                    <div class="block aspect-w-4 aspect-h-3">
+                                        <img class="object-cover w-full h-56"
+                                            src="{{ asset(str_replace('public', 'storage', $evento->logo)) }}"
                                             alt="" />
-                                    </a>
+                                    </div>
 
                                     <div class="absolute top-4 left-4">
                                         <span
@@ -696,8 +799,21 @@
                                             {{$evento->modalidad->modalidad}} </span>
                                     </div>
                                 </div>
+                                @php
+                                $inscripcion = Auth::user()->persona->inscripciones()->where('IdEvento', $evento->id)->first();
+                                $estadoInscripcion = $inscripcion ? $inscripcion->Status : null;
+                                $yaInscrito = $estadoInscripcion === 'Aceptado';
+                            @endphp
                                 <div class="p-5">
-                                    <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase">
+                                    @if ($evento->estado  === 'Pagado')
+                                    <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full {{ $estadoInscripcion === 'Aceptado' ? 'text-green-600 bg-green-100' : 'text-red-600 bg-red-100' }}"> {{ $estadoInscripcion ?? 'No inscrito' }} </span>
+                                    @endif
+                                    @if ($estadoInscripcion === 'Aceptado')
+                                    <a href="{{ route('gafete', ['evento' => $evento->id]) }}">
+                                <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full text-yellow-500 bg-yellow-100">Gafete</span>
+                                    </a>
+                                    @endif
+                                <span class="block mt-4 text-sm font-semibold tracking-widest text-gray-500">
                                     <?php
 // Obtener el timestamp de la fecha
 $timestamp = strtotime($evento->fechainicio);
@@ -720,10 +836,14 @@ $diaSemanaEsp = $diasSemana[$diaSemana];
 ?>
                                     
                                     {{$diaSemanaEsp}}, {{ \Carbon\Carbon::parse($evento->fechainicio)->format('d \d\e F \d\e Y') }} </span>
-                                    <p class="mt-5 text-2xl font-semibold">
-                                        <a href="#" title="" class="text-black">{{$evento->nombreevento}} </a>
+                                    <p class="text-2xl font-semibold">
+                                        <a 
+                                        href="{{($evento->estado === 'Pagado' && !$yaInscrito)
+                        ? route('subir-comprobante', ['evento' => $evento->id])
+                        : route('reporteEvento', ['evento' => $evento->id]) }}"
+                                        class="text-black">{{$evento->nombreevento}} </a>
                                     </p>
-                                    <p class="mt-4 text-base text-gray-600 truncate">{{$evento->descripcion}}</p>
+                                    <p class="mt-2 text-base text-gray-600 truncate">{{$evento->descripcion}}</p>
                                 </div>
 
                                 <div class="border-t border-gray-200">
@@ -734,7 +854,7 @@ $diaSemanaEsp = $diasSemana[$diaSemana];
                                                 alt="" />
                                             <span
                                                 class="flex-1 block min-w-0 ml-3 text-base font-semibold text-gray-900 truncate">
-                                                {{$evento->organizador}}</span>
+                                                {{$evento->organizador}}<p class="fecha-creacion font-medium">{{ $evento->created_at->diffForHumans() }}</p></span>
                                         </div>
 
                                         <a href="{{ route('reporteEvento', ['evento' => $evento->id]) }}"

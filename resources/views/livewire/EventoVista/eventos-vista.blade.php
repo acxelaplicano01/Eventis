@@ -68,11 +68,9 @@
 
                                 <div class="evento-details">
                                     <a
-                                        href="{{ 
-                                                                                                                     ($tarjetasEvento->estado === 'Pagado' && !$yaInscrito)
+                                        href="{{($tarjetasEvento->estado === 'Pagado' && !$yaInscrito)
                         ? route('subir-comprobante', ['evento' => $tarjetasEvento->id])
-                        : route('vistaconferencia', ['evento' => $tarjetasEvento->id]) 
-                                                                                                                                                                        }}">
+                        : route('vistaconferencia', ['evento' => $tarjetasEvento->id])}}">
                                         <h2 class="name-evento">{{ $tarjetasEvento->nombreevento }}</h2>
                                     </a>
                                     <div class="grid grid-cols-2 gap-6">
