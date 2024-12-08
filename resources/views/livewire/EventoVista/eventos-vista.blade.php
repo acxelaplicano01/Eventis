@@ -17,189 +17,101 @@
                 <p>Por el momento no hay eventos disponibles, por favor intente más tarde.</p>
             </div>
         @else
-            <div
-                class="evento-list dark:bg-gray-900 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white">
-                @foreach($Eventos as $tarjetasEvento)
-                        <div class="evento-card">
-                            @php
-                                $inscripcion = Auth::user()->persona->inscripciones()->where('IdEvento', $tarjetasEvento->id)->first();
+        <section class="py-2 sm:py-2 lg:py-2">
+            <div class="px-2 mx-auto mb-24 sm:px-2 lg:px-2 max-w-7xl">
+                <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-4 lg:mt-8 lg:grid-cols-3 lg:max-w-full">
+                    @foreach($Eventos as $evento)
+                        <div class="overflow-hidden bg-white dark:bg-gray-800 transform transition duration-300 hover:scale-105 rounded-xl shadow-xl">
+                            <div>
+                                <div class="relative">
+                                    <div class="block aspect-w-4 aspect-h-3">
+                                        <img class="object-cover w-full h-56"
+                                            src="{{ asset(str_replace('public', 'storage', $evento->logo)) }}"
+                                            alt="" />
+                                    </div>
+
+                                    <div class="absolute top-4 left-4">
+                                        <span
+                                            class="px-4 py-2 text-xs font-semibold tracking-widest text-yellow-900 uppercase bg-yellow-500 dark:bg-yellow-900 dark:text-yellow-300 rounded-full">
+                                            {{$evento->modalidad->modalidad}} </span>
+                                    </div>
+                                </div>
+                                @php
+                                $inscripcion = Auth::user()->persona->inscripciones()->where('IdEvento', $evento->id)->first();
                                 $estadoInscripcion = $inscripcion ? $inscripcion->Status : null;
                                 $yaInscrito = $estadoInscripcion === 'Aceptado';
                             @endphp
+                                <div class="p-5">
+                                    @if ($evento->estado  === 'Pagado')
+                                    <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full {{ $estadoInscripcion === 'Aceptado' ? 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300' : 'text-red-600 bg-red-100' }}"> {{ $estadoInscripcion ?? 'No inscrito' }} </span>
+                                    @endif
+                                    @if ($estadoInscripcion === 'Aceptado')
+                                    <a href="{{ route('gafete', ['evento' => $evento->id]) }}">
+                                <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full text-yellow-500 bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300">Gafete</span>
+                                    </a>
+                                    @endif
+                                <span class="block mt-4 text-sm font-semibold tracking-widest text-gray-500 dark:text-gray-400">
+                                    <?php
+// Obtener el timestamp de la fecha
+$timestamp = strtotime($evento->fechainicio);
 
+// Obtener el día de la semana en formato textual completo (por ejemplo, "Sunday")
+$diaSemana = date('l', $timestamp);
 
-                            <div class="thumbnail-container">
-                                @if($tarjetasEvento->logo == "")
-                                    <img src="http://www.puertopixel.com/wp-content/uploads/2011/03/Fondos-web-Texturas-web-abtacto-17.jpg"
-                                        alt="Sin Foto De Evento">
-                                @else
-                                    <img src="{{ asset(str_replace('public', 'storage', $tarjetasEvento->logo)) }}"
-                                        alt="Sin Foto De Evento"
-                                        class="bg-white dark:bg-gray-800 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white thumbnail">
-                                @endif
-                                <p class="marca">{{ $tarjetasEvento->modalidad->modalidad }}</p>
-                                @if ($tarjetasEvento->estado === 'Pagado')
-                                    <p class="inscripcion-status text-sm estado bg-yellow-400 text-gray-600">
+// Traducir el día de la semana al español
+$diasSemana = [
+    'Monday' => 'Lunes',
+    'Tuesday' => 'Martes',
+    'Wednesday' => 'Miércoles',
+    'Thursday' => 'Jueves',
+    'Friday' => 'Viernes',
+    'Saturday' => 'Sábado',
+    'Sunday' => 'Domingo'
+];
 
-                                        <span class="{{ $estadoInscripcion === 'Aceptado' ? 'text-green-600' : 'text-red-600' }}">
-                                            {{ $estadoInscripcion ?? 'No inscrito' }}
-                                        </span>
+$diaSemanaEsp = $diasSemana[$diaSemana];
+?>
+                                    
+                                    {{$diaSemanaEsp}}, {{ \Carbon\Carbon::parse($evento->fechainicio)->format('d \d\e F \d\e Y') }} </span>
+                                    <p class="text-2xl font-semibold">
+                                        <a 
+                                        href="{{($evento->estado === 'Pagado' && !$yaInscrito)
+                        ? route('subir-comprobante', ['evento' => $evento->id])
+                        : route('reporteEvento', ['evento' => $evento->id]) }}"
+                                        class="text-black dark:text-gray-300">{{$evento->nombreevento}} </a>
                                     </p>
-                                @endif
-                                @if ($estadoInscripcion === 'Aceptado')
-                                    <a href="{{ route('gafete', ['evento' => $tarjetasEvento->id]) }}"
-                                        class="inscripcion-status text-sm gafete bg-yellow-400 text-gray-600">
-                                        <span>
+                                    <p class="mt-2 text-base text-gray-600 dark:text-gray-400 truncate">{{$evento->descripcion}}</p>
+                                </div>
 
-                                            <svg class="w-5 h-5 text-black dark:text-black" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                                viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2"
-                                                    d="M15 9h3m-3 3h3m-3 3h3m-6 1c-.306-.613-.933-1-1.618-1H7.618c-.685 0-1.312.387-1.618 1M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm7 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z" />
+                                <div class="border-t border-gray-200 dark:border-gray-700">
+                                    <div class="flex">
+                                        <div class="flex items-center flex-1 px-6 py-5">
+                                            <img class="object-cover w-8 h-8 rounded-full"
+                                                src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/3/avatar-3.jpg"
+                                                alt="" />
+                                            <span
+                                                class="flex-1 block min-w-0 ml-3 text-base font-semibold text-gray-900 dark:text-gray-300 truncate">
+                                                {{$evento->organizador}}<p class="fecha-creacion font-medium">{{ $evento->created_at->diffForHumans() }}</p></span>
+                                        </div>
+
+                                        <a href="{{ route('reporteEvento', ['evento' => $evento->id]) }}"
+                                            class="inline-flex items-center flex-shrink-0 px-4 py-5 text-base font-semibold transition-all duration-200 bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 hover:bg-yellow-500 dark:hover:bg-yellow-600 text-gray-300 hover:text-white">
+                                            Ver evento
+                                            <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd" />
                                             </svg>
-
-                                        </span>
-                                    </a>
-                                @endif
-                            </div>
-                            <div class="evento-info">
-                                <img src="{{ asset('Logo/EVENTIS LOGO.png') }}" alt="foto-creador" class="icon">
-
-                                <div class="evento-details">
-                                    <a
-                                        href="{{($tarjetasEvento->estado === 'Pagado' && !$yaInscrito)
-                        ? route('subir-comprobante', ['evento' => $tarjetasEvento->id])
-                        : route('vistaconferencia', ['evento' => $tarjetasEvento->id])}}">
-                                        <h2 class="name-evento">{{ $tarjetasEvento->nombreevento }}</h2>
-                                    </a>
-                                    <div class="grid grid-cols-2 gap-6">
-                                        <div class="flex flex-col justify-center max-w-sm">
-                                            <p class="evento-creador">{{ $tarjetasEvento->organizador }}</p>
-                                            <p class="fecha-creacion">{{ $tarjetasEvento->created_at->diffForHumans() }}</p>
-                                        </div>
-                                        <div class="flex flex-col justify-center max-w-sm">
-                                            @if ($tarjetasEvento->estado === 'Pagado')
-                                                                    @php
-                                                                        $evento = $tarjetasEvento;
-                                                                        $yaInscrito = Auth::user()->persona->inscripciones()
-                                                                            ->where('IdEvento', $evento->id)
-                                                                            ->exists();
-                                                                    @endphp
-                                                                    @if ($yaInscrito)
-                                                                        <p data-modal-target="inscrito-modal-{{ $tarjetasEvento->id }}"
-                                                                            data-modal-toggle="inscrito-modal-{{ $tarjetasEvento->id }}"
-                                                                            class="cursor-pointer inscribir-button inline-flex items-center px-3 py-2 text-sm font-semibold text-center text-black bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
-                                                                            Inscribirse
-                                                                            <svg class="w-6 h-6 text-gray-800 dark:text-gray-800"
-                                                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                                                <path fill-rule="evenodd"
-                                                                                    d="M5 8a4 4 0 1 1 7.796 1.263l-2.533 2.534A4 4 0 0 1 5 8Zm4.06 5H7a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h2.172a2.999 2.999 0 0 1-.114-1.588l.674-3.372a3 3 0 0 1 .82-1.533L9.06 13Zm9.032-5a2.907 2.907 0 0 0-2.056.852L9.967 14.92a1 1 0 0 0-.273.51l-.675 3.373a1 1 0 0 0 1.177 1.177l3.372-.675a1 1 0 0 0 .511-.273l6.07-6.07a2.91 2.91 0 0 0-.944-4.742A2.907 2.907 0 0 0 18.092 8Z"
-                                                                                    clip-rule="evenodd" />
-                                                                            </svg>
-                                                                        </p>
-                                                                    @else
-                                                                        <p data-modal-target="progress-modal-{{ $tarjetasEvento->id }}"
-                                                                            data-modal-toggle="progress-modal-{{ $tarjetasEvento->id }}"
-                                                                            class="cursor-pointer inscribir-button inline-flex items-center px-3 py-2 text-sm font-semibold text-center text-black bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
-                                                                            Inscribirse
-                                                                            <svg class="w-6 h-6 text-gray-800 dark:text-gray-800"
-                                                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                                                <path fill-rule="evenodd"
-                                                                                    d="M5 8a4 4 0 1 1 7.796 1.263l-2.533 2.534A4 4 0 0 1 5 8Zm4.06 5H7a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h2.172a2.999 2.999 0 0 1-.114-1.588l.674-3.372a3 3 0 0 1 .82-1.533L9.06 13Zm9.032-5a2.907 2.907 0 0 0-2.056.852L9.967 14.92a1 1 0 0 0-.273.51l-.675 3.373a1 1 0 0 0 1.177 1.177l3.372-.675a1 1 0 0 0 .511-.273l6.07-6.07a2.91 2.91 0 0 0-.944-4.742A2.907 2.907 0 0 0 18.092 8Z"
-                                                                                    clip-rule="evenodd" />
-                                                                            </svg>
-                                                                        </p>
-                                                                    @endif
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <!-- Modal para ya inscrito -->
-                                    <div id="inscrito-modal-{{ $tarjetasEvento->id }}" tabindex="-1" aria-hidden="true"
-                                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                        <!-- Fondo opaco -->
-                                        <div class="fixed inset-0 bg-black opacity-50"></div>
-                                        <div class="relative p-4 w-full max-w-md max-h-full mx-auto">
-                                            <!-- Modal content -->
-                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                                <div class="p-4 md:p-5">
-                                                    <h3 class="mb-1 text-xl font-bold text-gray-900 dark:text-white">
-                                                        Ya estas inscrito a "{{ $tarjetasEvento->nombreevento }}"
-                                                    </h3>
-                                                    <p class="text-gray-500 dark:text-gray-400 mb-6">Si tu comprobante de pago ya
-                                                        fue
-                                                        aceptado ya debes poder inscribirte a las conferencias de este evento.</p>
-                                                    <!-- Modal footer -->
-                                                    <div class="flex items-center mt-6 space-x-4 rtl:space-x-reverse">
-                                                        <button data-modal-hide="inscrito-modal-{{ $tarjetasEvento->id }}"
-                                                            type="button"
-                                                            class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-yellow-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cerrar</button>
-                                                        @if ($estadoInscripcion == 'Aceptado')
-                                                            <a href="{{ route('vistaconferencia', ['evento' => $tarjetasEvento->id]) }}"
-                                                                data-modal-hide="inscrito-modal-{{ $tarjetasEvento->id }}" type="button"
-                                                                class="text-white bg-yellow-600 hover:bg-yellow-700 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Ver
-                                                                conferencias</a>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div id="progress-modal-{{ $tarjetasEvento->id}}" tabindex="-1" aria-hidden="true"
-                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                            <div class="fixed inset-0 bg-black opacity-50"></div>
-                            <div class="relative p-4 w-full max-w-md max-h-full">
-                                <!-- Modal content -->
-                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                    <div class="p-4 md:p-5">
-                                        <h3 class="mb-1 text-xl font-bold text-gray-900 dark:text-white">
-                                            "{{$tarjetasEvento->nombreevento}}" tiene un costo
-                                        </h3>
-                                        <div class="payment-section p-4 bg-gray-100 rounded-lg shadow-lg dark:bg-gray-800">
-                                            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Realiza tu pago</h3>
-                                            <ul class="list-disc pl-5 text-gray-700 dark:text-gray-300">
-                                                <li>
-                                                    Tesorería UNAH con código de pago <strong>1078</strong>
-                                                </li>
-                                                <li>
-                                                    Pago en Banco Lafise con código de pago <strong>1078</strong>
-                                                </li>
-                                                <li class="mt-2">
-                                                    <span>Pago en línea:</span>
-                                                    <a href="https://pagos.unah.edu.hn/#/productos/101" target="_blank"
-                                                        class="inline-flex items-center px-4 py-2 mt-2 text-sm font-medium text-white bg-yellow-600 rounded-lg shadow hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 dark:bg-yellow-500 dark:hover:bg-yellow-600">
-                                                        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                            stroke-width="2" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M17 9V7a4 4 0 1 0-8 0v2M5 9h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2zm6 3v4m-3-2h6" />
-                                                        </svg>
-                                                        Pagar en línea
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <p class="mt-4 text-gray-600 dark:text-gray-400">Por favor, sube tu comprobante de pago para completar tu inscripción.</p>
-                                        </div>
-
-                                            <!-- Modal footer -->
-                                        <div class="flex items-center mt-6 space-x-4 rtl:space-x-reverse">
-                                            <button data-modal-hide="progress-modal-{{ $tarjetasEvento->id }}" type="button"
-                                                class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-yellow-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cerrar</button>
-                                            <a href="{{ route('recibo', ['evento' => $tarjetasEvento->id]) }}"
-                                                data-modal-hide="progress-modal-{{ $tarjetasEvento->id }}" type="button"
-                                                class="text-white bg-yellow-600 hover:bg-yellow-700 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Subir
-                                                Comprobante</a>
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
+        </section>
 
             <br>
             {{ $Eventos->links() }}
