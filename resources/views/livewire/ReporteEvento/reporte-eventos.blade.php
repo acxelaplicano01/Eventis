@@ -840,7 +840,7 @@ $yaInscrito = $estadoInscripcion === 'Aceptado';
                                                                         src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/3/avatar-3.jpg"
                                                                         alt="" />
                                                                         <div data-popover id="popover-company-profile-{{$evento->id}}" role="tooltip"
-                                                                            class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 w-80 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
+                                                                            class="absolute z-20 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 w-80 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
                                                                             <div class="p-3">
                                                                                 <div class="flex">
                                                                                     <div class="me-3 shrink-0">
@@ -897,7 +897,7 @@ $yaInscrito = $estadoInscripcion === 'Aceptado';
                                                                                                     fill="currentColor" viewBox="0 0 18 18">
                                                                                                     <path
                                                                                                         d="M3 7H1a1 1 0 0 0-1 1v8a2 2 0 0 0 4 0V8a1 1 0 0 0-1-1Zm12.954 0H12l1.558-4.5a1.778 1.778 0 0 0-3.331-1.06A24.859 24.859 0 0 1 6 6.8v9.586h.114C8.223 16.969 11.015 18 13.6 18c1.4 0 1.592-.526 1.88-1.317l2.354-7A2 2 0 0 0 15.954 7Z" />
-                                                                                                </svg>Like page</button>
+                                                                                                </svg>Seguir</button>
                                                                                             <button id="dropdown-button" data-dropdown-toggle="dropdown-menu-{{$evento->id}}" data-dropdown-placement="right"
                                                                                                 class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shrink-0 focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                                                                                                 type="button">
