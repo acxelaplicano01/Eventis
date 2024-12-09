@@ -155,7 +155,7 @@ $yaInscrito = $estadoInscripcion === 'Aceptado';
                                 </div>
                             </div>
                         </div>
-                    <a href="{{ route('vistaconferencia', ['evento' => $evento->id]) }}"
+                    <a href="#conferencias"
                         class="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
                         Conferencias
                     </a>
@@ -203,11 +203,11 @@ $yaInscrito = $estadoInscripcion === 'Aceptado';
                                 <h3 class="text-xl font-semibold text-black dark:text-gray-100">Hora</h3>
                                 <p class="mt-3 text-base text-gray-600 dark:text-gray-400">
                                     {{ \Carbon\Carbon::parse($evento->fechainicio)->locale('es')->isoFormat('D [de] MMMM [de] YYYY ') }}Hora:
-                                    <strong>{{$evento->horainicio}}</strong>
+                                    <strong>{{ \Carbon\Carbon::parse($evento->horaInicio)->format('g:i a') }}</strong>
                                 </p>
                                 <p class="mt-3 text-base text-gray-600 dark:text-gray-400">
                                     {{ \Carbon\Carbon::parse($evento->fechafinal)->locale('es')->isoFormat('D [de] MMMM [de] YYYY ') }}Hora:
-                                    <strong>{{$evento->horafin}}</strong>
+                                    <strong>{{ \Carbon\Carbon::parse($evento->horafin)->format('g:i a') }}</strong>
                                 </p>
                             </div>
                         </div>
@@ -263,50 +263,164 @@ $yaInscrito = $estadoInscripcion === 'Aceptado';
             </div>
         </section>
 
-        <section class="py-10 bg-gray-100 dark:bg-gray-900 sm:py-16 lg:py-24">
+
+        <section id="conferencias"  class="py-10 bg-white sm:py-16 lg:py-24">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div class="max-w-2xl mx-auto text-center">
+                <div class="max-w-2xl mx-auto text-center mb-16">
                     <h2 class="text-3xl font-bold leading-tight text-gray-800 dark:text-gray-100 sm:text-4xl lg:text-5xl">
-                        Conferencistas del evento <span class="text-yellow-500 dark:text-yellow-700">{{$evento->nombreevento}}</span>
+                        Conferencias <br><span class="text-yellow-500 dark:text-yellow-700">{{$evento->nombreevento}}</span>
                     </h2>
                 </div>
-        
-                <div
-                    class="grid max-w-xl grid-cols-1 mx-auto mt-8 text-center lg:max-w-full sm:mt-12 lg:mt-20 lg:grid-cols-3 gap-x-6 xl:gap-x-12 gap-y-6">
+                <div class="grid grid-cols-1 gap-6 lg:gap-10 sm:grid-cols-2 md:grid-cols-3">
                     @foreach ($conferencias as $conferencia)
-                        <div class="overflow-hidden bg-white dark:bg-gray-800 rounded-md shadow">
-                            <div class="relative">
-                                <!-- Contenido de la tarjeta -->
-                                <div
-                                    class="absolute text-white m-4 top-0 right-0 flex items-center justify-center bg-yellow-500 dark:bg-yellow-700 rounded-full p-2 w-auto h-7">
-                                    {{$conferencia->conferencista->persona->nacionalidad->nombreNacionalidad}}
-                                </div>
+                        <div class="flex flex-col bg-white border border-gray-200 rounded-xl">
+                            <div class="block aspect-w-4 aspect-h-3">
+                                <img class="object-cover w-full h-56 rounded-t-xl"
+                                    src="{{ asset(str_replace('public', 'storage', $conferencia->foto)) }}" alt="" />
                             </div>
-                            <div class="px-8 py-12">
-                                <div class="relative w-52 h-52 mx-auto">
-                                    <img class="relative object-cover w-full h-full mx-auto rounded-full"
-                                        src="{{ asset(str_replace('public', 'storage', $conferencia->conferencista->foto)) }}"
-                                        alt="" />
+                            <div class="flex flex-col justify-between flex-1 p-6">
+                                <a class="text-black dark:text-gray-300 text-2xl font-semibold">{{$conferencia->nombre}}</a>
+                                <div class="flex-1">
+                                    <div>
+                                        <ul class="flex flex-col mt-2 space-y-4">
+                                            <li class="inline-flex items-center space-x-2">
+                                            <svg class="flex-shrink-0 w-8 h-8 text-green-500 dark:text-green-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z" />
+                                            </svg>
+                                                <span class="text-base font-medium text-gray-900"><strong>Lugar: </strong> {{ $conferencia->lugar }} </span>
+                                            </li>
+
+                                            <li class="inline-flex items-center space-x-2">
+                                            <svg class="flex-shrink-0 w-8 h-8 text-green-500 dark:text-green-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z" />
+                                            </svg>
+                                                <span class="text-base font-medium text-gray-900"><strong>Fecha: </strong> {{ \Carbon\Carbon::parse($conferencia->fecha)->format('d \d\e F \d\e Y') }}</span>
+                                            </li>
+                                            <li class="inline-flex items-center space-x-2">
+                                            <svg class="flex-shrink-0 w-8 h-8 text-green-500 dark:text-green-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                            </svg>
+
+                                                <span class="text-base font-medium text-gray-900"><strong>Hora: </strong>  De {{ \Carbon\Carbon::parse($conferencia->horaInicio)->format('g:i a') }} a {{ \Carbon\Carbon::parse($conferencia->horaFin)->format('g:i a') }} </span>
+                                            </li>
+                                            <li class="inline-flex items-center space-x-2">
+                                                <svg class="flex-shrink-0 w-8 h-8 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                    height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-width="2"
+                                                        d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                </svg>
+                                                <span class="text-base font-medium text-gray-900"><strong>Costo: </strong> {{ $conferencia->estado }} </span>
+                                            </li>
+                                            @if ($conferencia->estado === 'Pagado')
+                                                <li class="inline-flex items-center space-x-2">
+                                                    <svg class="flex-shrink-0 w-8 h-8 text-green-500 dark:text-green-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                                            d="M8 7V6a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1M3 18v-7a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                                                    </svg>
+                                                    <span class="text-base font-medium text-gray-900"><strong>Precio: </strong> {{ $conferencia->precio }} </span>
+                                                    <button data-popover-target="popover-description-{{$conferencia->id}}" data-popover-placement="bottom-end" type="button"><svg
+                                                            class="w-4 h-4 ms-2 text-gray-400 hover:text-gray-500" aria-hidden="true" fill="currentColor"
+                                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd"
+                                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+                                                                clip-rule="evenodd"></path>
+                                                        </svg><span class="sr-only">Show information</span></button></p>
+                                                    <div data-popover id="popover-description-{{$conferencia->id}}" role="tooltip"
+                                                        class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
+                                                        <div class="p-3 space-y-2">
+                                                            <h3 class="font-semibold text-gray-900 dark:text-white">Activity growth - Incremental</h3>
+                                                            <p>Report helps navigate cumulative growth of community activities. Ideally, the chart should have a growing
+                                                                trend, as stagnating chart signifies a significant decrease of community activity.</p>
+                                                            <h3 class="font-semibold text-gray-900 dark:text-white">Calculation</h3>
+                                                            <p>For each date bucket, the all-time volume of activities is calculated. This means that activities in period n
+                                                                contain all activities up to period n, plus the activities generated by your community in period.</p>
+                                                            <a href="#"
+                                                                class="flex items-center font-medium text-blue-600 dark:text-blue-500 dark:hover:text-blue-600 hover:text-blue-700 hover:underline">Read
+                                                                more <svg class="w-2 h-2 ms-1.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                                    fill="none" viewBox="0 0 6 10">
+                                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                        d="m1 9 4-4-4-4" />
+                                                                </svg></a>
+                                                        </div>
+                                                        <div data-popper-arrow></div>
+                                                    </div>
+                                                </li>
+                                            @endif
+                                        </ul>
+                                    </div>
                                 </div>
-                                <p class="text-base font-semibold text-black dark:text-gray-100 mt-4">
-                                    {{ $conferencia->conferencista->persona->nombre }}
-                                    {{ $conferencia->conferencista->persona->apellido ?? '' }}
-                                </p>
-                                <p class="mt-1 text-base text-gray-600 dark:text-gray-400">
-                                    {{$conferencia->conferencista->titulo}}
-                                </p>
-                                <blockquote class="mt-5">
-                                    <p class="text-lg text-black dark:text-gray-200">“Amet minim mollit non deserunt ullam co est
-                                        sit aliqua
-                                        dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation
-                                        veniam consequat”</p>
-                                </blockquote>
+
+                                <div class="mt-4">
+                                    <div class="w-full h-0 mb-4 border-t-2 border-gray-200 border-dotted"></div>
+                                    <div class="flex items-center">
+                                        <img class="flex-shrink-0 object-cover w-10 h-10 rounded-full"
+                                            src="{{ asset(str_replace('public', 'storage', $conferencia->conferencista->foto)) }}"
+                                            alt="" />
+                                        <div class="min-w-0 ml-3">
+                                            <p class="text-base font-semibold text-gray-800 truncate">
+                                                @if ($conferencia->conferencista)
+                                                    @if ($conferencia->conferencista->persona)
+                                                        {{ $conferencia->conferencista->persona->nombre }}
+                                                        {{ $conferencia->conferencista->persona->apellido ?? '' }}
+                                                    @else
+                                                        N/A
+                                                    @endif
+                                                @else
+                                                    N/A
+                                                @endif
+                                            </p>
+                                            <p class="text-base text-gray-500 truncate">Conferencista</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
             </div>
         </section>
+
+        <section class="py-10 bg-white sm:py-16 lg:py-24">
+            <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="max-w-2xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold leading-tight text-gray-800 dark:text-gray-100 sm:text-4xl lg:text-5xl">
+                        Conferencistas <br><span class="text-yellow-500 dark:text-yellow-700">{{$evento->nombreevento}}</span>
+                    </h2>
+                </div>
+                <div class="grid grid-cols-1 gap-12 mt-24 text-center sm:grid-cols-2 md:grid-cols-3 lg:gap-y-16">
+                @foreach($conferencias as $conferencia)
+                    <div>
+                        <div class="relative flex items-center justify-center mx-auto">
+                            <svg class="text-yellow-500 w-62 h-56" viewBox="0 0 72 75" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M63.6911 28.8569C68.0911 48.8121 74.6037 61.2674 53.2349 65.9792C31.8661 70.6909 11.6224 61.2632 7.22232 41.308C2.82229 21.3528 3.6607 12.3967 25.0295 7.68503C46.3982 2.97331 59.2911 8.90171 63.6911 28.8569Z" />
+                            </svg>
+                            <div class="absolute text-yellow-500 w-48 h-48">
+                                <img class="object-cover w-full h-full rounded-full"
+                                    src="{{ asset(str_replace('public', 'storage', $conferencia->conferencista->foto)) }}"
+                                    alt="{{$evento->logo}}" />
+                            </div>
+                        </div>
+                        <h3 class="mt-1 text-lg font-semibold text-black">{{$conferencia->conferencista->persona->nombre}} {{$conferencia->conferencista->persona->apellido}}</h3>
+                        <h4 class="text-md font-medium text-black">{{$conferencia->conferencista->persona->nacionalidad->nombreNacionalidad}}</h4>
+                        <p class="mt-2 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua dolor do
+                            amet sint. Velit officia consequat duis enim velit mollit.</p>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
 
         <section>
             <div class="py-10 bg-gradient-to-r from-yellow-500 to-yellow-600 dark:from-yellow-700 dark:to-yellow-800">
