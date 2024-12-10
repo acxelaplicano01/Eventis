@@ -31,12 +31,14 @@ class EventosVistas extends Component
         return view('livewire.EventoVista.eventos-vista', ['Eventos' => $Eventos]);
     }
 
-    public $modalidades, $localidades;
+    public $modalidades, $localidades, $eventos;
 
     public function mount()
     {
+        $userId = auth()->id(); // Obtener el ID del usuario autenticado
         $this->modalidades = Modalidad::all();
         $this->localidades = Localidad::all();
+        $this->eventos = Evento::where('created_by', $userId)->with('usuario')->get(); // Filtrar eventos por el ID del usuario y cargar la relación usuario
     }
     public function confirmInscription($EventoId)
     {

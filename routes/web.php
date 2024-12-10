@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\EventoVistaController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\ValidarDiplomaController;
 use App\Livewire\Conferencista\Perfilconferencista;
 use App\Livewire\ConferencistasCongreso;
@@ -8,6 +9,7 @@ use App\Livewire\EventoConferencias;
 use App\Livewire\Gafete\Gafetes;
 use App\Livewire\HistorialEvento\HistorialEventos;
 use App\Livewire\PaginaInicial;
+use App\Livewire\Perfil\Perfil;
 use App\Livewire\TemasCongreso;
 use App\Livewire\Tipoperfil\Tipoperfiles;
 use App\Livewire\VistaDiplomas;
@@ -76,7 +78,7 @@ Route::middleware([
     Route::get('/perfilconferencista', Perfilconferencista::class)->name('perfilconferencista');
 });
 
-
+Route::get('/perfil/{user}', [PerfilController::class, 'perfil'])->name('perfil');
 Route::get('/evento/{evento}', [EventoController::class, 'show'])->name('evento');
 Route::get('/registrar', [RegistrarUsarioController::class, 'index'])->name('register');
 Route::post('/registrar', [RegistrarUsarioController::class, 'store'])->name('registerpost');

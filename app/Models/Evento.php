@@ -39,4 +39,11 @@ class Evento extends BaseModel
     return $this->hasMany(Inscripcion::class, 'IdEvento');
 }
 
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+
+
+    }
+
 }

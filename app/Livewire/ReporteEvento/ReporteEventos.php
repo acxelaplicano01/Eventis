@@ -19,10 +19,12 @@ class ReporteEventos extends Component
     public $search = '';
     public $conferencias;
 
-    public $modalidades, $localidades, $diplomas;
+    public $modalidades, $localidades, $diplomas, $eventos;
 
     public function mount(Evento $evento)
     {
+        $userId = auth()->id(); // Obtener el ID del usuario autenticado
+        $this->eventos = Evento::where('created_by', $userId)->with('usuario')->get(); // Filtrar eventos por el ID del usuario y cargar la relación usuario
         $this->evento = $evento;
         $this->conferencias =  $evento->conferencias;
         $this->modalidades = Modalidad::all();

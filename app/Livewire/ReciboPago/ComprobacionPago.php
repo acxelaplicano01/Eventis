@@ -45,7 +45,7 @@ class ComprobacionPago extends Component
     public function marcarComprobado($inscripcionId)
     {
         // Actualizar el estado de la inscripción
-        Inscripcion::where('id', $inscripcionId)->update(['Status' => 'Aceptado']);
+        Inscripcion::where('id', $inscripcionId)->update(['Status' => 'Inscrito']);
 
         DiplomaEvento::updateOrCreate(
             ['inscripcionId' => $inscripcionId],
@@ -165,7 +165,7 @@ class ComprobacionPago extends Component
     public function descargarDiplomas($eventoId)
     {
         // Obtener las personas con estatus aceptado para el evento específico
-        $eventopersona = Inscripcion::where('Status', 'Aceptado')
+        $eventopersona = Inscripcion::where('Status', 'Inscrito')
             ->where('IdEvento', $eventoId)
             ->get();
         // Crear un array para almacenar los PDFs individuales

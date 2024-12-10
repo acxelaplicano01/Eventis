@@ -36,7 +36,7 @@
                         <div
                             class="flex sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center mt-1 pb-2 w-3/5">
                             <div class="mr-2 ml-1">
-                                <button wire:click="marcarTodos('Aceptado')"
+                                <button wire:click="marcarTodos('Inscrito')"
                                     class="mb-1 w-full py-2 px-4 text-sm font-bold text-white inline-flex items-center bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 rounded text-center dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-800">
                                     <svg class="w-6 h-6 text-white dark:text-white" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -112,9 +112,9 @@
                                     @elseif($inscripcion->Status == "Rechazado")
                                     <span
                                         class="bg-red-100 text-red-800 text-xs font-bold me-2 px-3 py-1 rounded-full dark:bg-red-900 dark:text-red-300">Rechazado</span>
-                                    @elseif($inscripcion->Status == "Aceptado")
+                                    @elseif($inscripcion->Status == "Inscrito")
                                     <span
-                                        class="bg-green-100 text-green-800 text-xs font-bold me-2 px-3 py-1 rounded-full dark:bg-green-900 dark:text-green-300">Aceptado</span>
+                                        class="bg-green-100 text-green-800 text-xs font-bold me-2 px-3 py-1 rounded-full dark:bg-green-900 dark:text-green-300">Inscrito</span>
                                     @endif
 
                                 </td>
@@ -134,7 +134,7 @@
                                     </button>
                                 </td>
                                 <td class="px-6 py-4 dark:text-gray-900 text-center">
-                                    @if($inscripcion->Status == 'Aceptado')
+                                    @if($inscripcion->Status == 'Inscrito')
                                     <button wire:click="descargarDiploma({{ $inscripcion->id }})"
                                         class="mb-1 w-full px-3 py-2 text-sm font-bold text-white inline-flex items-center bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
                                         Diploma

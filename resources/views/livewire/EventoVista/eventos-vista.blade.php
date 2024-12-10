@@ -20,7 +20,7 @@
                     <section class="py-2 sm:py-2 lg:py-2">
                         <div class="px-2 mx-auto mb-24 sm:px-2 lg:px-2 max-w-7xl">
                             <div class="grid max-w-md grid-cols-1 gap-6 mx-auto mt-4 lg:mt-8 lg:grid-cols-3 lg:max-w-full">
-                                @foreach($Eventos as $evento)
+                                @foreach($eventos as $evento)
                                 <div class="flex flex-col overflow-hidden bg-white dark:bg-gray-800 transform transition duration-300 hover:scale-105 rounded-xl shadow-xl">
                         <div class="flex flex-col justify-between flex-1">
                             <div class="relative">
@@ -40,16 +40,16 @@
                                     @php
     $inscripcion = Auth::user()->persona->inscripciones()->where('IdEvento', $evento->id)->first();
     $estadoInscripcion = $inscripcion ? $inscripcion->Status : null;
-    $yaInscrito = $estadoInscripcion === 'Aceptado';
+    $yaInscrito = $estadoInscripcion === 'Inscrito';
                                     @endphp
                                 <div class="p-5">
                                     @if ($evento->estado === 'Pagado')
-                                        <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full {{ $estadoInscripcion === 'Aceptado' ? 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300' : 'text-red-600 bg-red-100' }}"> 
+                                        <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full {{ $estadoInscripcion === 'Inscrito' ? 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300' : 'text-red-600 bg-red-100' }}"> 
                                             {{ $estadoInscripcion ?? 'No inscrito' }} 
                                         </span>
                                     @endif
 
-                                    @if ($estadoInscripcion === 'Aceptado' || $evento->estado === 'Gratis')
+                                    @if ($estadoInscripcion === 'Inscrito' || $evento->estado === 'Gratis')
                                         <a href="{{ route('gafete', ['evento' => $evento->id]) }}">
                                             <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full text-yellow-500 bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300">Gafete</span>
                                         </a>
@@ -98,7 +98,7 @@
                                                </button>
                                                 <span
                                                     class="flex-1 block min-w-0 ml-3 text-base font-semibold text-gray-900 dark:text-gray-300 truncate">
-                                                        {{$evento->organizador}}<p class="fecha-creacion font-medium">{{ $evento->created_at->diffForHumans() }}</p></span>
+                                                        {{ $evento->usuario->persona->nombre }} {{ $evento->usuario->persona->apellido }}<p class="fecha-creacion font-medium">{{ $evento->created_at->diffForHumans() }}</p></span>
                                                         <div data-popover id="popover-company-profile-{{$evento->id}}" role="tooltip"
             class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-80 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
             <div class="p-3">
@@ -111,10 +111,10 @@
                     </div>
                     <div>
                         <p class="mb-1 text-base font-semibold leading-none text-gray-900 dark:text-white">
-                            <a href="#" class="hover:underline">{{$evento->organizador}}</a>
+                            <a href="#" class="hover:underline"> {{ $evento->usuario->persona->nombre }} {{ $evento->usuario->persona->apellido }}</a>
                         </p>
                         <p class="mb-3 text-sm font-normal">
-                            Tech company
+                        {{ $evento->usuario->name }}
                         </p>
                         <p class="mb-4 text-sm">Open-source library of Tailwind CSS components and Figma design system.</p>
                         <ul class="text-sm">

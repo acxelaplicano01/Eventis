@@ -1,5 +1,6 @@
 <div>
     <x-layouts.reportes>
+    <div class="relative">
         <section class="bg-center bg-no-repeat bg-gray-700 bg-blend-multiply"
             style="background-image: url('{{ asset(str_replace('public', 'storage', $evento->logo)) }}');">
            <div class="flex">
@@ -41,8 +42,7 @@
                         Se han inscrito <span class="border-b-8 border-yellow-300"> {{ $evento->inscripciones->count() }}</span> participantes</h2>
                 </div>
 
-
-                <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+                <div class="flex flex-col space-y-4 mb-12 sm:flex-row sm:justify-center sm:space-y-0">
                 @if ($evento->estado === 'Pagado')
                 @php
     $yaInscrito = Auth::user()->persona->inscripciones()
@@ -90,13 +90,13 @@
                                                     @php
 $inscripcion = Auth::user()->persona->inscripciones()->where('IdEvento', $evento->id)->first();
 $estadoInscripcion = $inscripcion ? $inscripcion->Status : null;
-$yaInscrito = $estadoInscripcion === 'Aceptado';
+$yaInscrito = $estadoInscripcion === 'Inscrito';
                             @endphp
                                                     <div class="flex items-center mt-6 space-x-4 rtl:space-x-reverse">
                                                         <button data-modal-hide="inscrito-modal-{{ $evento->id }}"
                                                             type="button"
                                                             class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-yellow-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cerrar</button>
-                                                        @if ($estadoInscripcion == 'Aceptado')
+                                                        @if ($estadoInscripcion == 'Inscrito')
                                                             <a href="{{ route('vistaconferencia', ['evento' => $evento->id]) }}"
                                                                 data-modal-hide="inscrito-modal-{{ $evento->id }}" type="button"
                                                                 class="text-white bg-yellow-600 hover:bg-yellow-700 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Ver
@@ -162,11 +162,98 @@ $yaInscrito = $estadoInscripcion === 'Aceptado';
                 </div>
             </div>
         </section>
+        
+        <dl id="countdown"
+            class="hidden lg:grid px-4 mx-auto max-w-screen-xl text-center py-8 lg:py-8 absolute inset-x-0 transform -translate-y-1/2 grid-cols-1 gap-4 divide-y divide-yellow-100 bg-slate-50 sm:mt-8 sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4 shadow-2xl rounded-3xl shadow-gray-500">
+            <div class="flex flex-col px-4 py-8 text-center">
+                <dt class="order-last text-lg font-medium text-gray-900">Días</dt>
+                <dd id="days" class="text-4xl font-extrabold text-yellow-500 md:text-5xl">0</dd>
+            </div>
+            <div class="flex flex-col px-4 py-8 text-center">
+                <dt class="order-last text-lg font-medium text-gray-900">Horas</dt>
+                <dd id="hours" class="text-4xl font-extrabold text-yellow-500 md:text-5xl">0</dd>
+            </div>
+            <div class="flex flex-col px-4 py-8 text-center">
+                <dt class="order-last text-lg font-medium text-gray-900">Minutos</dt>
+                <dd id="minutes" class="text-4xl font-extrabold text-yellow-500 md:text-5xl">0</dd>
+            </div>
+            <div class="flex flex-col px-4 py-8 text-center">
+                <dt class="order-last text-lg font-medium text-gray-900">Segundos</dt>
+                <dd id="seconds" class="text-4xl font-extrabold text-yellow-500 md:text-5xl">0</dd>
+            </div>
+        </dl>
 
+        <script>
+            // Fechas de inicio y fin del evento
+            var eventStartDate = new Date("{{ $evento->fechainicio }}");
+            var eventEndDate = new Date("{{ $evento->fechafinal }}");
+
+            // Actualizar la cuenta regresiva cada segundo
+            var countdownInterval = setInterval(function () {
+                var now = new Date(); // Fecha y hora actuales
+
+                // Calcular distancias
+                var distanceToStart = eventStartDate - now; // Tiempo restante para el inicio
+                var distanceToEnd = eventEndDate - now; // Tiempo restante para el final
+
+                // Si el evento ya terminó
+                if (distanceToEnd < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById("countdown").innerHTML = `
+                        <h1 class="text-4xl font-bold text-gray-900 mb-4">¡El evento ha terminado!</h1>
+                        <p class="text-lg text-gray-700 mb-6">Gracias por participar. ¡Esperamos verte en el próximo evento!</p>
+                        <div class="flex justify-center">
+                            <svg class="w-16 h-16 text-red-500 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="mt-6">
+                            <a href="#conferencias" class="inline-flex items-center px-6 py-3 text-lg font-medium text-white bg-yellow-600 rounded-lg shadow hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                                Ver conferencias
+                            </a>
+                        </div>`;
+                    return;
+                }
+
+                // Si el evento es hoy y aún no ha terminado
+                if (distanceToStart <= 0 && distanceToEnd > 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById("countdown").innerHTML = `
+                        <h1 class="text-4xl font-bold text-gray-900 mb-4">¡Hoy es el evento!</h1>
+                        <p class="text-lg text-gray-700 mb-6">Estamos emocionados de que estés aquí. ¡Disfrútalo!</p>
+                        <div class="flex justify-center">
+                            <svg class="w-16 h-16 text-green-500 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="mt-6">
+                            <a href="#conferencias" class="inline-flex items-center px-6 py-3 text-lg font-medium text-white bg-yellow-600 rounded-lg shadow hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                                Ir a las conferencias
+                            </a>
+                        </div>`;
+                    return;
+                }
+
+                // Si el evento es próximo (aún no comienza)
+                if (distanceToStart > 0) {
+                    // Calcular días, horas, minutos y segundos
+                    var days = Math.floor(distanceToStart / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distanceToStart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distanceToStart % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distanceToStart % (1000 * 60)) / 1000);
+
+                    // Mostrar los resultados en los elementos correspondientes
+                    document.getElementById("days").innerHTML = days;
+                    document.getElementById("hours").innerHTML = hours;
+                    document.getElementById("minutes").innerHTML = minutes;
+                    document.getElementById("seconds").innerHTML = seconds;
+                }
+            }, 1000);
+        </script>
 
         <section class="py-10 bg-gray-50 dark:bg-gray-900 sm:py-16 lg:py-24">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div class="max-w-xl mx-auto text-center">
+                <div class="max-w-xl mt-24 mx-auto text-center">
                     <p class="text-sm font-semibold tracking-widest text-yellow-500 dark:text-yellow-400 uppercase">Este evento
                         es
                         {{$evento->estado}}
@@ -262,6 +349,7 @@ $yaInscrito = $estadoInscripcion === 'Aceptado';
                 </div>
             </div>
         </section>
+        </div>
 
 
         <section id="conferencias"  class="py-10 bg-white sm:py-16 lg:py-24">
@@ -903,16 +991,16 @@ $yaInscrito = $estadoInscripcion === 'Aceptado';
                                     @php
     $inscripcion = Auth::user()->persona->inscripciones()->where('IdEvento', $evento->id)->first();
     $estadoInscripcion = $inscripcion ? $inscripcion->Status : null;
-    $yaInscrito = $estadoInscripcion === 'Aceptado';
+    $yaInscrito = $estadoInscripcion === 'Inscrito';
                                     @endphp
                                 <div class="p-5">
                                     @if ($evento->estado === 'Pagado')
-                                        <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full {{ $estadoInscripcion === 'Aceptado' ? 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300' : 'text-red-600 bg-red-100 dark:bg-red-900 dark:text-red-300' }}"> 
+                                        <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full {{ $estadoInscripcion === 'Inscrito' ? 'text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-300' : 'text-red-600 bg-red-100 dark:bg-red-900 dark:text-red-300' }}"> 
                                             {{ $estadoInscripcion ?? 'No inscrito' }} 
                                         </span>
                                     @endif
 
-                                    @if ($estadoInscripcion === 'Aceptado' || $evento->estado === 'Gratis')
+                                    @if ($estadoInscripcion === 'Inscrito' || $evento->estado === 'Gratis')
                                         <a href="{{ route('gafete', ['evento' => $evento->id]) }}">
                                             <span class="inline-flex px-4 py-2 text-xs font-semibold tracking-widest uppercase rounded-full text-yellow-500 bg-yellow-100 dark:bg-yellow-900 dark:text-yellow-300">Gafete</span>
                                         </a>
@@ -961,7 +1049,7 @@ $yaInscrito = $estadoInscripcion === 'Aceptado';
                                                </button>
                                                 <span
                                                     class="flex-1 block min-w-0 ml-3 text-base font-semibold text-gray-900 dark:text-gray-300 truncate">
-                                                        {{$evento->organizador}}<p class="fecha-creacion font-medium">{{ $evento->created_at->diffForHumans() }}</p></span>
+                                                    {{ $evento->usuario->persona->nombre }} {{ $evento->usuario->persona->apellido }}<p class="fecha-creacion font-medium">{{ $evento->created_at->diffForHumans() }}</p></span>
                                                         <div data-popover id="popover-company-profile-{{$evento->id}}" role="tooltip"
             class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-80 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
             <div class="p-3">
@@ -974,10 +1062,10 @@ $yaInscrito = $estadoInscripcion === 'Aceptado';
                     </div>
                     <div>
                         <p class="mb-1 text-base font-semibold leading-none text-gray-900 dark:text-white">
-                            <a href="#" class="hover:underline">Flowbite</a>
+                            <a href="#" class="hover:underline"> {{ $evento->usuario->persona->nombre }} {{ $evento->usuario->persona->apellido }}</a>
                         </p>
                         <p class="mb-3 text-sm font-normal">
-                            Tech company
+                        {{ $evento->usuario->name }}
                         </p>
                         <p class="mb-4 text-sm">Open-source library of Tailwind CSS components and Figma design system.</p>
                         <ul class="text-sm">
@@ -1284,7 +1372,5 @@ $yaInscrito = $estadoInscripcion === 'Aceptado';
                 </div>
             </div>
         </section>
-
-
     </x-layouts.reportes>
 </div>
