@@ -111,7 +111,7 @@
                     </div>
                     <div>
                         <p class="mb-1 text-base font-semibold leading-none text-gray-900 dark:text-white">
-                            <a href="#" class="hover:underline"> {{ $evento->usuario->persona->nombre }} {{ $evento->usuario->persona->apellido }}</a>
+                            <a href="{{route('perfil', ['usuario' => $evento->usuario->id])}}" class="hover:underline"> {{ $evento->usuario->persona->nombre }} {{ $evento->usuario->persona->apellido }}</a>
                         </p>
                         <p class="mb-3 text-sm font-normal">
                         {{ $evento->usuario->name }}

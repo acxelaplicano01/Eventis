@@ -76,9 +76,9 @@ Route::middleware([
     Route::get('/historial-eventos', HistorialEventos::class)->name('historial-eventos');
     Route::get('/gafete/{evento}', Gafetes::class)->name('gafete');
     Route::get('/perfilconferencista', Perfilconferencista::class)->name('perfilconferencista');
+    Route::get('/perfil/{usuario}', Perfil::class)->name('perfil');
 });
 
-Route::get('/perfil/{user}', [PerfilController::class, 'perfil'])->name('perfil');
 Route::get('/evento/{evento}', [EventoController::class, 'show'])->name('evento');
 Route::get('/registrar', [RegistrarUsarioController::class, 'index'])->name('register');
 Route::post('/registrar', [RegistrarUsarioController::class, 'store'])->name('registerpost');
