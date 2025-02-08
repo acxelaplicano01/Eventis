@@ -3,18 +3,19 @@
 namespace App\Livewire\Perfil;
 
 use App\Models\Evento;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 use Livewire\Component;
 
 class Perfil extends Component
 {
-    public  $eventos;
+    public  $eventos, $userperfil;
 
-    public function mount()
+    public function mount(User $userperfil)
     {
-        $userId = auth()->id(); // Obtener el ID del usuario autenticado
-        $this->eventos = Evento::where('created_by', $userId)->with('usuario')->get(); // Filtrar eventos por el ID del usuario y cargar la relación usuario
+        $this->eventos = Evento::where('created_by', $userperfil->id)->with('usuario')->get();
+        $this->userperfil = $userperfil;
     }
     public function render()
     {

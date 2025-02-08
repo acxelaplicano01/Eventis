@@ -1,1533 +1,906 @@
 <div>
-    <div class="py-3 mb-28">
-        <div class="max-w-7xl mx-auto sm:px-2 lg:px-1">
-            <div class="flex flex-1 gap-4 container mx-auto">
-                <!--  perfil  -->
-                <aside>
-                    <div class="relative">
-                        <img class="h-72 w-full object-cover"
-                            src="https://azulschool.net/wp-content/uploads/buddypress/members/34880/cover-image/673448942ac49-bp-cover-image.jpg"
-                            alt="Cover Image">
-                        <div class="absolute left-4 bottom-0 transform translate-y-1/2">
-                            <img class="h-48 w-48 rounded-full border-4 border-white"
-                                src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                alt="Profile Image">
-                        </div>
-                    </div>
-                    <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-b-xl"> 
-                        <div class="flex items-center space-x-4 mb-4 ml-56">
+    <x-layouts.reportes>
+        <div class="p-relative h-screen" style="background-color: #15202b;">
+            <div class="flex justify-center">
+                <main role="main">
+                    <div class="flex" style="width: 990px;">
+                        <section class="w-3/5 border border-y-0 border-gray-800" style="max-width:600px;">
                             <div>
-                                <h2 class="text-xl font-semibold text-gray-800 dark:text-white flex items-center">
-                                    <span>{{ Auth::user()->name }}</span>
-                                    <span
-                                        class="bg-blue-100 ml-4 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Estudiante</span>
-                                    <button
-                                        class="ml-4 transform -translate-y-2 mt-4 w-32 px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-xl hover:bg-blue-600">Seguir</button>
-                                </h2>
-
-                                <p class="text-sm text-gray-500 dark:text-gray-400">@acxel.aplicano • Joined May 2023 •
-                                    Active now
-                                </p>
-                                <div class="flex gap-2 mt-4">
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">1425 seguidores</p>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">25 seguidos</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-4 dark:border-gray-700">
-                        <ul class="w-full flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"
-                            data-tabs-toggle="#default-tab-content" role="tablist">
-                            <li class="me-2" role="presentation">
-                                <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab"
-                                    data-tabs-target="#profile" type="button" role="tab" aria-controls="profile"
-                                    aria-selected="false">Publicaciones</button>
-                            </li>
-                            <li class="me-2" role="presentation">
-                                <button
-                                    class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                                    id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab"
-                                    aria-controls="dashboard" aria-selected="false">Perfil</button>
-                            </li>
-                            <li class="me-2" role="presentation">
-                                <button
-                                    class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                                    id="settings-tab" data-tabs-target="#settings" type="button" role="tab"
-                                    aria-controls="settings" aria-selected="false">Amigos</button>
-                            </li>
-                            <li role="presentation">
-                                <button
-                                    class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                                    id="contacts-tab" data-tabs-target="#contacts" type="button" role="tab"
-                                    aria-controls="contacts" aria-selected="false">Grupos</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="default-tab-content">
-                        <div class="hidden rounded-lg dark:bg-gray-800" id="profile" role="tabpanel"
-                            aria-labelledby="profile-tab">
-                            <main class="flex-1 w-full rounded-xl h-auto">
-                                <div class="mb-4">
-                                    <!-- Crear Publicaciones -->
-                                    <div>
-                                        <div class="relative w-full max-w-4xl max-h-full">
-                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                                <div class="p-4 md:p-5 space-y-4">
-                                                    <button data-modal-target="large-modal"
-                                                        data-modal-toggle="large-modal"
-                                                        class="flex items-center text-lg pe-1 font-normal text-gray-500 rounded-full md:me-0 text-ellipsis text-nowrap overflow-hidden dark:text-gray-500"
-                                                        type="button">
-                                                        <span class="sr-only">Open user menu</span>
-                                                        <img class="w-12 h-12 me-2 rounded-full"
-                                                            src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                                            alt="user photo">
-                                                        Comparte lo que piensas, {{ Auth::user()->name }}
-                                                    </button>
-                                                    <!-- Large Modal -->
-                                                    <div id="large-modal" tabindex="-1"
-                                                        class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                                        <div class="relative w-full max-w-4xl max-h-full">
-                                                            <!-- Modal content -->
-                                                            <div
-                                                                class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                                                <!-- Modal header -->
-                                                                <div
-                                                                    class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                                                    <h3
-                                                                        class="text-xl font-medium text-gray-900 dark:text-white">
-                                                                        Crear Publicación
-                                                                    </h3>
-                                                                    <button type="button"
-                                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                                                        data-modal-hide="large-modal">
-                                                                        <svg class="w-3 h-3" aria-hidden="true"
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            fill="none" viewBox="0 0 14 14">
-                                                                            <path stroke="currentColor"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round" stroke-width="2"
-                                                                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                                                        </svg>
-                                                                        <span class="sr-only">Close modal</span>
-                                                                    </button>
-                                                                </div>
-                                                                <!-- Modal body -->
-                                                                <div class="p-4 md:p-5 space-y-4">
-                                                                    <div>
-                                                                        <a href="#" class="flex px-1 py-1">
-                                                                            <div class="flex-shrink-0">
-                                                                                <img class="rounded-full w-12 h-12"
-                                                                                    src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                                                                    alt="Jese image">
-                                                                            </div>
-                                                                            <div class="w-full ps-3">
-                                                                                <div
-                                                                                    class="text-gray-500 text-sm mb-1 dark:text-gray-400">
-                                                                                    <span
-                                                                                        class="font-semibold text-lg text-gray-900 dark:text-white">{{ Auth::user()->name }}</span>
-                                                                                </div>
-                                                                                <div class="relative">
-                                                                                    <!-- Botón que muestra la selección -->
-                                                                                    <button id="visibilityButton"
-                                                                                        data-dropdown-toggle="visibilityDropdown"
-                                                                                        class="text-white bg-gray-700 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-gray-600 dark:hover:bg-gray-700"
-                                                                                        type="button"><span
-                                                                                            id="visibilityOption"
-                                                                                            class="ml-2">Público</span>
-                                                                                        <svg class="w-2.5 h-2.5 ms-3"
-                                                                                            aria-hidden="true"
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            fill="none"
-                                                                                            viewBox="0 0 10 6">
-                                                                                            <path stroke="currentColor"
-                                                                                                stroke-linecap="round"
-                                                                                                stroke-linejoin="round"
-                                                                                                stroke-width="2"
-                                                                                                d="m1 1 4 4 4-4" />
-                                                                                        </svg>
-                                                                                    </button>
-
-                                                                                    <!-- Menú desplegable -->
-                                                                                    <div id="visibilityDropdown"
-                                                                                        class="hidden z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-48"
-                                                                                        data-dropdown-menu>
-                                                                                        <ul id="menu"
-                                                                                            class="p-2 space-y-2 text-sm text-gray-700">
-                                                                                            <li>
-                                                                                                <label
-                                                                                                    class="flex hover:bg-gray-100 p-1 rounded-lg items-start space-x-2">
-                                                                                                    <span>
-                                                                                                        <strong>Público</strong>
-                                                                                                        <p
-                                                                                                            class="text-gray-500 text-xs">
-                                                                                                            Cualquiera
-                                                                                                            puede ver
-                                                                                                            esta
-                                                                                                            publicación.
-                                                                                                        </p>
-                                                                                                    </span>
-                                                                                                    <input type="radio"
-                                                                                                        name="visibility"
-                                                                                                        value="Público"
-                                                                                                        class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                                                                                                        onchange="updateVisibility(this.value); closeMenu();" />
-
-                                                                                                </label>
-                                                                                            </li>
-                                                                                            <li>
-                                                                                                <label
-                                                                                                    class="flex hover:bg-gray-100 p-1 rounded-lg items-start space-x-2">
-                                                                                                    <span>
-                                                                                                        <strong>Privado</strong>
-                                                                                                        <p
-                                                                                                            class="text-gray-500 text-xs">
-                                                                                                            Solo tú
-                                                                                                            puedes ver
-                                                                                                            esta
-                                                                                                            publicación.
-                                                                                                        </p>
-                                                                                                    </span>
-                                                                                                    <input type="radio"
-                                                                                                        name="visibility"
-                                                                                                        value="Privado"
-                                                                                                        class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                                                                                                        onchange="updateVisibility(this.value); closeMenu();" />
-
-                                                                                                </label>
-                                                                                            </li>
-                                                                                            <li>
-                                                                                                <label
-                                                                                                    class="flex hover:bg-gray-100 p-1 rounded-lg items-start space-x-2">
-                                                                                                    <span class="block">
-                                                                                                        <strong>
-                                                                                                            Solo
-                                                                                                            Amigos</strong>
-                                                                                                        <p
-                                                                                                            class="text-gray-500 text-xs">
-                                                                                                            Solo tus
-                                                                                                            amigos
-                                                                                                            podrán
-                                                                                                            ver esta
-                                                                                                            publicación.
-                                                                                                        </p>
-                                                                                                    </span>
-                                                                                                    <input type="radio"
-                                                                                                        name="visibility"
-                                                                                                        value="Solo Amigos"
-                                                                                                        class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                                                                                                        onchange="updateVisibility(this.value); closeMenu();" />
-
-                                                                                                </label>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <script>
-                                                                                    function updateVisibility(value) {
-                                                                                        document.getElementById('visibilityOption').innerText = value;
-                                                                                    }
-
-                                                                                    function closeMenu() {
-                                                                                        // Suponiendo que el menú tiene un id "menu"
-                                                                                        // document.getElementById('menu').style.display = 'none';
-                                                                                    }
-                                                                                </script>
-
-                                                                            </div>
-                                                                        </a>
-                                                                    </div>
-
-                                                                    <form>
-                                                                        <div
-                                                                            class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-                                                                            <div
-                                                                                class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
-                                                                                <label for="comment"
-                                                                                    class="sr-only">Your
-                                                                                    comment</label>
-                                                                                <textarea id="comment" rows="9"
-                                                                                    class="w-full resize-none px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                                                                                    placeholder="Cómparte lo que piensas, {{ Auth::user()->name }}..."
-                                                                                    required></textarea>
-                                                                            </div>
-                                                                            <div
-                                                                                class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
-                                                                                <div
-                                                                                    class="flex ps-0 space-x-1 rtl:space-x-reverse sm:ps-2">
-                                                                                    <button type="button"
-                                                                                        class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                                                                        <svg class="w-4 h-4"
-                                                                                            aria-hidden="true"
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            fill="none"
-                                                                                            viewBox="0 0 12 20">
-                                                                                            <path stroke="currentColor"
-                                                                                                stroke-linejoin="round"
-                                                                                                stroke-width="2"
-                                                                                                d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6" />
-                                                                                        </svg>
-                                                                                        <span class="sr-only">Attach
-                                                                                            file</span>
-                                                                                    </button>
-                                                                                    <button type="button"
-                                                                                        class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                                                                        <svg class="w-4 h-4"
-                                                                                            aria-hidden="true"
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            fill="currentColor"
-                                                                                            viewBox="0 0 16 20">
-                                                                                            <path
-                                                                                                d="M8 0a7.992 7.992 0 0 0-6.583 12.535 1 1 0 0 0 .12.183l.12.146c.112.145.227.285.326.4l5.245 6.374a1 1 0 0 0 1.545-.003l5.092-6.205c.206-.222.4-.455.578-.7l.127-.155a.934.934 0 0 0 .122-.192A8.001 8.001 0 0 0 8 0Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
-                                                                                        </svg>
-                                                                                        <span class="sr-only">Set
-                                                                                            location</span>
-                                                                                    </button>
-                                                                                    <button type="button"
-                                                                                        class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                                                                        <svg class="w-4 h-4"
-                                                                                            aria-hidden="true"
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            fill="currentColor"
-                                                                                            viewBox="0 0 20 18">
-                                                                                            <path
-                                                                                                d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
-                                                                                        </svg>
-                                                                                        <span class="sr-only">Upload
-                                                                                            image</span>
-                                                                                    </button>
-                                                                                </div>
-                                                                                <button type="submit"
-                                                                                    class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
-                                                                                    Publicar
-                                                                                </button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Botones compartir -->
-                                                <div
-                                                    class="flex dark:bg-gray-800 bg-gray-100 items-center p-2 md:p-3 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                                                    <button>
-                                                        <svg class="w-6 h-6 text-gray-400 dark:text-gray-500 dark:hover:text-gray-900 hover:text-gray-700"
-                                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                            width="24" height="24" fill="currentColor"
-                                                            viewBox="0 0 24 24">
-                                                            <path fill-rule="evenodd"
-                                                                d="M7.5 4.586A2 2 0 0 1 8.914 4h6.172a2 2 0 0 1 1.414.586L17.914 6H19a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h1.086L7.5 4.586ZM10 12a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm2-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"
-                                                                clip-rule="evenodd" />
-                                                        </svg>
-                                                    </button>
-                                                    <button>
-                                                        <svg class="w-6 h-6 text-gray-400 dark:text-gray-500 dark:hover:text-gray-900 hover:text-gray-700"
-                                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                            width="24" height="24" fill="currentColor"
-                                                            viewBox="0 0 24 24">
-                                                            <path fill-rule="evenodd"
-                                                                d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2ZM7.99 9a1 1 0 0 1 1-1H9a1 1 0 0 1 0 2h-.01a1 1 0 0 1-1-1ZM14 9a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H15a1 1 0 0 1-1-1Zm-5.506 7.216A5.5 5.5 0 0 1 6.6 13h10.81a5.5 5.5 0 0 1-8.916 3.216Z"
-                                                                clip-rule="evenodd" />
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="space-y-4">
-                                    <!-- Post -->
-                                    <div class="bg-white p-4 border rounded-xl">
-                                        <article>
-                                            <div class="flex items-center mb-4">
-                                                <div class="flex-shrink-0">
-                                                    <img class="rounded-full w-11 h-11"
-                                                        src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                                        alt="Jese image">
-                                                    <div
-                                                        class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-blue-600 border border-white rounded-full dark:border-gray-800">
-                                                        <svg class="w-2 h-2 text-white" aria-hidden="true"
-                                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                            viewBox="0 0 18 18">
-                                                            <path
-                                                                d="M1 18h16a1 1 0 0 0 1-1v-6h-4.439a.99.99 0 0 0-.908.6 3.978 3.978 0 0 1-7.306 0 .99.99 0 0 0-.908-.6H0v6a1 1 0 0 0 1 1Z" />
-                                                            <path
-                                                                d="M4.439 9a2.99 2.99 0 0 1 2.742 1.8 1.977 1.977 0 0 0 3.638 0A2.99 2.99 0 0 1 13.561 9H17.8L15.977.783A1 1 0 0 0 15 0H3a1 1 0 0 0-.977.783L.2 9h4.239Z" />
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                                <div class="w-full ps-3">
-                                                    <div
-                                                        class="text-gray-500 dark:text-gray-400 flex justify-between items-center">
-                                                        <span
-                                                            class="font-semibold text-gray-900 dark:text-white">Profesional
-                                                            C++</span>
-                                                        <span class="text-gray-500 text-sm">
-                                                            <button id="dropdownMenuIconHorizontalButton1"
-                                                                data-dropdown-toggle="dropdownDotsHorizontal1"
-                                                                class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100  dark:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
-                                                                type="button">
-                                                                <svg class="w-5 h-5" aria-hidden="true"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    fill="currentColor" viewBox="0 0 16 3">
-                                                                    <path
-                                                                        d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-                                                                </svg>
-                                                            </button>
-
-                                                            <!-- Dropdown menu -->
-                                                            <div id="dropdownDotsHorizontal1"
-                                                                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                                                    aria-labelledby="dropdownMenuIconHorizontalButton1">
-                                                                    <li>
-                                                                        <a href="#"
-                                                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#"
-                                                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#"
-                                                                            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                                                                    </li>
-                                                                </ul>
-                                                                <div class="py-2">
-                                                                    <a href="#"
-                                                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Separated
-                                                                        link</a>
-                                                                </div>
-                                                            </div>
-                                                        </span>
-                                                    </div>
-                                                    <div class="text-xs text-gray-600 dark:text-gray-500">Eduardo
-                                                        Casares Aguayo a
-                                                        publicado una actualización <div
-                                                            class="text-xs text-gray-600 dark:text-gray-500">hace dos
-                                                            dias
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <p class="mb-2 text-gray-500 dark:text-gray-400">This is my third Invicta
-                                                Pro Diver.
-                                                They are just fantastic value for money. This one arrived yesterday and
-                                                the first
-                                                thing I did was set the time, popped on an identical strap from another
-                                                Invicta and
-                                                went in the shower with it to test the waterproofing.... No problems.
-                                            </p>
-
-                                            <a href="#"
-                                                class="block mb-5 text-sm font-medium text-blue-600 dark:text-blue-500">Read
-                                                more</a>
-                                            <div>
-                                                <img class="h-auto mb-4 w-full rounded-xl"
-                                                    src="https://flowbite.s3.amazonaws.com/docs/gallery/featured/image.jpg"
-                                                    alt="">
-
-                                                <!--   <video class="h-auto w-full rounded-xl" autoplay controls>
-                                        <source src="/docs/videos/flowbite.mp4" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video> -->
-
-                                                <!--   <div class="leading-1.5 mt-2 flex w-full flex-col">
-                                        <div class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-xl p-2">
-                                            <div class="me-2">
-                                                <span
-                                                    class="flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white pb-2">
-                                                    <svg fill="none" aria-hidden="true" class="w-5 h-5 flex-shrink-0"
-                                                        viewBox="0 0 20 21">
-                                                        <g clip-path="url(#clip0_3173_1381)">
-                                                            <path fill="#E2E5E7"
-                                                                d="M5.024.5c-.688 0-1.25.563-1.25 1.25v17.5c0 .688.562 1.25 1.25 1.25h12.5c.687 0 1.25-.563 1.25-1.25V5.5l-5-5h-8.75z" />
-                                                            <path fill="#B0B7BD"
-                                                                d="M15.024 5.5h3.75l-5-5v3.75c0 .688.562 1.25 1.25 1.25z" />
-                                                            <path fill="#CAD1D8"
-                                                                d="M18.774 9.25l-3.75-3.75h3.75v3.75z" />
-                                                            <path fill="#F15642"
-                                                                d="M16.274 16.75a.627.627 0 01-.625.625H1.899a.627.627 0 01-.625-.625V10.5c0-.344.281-.625.625-.625h13.75c.344 0 .625.281.625.625v6.25z" />
-                                                            <path fill="#fff"
-                                                                d="M3.998 12.342c0-.165.13-.345.34-.345h1.154c.65 0 1.235.435 1.235 1.269 0 .79-.585 1.23-1.235 1.23h-.834v.66c0 .22-.14.344-.32.344a.337.337 0 01-.34-.344v-2.814zm.66.284v1.245h.834c.335 0 .6-.295.6-.605 0-.35-.265-.64-.6-.64h-.834zM7.706 15.5c-.165 0-.345-.09-.345-.31v-2.838c0-.18.18-.31.345-.31H8.85c2.284 0 2.234 3.458.045 3.458h-1.19zm.315-2.848v2.239h.83c1.349 0 1.409-2.24 0-2.24h-.83zM11.894 13.486h1.274c.18 0 .36.18.36.355 0 .165-.18.3-.36.3h-1.274v1.049c0 .175-.124.31-.3.31-.22 0-.354-.135-.354-.31v-2.839c0-.18.135-.31.355-.31h1.754c.22 0 .35.13.35.31 0 .16-.13.34-.35.34h-1.455v.795z" />
-                                                            <path fill="#CAD1D8"
-                                                                d="M15.649 17.375H3.774V18h11.875a.627.627 0 00.625-.625v-.625a.627.627 0 01-.625.625z" />
-                                                        </g>
-                                                        <defs>
-                                                            <clipPath id="clip0_3173_1381">
-                                                                <path fill="#fff" d="M0 0h20v20H0z"
-                                                                    transform="translate(0 .5)" />
-                                                            </clipPath>
-                                                        </defs>
-                                                    </svg>
-                                                    Flowbite Terms & Conditions
-                                                </span>
-                                                <span
-                                                    class="flex text-xs font-normal text-gray-500 dark:text-gray-400 gap-2">
-                                                    12 Pages
-                                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                                        class="self-center" width="3" height="4" viewBox="0 0 3 4"
-                                                        fill="none">
-                                                        <circle cx="1.5" cy="2" r="1.5" fill="#6B7280" />
-                                                    </svg>
-                                                    18 MB
-                                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                                        class="self-center" width="3" height="4" viewBox="0 0 3 4"
-                                                        fill="none">
-                                                        <circle cx="1.5" cy="2" r="1.5" fill="#6B7280" />
-                                                    </svg>
-                                                    PDF
-                                                </span>
-                                            </div>
-                                            <div class="inline-flex self-center items-center">
-                                                <button
-                                                    class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                                                    type="button">
-                                                    <svg class="w-4 h-4 text-gray-900 dark:text-white"
-                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                        fill="currentColor" viewBox="0 0 20 20">
-                                                        <path
-                                                            d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z" />
-                                                        <path
-                                                            d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div> -->
-
-                                            </div>
-
-
-                                            <div class="flex mt-2 justify-between items-center">
-                                                <button class="mt-1 text-xs mb-1 text-gray-500 dark:text-gray-400">
-                                                    19 reacciones</button>
-                                                <button data-modal-target="medium-modal"
-                                                    data-modal-toggle="medium-modal"
-                                                    class="mt-1 text-xs mb-1 text-gray-500 dark:text-gray-400">
-                                                    Ver los 108 comentarios</button>
-                                                <!--  Modal ver comentarios en modal -->
-                                                <div id="medium-modal" tabindex="-1"
-                                                    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                                    <div class="relative w-full max-w-lg max-h-full">
-                                                        <!-- Modal content -->
-                                                        <div
-                                                            class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                                            <!-- Modal header -->
-                                                            <div
-                                                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                                                <h3
-                                                                    class="text-xl font-medium text-gray-900 dark:text-white">
-                                                                    Publicacion de Xpersona
-                                                                </h3>
-                                                                <button type="button"
-                                                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                                                    data-modal-hide="medium-modal">
-                                                                    <svg class="w-3 h-3" aria-hidden="true"
-                                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                        viewBox="0 0 14 14">
-                                                                        <path stroke="currentColor"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round" stroke-width="2"
-                                                                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                                                    </svg>
-                                                                    <span class="sr-only">Close modal</span>
-                                                                </button>
-                                                            </div>
-                                                            <!-- Modal body -->
-                                                            <div class="p-3 md:p-4 space-y-6 overflow-y-auto max-h-96">
-
-                                                                <!-- Publicacion en modal -->
-                                                                <div class="bg-white">
-                                                                    <article>
-                                                                        <div class="flex items-center mb-4">
-                                                                            <div class="flex-shrink-0">
-                                                                                <img class="rounded-full w-11 h-11"
-                                                                                    src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                                                                    alt="Jese image">
-                                                                                <div
-                                                                                    class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-blue-600 border border-white rounded-full dark:border-gray-800">
-                                                                                    <svg class="w-2 h-2 text-white"
-                                                                                        aria-hidden="true"
-                                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                                        fill="currentColor"
-                                                                                        viewBox="0 0 18 18">
-                                                                                        <path
-                                                                                            d="M1 18h16a1 1 0 0 0 1-1v-6h-4.439a.99.99 0 0 0-.908.6 3.978 3.978 0 0 1-7.306 0 .99.99 0 0 0-.908-.6H0v6a1 1 0 0 0 1 1Z" />
-                                                                                        <path
-                                                                                            d="M4.439 9a2.99 2.99 0 0 1 2.742 1.8 1.977 1.977 0 0 0 3.638 0A2.99 2.99 0 0 1 13.561 9H17.8L15.977.783A1 1 0 0 0 15 0H3a1 1 0 0 0-.977.783L.2 9h4.239Z" />
-                                                                                    </svg>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="w-full ps-3">
-                                                                                <div
-                                                                                    class="text-gray-500 dark:text-gray-400 flex justify-between items-center">
-                                                                                    <span
-                                                                                        class="font-semibold text-gray-900 dark:text-white">Profesional
-                                                                                        C++</span>
-                                                                                    <span class="text-gray-500 text-sm">
-                                                                                        <button
-                                                                                            id="dropdownMenuIconHorizontalButton2"
-                                                                                            data-dropdown-toggle="dropdownDotsHorizontal2"
-                                                                                            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100  dark:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
-                                                                                            type="button">
-                                                                                            <svg class="w-5 h-5"
-                                                                                                aria-hidden="true"
-                                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                                fill="currentColor"
-                                                                                                viewBox="0 0 16 3">
-                                                                                                <path
-                                                                                                    d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-                                                                                            </svg>
-                                                                                        </button>
-
-                                                                                        <!-- Dropdown menu -->
-                                                                                        <div id="dropdownDotsHorizontal2"
-                                                                                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                                                                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                                                                                aria-labelledby="dropdownMenuIconHorizontalButton1">
-                                                                                                <li>
-                                                                                                    <a href="#"
-                                                                                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <a href="#"
-                                                                                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                                                                                                </li>
-                                                                                                <li>
-                                                                                                    <a href="#"
-                                                                                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                                                                                                </li>
-                                                                                            </ul>
-                                                                                            <div class="py-2">
-                                                                                                <a href="#"
-                                                                                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Separated
-                                                                                                    link</a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </span>
-                                                                                </div>
-                                                                                <div
-                                                                                    class="text-xs text-gray-600 dark:text-gray-500">
-                                                                                    Eduardo Casares Aguayo a
-                                                                                    publicado una actualización <div
-                                                                                        class="text-xs text-gray-600 dark:text-gray-500">
-                                                                                        hace dos dias
-                                                                                    </div>
-                                                                                </div>
-
-                                                                            </div>
-                                                                        </div>
-                                                                        <p
-                                                                            class="mb-2 text-gray-500 dark:text-gray-400">
-                                                                            This is my
-                                                                            third Invicta Pro Diver.
-                                                                            They are just fantastic value for money.
-                                                                            This one
-                                                                            arrived yesterday and the first
-                                                                            thing I did was set the time, popped on an
-                                                                            identical
-                                                                            strap from another Invicta and
-                                                                            went in the shower with it to test the
-                                                                            waterproofing....
-                                                                            No problems.</p>
-
-                                                                        <a href="#"
-                                                                            class="block mb-5 text-sm font-medium text-blue-600 dark:text-blue-500">Read
-                                                                            more</a>
-                                                                        <div>
-                                                                            <img class="h-auto mb-4 w-full rounded-xl"
-                                                                                src="https://flowbite.s3.amazonaws.com/docs/gallery/featured/image.jpg"
-                                                                                alt="">
-
-                                                                            <video class="h-auto w-full rounded-xl"
-                                                                                autoplay controls>
-                                                                                <source src="/docs/videos/flowbite.mp4"
-                                                                                    type="video/mp4">
-                                                                                Your browser does not support the video
-                                                                                tag.
-                                                                            </video>
-
-                                                                            <div
-                                                                                class="leading-1.5 mt-2 flex w-full flex-col">
-                                                                                <div
-                                                                                    class="flex items-start bg-gray-50 dark:bg-gray-700 rounded-xl p-2">
-                                                                                    <div class="me-2">
-                                                                                        <span
-                                                                                            class="flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-white pb-2">
-                                                                                            <svg fill="none"
-                                                                                                aria-hidden="true"
-                                                                                                class="w-5 h-5 flex-shrink-0"
-                                                                                                viewBox="0 0 20 21">
-                                                                                                <g
-                                                                                                    clip-path="url(#clip0_3173_1381)">
-                                                                                                    <path fill="#E2E5E7"
-                                                                                                        d="M5.024.5c-.688 0-1.25.563-1.25 1.25v17.5c0 .688.562 1.25 1.25 1.25h12.5c.687 0 1.25-.563 1.25-1.25V5.5l-5-5h-8.75z" />
-                                                                                                    <path fill="#B0B7BD"
-                                                                                                        d="M15.024 5.5h3.75l-5-5v3.75c0 .688.562 1.25 1.25 1.25z" />
-                                                                                                    <path fill="#CAD1D8"
-                                                                                                        d="M18.774 9.25l-3.75-3.75h3.75v3.75z" />
-                                                                                                    <path fill="#F15642"
-                                                                                                        d="M16.274 16.75a.627.627 0 01-.625.625H1.899a.627.627 0 01-.625-.625V10.5c0-.344.281-.625.625-.625h13.75c.344 0 .625.281.625.625v6.25z" />
-                                                                                                    <path fill="#fff"
-                                                                                                        d="M3.998 12.342c0-.165.13-.345.34-.345h1.154c.65 0 1.235.435 1.235 1.269 0 .79-.585 1.23-1.235 1.23h-.834v.66c0 .22-.14.344-.32.344a.337.337 0 01-.34-.344v-2.814zm.66.284v1.245h.834c.335 0 .6-.295.6-.605 0-.35-.265-.64-.6-.64h-.834zM7.706 15.5c-.165 0-.345-.09-.345-.31v-2.838c0-.18.18-.31.345-.31H8.85c2.284 0 2.234 3.458.045 3.458h-1.19zm.315-2.848v2.239h.83c1.349 0 1.409-2.24 0-2.24h-.83zM11.894 13.486h1.274c.18 0 .36.18.36.355 0 .165-.18.3-.36.3h-1.274v1.049c0 .175-.124.31-.3.31-.22 0-.354-.135-.354-.31v-2.839c0-.18.135-.31.355-.31h1.754c.22 0 .35.13.35.31 0 .16-.13.34-.35.34h-1.455v.795z" />
-                                                                                                    <path fill="#CAD1D8"
-                                                                                                        d="M15.649 17.375H3.774V18h11.875a.627.627 0 00.625-.625v-.625a.627.627 0 01-.625.625z" />
-                                                                                                </g>
-                                                                                                <defs>
-                                                                                                    <clipPath
-                                                                                                        id="clip0_3173_1381">
-                                                                                                        <path
-                                                                                                            fill="#fff"
-                                                                                                            d="M0 0h20v20H0z"
-                                                                                                            transform="translate(0 .5)" />
-                                                                                                    </clipPath>
-                                                                                                </defs>
-                                                                                            </svg>
-                                                                                            Flowbite Terms & Conditions
-                                                                                        </span>
-                                                                                        <span
-                                                                                            class="flex text-xs font-normal text-gray-500 dark:text-gray-400 gap-2">
-                                                                                            12 Pages
-                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                                aria-hidden="true"
-                                                                                                class="self-center"
-                                                                                                width="3" height="4"
-                                                                                                viewBox="0 0 3 4"
-                                                                                                fill="none">
-                                                                                                <circle cx="1.5" cy="2"
-                                                                                                    r="1.5"
-                                                                                                    fill="#6B7280" />
-                                                                                            </svg>
-                                                                                            18 MB
-                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                                aria-hidden="true"
-                                                                                                class="self-center"
-                                                                                                width="3" height="4"
-                                                                                                viewBox="0 0 3 4"
-                                                                                                fill="none">
-                                                                                                <circle cx="1.5" cy="2"
-                                                                                                    r="1.5"
-                                                                                                    fill="#6B7280" />
-                                                                                            </svg>
-                                                                                            PDF
-                                                                                        </span>
-                                                                                    </div>
-                                                                                    <div
-                                                                                        class="inline-flex self-center items-center">
-                                                                                        <button
-                                                                                            class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                                                                                            type="button">
-                                                                                            <svg class="w-4 h-4 text-gray-900 dark:text-white"
-                                                                                                aria-hidden="true"
-                                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                                fill="currentColor"
-                                                                                                viewBox="0 0 20 20">
-                                                                                                <path
-                                                                                                    d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z" />
-                                                                                                <path
-                                                                                                    d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
-                                                                                            </svg>
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-
-                                                                        <div
-                                                                            class="flex mt-2 justify-between items-center">
-                                                                            <p
-                                                                                class="mt-1 text-xs mb-1 text-gray-500 dark:text-gray-400">
-                                                                                19 reacciones</p>
-                                                                            <p
-                                                                                class="mt-1 text-xs mb-1 text-gray-500 dark:text-gray-400">
-                                                                                Ver los 12 comentarios</p>
-                                                                        </div>
-                                                                        <aside
-                                                                            class="dark:border-gray-600 border-gray-200 border-t border-b">
-                                                                            <div class="flex items-center mb-2 mt-2">
-                                                                                <a href="#"
-                                                                                    class="w-full text-gray-700 sfocus:z-10 dark:hover:text-blue-600 hover:text-blue-600 hover:bg-gray-100 font-medium rounded-full text-sm px-2 py-2 text-center items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:text-white">Me
-                                                                                    gusta
-                                                                                </a>
-                                                                                <button
-                                                                                    class="w-full text-gray-700 focus:z-10 dark:hover:text-blue-600 hover:text-blue-600  hover:bg-gray-100 font-medium rounded-full text-sm px-2 py-2 text-center items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:text-white">Comentar
-                                                                                </button>
-                                                                            </div>
-                                                                        </aside>
-                                                                    </article>
-                                                                </div>
-                                                                <!--Seccion de todos los comentarios-->
-                                                                <div>
-                                                                    <div class="flex items-start gap-2.5">
-                                                                        <img class="w-8 h-8 rounded-full"
-                                                                            src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                                                            alt="Jese image">
-                                                                        <div
-                                                                            class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
-                                                                            <div
-                                                                                class="flex items-center space-x-2 rtl:space-x-reverse">
-                                                                                <span
-                                                                                    class="text-sm font-semibold text-gray-900 dark:text-white">Bonnie
-                                                                                    Green</span>
-                                                                                <span
-                                                                                    class="text-sm font-normal text-gray-500 dark:text-gray-400">11:46</span>
-                                                                            </div>
-                                                                            <p
-                                                                                class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
-                                                                                That's awesome. I think our users will
-                                                                                really
-                                                                                appreciate
-                                                                                the improvements.</p>
-                                                                            <span
-                                                                                class="text-sm font-normal text-gray-500 dark:text-gray-400">Delivered</span>
-                                                                        </div>
-                                                                        <button id="dropdownMenuIconButton"
-                                                                            data-dropdown-toggle="dropdownDots"
-                                                                            data-dropdown-placement="bottom-start"
-                                                                            class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600"
-                                                                            type="button">
-                                                                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                                                                                aria-hidden="true"
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                fill="currentColor" viewBox="0 0 4 15">
-                                                                                <path
-                                                                                    d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-                                                                            </svg>
-                                                                        </button>
-                                                                        <div id="dropdownDots"
-                                                                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600">
-                                                                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                                                                aria-labelledby="dropdownMenuIconButton">
-                                                                                <li>
-                                                                                    <a href="#"
-                                                                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reply</a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="#"
-                                                                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Forward</a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="#"
-                                                                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Copy</a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="#"
-                                                                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="#"
-                                                                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="flex  items-center mt-2">
-                                                                        <button
-                                                                            class="mt-1 text-xs ml-12 mb-1 text-gray-500 dark:text-gray-400">
-                                                                            1 día
-                                                                        </button>
-                                                                        <button
-                                                                            class="mt-1 text-xs mx-4 mb-1 text-gray-500 dark:text-gray-400">
-                                                                            Me gusta
-                                                                        </button>
-                                                                        <button
-                                                                            class="mt-1 text-xs mb-1 text-gray-500 dark:text-gray-400">
-                                                                            Responder
-                                                                        </button>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                            <!-- Modal footer -->
-                                                            <div
-                                                                class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                                                <!-- Crear comentario -->
-                                                                <div class="flex w-full items-start mt-2 gap-2.5">
-                                                                    <img class="w-8 h-8 rounded-full"
-                                                                        src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                                                        alt="Jese image">
-                                                                    <div class="w-full">
-                                                                        <form>
-                                                                            <div
-                                                                                class="w-full mb-2 border border-gray-200 rounded-lg bg-white dark:border-gray-600">
-                                                                                <div
-                                                                                    class="px-4 bg-white rounded-t-lg dark:bg-gray-800">
-                                                                                    <label for="comment"
-                                                                                        class="sr-only">Your
-                                                                                        comment</label>
-                                                                                    <textarea id="comment" rows="1"
-                                                                                        class="w-full overflow-hidden resize-none dark:focus:ring-blue-500 dark:focus:border-blue-500  px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                                                                                        placeholder="Escribe tu comentario..."
-                                                                                        required></textarea>
-                                                                                </div>
-                                                                                <div
-                                                                                    class="flex items-center justify-between px-2 dark:bg-gray-800">
-                                                                                    <div
-                                                                                        class="flex ps-0 space-x-1 rtl:space-x-reverse sm:ps-2">
-                                                                                        <button type="button"
-                                                                                            class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                                                                            <svg class="w-3 h-3"
-                                                                                                aria-hidden="true"
-                                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                                fill="none"
-                                                                                                viewBox="0 0 12 20">
-                                                                                                <path
-                                                                                                    stroke="currentColor"
-                                                                                                    stroke-linejoin="round"
-                                                                                                    stroke-width="2"
-                                                                                                    d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6" />
-                                                                                            </svg>
-                                                                                            <span class="sr-only">Attach
-                                                                                                file</span>
-                                                                                        </button>
-                                                                                        <button type="button"
-                                                                                            class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                                                                            <svg class="w-3 h-3"
-                                                                                                aria-hidden="true"
-                                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                                fill="currentColor"
-                                                                                                viewBox="0 0 16 20">
-                                                                                                <path
-                                                                                                    d="M8 0a7.992 7.992 0 0 0-6.583 12.535 1 1 0 0 0 .12.183l.12.146c.112.145.227.285.326.4l5.245 6.374a1 1 0 0 0 1.545-.003l5.092-6.205c.206-.222.4-.455.578-.7l.127-.155a.934.934 0 0 0 .122-.192A8.001 8.001 0 0 0 8 0Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
-                                                                                            </svg>
-                                                                                            <span class="sr-only">Set
-                                                                                                location</span>
-                                                                                        </button>
-                                                                                        <button type="button"
-                                                                                            class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                                                                            <svg class="w-3 h-3"
-                                                                                                aria-hidden="true"
-                                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                                fill="currentColor"
-                                                                                                viewBox="0 0 20 18">
-                                                                                                <path
-                                                                                                    d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
-                                                                                            </svg>
-                                                                                            <span class="sr-only">Upload
-                                                                                                image</span>
-                                                                                        </button>
-                                                                                    </div>
-                                                                                    <button type="submit"
-                                                                                        class="inline-flex items-center mb-2 py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-full focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
-                                                                                        Publicar
-                                                                                    </button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <aside class="dark:border-gray-600 border-gray-200 border-t">
-                                                <div class="flex items-center mt-2">
-                                                    <a href="#"
-                                                        class="w-full text-gray-700 sfocus:z-10 dark:hover:text-blue-600 hover:text-blue-600 hover:bg-gray-100 font-medium rounded-full text-sm px-2 py-2 text-center items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:text-white">Me
-                                                        gusta
-                                                    </a>
-                                                    <button id="commentButton1" data-collapse-toggle="commentSection1"
-                                                        aria-expanded="false" aria-controls="commentSection"
-                                                        class="w-full text-gray-700 focus:z-10 dark:hover:text-blue-600 hover:text-blue-600  hover:bg-gray-100 font-medium rounded-full text-sm px-2 py-2 text-center items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:text-white">Comentar
-                                                    </button>
-                                                </div>
-                                            </aside>
-                                            <!-- Sección de Comentarios -->
-                                            <div id="commentSection1"
-                                                class="hidden mt-2 dark:border-gray-600 border-gray-200 border-t">
-
-                                                <div class="flex items-start mt-2 gap-2.5">
-                                                    <img class="w-8 h-8 rounded-full"
-                                                        src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                                        alt="Jese image">
-
-                                                    <div class="w-full">
-                                                        <form>
-                                                            <div
-                                                                class="w-full mb-2 border border-gray-200 rounded-lg bg-white dark:border-gray-600">
-                                                                <div
-                                                                    class="px-4 bg-white rounded-t-lg dark:bg-gray-800">
-                                                                    <label for="comment" class="sr-only">Your
-                                                                        comment</label>
-                                                                    <textarea id="comment" rows="1"
-                                                                        class="w-full overflow-hidden resize-none dark:focus:ring-blue-500 dark:focus:border-blue-500  px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                                                                        placeholder="Escribe tu comentario..."
-                                                                        required></textarea>
-                                                                </div>
-                                                                <div
-                                                                    class="flex items-center justify-between px-2 dark:bg-gray-800">
-                                                                    <div
-                                                                        class="flex ps-0 space-x-1 rtl:space-x-reverse sm:ps-2">
-                                                                        <button type="button"
-                                                                            class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                                                            <svg class="w-3 h-3" aria-hidden="true"
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                fill="none" viewBox="0 0 12 20">
-                                                                                <path stroke="currentColor"
-                                                                                    stroke-linejoin="round"
-                                                                                    stroke-width="2"
-                                                                                    d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6" />
-                                                                            </svg>
-                                                                            <span class="sr-only">Attach file</span>
-                                                                        </button>
-                                                                        <button type="button"
-                                                                            class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                                                            <svg class="w-3 h-3" aria-hidden="true"
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                fill="currentColor" viewBox="0 0 16 20">
-                                                                                <path
-                                                                                    d="M8 0a7.992 7.992 0 0 0-6.583 12.535 1 1 0 0 0 .12.183l.12.146c.112.145.227.285.326.4l5.245 6.374a1 1 0 0 0 1.545-.003l5.092-6.205c.206-.222.4-.455.578-.7l.127-.155a.934.934 0 0 0 .122-.192A8.001 8.001 0 0 0 8 0Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
-                                                                            </svg>
-                                                                            <span class="sr-only">Set location</span>
-                                                                        </button>
-                                                                        <button type="button"
-                                                                            class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                                                            <svg class="w-3 h-3" aria-hidden="true"
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                fill="currentColor" viewBox="0 0 20 18">
-                                                                                <path
-                                                                                    d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
-                                                                            </svg>
-                                                                            <span class="sr-only">Upload image</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <button type="submit"
-                                                                        class="inline-flex items-center mb-2 py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-full focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
-                                                                        Publicar
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </article>
-                                    </div>
-
-                                    <div class="bg-white p-4 border rounded-xl">
-                                        <article>
-                                            <div class="flex items-center mb-4">
-                                                <img class="w-10 h-10 me-4 rounded-full"
-                                                    src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                                    alt="">
-                                                <div class=" dark:text-white">
-                                                    <span class="font-semibold text-gray-900 dark:text-white">Acxel
-                                                        Aplicano </span>
-                                                    <div class="text-xs text-gray-500 dark:text-gray-500">hace dos días
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <p class="mb-2 text-gray-500 dark:text-gray-400">This is my third Invicta
-                                                Pro Diver.
-                                                They are just fantastic value for money. This one arrived yesterday and
-                                                the first
-                                                thing I did was set the time, popped on an identical strap from another
-                                                Invicta and
-                                                went in the shower with it to test the waterproofing.... No problems.
-                                            </p>
-
-                                            <a href="#"
-                                                class="block mb-5 text-sm font-medium text-blue-600 dark:text-blue-500">Read
-                                                more</a>
-                                            <div class="flex justify-between items-center">
-                                                <button class="mt-1 text-xs mb-1 text-gray-500 dark:text-gray-400">
-                                                    19 reacciones</button>
-                                                <p class="mt-1 text-xs mb-1 text-gray-500 dark:text-gray-400">
-                                                    Ver los 108 comentarios</p>
-                                            </div>
-
-
-                                            <aside class="dark:border-gray-600 border-gray-200 border-t">
-                                                <div class="flex items-center mt-2">
-                                                    <a href="#"
-                                                        class="w-full text-gray-700 sfocus:z-10 dark:hover:text-blue-600 hover:text-blue-600 hover:bg-gray-100 font-medium rounded-full text-sm px-2 py-2 text-center items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:text-white">Me
-                                                        gusta
-                                                    </a>
-                                                    <button id="commentButton" data-collapse-toggle="commentSection"
-                                                        aria-expanded="false" aria-controls="commentSection"
-                                                        class="w-full text-gray-700 focus:z-10 dark:hover:text-blue-600 hover:text-blue-600  hover:bg-gray-100 font-medium rounded-full text-sm px-2 py-2 text-center items-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:text-white">Comentar
-                                                    </button>
-                                                </div>
-                                            </aside>
-                                            <!-- Sección de Comentarios -->
-                                            <div id="commentSection"
-                                                class="hidden mt-2 dark:border-gray-600 border-gray-200 border-t">
-
-                                                <div class="flex items-start mt-2 gap-2.5">
-                                                    <img class="w-8 h-8 rounded-full"
-                                                        src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                                        alt="Jese image">
-                                                    <div class="w-full">
-
-                                                        <form>
-                                                            <div
-                                                                class="w-full mb-2 border border-gray-200 rounded-lg bg-white dark:border-gray-600">
-                                                                <div
-                                                                    class="px-4 bg-white rounded-t-lg dark:bg-gray-800">
-                                                                    <label for="comment" class="sr-only">Your
-                                                                        comment</label>
-                                                                    <textarea id="comment" rows="1"
-                                                                        class="w-full overflow-hidden resize-none dark:focus:ring-blue-500 dark:focus:border-blue-500  px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                                                                        placeholder="Escribe tu comentario..."
-                                                                        required></textarea>
-                                                                </div>
-                                                                <div
-                                                                    class="flex items-center justify-between px-2 dark:bg-gray-800">
-                                                                    <div
-                                                                        class="flex ps-0 space-x-1 rtl:space-x-reverse sm:ps-2">
-                                                                        <button type="button"
-                                                                            class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                                                            <svg class="w-3 h-3" aria-hidden="true"
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                fill="none" viewBox="0 0 12 20">
-                                                                                <path stroke="currentColor"
-                                                                                    stroke-linejoin="round"
-                                                                                    stroke-width="2"
-                                                                                    d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6" />
-                                                                            </svg>
-                                                                            <span class="sr-only">Attach file</span>
-                                                                        </button>
-                                                                        <button type="button"
-                                                                            class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                                                            <svg class="w-3 h-3" aria-hidden="true"
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                fill="currentColor" viewBox="0 0 16 20">
-                                                                                <path
-                                                                                    d="M8 0a7.992 7.992 0 0 0-6.583 12.535 1 1 0 0 0 .12.183l.12.146c.112.145.227.285.326.4l5.245 6.374a1 1 0 0 0 1.545-.003l5.092-6.205c.206-.222.4-.455.578-.7l.127-.155a.934.934 0 0 0 .122-.192A8.001 8.001 0 0 0 8 0Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
-                                                                            </svg>
-                                                                            <span class="sr-only">Set location</span>
-                                                                        </button>
-                                                                        <button type="button"
-                                                                            class="inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                                                            <svg class="w-3 h-3" aria-hidden="true"
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                fill="currentColor" viewBox="0 0 20 18">
-                                                                                <path
-                                                                                    d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
-                                                                            </svg>
-                                                                            <span class="sr-only">Upload image</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <button type="submit"
-                                                                        class="inline-flex items-center mb-2 py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-full focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
-                                                                        Publicar
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </article>
-                                    </div>
-                                </div>
-                            </main>
-                        </div>
-                        <div class="hidden w-full rounded-lg bg-white dark:bg-gray-800" id="dashboard" role="tabpanel"
-                            aria-labelledby="dashboard-tab">
-                            <div class="relative overflow-x-auto">
-                                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    <thead class="text-xs text-gray-900 uppercase dark:text-gray-400">
-                                        <tr class="border-b mb-2">
-                                            <p class="mx-4 my-4 font-medium text-xl">
-                                                Información de presentación
-                                            </p>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900  ">
-                                                Tipo de usuario
-                                            </th>
-                                            <td class="px-6 py-4 whitespace-normal">
-                                                Silver Lorem ipsum
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900  ">
-                                                Número de teléfono
-                                            </th>
-                                            <td class="px-6 py-4 whitespace-normal">
-                                                Silver Lorem ipsum, dolor sit arum aperiam, numquam quidem modi quae
-                                                officia vitae corrupti.
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900  ">
-                                                País
-                                            </th>
-                                            <td class="px-6 py-4 whitespace-normal">
-                                                White
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900  ">
-                                                Ciudad
-                                            </th>
-                                            <td class="px-6 py-4 whitespace-normal">
-                                                White
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900  ">
-                                                Dirección
-                                            </th>
-                                            <td class="px-6 py-4 whitespace-normal">
-                                                White
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900  ">
-                                                Sexo
-                                            </th>
-                                            <td class="px-6 py-4 whitespace-normal">
-                                                Black
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900  ">
-                                                Fecha nacimiento
-                                            </th>
-                                            <td class="px-6 py-4 whitespace-normal">
-                                                Gray
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900  ">
-                                                Estado civil
-                                            </th>
-                                            <td class="px-6 py-4 whitespace-normal">
-                                                Red
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" class="px-6 py-4 font-medium text-gray-900  ">
-                                                Intereses
-                                            </th>
-                                            <td class="px-6 py-4 whitespace-normal">
-                                                Red
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="hidden rounded-xl" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                            <div class="relative overflow-x-auto sm:rounded-lg">
-                                <div
-                                    class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
-                                    <label for="table-search" class="sr-only">Search</label>
-                                    <div class="relative">
-                                        <div
-                                            class="absolute m-4 inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                <div class="flex justify-start">
+                                    <div class="px-4 py-2 mx-2">
+                                        <a href=""
+                                            class=" text-2xl font-medium rounded-full text-blue-400 hover:bg-gray-800 hover:text-blue-300 float-right">
+                                            <svg class="m-2 h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                                <g>
+                                                    <path
+                                                        d="M20 11H7.414l4.293-4.293c.39-.39.39-1.023 0-1.414s-1.023-.39-1.414 0l-6 6c-.39.39-.39 1.023 0 1.414l6 6c.195.195.45.293.707.293s.512-.098.707-.293c.39-.39.39-1.023 0-1.414L7.414 13H20c.553 0 1-.447 1-1s-.447-1-1-1z">
+                                                    </path>
+                                                </g>
                                             </svg>
-                                        </div>
-                                        <input type="text" id="table-search-users"
-                                            class="block m-4 p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="Search for users">
+                                        </a>
+                                    </div>
+                                    <div class="mx-2">
+                                        <h2 class="mb-0 text-xl font-bold text-white">ℜ??????ℜ??????.dev</h2>
+                                        <p class="mb-0 w-48 text-xs text-gray-400">9,416 Tweets</p>
                                     </div>
                                 </div>
-                                <table
-                                    class="w-full rounded-xl text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                    <tbody>
-                                        <tr
-                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th scope="row"
-                                                class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                                <img class="w-10 h-10 rounded-full"
-                                                    src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                                    alt="Jese image">
-                                                <div class="ps-3">
-                                                    <div class="text-base font-semibold">Neil Sims<span
-                                                            class="bg-blue-100 ml-4 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Estudiante</span>
-                                                    </div>
-                                                    <div class="font-normal text-gray-500">Joined Dic 2019•Active a week
-                                                        ago</div>
-                                                </div>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                30 seguidores
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <div class="flex items-center">
-                                                    <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                                                    Online
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <button type="button"
-                                                    class="text-blue-700 hover:text-white border w-36 border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Dejar
-                                                    de seguir</button>
-                                            </td>
-                                        </tr>
-                                        <tr
-                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
-                                            <th scope="row"
-                                                class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                <img class="w-10 h-10 rounded-full"
-                                                    src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                                    alt="Jese image">
-                                                <div class="ps-3">
-                                                    <div class="text-base font-semibold">Bonnie Green<span
-                                                            class="bg-blue-100 ml-4 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Estudiante</span>
-                                                    </div>
-                                                    <div class="font-normal text-gray-500">Joined Dic 2019•Active a week
-                                                        ago</div>
-                                                </div>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                0 seguidores
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <div class="flex items-center">
-                                                    <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                                                    Online
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <button type="button"
-                                                    class="text-blue-700 hover:text-white border w-36 border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Dejar
-                                                    de seguir</button>
-                                            </td>
-                                        </tr>
-                                        <tr
-                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-
-                                            <th scope="row"
-                                                class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                <img class="w-10 h-10 rounded-full"
-                                                    src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                                    alt="Jese image">
-                                                <div class="ps-3">
-                                                    <div class="text-base font-semibold">Jese Leos<span
-                                                            class="bg-blue-100 ml-4 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Estudiante</span>
-                                                    </div>
-                                                    <div class="font-normal text-gray-500">Joined Dic 2019•Active a week
-                                                        ago</div>
-                                                </div>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                16 seguidores
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <div class="flex items-center">
-                                                    <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                                                    Online
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <button type="button"
-                                                    class="text-blue-700 hover:text-white border w-36 border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Dejar
-                                                    de seguir</button>
-                                            </td>
-                                        </tr>
-                                        <tr
-                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-
-                                            <th scope="row"
-                                                class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                <img class="w-10 h-10 rounded-full"
-                                                    src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                                    alt="Jese image">
-                                                <div class="ps-3">
-                                                    <div class="text-base font-semibold">Thomas Lean<span
-                                                            class="bg-blue-100 ml-4 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Estudiante</span>
-                                                    </div>
-                                                    <div class="font-normal text-gray-500">Joined Dic 2019•Active a week
-                                                        ago</div>
-                                                </div>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                4 seguidores
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <div class="flex items-center">
-                                                    <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                                                    Online
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <button type="button"
-                                                    class="text-blue-700 hover:text-white border w-36 border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Dejar
-                                                    de seguir</button>
-                                            </td>
-                                        </tr>
-                                        <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-
-                                            <th scope="row"
-                                                class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                <img class="w-10 h-10 rounded-full"
-                                                    src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                                    alt="Jese image">
-                                                <div class="ps-3">
-                                                    <div class="text-base font-semibold">Leslie Livingston<span
-                                                            class="bg-blue-100 ml-4 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Estudiante</span>
-                                                    </div>
-                                                    <div class="font-normal text-gray-500">Joined Dic 2019•Active a week
-                                                        ago</div>
-                                                </div>
-                                            </th>
-                                            <td class="px-6 py-4">
-                                                1 seguidor
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <div class="flex items-center">
-                                                    <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Offline
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <button type="button"
-                                                    class="text-blue-700 hover:text-white border w-36 border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Dejar
-                                                    de seguir</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <hr class="border-gray-800">
                             </div>
 
-                        </div>
-                        <div class="hidden w-full rounded-lg" id="contacts" role="tabpanel"
-                            aria-labelledby="contacts-tab">
-                            <div class="relative overflow-x-auto">
-                                <a href="#"
-                                    class="flex flex-col mb-1 items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                    <img class="object-cover p-6 w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-                                        src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
+                            <!-- User card-->
+                            <div>
+                                <div class="w-full bg-cover bg-no-repeat bg-center"
+                                    style="height: 200px; background-image: url(https://pbs.twimg.com/profile_banners/2161323234/1585151401/600x200);">
+                                    <img class="opacity-0 w-full h-full"
+                                        src="https://pbs.twimg.com/profile_banners/2161323234/1585151401/600x200"
                                         alt="">
-                                    <div class="flex flex-col justify-between p-4 leading-normal">
-                                        <h5
-                                            class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                            Noteworthy technology acquisitions 2021</h5>
-                                        <p class="text-sm text-gray-500 dark:text-gray-400">Public • Group • Active 4
-                                            hours
-                                            ago
-                                        </p>
-                                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the
-                                            biggest
-                                            enterprise technology acquisitions of 2021 so far, in reverse chronological
-                                            order.</p>
-                                        <div class="flex flex-col justify-between p-4 leading-normal">
-                                            <button type="button"
-                                                class="text-blue-700 hover:text-white border w-48 border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Miembro</button>
+                                </div>
+                                <div class="p-4">
+                                    <div class="relative flex w-full">
+                                        <!-- Avatar -->
+                                        <div class="flex flex-1">
+                                            <div style="margin-top: -6rem;">
+                                                <div style="height:9rem; width:9rem;"
+                                                    class="md rounded-full relative avatar">
+                                                    <img style="height:9rem; width:9rem;"
+                                                        class="md rounded-full relative border-4 border-gray-900"
+                                                        src="https://pbs.twimg.com/profile_images/1254779846615420930/7I4kP65u_400x400.jpg"
+                                                        alt="">
+                                                    <div class="absolute"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Follow Button -->
+                                        <div class="flex flex-col text-right">
+                                            <button
+                                                class="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring  max-w-max border bg-transparent border-blue-500 text-blue-500  hover:border-blue-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
+                                                Edit Profile
+                                            </button>
                                         </div>
                                     </div>
-                                </a>
 
-                                <a href="#"
-                                    class="flex flex-col mb-1 items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                    <img class="object-cover p-6 w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-                                        src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                        alt="">
-                                    <div class="flex flex-col justify-between p-4 leading-normal">
-                                        <h5
-                                            class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                            Noteworthy technology acquisitions 2021</h5>
-                                        <p class="text-sm text-gray-500 dark:text-gray-400">Public • Group • Active 4
-                                            hours
-                                            ago
-                                        </p>
-                                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the
-                                            biggest
-                                            enterprise technology acquisitions of 2021 so far, in reverse chronological
-                                            order.</p>
-                                        <div class="flex flex-col justify-between p-4 leading-normal">
-                                            <button type="button"
-                                                class="text-blue-700 hover:text-white border w-48 border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Miembro</button>
+                                    <!-- Profile info -->
+                                    <div class="space-y-1 justify-center w-full mt-3 ml-3">
+                                        <!-- User basic-->
+                                        <div>
+                                            <h2 class="text-xl leading-6 font-bold text-white">ℜ??????ℜ??????.dev</h2>
+                                            <p class="text-sm leading-5 font-medium text-gray-600">@Ricardo_oRibeir</p>
+                                        </div>
+                                        <!-- Description and others -->
+                                        <div class="mt-3">
+                                            <p class="text-white leading-tight mb-2">Software Engineer / Designer /
+                                                Entrepreneur <br>Visit my website to test a working <b>Twitter
+                                                    Clone.</b> </p>
+                                            <div class="text-gray-600 flex">
+                                                <span class="flex mr-2"><svg viewBox="0 0 24 24"
+                                                        class="h-5 w-5 paint-icon">
+                                                        <g>
+                                                            <path
+                                                                d="M11.96 14.945c-.067 0-.136-.01-.203-.027-1.13-.318-2.097-.986-2.795-1.932-.832-1.125-1.176-2.508-.968-3.893s.942-2.605 2.068-3.438l3.53-2.608c2.322-1.716 5.61-1.224 7.33 1.1.83 1.127 1.175 2.51.967 3.895s-.943 2.605-2.07 3.438l-1.48 1.094c-.333.246-.804.175-1.05-.158-.246-.334-.176-.804.158-1.05l1.48-1.095c.803-.592 1.327-1.463 1.476-2.45.148-.988-.098-1.975-.69-2.778-1.225-1.656-3.572-2.01-5.23-.784l-3.53 2.608c-.802.593-1.326 1.464-1.475 2.45-.15.99.097 1.975.69 2.778.498.675 1.187 1.15 1.992 1.377.4.114.633.528.52.928-.092.33-.394.547-.722.547z">
+                                                            </path>
+                                                            <path
+                                                                d="M7.27 22.054c-1.61 0-3.197-.735-4.225-2.125-.832-1.127-1.176-2.51-.968-3.894s.943-2.605 2.07-3.438l1.478-1.094c.334-.245.805-.175 1.05.158s.177.804-.157 1.05l-1.48 1.095c-.803.593-1.326 1.464-1.475 2.45-.148.99.097 1.975.69 2.778 1.225 1.657 3.57 2.01 5.23.785l3.528-2.608c1.658-1.225 2.01-3.57.785-5.23-.498-.674-1.187-1.15-1.992-1.376-.4-.113-.633-.527-.52-.927.112-.4.528-.63.926-.522 1.13.318 2.096.986 2.794 1.932 1.717 2.324 1.224 5.612-1.1 7.33l-3.53 2.608c-.933.693-2.023 1.026-3.105 1.026z">
+                                                            </path>
+                                                        </g>
+                                                    </svg> <a href="https://ricardoribeirodev.com/personal/" target="#"
+                                                        class="leading-5 ml-1 text-blue-400">www.RicardoRibeiroDEV.com</a></span>
+                                                <span class="flex mr-2"><svg viewBox="0 0 24 24"
+                                                        class="h-5 w-5 paint-icon">
+                                                        <g>
+                                                            <path
+                                                                d="M19.708 2H4.292C3.028 2 2 3.028 2 4.292v15.416C2 20.972 3.028 22 4.292 22h15.416C20.972 22 22 20.972 22 19.708V4.292C22 3.028 20.972 2 19.708 2zm.792 17.708c0 .437-.355.792-.792.792H4.292c-.437 0-.792-.355-.792-.792V6.418c0-.437.354-.79.79-.792h15.42c.436 0 .79.355.79.79V19.71z">
+                                                            </path>
+                                                            <circle cx="7.032" cy="8.75" r="1.285"></circle>
+                                                            <circle cx="7.032" cy="13.156" r="1.285"></circle>
+                                                            <circle cx="16.968" cy="8.75" r="1.285"></circle>
+                                                            <circle cx="16.968" cy="13.156" r="1.285"></circle>
+                                                            <circle cx="12" cy="8.75" r="1.285"></circle>
+                                                            <circle cx="12" cy="13.156" r="1.285"></circle>
+                                                            <circle cx="7.032" cy="17.486" r="1.285"></circle>
+                                                            <circle cx="12" cy="17.486" r="1.285"></circle>
+                                                        </g>
+                                                    </svg> <span class="leading-5 ml-1">Joined December,
+                                                        2019</span></span>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="pt-3 flex justify-start items-start w-full divide-x divide-gray-800 divide-solid">
+                                            <div class="text-center pr-3"><span
+                                                    class="font-bold text-white">520</span><span class="text-gray-600">
+                                                    Following</span></div>
+                                            <div class="text-center px-3"><span class="font-bold text-white">23,4m
+                                                </span><span class="text-gray-600"> Followers</span></div>
                                         </div>
                                     </div>
-                                </a>
-
-                                <a href="#"
-                                    class="flex flex-col mb-1 items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                    <img class="object-cover p-6 w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-                                        src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                        alt="">
-                                    <div class="flex flex-col justify-between p-4 leading-normal">
-                                        <h5
-                                            class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                            Noteworthy technology acquisitions 2021</h5>
-                                        <p class="text-sm text-gray-500 dark:text-gray-400">Public • Group • Active 4
-                                            hours
-                                            ago
-                                        </p>
-                                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the
-                                            biggest
-                                            enterprise technology acquisitions of 2021 so far, in reverse chronological
-                                            order.</p>
-                                        <div class="flex flex-col justify-between p-4 leading-normal">
-                                            <button type="button"
-                                                class="text-blue-700 hover:text-white border w-48 border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Miembro</button>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <a href="#"
-                                    class="flex flex-col mb-1 items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                    <img class="object-cover p-6 w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-                                        src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                        alt="">
-                                    <div class="flex flex-col justify-between p-4 leading-normal">
-                                        <h5
-                                            class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                            Noteworthy technology acquisitions 2021</h5>
-                                        <p class="text-sm text-gray-500 dark:text-gray-400">Public • Group • Active 4
-                                            hours
-                                            ago
-                                        </p>
-                                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the
-                                            biggest
-                                            enterprise technology acquisitions of 2021 so far, in reverse chronological
-                                            order.</p>
-                                        <div class="flex flex-col justify-between p-4 leading-normal">
-                                            <button type="button"
-                                                class="text-blue-700 hover:text-white border w-48 border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Miembro</button>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <a href="#"
-                                    class="flex flex-col mb-1 items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                    <img class="object-cover p-6 w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-                                        src="https://www.azulschool.net/wp-content/uploads/avatars/34880/67344815cd549-bpfull.jpg"
-                                        alt="">
-                                    <div class="flex flex-col justify-between p-4 leading-normal">
-                                        <h5
-                                            class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                            Noteworthy technology acquisitions 2021</h5>
-                                        <p class="text-sm text-gray-500 dark:text-gray-400">Public • Group • Active 4
-                                            hours
-                                            ago
-                                        </p>
-                                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the
-                                            biggest
-                                            enterprise technology acquisitions of 2021 so far, in reverse chronological
-                                            order.</p>
-                                        <div class="flex flex-col justify-between p-4 leading-normal">
-                                            <button type="button"
-                                                class="text-blue-700 hover:text-white border w-48 border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Miembro</button>
-                                        </div>
-                                    </div>
-                                </a>
+                                </div>
+                                <hr class="border-gray-800">
                             </div>
-                        </div>
+
+                            <ul class="list-none">
+                                <li>
+                                    <!--second tweet-->
+                                    <article class="hover:bg-gray-800 transition duration-350 ease-in-out">
+                                        <div class="flex flex-shrink-0 p-4 pb-0">
+                                            <a href="#" class="flex-shrink-0 group block">
+                                                <div class="flex items-center">
+                                                    <div>
+                                                        <img class="inline-block h-10 w-10 rounded-full"
+                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="ml-3">
+                                                        <p class="text-base leading-6 font-medium text-white">
+                                                            Sonali Hirave
+                                                            <span
+                                                                class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                                                                @ShonaDesign . 16 April
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
+                                        <div class="pl-16">
+                                            <p class="text-base width-auto font-medium text-white flex-shrink">
+                                                Day 07 of the challenge <a href="#"
+                                                    class="text-blue-400">#100DaysOfCode</a>
+                                                I was wondering what I can do with <a href="#"
+                                                    class="text-blue-400">#tailwindcss</a>, so just started building
+                                                Twitter UI using Tailwind and so far it looks so promising. I will post
+                                                my code after completion.
+                                                [07/100]
+                                                <a href="#" class="text-blue-400"> #WomenWhoCode #CodeNewbie</a>
+                                            </p>
+
+                                            <div class="md:flex-shrink pr-6 pt-3">
+                                                <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64"
+                                                    style="height: 200px; background-image: url(https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80);">
+                                                    <img class="opacity-0 w-full h-full"
+                                                        src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80"
+                                                        alt="">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="flex items-center py-4">
+                                                <div
+                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                        <g>
+                                                            <path
+                                                                d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                    12.3 k
+                                                </div>
+                                                <div
+                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-green-400 transition duration-350 ease-in-out">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                        <g>
+                                                            <path
+                                                                d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                    14 k
+                                                </div>
+                                                <div
+                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-red-600 transition duration-350 ease-in-out">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                        <g>
+                                                            <path
+                                                                d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                    14 k
+                                                </div>
+                                                <div
+                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                        <g>
+                                                            <path
+                                                                d="M17.53 7.47l-5-5c-.293-.293-.768-.293-1.06 0l-5 5c-.294.293-.294.768 0 1.06s.767.294 1.06 0l3.72-3.72V15c0 .414.336.75.75.75s.75-.336.75-.75V4.81l3.72 3.72c.146.147.338.22.53.22s.384-.072.53-.22c.293-.293.293-.767 0-1.06z">
+                                                            </path>
+                                                            <path
+                                                                d="M19.708 21.944H4.292C3.028 21.944 2 20.916 2 19.652V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 .437.355.792.792.792h15.416c.437 0 .792-.355.792-.792V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 1.264-1.028 2.292-2.292 2.292z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <hr class="border-gray-800">
+                                    </article>
+                                </li>
+                                <li>
+                                    <!--second tweet-->
+                                    <article class="hover:bg-gray-800 transition duration-350 ease-in-out">
+                                        <div class="flex flex-shrink-0 p-4 pb-0">
+                                            <a href="#" class="flex-shrink-0 group block">
+                                                <div class="flex items-center">
+                                                    <div>
+                                                        <img class="inline-block h-10 w-10 rounded-full"
+                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="ml-3">
+                                                        <p class="text-base leading-6 font-medium text-white">
+                                                            Sonali Hirave
+                                                            <span
+                                                                class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                                                                @ShonaDesign . 16 April
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
+                                        <div class="pl-16">
+                                            <p class="text-base width-auto font-medium text-white flex-shrink">
+                                                Day 07 of the challenge <a href="#"
+                                                    class="text-blue-400">#100DaysOfCode</a>
+                                                I was wondering what I can do with <a href="#"
+                                                    class="text-blue-400">#tailwindcss</a>, so just started building
+                                                Twitter UI using Tailwind and so far it looks so promising. I will post
+                                                my code after completion.
+                                                [07/100]
+                                                <a href="#" class="text-blue-400"> #WomenWhoCode #CodeNewbie</a>
+                                            </p>
+
+                                            <div class="md:flex-shrink pr-6 pt-3">
+                                                <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64"
+                                                    style="height: 200px; background-image: url(https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80);">
+                                                    <img class="opacity-0 w-full h-full"
+                                                        src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80"
+                                                        alt="">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="flex items-center py-4">
+                                                <div
+                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                        <g>
+                                                            <path
+                                                                d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                    12.3 k
+                                                </div>
+                                                <div
+                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-green-400 transition duration-350 ease-in-out">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                        <g>
+                                                            <path
+                                                                d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                    14 k
+                                                </div>
+                                                <div
+                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-red-600 transition duration-350 ease-in-out">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                        <g>
+                                                            <path
+                                                                d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                    14 k
+                                                </div>
+                                                <div
+                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                        <g>
+                                                            <path
+                                                                d="M17.53 7.47l-5-5c-.293-.293-.768-.293-1.06 0l-5 5c-.294.293-.294.768 0 1.06s.767.294 1.06 0l3.72-3.72V15c0 .414.336.75.75.75s.75-.336.75-.75V4.81l3.72 3.72c.146.147.338.22.53.22s.384-.072.53-.22c.293-.293.293-.767 0-1.06z">
+                                                            </path>
+                                                            <path
+                                                                d="M19.708 21.944H4.292C3.028 21.944 2 20.916 2 19.652V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 .437.355.792.792.792h15.416c.437 0 .792-.355.792-.792V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 1.264-1.028 2.292-2.292 2.292z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <hr class="border-gray-800">
+                                    </article>
+                                </li>
+                                <li>
+                                    <!--second tweet-->
+                                    <article class="hover:bg-gray-800 transition duration-350 ease-in-out">
+                                        <div class="flex flex-shrink-0 p-4 pb-0">
+                                            <a href="#" class="flex-shrink-0 group block">
+                                                <div class="flex items-center">
+                                                    <div>
+                                                        <img class="inline-block h-10 w-10 rounded-full"
+                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="ml-3">
+                                                        <p class="text-base leading-6 font-medium text-white">
+                                                            Sonali Hirave
+                                                            <span
+                                                                class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                                                                @ShonaDesign . 16 April
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
+                                        <div class="pl-16">
+                                            <p class="text-base width-auto font-medium text-white flex-shrink">
+                                                Day 07 of the challenge <a href="#"
+                                                    class="text-blue-400">#100DaysOfCode</a>
+                                                I was wondering what I can do with <a href="#"
+                                                    class="text-blue-400">#tailwindcss</a>, so just started building
+                                                Twitter UI using Tailwind and so far it looks so promising. I will post
+                                                my code after completion.
+                                                [07/100]
+                                                <a href="#" class="text-blue-400"> #WomenWhoCode #CodeNewbie</a>
+                                            </p>
+
+                                            <div class="md:flex-shrink pr-6 pt-3">
+                                                <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64"
+                                                    style="height: 200px; background-image: url(https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80);">
+                                                    <img class="opacity-0 w-full h-full"
+                                                        src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80"
+                                                        alt="">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="flex items-center py-4">
+                                                <div
+                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                        <g>
+                                                            <path
+                                                                d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                    12.3 k
+                                                </div>
+                                                <div
+                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-green-400 transition duration-350 ease-in-out">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                        <g>
+                                                            <path
+                                                                d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                    14 k
+                                                </div>
+                                                <div
+                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-red-600 transition duration-350 ease-in-out">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                        <g>
+                                                            <path
+                                                                d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                    14 k
+                                                </div>
+                                                <div
+                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                        <g>
+                                                            <path
+                                                                d="M17.53 7.47l-5-5c-.293-.293-.768-.293-1.06 0l-5 5c-.294.293-.294.768 0 1.06s.767.294 1.06 0l3.72-3.72V15c0 .414.336.75.75.75s.75-.336.75-.75V4.81l3.72 3.72c.146.147.338.22.53.22s.384-.072.53-.22c.293-.293.293-.767 0-1.06z">
+                                                            </path>
+                                                            <path
+                                                                d="M19.708 21.944H4.292C3.028 21.944 2 20.916 2 19.652V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 .437.355.792.792.792h15.416c.437 0 .792-.355.792-.792V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 1.264-1.028 2.292-2.292 2.292z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <hr class="border-gray-800">
+                                    </article>
+                                </li>
+                                <li>
+                                    <!--second tweet-->
+                                    <article class="hover:bg-gray-800 transition duration-350 ease-in-out">
+                                        <div class="flex flex-shrink-0 p-4 pb-0">
+                                            <a href="#" class="flex-shrink-0 group block">
+                                                <div class="flex items-center">
+                                                    <div>
+                                                        <img class="inline-block h-10 w-10 rounded-full"
+                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="ml-3">
+                                                        <p class="text-base leading-6 font-medium text-white">
+                                                            Sonali Hirave
+                                                            <span
+                                                                class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                                                                @ShonaDesign . 16 April
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
+                                        <div class="pl-16">
+                                            <p class="text-base width-auto font-medium text-white flex-shrink">
+                                                Day 07 of the challenge <a href="#"
+                                                    class="text-blue-400">#100DaysOfCode</a>
+                                                I was wondering what I can do with <a href="#"
+                                                    class="text-blue-400">#tailwindcss</a>, so just started building
+                                                Twitter UI using Tailwind and so far it looks so promising. I will post
+                                                my code after completion.
+                                                [07/100]
+                                                <a href="#" class="text-blue-400"> #WomenWhoCode #CodeNewbie</a>
+                                            </p>
+
+                                            <div class="md:flex-shrink pr-6 pt-3">
+                                                <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64"
+                                                    style="height: 200px; background-image: url(https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80);">
+                                                    <img class="opacity-0 w-full h-full"
+                                                        src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80"
+                                                        alt="">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="flex items-center py-4">
+                                                <div
+                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                        <g>
+                                                            <path
+                                                                d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                    12.3 k
+                                                </div>
+                                                <div
+                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-green-400 transition duration-350 ease-in-out">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                        <g>
+                                                            <path
+                                                                d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                    14 k
+                                                </div>
+                                                <div
+                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-red-600 transition duration-350 ease-in-out">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                        <g>
+                                                            <path
+                                                                d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                    14 k
+                                                </div>
+                                                <div
+                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
+                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                        <g>
+                                                            <path
+                                                                d="M17.53 7.47l-5-5c-.293-.293-.768-.293-1.06 0l-5 5c-.294.293-.294.768 0 1.06s.767.294 1.06 0l3.72-3.72V15c0 .414.336.75.75.75s.75-.336.75-.75V4.81l3.72 3.72c.146.147.338.22.53.22s.384-.072.53-.22c.293-.293.293-.767 0-1.06z">
+                                                            </path>
+                                                            <path
+                                                                d="M19.708 21.944H4.292C3.028 21.944 2 20.916 2 19.652V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 .437.355.792.792.792h15.416c.437 0 .792-.355.792-.792V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 1.264-1.028 2.292-2.292 2.292z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <hr class="border-gray-800">
+                                    </article>
+                                </li>
+                            </ul>
+                        </section>
+
+
+                        <aside class="w-2/5 h-12 position-relative">
+                            <!--Aside menu (right side)-->
+                            <div style="max-width:350px;">
+                                <div class="overflow-y-auto fixed  h-screen">
+
+
+
+
+                                    <div class="relative text-gray-300 w-80 p-5">
+                                        <button type="submit" class="absolute ml-4 mt-3 mr-4">
+                                            <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
+                                                x="0px" y="0px" viewBox="0 0 56.966 56.966"
+                                                style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+                                                width="512px" height="512px">
+                                                <path
+                                                    d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z">
+                                                </path>
+                                            </svg>
+                                        </button>
+
+                                        <input type="search" name="search" placeholder="Search Twitter"
+                                            class=" bg-dim-700 h-10 px-10 pr-5 w-full text-sm focus:outline-none bg-purple-white shadow rounded border-0">
+                                    </div>
+                                    <!--trending tweet section-->
+                                    <div class="max-w-sm rounded-lg bg-dim-700 overflow-hidden shadow-lg m-4">
+                                        <div class="flex mb-1">
+                                            <!-- Image-->
+                                            <a href="https://www.instagram.com/ricardoribeiro.rr/" target="#"
+                                                class="flex-col w-full mr-1">
+                                                <div class="w-full bg-cover bg-no-repeat bg-center"
+                                                    style="height:100px; background-image: url(https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/s640x640/116865832_615803592697921_5045643941059143720_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=101&amp;_nc_ohc=EQFsJZNRIPMAX-pb8EZ&amp;tp=1&amp;oh=1ffba368dc5827c172420060b811d1c4&amp;oe=60433210);">
+                                                    <img class="opacity-0"
+                                                        src="https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/s640x640/116865832_615803592697921_5045643941059143720_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=101&amp;_nc_ohc=EQFsJZNRIPMAX-pb8EZ&amp;tp=1&amp;oh=1ffba368dc5827c172420060b811d1c4&amp;oe=60433210"
+                                                        alt="">
+                                                </div>
+                                            </a>
+
+                                            <a href="https://www.instagram.com/ricardoribeiro.rr/" target="#"
+                                                class="flex-col w-full mr-1">
+                                                <div class="w-full bg-cover bg-no-repeat bg-center"
+                                                    style="height:100px; background-image: url(https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/e35/33476414_2111389325772141_4942435591556956160_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=109&amp;_nc_ohc=m4fof_6edMQAX8y6Mma&amp;tp=1&amp;oh=66d43f3c9ef1e6d35aa27b5ea79fc566&amp;oe=6045E945);">
+                                                    <img class="opacity-0"
+                                                        src="https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/e35/33476414_2111389325772141_4942435591556956160_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=109&amp;_nc_ohc=m4fof_6edMQAX8y6Mma&amp;tp=1&amp;oh=66d43f3c9ef1e6d35aa27b5ea79fc566&amp;oe=6045E945"
+                                                        alt="">
+                                                </div>
+                                            </a>
+
+                                            <a href="https://www.instagram.com/ricardoribeiro.rr/" target="#"
+                                                class="flex-col w-full">
+                                                <div class="w-full bg-cover bg-no-repeat bg-center"
+                                                    style="height:100px; background-image: url(https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/fr/e15/s1080x1080/71304173_398561657763867_3930777215019056798_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=103&amp;_nc_ohc=V2sPZa9JmQAAX_Lmo3e&amp;tp=1&amp;oh=ecbe6e24eb0d74975e725fceaaf09f5b&amp;oe=60460257);">
+                                                    <img class="opacity-0"
+                                                        src="https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/fr/e15/s1080x1080/71304173_398561657763867_3930777215019056798_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=103&amp;_nc_ohc=V2sPZa9JmQAAX_Lmo3e&amp;tp=1&amp;oh=ecbe6e24eb0d74975e725fceaaf09f5b&amp;oe=60460257"
+                                                        alt="">
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="flex">
+                                            <!-- Image-->
+                                            <a href="https://www.instagram.com/ricardoribeiro.rr/" target="#"
+                                                class="flex-col w-full mr-1">
+                                                <div class="w-full bg-cover bg-no-repeat bg-center"
+                                                    style="height:100px; background-image: url(https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/e35/28765942_569404996768567_810640940719931392_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=107&amp;_nc_ohc=Xf0LrzDMbp8AX8S55zD&amp;tp=1&amp;oh=0cf858806b52e56cc9093211b2656831&amp;oe=6045F090);">
+                                                    <img class="opacity-0"
+                                                        src="https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/e35/28765942_569404996768567_810640940719931392_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=107&amp;_nc_ohc=Xf0LrzDMbp8AX8S55zD&amp;tp=1&amp;oh=0cf858806b52e56cc9093211b2656831&amp;oe=6045F090"
+                                                        alt="">
+                                                </div>
+                                            </a>
+
+                                            <a href="https://www.instagram.com/ricardoribeiro.rr/" target="#"
+                                                class="flex-col w-full mr-1">
+                                                <div class="w-full bg-cover bg-no-repeat bg-center"
+                                                    style="height:100px; background-image: url(https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/e35/27877940_216827205533781_6550488685962330112_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=109&amp;_nc_ohc=ihm93wr5mUUAX_w6e1G&amp;tp=1&amp;oh=e492418bf694b130464f681f9fedd180&amp;oe=60442B6C);">
+                                                    <img class="opacity-0"
+                                                        src="https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/e35/27877940_216827205533781_6550488685962330112_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=109&amp;_nc_ohc=ihm93wr5mUUAX_w6e1G&amp;tp=1&amp;oh=e492418bf694b130464f681f9fedd180&amp;oe=60442B6C"
+                                                        alt="">
+                                                </div>
+                                            </a>
+
+                                            <a href="https://www.instagram.com/ricardoribeiro.rr/" target="#"
+                                                class="flex-col w-full">
+                                                <div class="w-full bg-cover bg-no-repeat bg-center"
+                                                    style="height:100px; background-image: url(https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/e35/22277804_1824335967579893_4558955485163683840_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=105&amp;_nc_ohc=CknMgBUYNhcAX-Jxi0P&amp;tp=1&amp;oh=631583468373481077e1834df4031435&amp;oe=6045BD08);">
+                                                    <img class="opacity-0"
+                                                        src="https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/e35/22277804_1824335967579893_4558955485163683840_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=105&amp;_nc_ohc=CknMgBUYNhcAX-Jxi0P&amp;tp=1&amp;oh=631583468373481077e1834df4031435&amp;oe=6045BD08"
+                                                        alt="">
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!--trending tweet section-->
+                                    <div class="max-w-sm rounded-lg bg-dim-700 overflow-hidden shadow-lg m-4">
+                                        <div class="flex">
+                                            <div class="flex-1 m-2">
+                                                <h2 class="px-4 py-2 text-xl w-48 font-semibold text-white">Germany
+                                                    trends</h2>
+                                            </div>
+                                            <div class="flex-1 px-4 py-2 m-2">
+                                                <a href=""
+                                                    class=" text-2xl rounded-full hover:bg-gray-800 hover:text-blue-300 float-right">
+                                                    <svg class="m-2 h-6 w-6" fill="none" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                                                        </path>
+                                                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+
+
+                                        <hr class="border-gray-800">
+
+                                        <!--first trending tweet-->
+                                        <div class="flex">
+                                            <div class="flex-1">
+                                                <p class="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">1 . Trending</p>
+                                                <h2 class="px-4 ml-2 w-48 font-bold text-white">#Microsoft363</h2>
+                                                <p class="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">5,466 Tweets</p>
+
+                                            </div>
+                                            <div class="flex-1 px-4 py-2 m-2">
+                                                <a href=""
+                                                    class=" text-2xl rounded-full text-gray-400 hover:bg-gray-800 hover:text-blue-300 float-right">
+                                                    <svg class="m-2 h-5 w-5" fill="none" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path d="M19 9l-7 7-7-7"></path>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <hr class="border-gray-800">
+
+                                        <!--second trending tweet-->
+
+                                        <div class="flex">
+                                            <div class="flex-1">
+                                                <p class="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">2 . Politics .
+                                                    Trending</p>
+                                                <h2 class="px-4 ml-2 w-48 font-bold text-white">#HI-Fashion</h2>
+                                                <p class="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">8,464 Tweets</p>
+
+                                            </div>
+                                            <div class="flex-1 px-4 py-2 m-2">
+                                                <a href=""
+                                                    class=" text-2xl rounded-full text-gray-400 hover:bg-gray-800 hover:text-blue-300 float-right">
+                                                    <svg class="m-2 h-5 w-5" fill="none" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path d="M19 9l-7 7-7-7"></path>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <hr class="border-gray-800">
+
+                                        <!--third trending tweet-->
+
+                                        <div class="flex">
+                                            <div class="flex-1">
+                                                <p class="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">3 . Rock . Trending
+                                                </p>
+                                                <h2 class="px-4 ml-2 w-48 font-bold text-white">#Ferrari</h2>
+                                                <p class="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">5,586 Tweets</p>
+
+                                            </div>
+                                            <div class="flex-1 px-4 py-2 m-2">
+                                                <a href=""
+                                                    class=" text-2xl rounded-full text-gray-400 hover:bg-gray-800 hover:text-blue-300 float-right">
+                                                    <svg class="m-2 h-5 w-5" fill="none" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path d="M19 9l-7 7-7-7"></path>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <hr class="border-gray-800">
+
+                                        <!--forth trending tweet-->
+
+                                        <div class="flex">
+                                            <div class="flex-1">
+                                                <p class="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">4 . Auto Racing .
+                                                    Trending</p>
+                                                <h2 class="px-4 ml-2 w-48 font-bold text-white">#vettel</h2>
+                                                <p class="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">9,416 Tweets</p>
+
+                                            </div>
+                                            <div class="flex-1 px-4 py-2 m-2">
+                                                <a href=""
+                                                    class=" text-2xl rounded-full text-gray-400 hover:bg-gray-800 hover:text-blue-300 float-right">
+                                                    <svg class="m-2 h-5 w-5" fill="none" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path d="M19 9l-7 7-7-7"></path>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <hr class="border-gray-800">
+
+                                        <!--show more-->
+
+                                        <div class="flex">
+                                            <div class="flex-1 p-4">
+                                                <h2 class="px-4 ml-2 w-48 font-bold text-blue-400">Show more</h2>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!--people suggetion to follow section-->
+                                    <div class="max-w-sm rounded-lg  bg-dim-700 overflow-hidden shadow-lg m-4">
+                                        <div class="flex">
+                                            <div class="flex-1 m-2">
+                                                <h2 class="px-4 py-2 text-xl w-48 font-semibold text-white">Who to
+                                                    follow</h2>
+                                            </div>
+                                        </div>
+
+
+                                        <hr class="border-gray-800">
+
+                                        <!--first person who to follow-->
+
+                                        <div class="flex flex-shrink-0">
+                                            <div class="flex-1 ">
+                                                <div class="flex items-center w-48">
+                                                    <div>
+                                                        <img class="inline-block h-10 w-auto rounded-full ml-4 mt-2"
+                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="ml-3 mt-3">
+                                                        <p class="text-base leading-6 font-medium text-white">
+                                                            Sonali Hirave
+                                                        </p>
+                                                        <p
+                                                            class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                                                            @ShonaDesign
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="flex-1 px-4 py-2 m-2">
+                                                <a href="" class=" float-right">
+                                                    <button
+                                                        class="bg-transparent hover:bg-gray-800 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full">
+                                                        Follow
+                                                    </button>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                        <hr class="border-gray-800">
+
+                                        <!--second person who to follow-->
+
+                                        <div class="flex flex-shrink-0">
+                                            <div class="flex-1 ">
+                                                <div class="flex items-center w-48">
+                                                    <div>
+                                                        <img class="inline-block h-10 w-auto rounded-full ml-4 mt-2"
+                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+                                                            alt="">
+                                                    </div>
+                                                    <div class="ml-3 mt-3">
+                                                        <p class="text-base leading-6 font-medium text-white">
+                                                            Sonali Hirave
+                                                        </p>
+                                                        <p
+                                                            class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                                                            @ShonaDesign
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="flex-1 px-4 py-2 m-2">
+                                                <a href="" class=" float-right">
+                                                    <button
+                                                        class="bg-transparent hover:bg-gray-800 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full">
+                                                        Follow
+                                                    </button>
+                                                </a>
+
+                                            </div>
+                                        </div>
+
+                                        <hr class="border-gray-800">
+
+
+
+                                        <!--show more-->
+
+                                        <div class="flex">
+                                            <div class="flex-1 p-4">
+                                                <h2 class="px-4 ml-2 w-48 font-bold text-blue-400">Show more</h2>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                    <div class="flow-root m-6">
+                                        <div class="flex-1">
+                                            <a href="#">
+                                                <p class="text-sm leading-6 font-medium text-gray-500">Terms Privacy
+                                                    Policy Cookies Imprint Ads info
+                                                </p>
+                                            </a>
+                                        </div>
+                                        <div class="flex-2">
+                                            <p class="text-sm leading-6 font-medium text-gray-600"> © 2020 Twitter, Inc.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
                     </div>
-                </aside>
+                </main>
+
             </div>
+
         </div>
-    </div>
+
+
+
+
+
+
+        <style>
+            .overflow-y-auto::-webkit-scrollbar,
+            .overflow-y-scroll::-webkit-scrollbar,
+            .overflow-x-auto::-webkit-scrollbar,
+            .overflow-x::-webkit-scrollbar,
+            .overflow-x-scroll::-webkit-scrollbar,
+            .overflow-y::-webkit-scrollbar,
+            body::-webkit-scrollbar {
+                display: none;
+            }
+
+            /* Hide scrollbar for IE, Edge and Firefox */
+            .overflow-y-auto,
+            .overflow-y-scroll,
+            .overflow-x-auto,
+            .overflow-x,
+            .overflow-x-scroll,
+            .overflow-y,
+            body {
+                -ms-overflow-style: none;
+                /* IE and Edge */
+                scrollbar-width: none;
+                /* Firefox */
+            }
+
+            .bg-dim-700 {
+                --bg-opacity: 1;
+                background-color: #192734;
+            }
+
+            html,
+            body {
+                margin: 0;
+                background-color: #15202b;
+            }
+
+            svg.paint-icon {
+                fill: currentcolor;
+            }
+        </style>
+    </x-layouts.reportes>
+
 </div>
