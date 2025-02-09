@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('diploma_eventos'); // Eliminar la tabla si ya existe
         Schema::create('diploma_eventos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('inscripcionId')->unique();

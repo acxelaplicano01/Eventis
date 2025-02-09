@@ -5,32 +5,33 @@
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">
 <style>
     .perspective {
-      perspective: 1000px;
+        perspective: 1000px;
     }
 
     .image-wrapper {
-      transform-style: preserve-3d;
-      transition: transform 0.2s ease-out;
+        transform-style: preserve-3d;
+        transition: transform 0.2s ease-out;
     }
-  </style>
+</style>
 @endsection
 
 <body class="dark:bg-gray-900">
     @section('app-content')
     <x-nav />
     <br>
-    {{-- Alerta de error de Flowbite --}}
-    @if ($errors->any())
-        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg z-50 bg-red-50 dark:bg-red-800 dark:text-red-300" role="alert">
-            <span class="font-medium">Error:</span> Las credenciales ingresadas son incorrectas. Por favor, inténtalo de
-            nuevo.
-        </div>
-    @endif
-
     <section class="bg-white w-full z-0 mt-8 lg:fixed">
         <div class="grid grid-cols-1 lg:grid-cols-2">
             <div class="flex items-center justify-center px-4 py-10 bg-white sm:px-6 lg:px-8 sm:py-16 lg:py-24">
                 <div class="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto">
+                    {{-- Alerta de error de Flowbite --}}
+                    @if ($errors->any())
+                        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg z-50 bg-red-50 dark:bg-red-800 dark:text-red-300"
+                            role="alert">
+                            <span class="font-medium">Error:</span> Las credenciales ingresadas son incorrectas. Por favor,
+                            inténtalo de
+                            nuevo.
+                        </div>
+                    @endif
                     <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl">Empieza a aprender</h2>
                     <p class="mt-2 text-base text-gray-600">No tienes una cuenta? <a href="{{ route('register') }}"
                             title=""
@@ -73,14 +74,16 @@
                 </div>
             </div>
 
-            <div 
+            <div
                 class="flex items-center justify-center px-4 py-10 sm:py-16 lg:py-24 bg-gradient-to-b from-yellow-50 to-yellow-100 sm:px-6 lg:px-8">
                 <div onmousemove="handleMouseMove(event)" onmouseleave="resetTransform(event)" class="perspective">
                     <img class="w-full mx-auto image-wrapper" src="{{ asset('Logo/logolo.png') }}" alt="" />
 
                     <div class="w-full max-w-md mx-auto xl:max-w-xl">
                         <h3 class="text-2xl font-bold text-center text-black">Certificate en cada evento</h3>
-                        <p class="leading-relaxed text-center text-gray-500 mt-2.5">Con Eventis, los asistentes pueden registrarse fácilmente, acceder a contenido exclusivo y recibir certificados personalizados al finalizar su participación.</p>
+                        <p class="leading-relaxed text-center text-gray-500 mt-2.5">Con Eventis, los asistentes pueden
+                            registrarse fácilmente, acceder a contenido exclusivo y recibir certificados personalizados
+                            al finalizar su participación.</p>
 
                         <div class="flex items-center justify-center mt-10 space-x-3">
                             <div class="bg-yellow-500 rounded-full w-20 h-1.5"></div>

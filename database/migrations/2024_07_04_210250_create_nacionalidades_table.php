@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('nacionalidads'); // Eliminar la tabla si ya existe
         Schema::create('nacionalidads', function (Blueprint $table) {
             $table->id();
             $table->string('nombreNacionalidad')->unique();

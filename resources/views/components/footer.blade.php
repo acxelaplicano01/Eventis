@@ -2,11 +2,13 @@
     <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-y-12 gap-x-8 xl:gap-x-12">
             <div class="col-span-2 md:col-span-4 xl:pr-8">
-                <img class="w-auto h-9" src="https://cdn.rareblocks.xyz/collection/celebration/images/logo.svg"
-                    alt="" />
+            <a href="/dashboard" class="flex ms-2 md:me-24">
+                  <img src="{{ asset('Logo/Eventis_Logo.png') }}" alt="Logo" height="50px" width="50px" />
+                  <span
+                     class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">EVENT-IS</span>
+               </a>
 
-                <p class="text-base leading-relaxed text-gray-600 dark:text-gray-300 mt-7">Amet minim mollit non
-                    deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.
+                <p class="text-base leading-relaxed text-gray-600 dark:text-gray-300 mt-7">Eventis es una plataforma diseñada para simplificar la gestión de eventos y conferencias. Permite a los organizadores crear y administrar eventos, configurar conferencias, y gestionar inscripciones de manera eficiente.
                 </p>
 
                 <a href="#" title=""

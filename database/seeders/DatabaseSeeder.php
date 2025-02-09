@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
            RolSeeder::class,
            TipoPerfilSeeder::class,
            LocalidadSeeder::class,
-           PersonaSeeder::class,         
+           PersonaSeeder::class,   
+          // PublicacionSeeder::class,      
        ]);
     }
 }

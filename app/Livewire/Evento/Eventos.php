@@ -6,7 +6,6 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\Evento;
-use App\Models\Cuenta;
 use App\Models\Modalidad;
 use App\Models\Localidad;
 use App\Models\Diploma;
@@ -15,7 +14,7 @@ class Eventos extends Component
 {
     use WithPagination, WithFileUploads;
 
-    public $logo, $nombreevento, $estado,$precio, $descripcion, $organizador, $fechainicio, $fechafinal, $horainicio, $horafin, $idmodalidad, $idlocalidad, $IdDiploma, $IdCuenta, $evento_id, $search;
+    public $logo, $nombreevento, $estado,$precio, $descripcion, $organizador, $fechainicio, $fechafinal, $horainicio, $horafin, $idmodalidad, $idlocalidad, $IdDiploma, $evento_id, $search;
     public $isOpen = 0;
     public $confirmingDelete = false;
     public $eventoIdAEliminar;
@@ -23,19 +22,17 @@ class Eventos extends Component
     public $showDetails = false;
     public $selectedEvento;
     public $modalidades, $localidades, $diplomas;
-    public $cuentas, $createNewCuenta = false, $cuentaNombre, $cuentaNumeroDeCuenta, $cuentaBanco, $cuentaTipoCuenta, $cuentaSaldoActual;
-
+   
     public function mount()
     {
         $this->modalidades = Modalidad::all();
         $this->localidades = Localidad::all();
         $this->diplomas = Diploma::all();
-        $this->cuentas = Cuenta::all();
     }
 
     public function render()
     {
-        $eventos = Evento::with('modalidad', 'localidad', 'diploma', 'cuenta')
+        $eventos = Evento::with('modalidad', 'localidad', 'diploma')
             ->where('nombreevento', 'like', '%' . $this->search . '%')
             ->orderBy('id', 'DESC')
             ->paginate(8);
@@ -72,15 +69,6 @@ class Eventos extends Component
         $this->idmodalidad = '';
         $this->idlocalidad = '';
         $this->IdDiploma = '';
-        $this->IdCuenta = '';
-        $this->estado = '';
-        $this->precio = '';
-        $this->createNewCuenta = false;
-        $this->cuentaNombre = '';
-        $this->cuentaNumeroDeCuenta = '';
-        $this->cuentaBanco = '';
-        $this->cuentaTipoCuenta = '';
-        $this->cuentaSaldoActual = 0;
     }
 
     public function store()
@@ -97,7 +85,6 @@ class Eventos extends Component
             'idmodalidad' => 'required',
             'idlocalidad' => 'required',
             'IdDiploma' => 'required',
-            'IdCuenta' => 'nullable|exists:cuentas,id',
             'estado' => 'required|string|max:255',
             'precio' => 'nullable',
         ]);
@@ -108,28 +95,6 @@ class Eventos extends Component
         } elseif ($this->evento_id) {
             $evento = Evento::findOrFail($this->evento_id);
             $this->logo = $evento->logo; 
-        }
-
-        // Si se está creando una nueva cuenta
-        if ($this->createNewCuenta) {
-            $this->validate([
-                'cuentaNombre' => 'required|string',
-                'cuentaNumeroDeCuenta' => 'required|string|unique:cuentas,numeroDeCuenta',
-                'cuentaBanco' => 'required|string',
-                'cuentaTipoCuenta' => 'required|string',
-                'cuentaSaldoActual' => 'required|numeric',
-            ]);
-
-            $cuenta = Cuenta::create([
-                'numeroDeCuenta' => $this->cuentaNumeroDeCuenta,
-                'CuentaHabiente' => $this->cuentaNombre,
-                'Banco' => $this->cuentaBanco,
-                'TipoCuenta' => $this->cuentaTipoCuenta,
-                'saldoActual' => $this->cuentaSaldoActual,
-                'created_by' => auth()->id(),
-            ]);
-
-            $this->IdCuenta = $cuenta->id;
         }
 
         Evento::updateOrCreate(['id' => $this->evento_id], [
@@ -144,7 +109,6 @@ class Eventos extends Component
             'idmodalidad' => $this->idmodalidad,
             'idlocalidad' => $this->idlocalidad,
             'IdDiploma' => $this->IdDiploma,
-            'IdCuenta' => $this->IdCuenta ?: null,
             'estado' => $this->estado,
             'precio' => $this->precio ?: null,
         ]);
@@ -171,7 +135,6 @@ class Eventos extends Component
     $this->idmodalidad = $evento->idmodalidad;
     $this->idlocalidad = $evento->idlocalidad;
     $this->IdDiploma = $evento->IdDiploma;
-    $this->IdCuenta = $evento->IdCuenta;
     $this->logo = null; // Mantener el logo existente sin sobrescribirlo
     $this->estado = $evento->estado;
     $this->precio = $evento->precio;
@@ -216,18 +179,5 @@ class Eventos extends Component
     public function closeDetails()
     {
         $this->showDetails = false;
-    }
-
-    public function toggleCreateNewCuenta()
-    {
-        $this->createNewCuenta = !$this->createNewCuenta;
-        if (!$this->createNewCuenta) {
-            // Si se desactiva la creación de una nueva cuenta, restablecer los campos
-            $this->cuentaNombre = '';
-            $this->cuentaNumeroDeCuenta = '';
-            $this->cuentaBanco = '';
-            $this->cuentaTipoCuenta = '';
-            $this->cuentaSaldoActual = 0;
-        }
     }
 }

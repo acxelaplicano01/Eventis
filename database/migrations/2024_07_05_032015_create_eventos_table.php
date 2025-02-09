@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('eventos'); // Eliminar la tabla si ya existe
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
             $table->string('logo')->nullable();
@@ -26,7 +27,6 @@ return new class extends Migration
             $table->unsignedBigInteger('idmodalidad');
             $table->unsignedBigInteger('idlocalidad');
             $table->unsignedBigInteger('IdDiploma');
-            $table->unsignedBigInteger('IdCuenta')->nullable();
             $table->integer("created_by");
             $table->integer("deleted_by")->nullable();
             $table->integer("updated_by")->nullable();
@@ -35,7 +35,6 @@ return new class extends Migration
             $table->foreign('idmodalidad')->references('id')->on('modalidads')->onDelete('restrict');
             $table->foreign('idlocalidad')->references('id')->on('localidads')->onDelete('restrict');
             $table->foreign('IdDiploma')->references('id')->on('diplomas')->onDelete('restrict');
-            $table->foreign('IdCuenta')->references('id')->on('cuentas')->onDelete('restrict');
         });
 
     }

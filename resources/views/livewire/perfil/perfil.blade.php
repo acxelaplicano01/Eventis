@@ -1,15 +1,16 @@
 <div>
     <x-layouts.reportes>
-        <div class="p-relative h-screen" style="background-color: #15202b;">
+        <div class="p-relative h-auto dark:bg-gray-900">
             <div class="flex justify-center">
                 <main role="main">
                     <div class="flex" style="width: 990px;">
-                        <section class="w-3/5 border border-y-0 border-gray-800" style="max-width:600px;">
+                        <section class="dark:bg-gray-800 w-3/5 border border-y-0 dark:border-gray-700"
+                            style="max-width:600px;">
                             <div>
                                 <div class="flex justify-start">
                                     <div class="px-4 py-2 mx-2">
-                                        <a href=""
-                                            class=" text-2xl font-medium rounded-full text-blue-400 hover:bg-gray-800 hover:text-blue-300 float-right">
+                                        <a href="{{ route('eventoVista') }}"
+                                            class="text-2xl font-medium rounded-full text-yellow-400 hover:bg-yellow-500 hover:text-yellow-300 float-right">
                                             <svg class="m-2 h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                                                 <g>
                                                     <path
@@ -19,21 +20,25 @@
                                             </svg>
                                         </a>
                                     </div>
-                                    <div class="mx-2">
-                                        <h2 class="mb-0 text-xl font-bold text-white">ℜ??????ℜ??????.dev</h2>
-                                        <p class="mb-0 w-48 text-xs text-gray-400">9,416 Tweets</p>
+                                    <div class="m-2 ">
+                                        <h2 class="mb-0 text-xl font-bold dark:text-white">
+                                            {{$userperfil->persona->nombre}} {{$userperfil->persona->apellido}}
+                                        </h2>
+                                        <p class="mb-0 w-48 text-xs dark:text-gray-400">14 Eventos</p>
                                     </div>
                                 </div>
 
-                                <hr class="border-gray-800">
+                                <hr class="dark:border-gray-700">
                             </div>
-
+                            @if($isOpen)
+                                @include('livewire.perfil.publicacion') 
+                            @endif
                             <!-- User card-->
                             <div>
                                 <div class="w-full bg-cover bg-no-repeat bg-center"
-                                    style="height: 200px; background-image: url(https://pbs.twimg.com/profile_banners/2161323234/1585151401/600x200);">
+                                    style="height: 200px; background-image: url(https://azulschool.net/wp-content/uploads/buddypress/members/34880/cover-image/673448942ac49-bp-cover-image.jpg;">
                                     <img class="opacity-0 w-full h-full"
-                                        src="https://pbs.twimg.com/profile_banners/2161323234/1585151401/600x200"
+                                        src="https://azulschool.net/wp-content/uploads/buddypress/members/34880/cover-image/673448942ac49-bp-cover-image.jpg"
                                         alt="">
                                 </div>
                                 <div class="p-4">
@@ -44,8 +49,8 @@
                                                 <div style="height:9rem; width:9rem;"
                                                     class="md rounded-full relative avatar">
                                                     <img style="height:9rem; width:9rem;"
-                                                        class="md rounded-full relative border-4 border-gray-900"
-                                                        src="https://pbs.twimg.com/profile_images/1254779846615420930/7I4kP65u_400x400.jpg"
+                                                        class="md rounded-full relative border-4 border-yellow-500"
+                                                        src="https://th.bing.com/th/id/OIP.Ei419o4f5KF2R_fSaMuLYAAAAA?pid=ImgDet&w=179&h=179&c=7&dpr=1,3"
                                                         alt="">
                                                     <div class="absolute"></div>
                                                 </div>
@@ -53,9 +58,9 @@
                                         </div>
                                         <!-- Follow Button -->
                                         <div class="flex flex-col text-right">
-                                            <button
-                                                class="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring  max-w-max border bg-transparent border-blue-500 text-blue-500  hover:border-blue-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
-                                                Edit Profile
+                                            <button wire:click="create()"
+                                                class="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring  max-w-max border bg-transparent border-yellow-500 text-yellow-500 hover:border-yellow-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
+                                                Editar Perfil
                                             </button>
                                         </div>
                                     </div>
@@ -64,15 +69,19 @@
                                     <div class="space-y-1 justify-center w-full mt-3 ml-3">
                                         <!-- User basic-->
                                         <div>
-                                            <h2 class="text-xl leading-6 font-bold text-white">ℜ??????ℜ??????.dev</h2>
-                                            <p class="text-sm leading-5 font-medium text-gray-600">@Ricardo_oRibeir</p>
+                                            <h2 class="text-xl leading-6 font-bold dark:text-white">
+                                                {{$userperfil->persona->nombre}} {{$userperfil->persona->apellido}}
+                                            </h2>
+                                            <p class="text-sm leading-5 font-medium dark:text-gray-400">@
+                                                {{$userperfil->name}}
+                                            </p>
                                         </div>
                                         <!-- Description and others -->
                                         <div class="mt-3">
-                                            <p class="text-white leading-tight mb-2">Software Engineer / Designer /
+                                            <p class="dark:text-white leading-tight mb-2">Software Engineer / Designer /
                                                 Entrepreneur <br>Visit my website to test a working <b>Twitter
                                                     Clone.</b> </p>
-                                            <div class="text-gray-600 flex">
+                                            <div class="dark:text-gray-400 flex">
                                                 <span class="flex mr-2"><svg viewBox="0 0 24 24"
                                                         class="h-5 w-5 paint-icon">
                                                         <g>
@@ -84,7 +93,7 @@
                                                             </path>
                                                         </g>
                                                     </svg> <a href="https://ricardoribeirodev.com/personal/" target="#"
-                                                        class="leading-5 ml-1 text-blue-400">www.RicardoRibeiroDEV.com</a></span>
+                                                        class="leading-5 ml-1 text-yellow-500">www.RicardoRibeiroDEV.com</a></span>
                                                 <span class="flex mr-2"><svg viewBox="0 0 24 24"
                                                         class="h-5 w-5 paint-icon">
                                                         <g>
@@ -107,20 +116,20 @@
                                         <div
                                             class="pt-3 flex justify-start items-start w-full divide-x divide-gray-800 divide-solid">
                                             <div class="text-center pr-3"><span
-                                                    class="font-bold text-white">520</span><span class="text-gray-600">
+                                                    class="font-bold dark:text-white">520</span><span
+                                                    class="dark:text-gray-400">
                                                     Following</span></div>
-                                            <div class="text-center px-3"><span class="font-bold text-white">23,4m
-                                                </span><span class="text-gray-600"> Followers</span></div>
+                                            <div class="text-center px-3"><span class="font-bold dark:text-white">23,4m
+                                                </span><span class="dark:text-gray-400"> Followers</span></div>
                                         </div>
                                     </div>
                                 </div>
-                                <hr class="border-gray-800">
+                                <hr class="dark:border-gray-700">
                             </div>
-
                             <ul class="list-none">
                                 <li>
                                     <!--second tweet-->
-                                    <article class="hover:bg-gray-800 transition duration-350 ease-in-out">
+                                    <article class="transition duration-350 ease-in-out">
                                         <div class="flex flex-shrink-0 p-4 pb-0">
                                             <a href="#" class="flex-shrink-0 group block">
                                                 <div class="flex items-center">
@@ -130,10 +139,10 @@
                                                             alt="">
                                                     </div>
                                                     <div class="ml-3">
-                                                        <p class="text-base leading-6 font-medium text-white">
+                                                        <p class="text-base leading-6 font-medium dark:text-white">
                                                             Sonali Hirave
                                                             <span
-                                                                class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                                                                class="text-sm leading-5 font-medium dark:text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
                                                                 @ShonaDesign . 16 April
                                                             </span>
                                                         </p>
@@ -142,17 +151,19 @@
                                             </a>
                                         </div>
 
-
                                         <div class="pl-16">
-                                            <p class="text-base width-auto font-medium text-white flex-shrink">
+                                            <p class="text-base width-auto font-medium dark:text-white flex-shrink">
                                                 Day 07 of the challenge <a href="#"
-                                                    class="text-blue-400">#100DaysOfCode</a>
+                                                    class="text-yellow-400 hover:text-yellow-300">#100DaysOfCode</a>
                                                 I was wondering what I can do with <a href="#"
-                                                    class="text-blue-400">#tailwindcss</a>, so just started building
+                                                    class="text-yellow-400 hover:text-yellow-300">#tailwindcss</a>, so
+                                                just
+                                                started building
                                                 Twitter UI using Tailwind and so far it looks so promising. I will post
                                                 my code after completion.
                                                 [07/100]
-                                                <a href="#" class="text-blue-400"> #WomenWhoCode #CodeNewbie</a>
+                                                <a href="#" class="text-yellow-400 hover:text-yellow-300"> #WomenWhoCode
+                                                    #CodeNewbie</a>
                                             </p>
 
                                             <div class="md:flex-shrink pr-6 pt-3">
@@ -164,10 +175,9 @@
                                                 </div>
                                             </div>
 
-
                                             <div class="flex items-center py-4">
                                                 <div
-                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
+                                                    class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-yellow-400 transition duration-350 ease-in-out">
                                                     <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
                                                         <g>
                                                             <path
@@ -178,7 +188,7 @@
                                                     12.3 k
                                                 </div>
                                                 <div
-                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-green-400 transition duration-350 ease-in-out">
+                                                    class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-green-400 transition duration-350 ease-in-out">
                                                     <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
                                                         <g>
                                                             <path
@@ -189,7 +199,7 @@
                                                     14 k
                                                 </div>
                                                 <div
-                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-red-600 transition duration-350 ease-in-out">
+                                                    class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-red-600 transition duration-350 ease-in-out">
                                                     <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
                                                         <g>
                                                             <path
@@ -200,7 +210,7 @@
                                                     14 k
                                                 </div>
                                                 <div
-                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
+                                                    class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-yellow-400 transition duration-350 ease-in-out">
                                                     <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
                                                         <g>
                                                             <path
@@ -213,309 +223,8 @@
                                                     </svg>
                                                 </div>
                                             </div>
-
                                         </div>
-                                        <hr class="border-gray-800">
-                                    </article>
-                                </li>
-                                <li>
-                                    <!--second tweet-->
-                                    <article class="hover:bg-gray-800 transition duration-350 ease-in-out">
-                                        <div class="flex flex-shrink-0 p-4 pb-0">
-                                            <a href="#" class="flex-shrink-0 group block">
-                                                <div class="flex items-center">
-                                                    <div>
-                                                        <img class="inline-block h-10 w-10 rounded-full"
-                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="ml-3">
-                                                        <p class="text-base leading-6 font-medium text-white">
-                                                            Sonali Hirave
-                                                            <span
-                                                                class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                                                                @ShonaDesign . 16 April
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-
-
-                                        <div class="pl-16">
-                                            <p class="text-base width-auto font-medium text-white flex-shrink">
-                                                Day 07 of the challenge <a href="#"
-                                                    class="text-blue-400">#100DaysOfCode</a>
-                                                I was wondering what I can do with <a href="#"
-                                                    class="text-blue-400">#tailwindcss</a>, so just started building
-                                                Twitter UI using Tailwind and so far it looks so promising. I will post
-                                                my code after completion.
-                                                [07/100]
-                                                <a href="#" class="text-blue-400"> #WomenWhoCode #CodeNewbie</a>
-                                            </p>
-
-                                            <div class="md:flex-shrink pr-6 pt-3">
-                                                <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64"
-                                                    style="height: 200px; background-image: url(https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80);">
-                                                    <img class="opacity-0 w-full h-full"
-                                                        src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80"
-                                                        alt="">
-                                                </div>
-                                            </div>
-
-
-                                            <div class="flex items-center py-4">
-                                                <div
-                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                    12.3 k
-                                                </div>
-                                                <div
-                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-green-400 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                    14 k
-                                                </div>
-                                                <div
-                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-red-600 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                    14 k
-                                                </div>
-                                                <div
-                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M17.53 7.47l-5-5c-.293-.293-.768-.293-1.06 0l-5 5c-.294.293-.294.768 0 1.06s.767.294 1.06 0l3.72-3.72V15c0 .414.336.75.75.75s.75-.336.75-.75V4.81l3.72 3.72c.146.147.338.22.53.22s.384-.072.53-.22c.293-.293.293-.767 0-1.06z">
-                                                            </path>
-                                                            <path
-                                                                d="M19.708 21.944H4.292C3.028 21.944 2 20.916 2 19.652V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 .437.355.792.792.792h15.416c.437 0 .792-.355.792-.792V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 1.264-1.028 2.292-2.292 2.292z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <hr class="border-gray-800">
-                                    </article>
-                                </li>
-                                <li>
-                                    <!--second tweet-->
-                                    <article class="hover:bg-gray-800 transition duration-350 ease-in-out">
-                                        <div class="flex flex-shrink-0 p-4 pb-0">
-                                            <a href="#" class="flex-shrink-0 group block">
-                                                <div class="flex items-center">
-                                                    <div>
-                                                        <img class="inline-block h-10 w-10 rounded-full"
-                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="ml-3">
-                                                        <p class="text-base leading-6 font-medium text-white">
-                                                            Sonali Hirave
-                                                            <span
-                                                                class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                                                                @ShonaDesign . 16 April
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-
-
-                                        <div class="pl-16">
-                                            <p class="text-base width-auto font-medium text-white flex-shrink">
-                                                Day 07 of the challenge <a href="#"
-                                                    class="text-blue-400">#100DaysOfCode</a>
-                                                I was wondering what I can do with <a href="#"
-                                                    class="text-blue-400">#tailwindcss</a>, so just started building
-                                                Twitter UI using Tailwind and so far it looks so promising. I will post
-                                                my code after completion.
-                                                [07/100]
-                                                <a href="#" class="text-blue-400"> #WomenWhoCode #CodeNewbie</a>
-                                            </p>
-
-                                            <div class="md:flex-shrink pr-6 pt-3">
-                                                <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64"
-                                                    style="height: 200px; background-image: url(https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80);">
-                                                    <img class="opacity-0 w-full h-full"
-                                                        src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80"
-                                                        alt="">
-                                                </div>
-                                            </div>
-
-
-                                            <div class="flex items-center py-4">
-                                                <div
-                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                    12.3 k
-                                                </div>
-                                                <div
-                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-green-400 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                    14 k
-                                                </div>
-                                                <div
-                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-red-600 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                    14 k
-                                                </div>
-                                                <div
-                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M17.53 7.47l-5-5c-.293-.293-.768-.293-1.06 0l-5 5c-.294.293-.294.768 0 1.06s.767.294 1.06 0l3.72-3.72V15c0 .414.336.75.75.75s.75-.336.75-.75V4.81l3.72 3.72c.146.147.338.22.53.22s.384-.072.53-.22c.293-.293.293-.767 0-1.06z">
-                                                            </path>
-                                                            <path
-                                                                d="M19.708 21.944H4.292C3.028 21.944 2 20.916 2 19.652V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 .437.355.792.792.792h15.416c.437 0 .792-.355.792-.792V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 1.264-1.028 2.292-2.292 2.292z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <hr class="border-gray-800">
-                                    </article>
-                                </li>
-                                <li>
-                                    <!--second tweet-->
-                                    <article class="hover:bg-gray-800 transition duration-350 ease-in-out">
-                                        <div class="flex flex-shrink-0 p-4 pb-0">
-                                            <a href="#" class="flex-shrink-0 group block">
-                                                <div class="flex items-center">
-                                                    <div>
-                                                        <img class="inline-block h-10 w-10 rounded-full"
-                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="ml-3">
-                                                        <p class="text-base leading-6 font-medium text-white">
-                                                            Sonali Hirave
-                                                            <span
-                                                                class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                                                                @ShonaDesign . 16 April
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-
-
-                                        <div class="pl-16">
-                                            <p class="text-base width-auto font-medium text-white flex-shrink">
-                                                Day 07 of the challenge <a href="#"
-                                                    class="text-blue-400">#100DaysOfCode</a>
-                                                I was wondering what I can do with <a href="#"
-                                                    class="text-blue-400">#tailwindcss</a>, so just started building
-                                                Twitter UI using Tailwind and so far it looks so promising. I will post
-                                                my code after completion.
-                                                [07/100]
-                                                <a href="#" class="text-blue-400"> #WomenWhoCode #CodeNewbie</a>
-                                            </p>
-
-                                            <div class="md:flex-shrink pr-6 pt-3">
-                                                <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64"
-                                                    style="height: 200px; background-image: url(https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80);">
-                                                    <img class="opacity-0 w-full h-full"
-                                                        src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80"
-                                                        alt="">
-                                                </div>
-                                            </div>
-
-
-                                            <div class="flex items-center py-4">
-                                                <div
-                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                    12.3 k
-                                                </div>
-                                                <div
-                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-green-400 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                    14 k
-                                                </div>
-                                                <div
-                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-red-600 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                    14 k
-                                                </div>
-                                                <div
-                                                    class="flex-1 flex items-center text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M17.53 7.47l-5-5c-.293-.293-.768-.293-1.06 0l-5 5c-.294.293-.294.768 0 1.06s.767.294 1.06 0l3.72-3.72V15c0 .414.336.75.75.75s.75-.336.75-.75V4.81l3.72 3.72c.146.147.338.22.53.22s.384-.072.53-.22c.293-.293.293-.767 0-1.06z">
-                                                            </path>
-                                                            <path
-                                                                d="M19.708 21.944H4.292C3.028 21.944 2 20.916 2 19.652V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 .437.355.792.792.792h15.416c.437 0 .792-.355.792-.792V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 1.264-1.028 2.292-2.292 2.292z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <hr class="border-gray-800">
+                                        <hr class="dark:border-gray-700">
                                     </article>
                                 </li>
                             </ul>
@@ -526,11 +235,7 @@
                             <!--Aside menu (right side)-->
                             <div style="max-width:350px;">
                                 <div class="overflow-y-auto fixed  h-screen">
-
-
-
-
-                                    <div class="relative text-gray-300 w-80 p-5">
+                                    <div class="relative text-gray-400  w-full p-5">
                                         <button type="submit" class="absolute ml-4 mt-3 mr-4">
                                             <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                                                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
@@ -543,296 +248,195 @@
                                             </svg>
                                         </button>
 
-                                        <input type="search" name="search" placeholder="Search Twitter"
-                                            class=" bg-dim-700 h-10 px-10 pr-5 w-full text-sm focus:outline-none bg-purple-white shadow rounded border-0">
+                                        <input name="buscar" wire:model.live="search" type="text"
+                                            id="table-search-users"
+                                            placeholder="Buscar en los eventos de {{$userperfil->persona->nombre}} {{$userperfil->persona->apellido}}"
+                                            class="h-10 px-10 pr-5 w-full text-sm text-gray-700 dark:text-gray-200 
+               bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 
+               focus:outline-none focus:ring-2 focus:ring-yellow-500 
+               rounded border border-gray-300 dark:border-gray-600 shadow-sm">
                                     </div>
                                     <!--trending tweet section-->
-                                    <div class="max-w-sm rounded-lg bg-dim-700 overflow-hidden shadow-lg m-4">
-                                        <div class="flex mb-1">
-                                            <!-- Image-->
-                                            <a href="https://www.instagram.com/ricardoribeiro.rr/" target="#"
-                                                class="flex-col w-full mr-1">
-                                                <div class="w-full bg-cover bg-no-repeat bg-center"
-                                                    style="height:100px; background-image: url(https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/s640x640/116865832_615803592697921_5045643941059143720_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=101&amp;_nc_ohc=EQFsJZNRIPMAX-pb8EZ&amp;tp=1&amp;oh=1ffba368dc5827c172420060b811d1c4&amp;oe=60433210);">
-                                                    <img class="opacity-0"
-                                                        src="https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/s640x640/116865832_615803592697921_5045643941059143720_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=101&amp;_nc_ohc=EQFsJZNRIPMAX-pb8EZ&amp;tp=1&amp;oh=1ffba368dc5827c172420060b811d1c4&amp;oe=60433210"
-                                                        alt="">
-                                                </div>
-                                            </a>
-
-                                            <a href="https://www.instagram.com/ricardoribeiro.rr/" target="#"
-                                                class="flex-col w-full mr-1">
-                                                <div class="w-full bg-cover bg-no-repeat bg-center"
-                                                    style="height:100px; background-image: url(https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/e35/33476414_2111389325772141_4942435591556956160_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=109&amp;_nc_ohc=m4fof_6edMQAX8y6Mma&amp;tp=1&amp;oh=66d43f3c9ef1e6d35aa27b5ea79fc566&amp;oe=6045E945);">
-                                                    <img class="opacity-0"
-                                                        src="https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/e35/33476414_2111389325772141_4942435591556956160_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=109&amp;_nc_ohc=m4fof_6edMQAX8y6Mma&amp;tp=1&amp;oh=66d43f3c9ef1e6d35aa27b5ea79fc566&amp;oe=6045E945"
-                                                        alt="">
-                                                </div>
-                                            </a>
-
-                                            <a href="https://www.instagram.com/ricardoribeiro.rr/" target="#"
-                                                class="flex-col w-full">
-                                                <div class="w-full bg-cover bg-no-repeat bg-center"
-                                                    style="height:100px; background-image: url(https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/fr/e15/s1080x1080/71304173_398561657763867_3930777215019056798_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=103&amp;_nc_ohc=V2sPZa9JmQAAX_Lmo3e&amp;tp=1&amp;oh=ecbe6e24eb0d74975e725fceaaf09f5b&amp;oe=60460257);">
-                                                    <img class="opacity-0"
-                                                        src="https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/fr/e15/s1080x1080/71304173_398561657763867_3930777215019056798_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=103&amp;_nc_ohc=V2sPZa9JmQAAX_Lmo3e&amp;tp=1&amp;oh=ecbe6e24eb0d74975e725fceaaf09f5b&amp;oe=60460257"
-                                                        alt="">
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="flex">
-                                            <!-- Image-->
-                                            <a href="https://www.instagram.com/ricardoribeiro.rr/" target="#"
-                                                class="flex-col w-full mr-1">
-                                                <div class="w-full bg-cover bg-no-repeat bg-center"
-                                                    style="height:100px; background-image: url(https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/e35/28765942_569404996768567_810640940719931392_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=107&amp;_nc_ohc=Xf0LrzDMbp8AX8S55zD&amp;tp=1&amp;oh=0cf858806b52e56cc9093211b2656831&amp;oe=6045F090);">
-                                                    <img class="opacity-0"
-                                                        src="https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/e35/28765942_569404996768567_810640940719931392_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=107&amp;_nc_ohc=Xf0LrzDMbp8AX8S55zD&amp;tp=1&amp;oh=0cf858806b52e56cc9093211b2656831&amp;oe=6045F090"
-                                                        alt="">
-                                                </div>
-                                            </a>
-
-                                            <a href="https://www.instagram.com/ricardoribeiro.rr/" target="#"
-                                                class="flex-col w-full mr-1">
-                                                <div class="w-full bg-cover bg-no-repeat bg-center"
-                                                    style="height:100px; background-image: url(https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/e35/27877940_216827205533781_6550488685962330112_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=109&amp;_nc_ohc=ihm93wr5mUUAX_w6e1G&amp;tp=1&amp;oh=e492418bf694b130464f681f9fedd180&amp;oe=60442B6C);">
-                                                    <img class="opacity-0"
-                                                        src="https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/e35/27877940_216827205533781_6550488685962330112_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=109&amp;_nc_ohc=ihm93wr5mUUAX_w6e1G&amp;tp=1&amp;oh=e492418bf694b130464f681f9fedd180&amp;oe=60442B6C"
-                                                        alt="">
-                                                </div>
-                                            </a>
-
-                                            <a href="https://www.instagram.com/ricardoribeiro.rr/" target="#"
-                                                class="flex-col w-full">
-                                                <div class="w-full bg-cover bg-no-repeat bg-center"
-                                                    style="height:100px; background-image: url(https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/e35/22277804_1824335967579893_4558955485163683840_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=105&amp;_nc_ohc=CknMgBUYNhcAX-Jxi0P&amp;tp=1&amp;oh=631583468373481077e1834df4031435&amp;oe=6045BD08);">
-                                                    <img class="opacity-0"
-                                                        src="https://instagram.flis9-1.fna.fbcdn.net/v/t51.2885-15/e35/22277804_1824335967579893_4558955485163683840_n.jpg?_nc_ht=instagram.flis9-1.fna.fbcdn.net&amp;_nc_cat=105&amp;_nc_ohc=CknMgBUYNhcAX-Jxi0P&amp;tp=1&amp;oh=631583468373481077e1834df4031435&amp;oe=6045BD08"
-                                                        alt="">
-                                                </div>
-                                            </a>
+                                    <div
+                                        class="max-w-sm rounded-lg dark:bg-dim-700 bg-dim-700 overflow-hidden shadow-lg m-4">
+                                        <div class="grid grid-cols-3 gap-1">
+                                            @foreach($eventosUsuario as $evento) 
+                                                <!-- Imagen 1 -->
+                                                <a href="{{ asset(str_replace('public', 'storage', $evento->logo)) }}"
+                                                    target="_blank" class="group">
+                                                    <div class="w-full h-24 bg-cover bg-no-repeat bg-center rounded-md border border-gray-300 dark:border-gray-700 group-hover:opacity-80 transition duration-300 ease-in-out shadow-sm dark:shadow-md"
+                                                        style="background-image: url({{ asset(str_replace('public', 'storage', $evento->logo)) }};">
+                                                        @if($evento->logo)
+                                                            <img src="{{ asset(str_replace('public', 'storage', $evento->logo)) }}"
+                                                                alt="Logo del Evento" class="h-full w-full">
+                                                        @else
+                                                            Sin foto
+                                                        @endif
+                                                    </div>
+                                                </a>
+                                            @endforeach
                                         </div>
                                     </div>
                                     <!--trending tweet section-->
-                                    <div class="max-w-sm rounded-lg bg-dim-700 overflow-hidden shadow-lg m-4">
-                                        <div class="flex">
-                                            <div class="flex-1 m-2">
-                                                <h2 class="px-4 py-2 text-xl w-48 font-semibold text-white">Germany
-                                                    trends</h2>
-                                            </div>
-                                            <div class="flex-1 px-4 py-2 m-2">
-                                                <a href=""
-                                                    class=" text-2xl rounded-full hover:bg-gray-800 hover:text-blue-300 float-right">
-                                                    <svg class="m-2 h-6 w-6" fill="none" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" stroke="currentColor"
-                                                        viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
-                                                        </path>
-                                                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <div
+                                        class="max-w-sm rounded-lg dark:bg-gray-800 overflow-hidden shadow-lg m-4 border border-gray-200 dark:border-gray-700">
+                                        <!-- Header -->
+                                        <div class="flex items-center justify-between p-4">
+                                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Germany
+                                                Trends</h2>
+                                            <a href="#" aria-label="Settings"
+                                                class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                                                <svg class="h-6 w-6 text-gray-500 dark:text-gray-300" fill="none"
+                                                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                </svg>
+                                            </a>
+                                        </div>
+
+                                        <hr class="border-gray-300 dark:border-gray-600">
+
+                                        <!-- Trending Items -->
+                                        <div class="divide-y divide-gray-300 dark:divide-gray-600">
+                                            <!-- Trending Item Template -->
+                                            <div
+                                                class="flex justify-between items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                                <div>
+                                                    <p class="text-xs text-gray-500 dark:text-gray-400">1 · Trending</p>
+                                                    <h3 class="font-bold text-gray-900 dark:text-white">#Microsoft363
+                                                    </h3>
+                                                    <p class="text-xs text-gray-500 dark:text-gray-400">5,466 Tweets</p>
+                                                </div>
+                                                <a href="#" aria-label="More options"
+                                                    class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                                                    <svg class="h-5 w-5 text-gray-500 dark:text-gray-300" fill="none"
+                                                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                                        <path d="M19 9l-7 7-7-7"></path>
                                                     </svg>
                                                 </a>
                                             </div>
-                                        </div>
 
-
-                                        <hr class="border-gray-800">
-
-                                        <!--first trending tweet-->
-                                        <div class="flex">
-                                            <div class="flex-1">
-                                                <p class="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">1 . Trending</p>
-                                                <h2 class="px-4 ml-2 w-48 font-bold text-white">#Microsoft363</h2>
-                                                <p class="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">5,466 Tweets</p>
-
+                                            <!-- Additional trending items (copy the block above and update the content as needed) -->
+                                            <div
+                                                class="flex justify-between items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                                <div>
+                                                    <p class="text-xs text-gray-500 dark:text-gray-400">2 · Politics ·
+                                                        Trending</p>
+                                                    <h3 class="font-bold text-gray-900 dark:text-white">#HI-Fashion</h3>
+                                                    <p class="text-xs text-gray-500 dark:text-gray-400">8,464 Tweets</p>
+                                                </div>
+                                                <a href="#" aria-label="More options"
+                                                    class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                                                    <svg class="h-5 w-5 text-gray-500 dark:text-gray-300" fill="none"
+                                                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                                        <path d="M19 9l-7 7-7-7"></path>
+                                                    </svg>
+                                                </a>
                                             </div>
-                                            <div class="flex-1 px-4 py-2 m-2">
-                                                <a href=""
-                                                    class=" text-2xl rounded-full text-gray-400 hover:bg-gray-800 hover:text-blue-300 float-right">
-                                                    <svg class="m-2 h-5 w-5" fill="none" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" stroke="currentColor"
-                                                        viewBox="0 0 24 24">
+
+                                            <div
+                                                class="flex justify-between items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                                <div>
+                                                    <p class="text-xs text-gray-500 dark:text-gray-400">3 · Rock ·
+                                                        Trending</p>
+                                                    <h3 class="font-bold text-gray-900 dark:text-white">#Ferrari</h3>
+                                                    <p class="text-xs text-gray-500 dark:text-gray-400">5,586 Tweets</p>
+                                                </div>
+                                                <a href="#" aria-label="More options"
+                                                    class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                                                    <svg class="h-5 w-5 text-gray-500 dark:text-gray-300" fill="none"
+                                                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                                        <path d="M19 9l-7 7-7-7"></path>
+                                                    </svg>
+                                                </a>
+                                            </div>
+
+                                            <div
+                                                class="flex justify-between items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                                <div>
+                                                    <p class="text-xs text-gray-500 dark:text-gray-400">4 · Auto Racing
+                                                        · Trending</p>
+                                                    <h3 class="font-bold text-gray-900 dark:text-white">#Vettel</h3>
+                                                    <p class="text-xs text-gray-500 dark:text-gray-400">9,416 Tweets</p>
+                                                </div>
+                                                <a href="#" aria-label="More options"
+                                                    class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                                                    <svg class="h-5 w-5 text-gray-500 dark:text-gray-300" fill="none"
+                                                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                                         <path d="M19 9l-7 7-7-7"></path>
                                                     </svg>
                                                 </a>
                                             </div>
                                         </div>
-                                        <hr class="border-gray-800">
 
-                                        <!--second trending tweet-->
-
-                                        <div class="flex">
-                                            <div class="flex-1">
-                                                <p class="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">2 . Politics .
-                                                    Trending</p>
-                                                <h2 class="px-4 ml-2 w-48 font-bold text-white">#HI-Fashion</h2>
-                                                <p class="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">8,464 Tweets</p>
-
-                                            </div>
-                                            <div class="flex-1 px-4 py-2 m-2">
-                                                <a href=""
-                                                    class=" text-2xl rounded-full text-gray-400 hover:bg-gray-800 hover:text-blue-300 float-right">
-                                                    <svg class="m-2 h-5 w-5" fill="none" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" stroke="currentColor"
-                                                        viewBox="0 0 24 24">
-                                                        <path d="M19 9l-7 7-7-7"></path>
-                                                    </svg>
-                                                </a>
-                                            </div>
+                                        <div
+                                            class="p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition text-center cursor-pointer">
+                                            <h2 class="text-yellow-500 hover:underline">Show more</h2>
                                         </div>
-                                        <hr class="border-gray-800">
-
-                                        <!--third trending tweet-->
-
-                                        <div class="flex">
-                                            <div class="flex-1">
-                                                <p class="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">3 . Rock . Trending
-                                                </p>
-                                                <h2 class="px-4 ml-2 w-48 font-bold text-white">#Ferrari</h2>
-                                                <p class="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">5,586 Tweets</p>
-
-                                            </div>
-                                            <div class="flex-1 px-4 py-2 m-2">
-                                                <a href=""
-                                                    class=" text-2xl rounded-full text-gray-400 hover:bg-gray-800 hover:text-blue-300 float-right">
-                                                    <svg class="m-2 h-5 w-5" fill="none" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" stroke="currentColor"
-                                                        viewBox="0 0 24 24">
-                                                        <path d="M19 9l-7 7-7-7"></path>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <hr class="border-gray-800">
-
-                                        <!--forth trending tweet-->
-
-                                        <div class="flex">
-                                            <div class="flex-1">
-                                                <p class="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">4 . Auto Racing .
-                                                    Trending</p>
-                                                <h2 class="px-4 ml-2 w-48 font-bold text-white">#vettel</h2>
-                                                <p class="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">9,416 Tweets</p>
-
-                                            </div>
-                                            <div class="flex-1 px-4 py-2 m-2">
-                                                <a href=""
-                                                    class=" text-2xl rounded-full text-gray-400 hover:bg-gray-800 hover:text-blue-300 float-right">
-                                                    <svg class="m-2 h-5 w-5" fill="none" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" stroke="currentColor"
-                                                        viewBox="0 0 24 24">
-                                                        <path d="M19 9l-7 7-7-7"></path>
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <hr class="border-gray-800">
-
-                                        <!--show more-->
-
-                                        <div class="flex">
-                                            <div class="flex-1 p-4">
-                                                <h2 class="px-4 ml-2 w-48 font-bold text-blue-400">Show more</h2>
-                                            </div>
-                                        </div>
-
                                     </div>
+
                                     <!--people suggetion to follow section-->
-                                    <div class="max-w-sm rounded-lg  bg-dim-700 overflow-hidden shadow-lg m-4">
-                                        <div class="flex">
-                                            <div class="flex-1 m-2">
-                                                <h2 class="px-4 py-2 text-xl w-48 font-semibold text-white">Who to
-                                                    follow</h2>
-                                            </div>
+                                    <div
+                                        class="max-w-sm rounded-lg  dark:bg-gray-800 overflow-hidden shadow-lg m-4 border border-gray-200 dark:border-gray-700">
+                                        <!-- Header -->
+                                        <div class="p-4">
+                                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Who to
+                                                Follow</h2>
                                         </div>
 
+                                        <hr class="border-gray-300 dark:border-gray-600">
 
-                                        <hr class="border-gray-800">
-
-                                        <!--first person who to follow-->
-
-                                        <div class="flex flex-shrink-0">
-                                            <div class="flex-1 ">
-                                                <div class="flex items-center w-48">
-                                                    <div>
-                                                        <img class="inline-block h-10 w-auto rounded-full ml-4 mt-2"
-                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="ml-3 mt-3">
-                                                        <p class="text-base leading-6 font-medium text-white">
-                                                            Sonali Hirave
-                                                        </p>
-                                                        <p
-                                                            class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                                                            @ShonaDesign
-                                                        </p>
-                                                    </div>
+                                        <!-- User Item Template -->
+                                        <div
+                                            class="flex items-center justify-between p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                            <div class="flex items-center">
+                                                <img class="h-10 w-10 rounded-full"
+                                                    src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+                                                    alt="Sonali Hirave Profile">
+                                                <div class="ml-3">
+                                                    <p class="text-base font-medium text-gray-900 dark:text-white">
+                                                        Sonali Hirave</p>
+                                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                                        @ShonaDesign</p>
                                                 </div>
-
                                             </div>
-                                            <div class="flex-1 px-4 py-2 m-2">
-                                                <a href="" class=" float-right">
-                                                    <button
-                                                        class="bg-transparent hover:bg-gray-800 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full">
-                                                        Follow
-                                                    </button>
-                                                </a>
-
-                                            </div>
+                                            <button
+                                                class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-4 rounded-full transition duration-300">
+                                                Follow
+                                            </button>
                                         </div>
-                                        <hr class="border-gray-800">
 
-                                        <!--second person who to follow-->
+                                        <hr class="border-gray-300 dark:border-gray-600">
 
-                                        <div class="flex flex-shrink-0">
-                                            <div class="flex-1 ">
-                                                <div class="flex items-center w-48">
-                                                    <div>
-                                                        <img class="inline-block h-10 w-auto rounded-full ml-4 mt-2"
-                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="ml-3 mt-3">
-                                                        <p class="text-base leading-6 font-medium text-white">
-                                                            Sonali Hirave
-                                                        </p>
-                                                        <p
-                                                            class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                                                            @ShonaDesign
-                                                        </p>
-                                                    </div>
+                                        <!-- Second User (duplicate the structure for more users) -->
+                                        <div
+                                            class="flex items-center justify-between p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                            <div class="flex items-center">
+                                                <img class="h-10 w-10 rounded-full"
+                                                    src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+                                                    alt="Sonali Hirave Profile">
+                                                <div class="ml-3">
+                                                    <p class="text-base font-medium text-gray-900 dark:text-white">
+                                                        Sonali Hirave</p>
+                                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                                        @ShonaDesign</p>
                                                 </div>
-
                                             </div>
-                                            <div class="flex-1 px-4 py-2 m-2">
-                                                <a href="" class=" float-right">
-                                                    <button
-                                                        class="bg-transparent hover:bg-gray-800 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full">
-                                                        Follow
-                                                    </button>
-                                                </a>
-
-                                            </div>
+                                            <button
+                                                class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-4 rounded-full transition duration-300">
+                                                Follow
+                                            </button>
                                         </div>
 
-                                        <hr class="border-gray-800">
+                                        <hr class="border-gray-300 dark:border-gray-600">
 
-
-
-                                        <!--show more-->
-
-                                        <div class="flex">
-                                            <div class="flex-1 p-4">
-                                                <h2 class="px-4 ml-2 w-48 font-bold text-blue-400">Show more</h2>
-                                            </div>
+                                        <!-- Show More -->
+                                        <div
+                                            class="p-4 text-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                            <h2 class="font-bold text-yellow-500 hover:underline">Show more</h2>
                                         </div>
-
                                     </div>
-
-
-
-
                                     <div class="flow-root m-6">
                                         <div class="flex-1">
                                             <a href="#">
@@ -855,12 +459,6 @@
             </div>
 
         </div>
-
-
-
-
-
-
         <style>
             .overflow-y-auto::-webkit-scrollbar,
             .overflow-y-scroll::-webkit-scrollbar,
@@ -888,13 +486,6 @@
 
             .bg-dim-700 {
                 --bg-opacity: 1;
-                background-color: #192734;
-            }
-
-            html,
-            body {
-                margin: 0;
-                background-color: #15202b;
             }
 
             svg.paint-icon {
@@ -902,5 +493,4 @@
             }
         </style>
     </x-layouts.reportes>
-
 </div>
