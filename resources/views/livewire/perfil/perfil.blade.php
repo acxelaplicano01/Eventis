@@ -24,15 +24,12 @@
                                         <h2 class="mb-0 text-xl font-bold dark:text-white">
                                             {{$userperfil->persona->nombre}} {{$userperfil->persona->apellido}}
                                         </h2>
-                                        <p class="mb-0 w-48 text-xs dark:text-gray-400">14 Eventos</p>
+                                        <p class="mb-0 w-48 text-xs dark:text-gray-400">{{$eventosCount}} Eventos</p>
                                     </div>
                                 </div>
 
                                 <hr class="dark:border-gray-700">
                             </div>
-                            @if($isOpen)
-                                @include('livewire.perfil.publicacion') 
-                            @endif
                             <!-- User card-->
                             <div>
                                 <div class="w-full bg-cover bg-no-repeat bg-center"
@@ -58,10 +55,9 @@
                                         </div>
                                         <!-- Follow Button -->
                                         <div class="flex flex-col text-right">
-                                            <button wire:click="create()"
-                                                class="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring  max-w-max border bg-transparent border-yellow-500 text-yellow-500 hover:border-yellow-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
-                                                Editar Perfil
-                                            </button>
+                                            <x-dropdown-link href="{{ route('profile.show') }}" class="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring  max-w-max border bg-transparent border-yellow-500 text-yellow-500 hover:border-yellow-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
+                                                {{ __('Editar Perfil') }}
+                                            </x-dropdown-link>
                                         </div>
                                     </div>
 

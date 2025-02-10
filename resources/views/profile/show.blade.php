@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-layouts.reportes>
     @if (Laravel\Fortify\Features::canUpdateProfileInformation())
         @livewire('profile.update-profile-information-form')
 
@@ -32,4 +32,4 @@
             @livewire('profile.delete-user-form')
         </div>
     @endif
-</x-layouts.app>
+</x-layouts.reportes>

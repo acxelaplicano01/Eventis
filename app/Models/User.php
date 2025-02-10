@@ -35,6 +35,16 @@ class User extends Authenticatable
     {
         return $this->hasOne(Persona::class, 'IdUsuario'); // Ajusta 'user_id' si es necesario
     }
+
+    public function eventos()
+    {
+        return $this->hasMany(Evento::class, 'created_by');
+    }
+
+    public function countEventos()
+    {
+        return $this->eventos()->count();
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

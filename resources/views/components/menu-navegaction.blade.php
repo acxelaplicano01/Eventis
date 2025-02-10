@@ -66,7 +66,7 @@
                      <ul class="py-1" role="none">
                         <li>
                            <x-dropdown-link href="{{ route('profile.show') }}">
-                              {{ __('Perfil') }}
+                              {{ __('Cuenta') }}
                            </x-dropdown-link>
                         </li>
                         <li>

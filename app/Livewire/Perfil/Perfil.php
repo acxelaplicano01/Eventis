@@ -27,7 +27,7 @@ class Perfil extends Component
     }
 
     public $publicacion_id, $foto, $IdUsuario, $descripcion;
-    public $isOpen = 0;
+    public $isOpen;
     public $confirmingDelete = false;
     public $IdAEliminar;
    
@@ -138,7 +138,7 @@ class Perfil extends Component
 
     public function render()
     {
-        $eventosUsuario = Evento::with('modalidad', 'localidad', 'diploma', 'cuenta')
+        $eventosUsuario = Evento::with('modalidad', 'localidad', 'diploma')
             ->where('created_by', $this->userperfil->id)
             ->where(function($query) {
                 $query->where('nombreevento', 'like', '%' . $this->search . '%')
@@ -151,7 +151,7 @@ class Perfil extends Component
             })
             ->orderBy('id', 'DESC')
             ->paginate(6);
-
-        return view('livewire.perfil.perfil', ['eventosUsuario' => $eventosUsuario]);
+            $eventosCount = $this->userperfil->countEventos();
+        return view('livewire.perfil.perfil', ['eventosUsuario' => $eventosUsuario, 'eventosCount' => $eventosCount,]);
     }
 }
