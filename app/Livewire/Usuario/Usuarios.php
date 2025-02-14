@@ -15,6 +15,9 @@ class Usuarios extends Component
 
     public $name;
     public $email;
+    public $nombre;
+    public $descripcion;
+    public $apellido;
     public $password;
     public $user;
     public $search = '';
@@ -29,6 +32,9 @@ class Usuarios extends Component
     protected $rules = [
         'name' => 'required',
         'email' => 'required|email|unique:users,email',
+        'nombre' => 'required',
+        'apellido' => 'required',
+        'descripcion' => 'required',
         'password' => 'required|min:8',
         'selectedRoles' => 'required|array',
         'selectedRoles.*' => 'exists:roles,id',
@@ -63,6 +69,9 @@ class Usuarios extends Component
         $this->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email' . ($this->user ? ',' . $this->user->id : ''),
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'descripcion' => 'required',
             'password' => 'required|min:8',
             'selectedRoles' => 'required|array',
             'selectedRoles.*' => 'exists:roles,id',
@@ -80,6 +89,9 @@ class Usuarios extends Component
         $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
+            'nombre' => $this->nombre,
+            'apellido' => $this->apellido,
+            'descripcion' => $this->descripcion,
             'password' => Hash::make($this->password),
         ]);
 
@@ -102,6 +114,9 @@ class Usuarios extends Component
         $this->user = $user;
         $this->name = $user->name;
         $this->email = $user->email;
+        $this->nombre = $user->nombre;
+        $this->apellido = $user->apellido;
+        $this->descripcion =$user->descripcion;
         $this->selectedRoles = $user->roles->pluck('id')->toArray();
         $this->roles = Role::all();
         $this->isOpen = true;
@@ -112,6 +127,9 @@ class Usuarios extends Component
         $validatedData = $this->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $this->user->id,
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'descripcion' => 'required',
             'password' => 'nullable|min:8',
             'selectedRoles' => 'required|array',
             'selectedRoles.*' => 'exists:roles,id',
@@ -125,6 +143,9 @@ class Usuarios extends Component
             $user->update([
                 'name' => $this->name,
                 'email' => $this->email,
+                'nombre' => $this->nombre,
+                'apellido' => $this->apellido,
+                'descripcion' => $this->descripcion,
                 'password' => $this->password ? Hash::make($this->password) : $user->password,
             ]);
 
@@ -189,6 +210,9 @@ class Usuarios extends Component
     {
         $this->name = '';
         $this->email = '';
+        $this->nombre = '';
+        $this->apellido = '';
+        $this->descripcion = '';
         $this->password = '';
         $this->selectedRoles = [];
     }

@@ -54,7 +54,7 @@
 
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="name" value="{{ __('Name') }}" />
+            <x-label for="name" value="{{ __('Usuario') }}" />
             <x-input id="name" type="text" class="mt-1 block w-full" wire:model="state.name" required autocomplete="name" />
             <x-input-error for="name" class="mt-2" />
         </div>
@@ -81,11 +81,29 @@
                 @endif
             @endif
         </div>
+
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="nombre" value="{{ __('Nombres') }}" />
+            <x-input id="nombre" type="text" class="mt-1 block w-full" wire:model="state.nombre" required autocomplete="nombre" />
+            <x-input-error for="nombre" class="mt-2" />
+        </div>
+
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="apellido" value="{{ __('Apellidos') }}" />
+            <x-input id="apellido" type="text" class="mt-1 block w-full" wire:model="state.apellido" required autocomplete="apellido" />
+            <x-input-error for="apellido" class="mt-2" />
+        </div>
+
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="descripcion" value="{{ __('Descripción') }}" />
+            <x-input id="descripcion" type="text" class="mt-1 block w-full" wire:model="state.descripcion" required autocomplete="descripcion" />
+            <x-input-error for="descripcion" class="mt-2" />
+        </div>
     </x-slot>
 
     <x-slot name="actions">
         <x-action-message class="me-3" on="saved">
-            {{ __('Guardado.') }}
+            {{ __('Información guardada.') }}
         </x-action-message>
 
         <x-button wire:loading.attr="disabled" wire:target="photo">

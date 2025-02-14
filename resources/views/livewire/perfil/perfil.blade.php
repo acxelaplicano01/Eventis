@@ -22,7 +22,7 @@
                                     </div>
                                     <div class="m-2 ">
                                         <h2 class="mb-0 text-xl font-bold dark:text-white">
-                                            {{$userperfil->persona->nombre}} {{$userperfil->persona->apellido}}
+                                            {{$userperfil->nombre}} {{$userperfil->apellido}}
                                         </h2>
                                         <p class="mb-0 w-48 text-xs dark:text-gray-400">{{$eventosCount}} Eventos</p>
                                     </div>
@@ -30,6 +30,320 @@
 
                                 <hr class="dark:border-gray-700">
                             </div>
+
+
+
+
+                            <!-- Large Modal -->
+                            <div id="extralarge-modal" tabindex="-1"
+                                class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                <!-- Fondo opaco -->
+                                <div class="fixed inset-0 bg-black opacity-50"></div>
+                                <div class="relative w-full max-w-xl max-h-full">
+                                    <!-- Modal content -->
+                                    <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                                        <!-- Modal header -->
+                                        <div
+                                            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                                            <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+                                                {{$userperfil->nombre}}   {{$userperfil->apellido}}
+                                            </h3>
+                                            <button type="button"
+                                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                data-modal-hide="extralarge-modal">
+                                                <svg class="w-3 h-3" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                </svg>
+                                                <span class="sr-only">Close modal</span>
+                                            </button>
+                                        </div>
+                                        <!-- Modal body -->
+                                        <div class="p-4 md:p-5 space-y-4">
+                                            <div class="md:flex">
+                                                <ul id="default-tab" data-tabs-toggle="#default-tab-content"
+                                                    role="tablist"
+                                                    class="flex-column space-y space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
+                                                    <li>
+                                                        <button id="info-tab" data-tabs-target="#info" type="button"
+                                                            role="tab" aria-controls="info" aria-selected="false"
+                                                            class="inline-flex items-center px-4 py-3 text-white bg-yellow-500 rounded-lg active w-full dark:bg-yellow-600"
+                                                            aria-current="page">
+                                                            <svg class="w-6 h-6 me-2  text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z"
+                                                                    clip-rule="evenodd" />
+                                                                <path fill-rule="evenodd"
+                                                                    d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z"
+                                                                    clip-rule="evenodd" />
+                                                            </svg>
+
+                                                            Editar
+                                                        </button>
+                                                    </li>
+                                                    <li>
+                                                        <button id="profile-tab" data-tabs-target="#profile"
+                                                            type="button" role="tab" aria-controls="profile"
+                                                            aria-selected="false"
+                                                            class="inline-flex items-center px-4 py-3 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white">
+                                                            <svg class="w-5 h-5 me-2  text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M12 20a7.966 7.966 0 0 1-5.002-1.756l.002.001v-.683c0-1.794 1.492-3.25 3.333-3.25h3.334c1.84 0 3.333 1.456 3.333 3.25v.683A7.966 7.966 0 0 1 12 20ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.5-4.44 9.963-9.932 10h-.138C6.438 21.962 2 17.5 2 12Zm10-5c-1.84 0-3.333 1.455-3.333 3.25S10.159 13.5 12 13.5c1.84 0 3.333-1.455 3.333-3.25S13.841 7 12 7Z"
+                                                                    clip-rule="evenodd" />
+                                                            </svg>
+                                                            Perfil
+                                                        </button>
+                                                    </li>
+                                                    <li>
+                                                        <button
+                                                            class="inline-flex items-center px-4 py-3 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white">
+                                                            <svg class="w-5 h-5 me-2  text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                                <path fill-rule="evenodd" d="M13 10a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H14a1 1 0 0 1-1-1Z" clip-rule="evenodd" />
+                                                                <path fill-rule="evenodd"
+                                                                    d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12c0 .556-.227 1.06-.593 1.422A.999.999 0 0 1 20.5 20H4a2.002 2.002 0 0 1-2-2V6Zm6.892 12 3.833-5.356-3.99-4.322a1 1 0 0 0-1.549.097L4 12.879V6h16v9.95l-3.257-3.619a1 1 0 0 0-1.557.088L11.2 18H8.892Z"
+                                                                    clip-rule="evenodd" />
+                                                            </svg>
+                                                            Portada
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                                <div id="default-tab-content">
+                                                    <div id="info" role="tabpanel" aria-labelledby="info-tab"
+                                                        class="hidden p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
+                                                        <h3
+                                                            class="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                                                            Editar información "Nombre y usuario."</h3>
+
+
+                                                        <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+                                                            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center"
+                                                                id="default-styled-tab"
+                                                                data-tabs-toggle="#default-styled-tab-content"
+                                                                data-tabs-active-classes="text-yellow-600 hover:text-yellow-600 dark:text-yellow-500 dark:hover:text-yellow-500 border-yellow-600 dark:border-yellow-500"
+                                                                data-tabs-inactive-classes="dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300"
+                                                                role="tablist">
+                                                                <li class="me-2" role="presentation">
+                                                                    <button
+                                                                        class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                                                                        id="settings-styled-tab"
+                                                                        data-tabs-target="#styled-settings"
+                                                                        type="button" role="tab"
+                                                                        aria-controls="settings"
+                                                                        aria-selected="false">Nombre y usuario.</button>
+                                                                </li>
+                                                                <li role="presentation">
+                                                                    <button
+                                                                        class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                                                                        id="contacts-styled-tab"
+                                                                        data-tabs-target="#styled-contacts"
+                                                                        type="button" role="tab"
+                                                                        aria-controls="contacts"
+                                                                        aria-selected="false">Redes sociales</button>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div id="default-styled-tab-content">
+                                                            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
+                                                                id="styled-settings" role="tabpanel"
+                                                                aria-labelledby="settings-tab">
+
+
+                                                                <form class="max-w-sm mx-auto">
+                                                                    <div class="mb-2">
+                                                                        <label for="email"
+                                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                                            Correo</label>
+                                                                        <input type="email" id="email"
+                                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                                                                            placeholder="name@flowbite.com" required />
+                                                                    </div>
+                                                                    <div class="mb-2">
+                                                                        <label for="password"
+                                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                                            Usuario</label>
+                                                                        <input type="text" id="password"
+                                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                                                                            required />
+                                                                    </div>
+                                                                    
+                                                                    <div class="mb-2">
+                                                                        <label for="password"
+                                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                                            Nombre</label>
+                                                                        <input type="text" id="password" 
+                                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                                                                            required />
+                                                                    </div>
+                                                                    <div class="mb-2">
+                                                                        <label for="password"
+                                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                                            Apellido</label>
+                                                                        <input type="text" id="password"
+                                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                                                                            required />
+                                                                    </div>
+                                                                    <div class="mb-2">
+                                                                        <label for="password"
+                                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                                            Descripción</label>
+                                                                        <input type="text" id="password"
+                                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                                                                            required />
+                                                                    </div>
+                                                                    <button type="submit"
+                                                                        class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Submit</button>
+                                                                </form>
+
+
+                                                            </div>
+                                                            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800"
+                                                                id="styled-contacts" role="tabpanel"
+                                                                aria-labelledby="contacts-tab">
+
+                                                                <form class="max-w-sm mx-auto">
+                                                                <label for="website-admin"
+                                                                        class="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">Mi sitio</label>
+                                                                    <div class="flex">
+                                                                        <span
+                                                                            class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                                                            <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                                height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                                                <path fill-rule="evenodd"
+                                                                                    d="M8.64 4.737A7.97 7.97 0 0 1 12 4a7.997 7.997 0 0 1 6.933 4.006h-.738c-.65 0-1.177.25-1.177.9 0 .33 0 2.04-2.026 2.008-1.972 0-1.972-1.732-1.972-2.008 0-1.429-.787-1.65-1.752-1.923-.374-.105-.774-.218-1.166-.411-1.004-.497-1.347-1.183-1.461-1.835ZM6 4a10.06 10.06 0 0 0-2.812 3.27A9.956 9.956 0 0 0 2 12c0 5.289 4.106 9.619 9.304 9.976l.054.004a10.12 10.12 0 0 0 1.155.007h.002a10.024 10.024 0 0 0 1.5-.19 9.925 9.925 0 0 0 2.259-.754 10.041 10.041 0 0 0 4.987-5.263A9.917 9.917 0 0 0 22 12a10.025 10.025 0 0 0-.315-2.5A10.001 10.001 0 0 0 12 2a9.964 9.964 0 0 0-6 2Zm13.372 11.113a2.575 2.575 0 0 0-.75-.112h-.217A3.405 3.405 0 0 0 15 18.405v1.014a8.027 8.027 0 0 0 4.372-4.307ZM12.114 20H12A8 8 0 0 1 5.1 7.95c.95.541 1.421 1.537 1.835 2.415.209.441.403.853.637 1.162.54.712 1.063 1.019 1.591 1.328.52.305 1.047.613 1.6 1.316 1.44 1.825 1.419 4.366 1.35 5.828Z"
+                                                                                    clip-rule="evenodd" />
+                                                                            </svg>
+
+
+                                                                        </span>
+                                                                        <input type="text" id="website-admin"
+                                                                            class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-yellow-500 focus:border-yellow-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                                                                            placeholder="Escribe la url de tu sitio">
+                                                                    </div>
+                                                                    <label for="website-admin"
+                                                                        class="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">Facebook</label>
+                                                                    <div class="flex">
+                                                                        <span
+                                                                            class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                                                            <svg class="w-4 h-4 text-gray-800 dark:text-white"
+                                                                                aria-hidden="true"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24"
+                                                                                fill="currentColor" viewBox="0 0 24 24">
+                                                                                <path fill-rule="evenodd"
+                                                                                    d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z"
+                                                                                    clip-rule="evenodd" />
+                                                                            </svg>
+
+                                                                        </span>
+                                                                        <input type="text" id="website-admin"
+                                                                            class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-yellow-500 focus:border-yellow-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                                                                            placeholder="Facebook">
+                                                                    </div>
+
+                                                                    <label for="website-admin"
+                                                                        class="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">Instagram</label>
+                                                                    <div class="flex">
+                                                                        <span
+                                                                            class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                                                            <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                                height="24" fill="none" viewBox="0 0 24 24">
+                                                                                <path fill="currentColor" fill-rule="evenodd"
+                                                                                    d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"
+                                                                                    clip-rule="evenodd" />
+                                                                            </svg>
+
+                                                                        </span>
+                                                                        <input type="text" id="website-admin"
+                                                                            class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-yellow-500 focus:border-yellow-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                                                                            placeholder="Instagram">
+                                                                    </div>
+
+                                                                    <label for="website-admin"
+                                                                        class="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">Youtube</label>
+                                                                    <div class="flex">
+                                                                        <span
+                                                                            class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                                                            <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                                height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                                                <path fill-rule="evenodd"
+                                                                                    d="M21.7 8.037a4.26 4.26 0 0 0-.789-1.964 2.84 2.84 0 0 0-1.984-.839c-2.767-.2-6.926-.2-6.926-.2s-4.157 0-6.928.2a2.836 2.836 0 0 0-1.983.839 4.225 4.225 0 0 0-.79 1.965 30.146 30.146 0 0 0-.2 3.206v1.5a30.12 30.12 0 0 0 .2 3.206c.094.712.364 1.39.784 1.972.604.536 1.38.837 2.187.848 1.583.151 6.731.2 6.731.2s4.161 0 6.928-.2a2.844 2.844 0 0 0 1.985-.84 4.27 4.27 0 0 0 .787-1.965 30.12 30.12 0 0 0 .2-3.206v-1.516a30.672 30.672 0 0 0-.202-3.206Zm-11.692 6.554v-5.62l5.4 2.819-5.4 2.801Z"
+                                                                                    clip-rule="evenodd" />
+                                                                            </svg>
+
+                                                                        </span>
+                                                                        <input type="text" id="website-admin"
+                                                                            class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-yellow-500 focus:border-yellow-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                                                                            placeholder="Youtube">
+                                                                    </div>
+
+                                                                    <label for="website-admin"
+                                                                        class="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">Twitter</label>
+                                                                    <div class="flex">
+                                                                        <span
+                                                                            class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                                                            <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                                height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                                                <path fill-rule="evenodd"
+                                                                                    d="M22 5.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.343 8.343 0 0 1-2.605.981A4.13 4.13 0 0 0 15.85 4a4.068 4.068 0 0 0-4.1 4.038c0 .31.035.618.105.919A11.705 11.705 0 0 1 3.4 4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 6.1 13.635a4.192 4.192 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 2 18.184 11.732 11.732 0 0 0 8.291 20 11.502 11.502 0 0 0 19.964 8.5c0-.177 0-.349-.012-.523A8.143 8.143 0 0 0 22 5.892Z"
+                                                                                    clip-rule="evenodd" />
+                                                                            </svg>
+
+                                                                        </span>
+                                                                        <input type="text" id="website-admin"
+                                                                            class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-yellow-500 focus:border-yellow-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                                                                            placeholder="Twitter">
+                                                                    </div>
+                                                                    <button type="submit"
+                                                                        class="text-white mt-2 bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Submit</button>
+                                                                </form>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div id="profile" role="tabpanel" aria-labelledby="profile-tab"
+                                                        class="hidden p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
+                                                        <h3
+                                                            class="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                                                            Editar foto de perfil</h3>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Modal footer -->
+                                        <div
+                                            class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
+                                            <button data-modal-hide="extralarge-modal" type="button"
+                                                class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-yellow-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             <!-- User card-->
                             <div>
                                 <div class="w-full bg-cover bg-no-repeat bg-center"
@@ -55,9 +369,12 @@
                                         </div>
                                         <!-- Follow Button -->
                                         <div class="flex flex-col text-right">
-                                            <x-dropdown-link href="{{ route('profile.show') }}" class="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring  max-w-max border bg-transparent border-yellow-500 text-yellow-500 hover:border-yellow-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
-                                                {{ __('Editar Perfil') }}
-                                            </x-dropdown-link>
+                                            <button data-modal-target="extralarge-modal"
+                                                data-modal-toggle="extralarge-modal"
+                                                class="block w-full md:w-auto text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
+                                                type="button">
+                                                Editar Perfil
+                                            </button>
                                         </div>
                                     </div>
 
@@ -66,7 +383,7 @@
                                         <!-- User basic-->
                                         <div>
                                             <h2 class="text-xl leading-6 font-bold dark:text-white">
-                                                {{$userperfil->persona->nombre}} {{$userperfil->persona->apellido}}
+                                                {{$userperfil->nombre}} {{$userperfil->apellido}}
                                             </h2>
                                             <p class="text-sm leading-5 font-medium dark:text-gray-400">@
                                                 {{$userperfil->name}}
@@ -74,9 +391,8 @@
                                         </div>
                                         <!-- Description and others -->
                                         <div class="mt-3">
-                                            <p class="dark:text-white leading-tight mb-2">Software Engineer / Designer /
-                                                Entrepreneur <br>Visit my website to test a working <b>Twitter
-                                                    Clone.</b> </p>
+                                            <p class="dark:text-white leading-tight mb-2">{{ $userperfil->descripcion }}
+                                            </p>
                                             <div class="dark:text-gray-400 flex">
                                                 <span class="flex mr-2"><svg viewBox="0 0 24 24"
                                                         class="h-5 w-5 paint-icon">
@@ -88,8 +404,8 @@
                                                                 d="M7.27 22.054c-1.61 0-3.197-.735-4.225-2.125-.832-1.127-1.176-2.51-.968-3.894s.943-2.605 2.07-3.438l1.478-1.094c.334-.245.805-.175 1.05.158s.177.804-.157 1.05l-1.48 1.095c-.803.593-1.326 1.464-1.475 2.45-.148.99.097 1.975.69 2.778 1.225 1.657 3.57 2.01 5.23.785l3.528-2.608c1.658-1.225 2.01-3.57.785-5.23-.498-.674-1.187-1.15-1.992-1.376-.4-.113-.633-.527-.52-.927.112-.4.528-.63.926-.522 1.13.318 2.096.986 2.794 1.932 1.717 2.324 1.224 5.612-1.1 7.33l-3.53 2.608c-.933.693-2.023 1.026-3.105 1.026z">
                                                             </path>
                                                         </g>
-                                                    </svg> <a href="https://ricardoribeirodev.com/personal/" target="#"
-                                                        class="leading-5 ml-1 text-yellow-500">www.RicardoRibeiroDEV.com</a></span>
+                                                    </svg> <a href="{{ $userperfil->pagina }}" target="#"
+                                                        class="leading-5 ml-1 text-yellow-500">{{ $userperfil->pagina }}</a></span>
                                                 <span class="flex mr-2"><svg viewBox="0 0 24 24"
                                                         class="h-5 w-5 paint-icon">
                                                         <g>
@@ -105,7 +421,8 @@
                                                             <circle cx="7.032" cy="17.486" r="1.285"></circle>
                                                             <circle cx="12" cy="17.486" r="1.285"></circle>
                                                         </g>
-                                                    </svg> <span class="leading-5 ml-1">Se unió el {{ \Carbon\Carbon::parse($userperfil->created_at)->locale('es')->isoFormat('D [de] MMMM [de] YYYY ') }}</span></span>
+                                                    </svg> <span class="leading-5 ml-1">Se unió el
+                                                        {{ \Carbon\Carbon::parse($userperfil->created_at)->locale('es')->isoFormat('D [de] MMMM [de] YYYY ') }}</span></span>
                                             </div>
                                         </div>
                                         <div
@@ -113,9 +430,9 @@
                                             <div class="text-center pr-3"><span
                                                     class="font-bold dark:text-white">520</span><span
                                                     class="dark:text-gray-400">
-                                                    Following</span></div>
+                                                    Siguiendo</span></div>
                                             <div class="text-center px-3"><span class="font-bold dark:text-white">23,4m
-                                                </span><span class="dark:text-gray-400"> Followers</span></div>
+                                                </span><span class="dark:text-gray-400"> Seguidores</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -245,7 +562,7 @@
 
                                         <input name="buscar" wire:model.live="search" type="text"
                                             id="table-search-users"
-                                            placeholder="Buscar en los eventos de {{$userperfil->persona->nombre}} {{$userperfil->persona->apellido}}"
+                                            placeholder="Buscar en los eventos de {{$userperfil->nombre}} {{$userperfil->apellido}}"
                                             class="h-10 px-10 pr-5 w-full text-sm text-gray-700 dark:text-gray-200 
                bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 
                focus:outline-none focus:ring-2 focus:ring-yellow-500 

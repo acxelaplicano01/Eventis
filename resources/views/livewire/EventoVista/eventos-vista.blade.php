@@ -116,8 +116,7 @@
                         <p class="mb-3 text-sm font-normal">
                         {{ $evento->usuario->name }}
                         </p>
-                        <p class="mb-4 text-sm">Software Engineer / Designer / Entrepreneur
-                        Visit my website to test a working Twitter Clone.</p>
+                        <p class="mb-4 text-sm">{{ $evento->usuario->descripcion }}</p>
                         <ul class="text-sm">
                             <li class="flex items-center mb-2">
                                 <span class="me-2 font-semibold text-gray-400">
@@ -128,7 +127,7 @@
                                             d="M6.487 1.746c0 4.192 3.592 1.66 4.592 5.754 0 .828 1 1.5 2 1.5s2-.672 2-1.5a1.5 1.5 0 0 1 1.5-1.5h1.5m-16.02.471c4.02 2.248 1.776 4.216 4.878 5.645C10.18 13.61 9 19 9 19m9.366-6h-2.287a3 3 0 0 0-3 3v2m6-8a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                     </svg>
                                 </span>
-                                <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">https://flowbite.com/</a>
+                                <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">{{ $evento->usuario->pagina }}</a>
                             </li>
                             <li class="flex items-start mb-2">
                                 <span class="me-2 font-semibold text-gray-400">
