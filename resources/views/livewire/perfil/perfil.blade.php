@@ -105,8 +105,7 @@
                                                             <circle cx="7.032" cy="17.486" r="1.285"></circle>
                                                             <circle cx="12" cy="17.486" r="1.285"></circle>
                                                         </g>
-                                                    </svg> <span class="leading-5 ml-1">Joined December,
-                                                        2019</span></span>
+                                                    </svg> <span class="leading-5 ml-1">Se unió el {{ \Carbon\Carbon::parse($userperfil->created_at)->locale('es')->isoFormat('D [de] MMMM [de] YYYY ') }}</span></span>
                                             </div>
                                         </div>
                                         <div

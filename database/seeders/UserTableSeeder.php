@@ -18,6 +18,8 @@ class UserTableSeeder extends Seeder
         $user = User::create([
             'name' => 'root', 
             'email' => 'admin@gmail.com',
+            'descripcion' => 'Administrador',
+            'pagina' => 'https://www.google.com',
             'password' => bcrypt('12345678')
         ]);
         $role = Role::create(['name' => 'root']);

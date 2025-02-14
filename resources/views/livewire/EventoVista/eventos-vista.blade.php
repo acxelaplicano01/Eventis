@@ -116,7 +116,8 @@
                         <p class="mb-3 text-sm font-normal">
                         {{ $evento->usuario->name }}
                         </p>
-                        <p class="mb-4 text-sm">Open-source library of Tailwind CSS components and Figma design system.</p>
+                        <p class="mb-4 text-sm">Software Engineer / Designer / Entrepreneur
+                        Visit my website to test a working Twitter Clone.</p>
                         <ul class="text-sm">
                             <li class="flex items-center mb-2">
                                 <span class="me-2 font-semibold text-gray-400">
