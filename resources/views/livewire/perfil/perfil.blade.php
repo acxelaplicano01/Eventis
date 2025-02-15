@@ -69,7 +69,7 @@
                                                     <li>
                                                         <button id="info-tab" data-tabs-target="#info" type="button"
                                                             role="tab" aria-controls="info" aria-selected="false"
-                                                            class="inline-flex items-center px-4 py-3 text-white bg-yellow-500 rounded-lg active w-full dark:bg-yellow-600"
+                                                            class="inline-flex items-center px-4 py-3 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
                                                             aria-current="page">
                                                             <svg class="w-6 h-6 me-2  text-gray-500 dark:text-gray-400"
                                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,6 @@
                                                                     d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z"
                                                                     clip-rule="evenodd" />
                                                             </svg>
-
                                                             Editar
                                                         </button>
                                                     </li>
@@ -103,7 +102,9 @@
                                                         </button>
                                                     </li>
                                                     <li>
-                                                        <button
+                                                        <button id="portada-tab" data-tabs-target="#portada"
+                                                            type="button" role="tab" aria-controls="portada"
+                                                            aria-selected="false"
                                                             class="inline-flex items-center px-4 py-3 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white">
                                                             <svg class="w-5 h-5 me-2  text-gray-500 dark:text-gray-400"
                                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -125,7 +126,7 @@
                                                         class="hidden p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
                                                         <h3
                                                             class="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                                                            Editar información "Nombre y usuario."</h3>
+                                                            Editar información "Nombre y usuario"</h3>
 
 
                                                         <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
@@ -168,7 +169,7 @@
                                                                             Correo</label>
                                                                         <input type="email" id="email"
                                                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                                            placeholder="name@flowbite.com" required />
+                                                                            placeholder="name@eventis.com" required />
                                                                     </div>
                                                                     <div class="mb-2">
                                                                         <label for="password"
@@ -176,7 +177,7 @@
                                                                             Usuario</label>
                                                                         <input type="text" id="password"
                                                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                                            required />
+                                                                            placeholder="eventis" required />
                                                                     </div>
 
                                                                     <div class="mb-2">
@@ -185,7 +186,7 @@
                                                                             Nombre</label>
                                                                         <input type="text" id="password"
                                                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                                            required />
+                                                                            placeholder="Nombres" required />
                                                                     </div>
                                                                     <div class="mb-2">
                                                                         <label for="password"
@@ -193,7 +194,7 @@
                                                                             Apellido</label>
                                                                         <input type="text" id="password"
                                                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                                            required />
+                                                                            placeholder="Apellidos" required />
                                                                     </div>
                                                                     <div class="mb-2">
                                                                         <label for="password"
@@ -201,10 +202,11 @@
                                                                             Descripción</label>
                                                                         <input type="text" id="password"
                                                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                                                                            placeholder="Cuenta un poco de tí"
                                                                             required />
                                                                     </div>
                                                                     <button type="submit"
-                                                                        class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Submit</button>
+                                                                        class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Guardar</button>
                                                                 </form>
 
 
@@ -215,7 +217,7 @@
 
                                                                 <form class="max-w-sm mx-auto">
                                                                     <label for="website-admin"
-                                                                        class="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">Mi
+                                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mi
                                                                         sitio</label>
                                                                     <div class="flex">
                                                                         <span
@@ -321,7 +323,7 @@
                                                                             placeholder="Twitter">
                                                                     </div>
                                                                     <button type="submit"
-                                                                        class="text-white mt-2 bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Submit</button>
+                                                                        class="text-white mt-2 bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Guardar</button>
                                                                 </form>
 
                                                             </div>
@@ -333,9 +335,107 @@
                                                         class="hidden p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
                                                         <h3
                                                             class="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                                                            Editar foto de perfil</h3>
+                                                            Cambiar foto de perfil
+                                                        </h3>
+                                                        <div class="flex items-center p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800"
+                                                            role="alert">
+                                                            <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true"
+                                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                                viewBox="0 0 20 20">
+                                                                <path
+                                                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                                                            </svg>
+                                                            <span class="sr-only">Info</span>
+                                                            <div>
+                                                                Su foto de perfil se utilizará en su perfil y en todo el
+                                                                sitio.
+                                                            </div>
+                                                        </div>
 
+                                                        <div class="flex items-center justify-center w-full">
+                                                            <label for="dropzone-file"
+                                                                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                                                <div
+                                                                    class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                                        aria-hidden="true"
+                                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                        viewBox="0 0 20 16">
+                                                                        <path stroke="currentColor"
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round" stroke-width="2"
+                                                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                                                    </svg>
+                                                                    <p
+                                                                        class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                                                        <span class="font-semibold">Click to
+                                                                            upload</span>
+                                                                        or drag and drop
+                                                                    </p>
+                                                                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                                                                        SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                                                </div>
+                                                                <input id="dropzone-file" type="file" class="hidden" />
+                                                            </label>
+                                                        </div>
+                                                        <button type="submit"
+                                                            class="text-white mt-2 bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Guardar</button>
+                                                        <button type="submit"
+                                                            class="text-white mt-2 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Eliminar
+                                                            mi foto de perfil</button>
+                                                    </div>
 
+                                                    <div id="portada" role="tabpanel" aria-labelledby="portada-tab"
+                                                        class="hidden p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
+                                                        <h3
+                                                            class="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                                                            Cambiar foto de portada
+                                                        </h3>
+                                                        <div class="flex items-center p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800"
+                                                            role="alert">
+                                                            <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true"
+                                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                                viewBox="0 0 20 20">
+                                                                <path
+                                                                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                                                            </svg>
+                                                            <span class="sr-only">Info</span>
+                                                            <div>
+                                                            Su foto de portada se utilizará para personalizar el encabezado de su perfil.
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="flex items-center justify-center w-full">
+                                                            <label for="dropzone-file"
+                                                                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                                                <div
+                                                                    class="flex flex-col items-center justify-center pt-5 pb-6">
+                                                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                                        aria-hidden="true"
+                                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                        viewBox="0 0 20 16">
+                                                                        <path stroke="currentColor"
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round" stroke-width="2"
+                                                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                                                    </svg>
+                                                                    <p
+                                                                        class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                                                        <span class="font-semibold">Click to
+                                                                            upload</span>
+                                                                        or drag and drop
+                                                                    </p>
+                                                                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                                                                        SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                                                </div>
+                                                                <input id="dropzone-file" type="file" class="hidden" />
+                                                            </label>
+                                                        </div>
+                                                        <button type="submit"
+                                                            class="text-white mt-2 bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Guardar</button>
+                                                        <button type="submit"
+                                                            class="text-white mt-2 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Eliminar
+                                                            mi foto de portada</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -344,20 +444,11 @@
                                         <div
                                             class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
                                             <button data-modal-hide="extralarge-modal" type="button"
-                                                class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-yellow-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button>
+                                                class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-yellow-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancelar</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
-
-
-
-
 
 
 
@@ -389,22 +480,25 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Edit Button -->
-                                        <div class="flex flex-col text-right">
+                                        <!-- Botones alineados horizontalmente -->
+                                        <div class="flex space-x-2 justify-end">
+                                            <!-- Editar Button -->
                                             <button data-modal-target="extralarge-modal"
                                                 data-modal-toggle="extralarge-modal"
-                                                class="flex justify-center max-h-max whitespace-nowrap md:w-auto text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
+                                                class="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring  max-w-max border bg-transparent border-yellow-500 text-yellow-500 hover:border-yellow-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto"
                                                 type="button">
                                                 Editar
                                             </button>
-                                            <!-- drawer init and show -->
+
+                                            <!-- Publicar Button -->
                                             <button
-                                                class="flex justify-center  max-h-max whitespace-nowrap md:w-auto text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
+                                                class="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring  max-w-max border bg-transparent border-yellow-500 text-yellow-500 hover:border-yellow-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto"
                                                 type="button" data-drawer-target="drawer-form"
                                                 data-drawer-show="drawer-form" aria-controls="drawer-form">
                                                 Publicar
                                             </button>
                                         </div>
+
                                     </div>
 
                                     <!-- drawer component -->
@@ -418,7 +512,7 @@
                                                 viewBox="0 0 20 20">
                                                 <path
                                                     d="M0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm14-7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm-5-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm-5-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4Z" />
-                                            </svg>New event
+                                            </svg>Nueva Publicación
                                         </h5>
                                         <button type="button" data-drawer-hide="drawer-form" aria-controls="drawer-form"
                                             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
@@ -433,61 +527,19 @@
                                         <form class="mb-6">
                                             <div class="mb-6">
                                                 <label for="title"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titulo</label>
                                                 <input type="text" id="title"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                     placeholder="Apple Keynote" required />
                                             </div>
                                             <div class="mb-6">
                                                 <label for="description"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
                                                 <textarea id="description" rows="4"
                                                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                     placeholder="Write event description..."></textarea>
                                             </div>
-                                            <div class="relative mb-6">
-                                                <div
-                                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                        fill="currentColor" viewBox="0 0 20 20">
-                                                        <path
-                                                            d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                                                    </svg>
-                                                </div>
-                                                <input datepicker="" datepicker-autohide datepicker-buttons=""
-                                                    type="text"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 datepicker-input"
-                                                    placeholder="Select date">
-                                            </div>
-                                            <div class="mb-4">
-                                                <label for="guests"
-                                                    class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Invite
-                                                    guests</label>
-                                                <div class="relative">
-                                                    <input type="search" id="guests"
-                                                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                        placeholder="Add guest email" required />
-                                                    <button type="button"
-                                                        class="absolute inline-flex items-center px-3 py-1 text-sm font-medium text-white bg-yellow-700 rounded-lg end-2 bottom-2 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"><svg
-                                                            class="w-3 h-3 me-1.5" aria-hidden="true"
-                                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                            viewBox="0 0 20 18">
-                                                            <path
-                                                                d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-2V5a1 1 0 0 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 0 0 2 0V9h2a1 1 0 1 0 0-2Z" />
-                                                        </svg>Add</button>
-                                                </div>
-                                            </div>
-                                            <div class="flex mb-4 -space-x-4 rtl:space-x-reverse">
-                                                <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
-                                                    src="/docs/images/people/profile-picture-5.jpg" alt="">
-                                                <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
-                                                    src="/docs/images/people/profile-picture-2.jpg" alt="">
-                                                <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
-                                                    src="/docs/images/people/profile-picture-3.jpg" alt="">
-                                                <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
-                                                    src="/docs/images/people/profile-picture-4.jpg" alt="">
-                                            </div>
+                                            
                                             <button type="submit"
                                                 class="text-white justify-center flex items-center bg-yellow-700 hover:bg-yellow-800 w-full focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800"><svg
                                                     class="w-3.5 h-3.5 me-2.5" aria-hidden="true"
@@ -544,7 +596,7 @@
                                                             <circle cx="7.032" cy="17.486" r="1.285"></circle>
                                                             <circle cx="12" cy="17.486" r="1.285"></circle>
                                                         </g>
-                                                    </svg> <span class="leading-5 ml-1">Se unió el
+                                                    </svg> <span class="leading-5 ml-1">Se unió un
                                                         {{ \Carbon\Carbon::parse($userperfil->created_at)->locale('es')->isoFormat('D [de] MMMM [de] YYYY ') }}</span></span>
                                             </div>
                                         </div>
