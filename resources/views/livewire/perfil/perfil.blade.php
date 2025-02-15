@@ -492,6 +492,14 @@
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                     placeholder="Apple Keynote" required />
                                             </div>
+                                            <div class="mb-4">
+                                                <label for="Plantilla" class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Imagen:</label>
+                                                <input type="file" wire:model="Plantilla"
+                                                    class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500">
+                                                @if ($userperfil->foto instanceof \Illuminate\Http\UploadedFile)
+                                                    <img src="{{ $userperfi->foto->temporaryUrl() }}" class="mt-2 w-20 h-20 object-cover">
+                                                @endif
+                                            </div>
                                             <div class="mb-6">
                                                 <label for="description"
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
