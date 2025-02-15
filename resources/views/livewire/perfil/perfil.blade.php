@@ -64,6 +64,8 @@
                                         <div class="p-4 md:p-5 space-y-4">
                                             <div class="md:flex">
                                                 <ul id="default-tab" data-tabs-toggle="#default-tab-content"
+                                                    data-tabs-active-classes="text-yellow-600 hover:text-yellow-600 dark:text-yellow-500 dark:hover:text-yellow-500 border-yellow-600 dark:border-yellow-500"
+                                                    data-tabs-inactive-classes="dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300"
                                                     role="tablist"
                                                     class="flex-column space-y space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
                                                     <li>
@@ -162,52 +164,9 @@
                                                                 aria-labelledby="settings-tab">
 
 
-                                                                <form class="max-w-sm mx-auto">
-                                                                    <div class="mb-2">
-                                                                        <label for="email"
-                                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                                            Correo</label>
-                                                                        <input type="email" id="email"
-                                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                                            placeholder="name@eventis.com" required />
-                                                                    </div>
-                                                                    <div class="mb-2">
-                                                                        <label for="password"
-                                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                                            Usuario</label>
-                                                                        <input type="text" id="password"
-                                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                                            placeholder="eventis" required />
-                                                                    </div>
-
-                                                                    <div class="mb-2">
-                                                                        <label for="password"
-                                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                                            Nombre</label>
-                                                                        <input type="text" id="password"
-                                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                                            placeholder="Nombres" required />
-                                                                    </div>
-                                                                    <div class="mb-2">
-                                                                        <label for="password"
-                                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                                            Apellido</label>
-                                                                        <input type="text" id="password"
-                                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                                            placeholder="Apellidos" required />
-                                                                    </div>
-                                                                    <div class="mb-2">
-                                                                        <label for="password"
-                                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                                            Descripción</label>
-                                                                        <input type="text" id="password"
-                                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                                            placeholder="Cuenta un poco de tí"
-                                                                            required />
-                                                                    </div>
-                                                                    <button type="submit"
-                                                                        class="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Guardar</button>
-                                                                </form>
+                                                                @if (Laravel\Fortify\Features::canUpdateProfileInformation())
+                                                                    @livewire('profile.update-profile-information-form')
+                                                                @endif
 
 
                                                             </div>
@@ -401,7 +360,8 @@
                                                             </svg>
                                                             <span class="sr-only">Info</span>
                                                             <div>
-                                                            Su foto de portada se utilizará para personalizar el encabezado de su perfil.
+                                                                Su foto de portada se utilizará para personalizar el
+                                                                encabezado de su perfil.
                                                             </div>
                                                         </div>
 
@@ -492,7 +452,7 @@
 
                                             <!-- Publicar Button -->
                                             <button
-                                                class="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring  max-w-max border bg-transparent border-yellow-500 text-yellow-500 hover:border-yellow-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto"
+                                                class="flex justify-center bg-yellow-500 max-h-max whitespace-nowrap focus:outline-none  focus:ring  max-w-max border bg-transparent border-yellow-500 text-white hover:border-yellow-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto"
                                                 type="button" data-drawer-target="drawer-form"
                                                 data-drawer-show="drawer-form" aria-controls="drawer-form">
                                                 Publicar
@@ -539,7 +499,7 @@
                                                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                                     placeholder="Write event description..."></textarea>
                                             </div>
-                                            
+
                                             <button type="submit"
                                                 class="text-white justify-center flex items-center bg-yellow-700 hover:bg-yellow-800 w-full focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800"><svg
                                                     class="w-3.5 h-3.5 me-2.5" aria-hidden="true"
