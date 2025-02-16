@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
            TipoPerfilSeeder::class,
            LocalidadSeeder::class,
            PersonaSeeder::class,   
-          // PublicacionSeeder::class,      
+          PublicacionSeeder::class,      
        ]);
     }
 }

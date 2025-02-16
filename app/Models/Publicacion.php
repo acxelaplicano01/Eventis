@@ -9,11 +9,12 @@ class Publicacion extends BaseModel
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['IdUsuario','descripcion','foto', 'fecha','hora','lugar'];
+    protected $table = 'publicaciones';
+    protected $fillable = ['descripcion','foto', 'fecha','hora','lugar', 'created_by'];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'IdUsuario ');
+        return $this->belongsTo(User::class, 'IdUsuario');
     }
 
 }

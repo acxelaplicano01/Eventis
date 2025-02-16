@@ -440,7 +440,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Botones alineados horizontalmente -->
+                                        <!-- Botones User -->
                                         <div class="flex space-x-2 justify-end">
                                             <!-- Editar Button -->
                                             <button data-modal-target="extralarge-modal"
@@ -451,74 +451,119 @@
                                             </button>
 
                                             <!-- Publicar Button -->
-                                            <button
+                                            <button wire:click="create"
                                                 class="flex justify-center bg-yellow-500 max-h-max whitespace-nowrap focus:outline-none  focus:ring  max-w-max border bg-transparent border-yellow-500 text-white hover:border-yellow-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto"
-                                                type="button" data-drawer-target="drawer-form"
-                                                data-drawer-show="drawer-form" aria-controls="drawer-form">
+                                                type="button" data-modal-target="crud-modal"
+                                                data-modal-toggle="crud-modal">
                                                 Publicar
                                             </button>
                                         </div>
-
                                     </div>
 
-                                    <!-- drawer component -->
-                                    <div id="drawer-form"
-                                        class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-80 dark:bg-gray-800"
-                                        tabindex="-1" aria-labelledby="drawer-form-label">
-                                        <h5 id="drawer-label"
-                                            class="inline-flex items-center mb-6 text-base font-semibold text-gray-500 uppercase dark:text-gray-400">
-                                            <svg class="w-3.5 h-3.5 me-2.5" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                viewBox="0 0 20 20">
-                                                <path
-                                                    d="M0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm14-7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm-5-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm-5-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4Z" />
-                                            </svg>Nueva Publicación
-                                        </h5>
-                                        <button type="button" data-drawer-hide="drawer-form" aria-controls="drawer-form"
-                                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
-                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                fill="none" viewBox="0 0 14 14">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                            </svg>
-                                            <span class="sr-only">Close menu</span>
-                                        </button>
-                                        <form class="mb-6">
-                                            <div class="mb-6">
-                                                <label for="title"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titulo</label>
-                                                <input type="text" id="title"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                    placeholder="Apple Keynote" required />
-                                            </div>
-                                            <div class="mb-4">
-                                                <label for="Plantilla" class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Imagen:</label>
-                                                <input type="file" wire:model="Plantilla"
-                                                    class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500">
-                                                @if ($userperfil->foto instanceof \Illuminate\Http\UploadedFile)
-                                                    <img src="{{ $userperfi->foto->temporaryUrl() }}" class="mt-2 w-20 h-20 object-cover">
-                                                @endif
-                                            </div>
-                                            <div class="mb-6">
-                                                <label for="description"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
-                                                <textarea id="description" rows="4"
-                                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                                    placeholder="Write event description..."></textarea>
-                                            </div>
+                                    
 
-                                            <button type="submit"
-                                                class="text-white justify-center flex items-center bg-yellow-700 hover:bg-yellow-800 w-full focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800"><svg
-                                                    class="w-3.5 h-3.5 me-2.5" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                    viewBox="0 0 20 20">
-                                                    <path
-                                                        d="M18 2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2ZM2 18V7h6.7l.4-.409A4.309 4.309 0 0 1 15.753 7H18v11H2Z" />
-                                                    <path
-                                                        d="M8.139 10.411 5.289 13.3A1 1 0 0 0 5 14v2a1 1 0 0 0 1 1h2a1 1 0 0 0 .7-.288l2.886-2.851-3.447-3.45ZM14 8a2.463 2.463 0 0 0-3.484 0l-.971.983 3.468 3.468.987-.971A2.463 2.463 0 0 0 14 8Z" />
-                                                </svg> Crear Publicación</button>
-                                        </form>
+                                   <!-- Main modal Publicar -->
+                                    <div id="crud-modal" tabindex="-1" aria-hidden="true"
+                                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                        <!-- Fondo opaco -->
+                                        <div class="fixed inset-0 bg-black opacity-50"></div>
+                                        <div class="relative p-4 w-full max-w-xl max-h-full">
+                                            <!-- Modal content -->
+                                            <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+                                                <!-- Modal header -->
+                                                <div
+                                                    class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    {{ $publicacion_id ? 'Editar Publicación' : 'Nueva Publicación' }}
+                                                    </h3>
+                                                    <button type="button"
+                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                        data-modal-toggle="crud-modal">
+                                                        <svg class="w-3 h-3" aria-hidden="true"
+                                                            xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 14 14">
+                                                            <path stroke="currentColor" stroke-linecap="round"
+                                                                stroke-linejoin="round" stroke-width="2"
+                                                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                        </svg>
+                                                        <span class="sr-only">Close modal</span>
+                                                    </button>
+                                                </div>
+                                                <!-- Modal body -->
+                                                <form class="p-4 md:p-5" wire:submit.prevent="store">
+                                                @csrf
+                                                    <article class="transition duration-350 ease-in-out">
+                                                        <div class="flex flex-shrink-0 pb-0">
+                                                            <a href="#" class="flex-shrink-0 group block">
+                                                                <div class="flex items-center">
+                                                                    <div>
+                                                                        <img class="inline-block h-10 w-10 rounded-full"
+                                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="">
+                                                                    </div>
+                                                                    <div class="ml-3">
+                                                                        <p class="text-base leading-6 font-medium dark:text-white">
+                                                                            {{$userperfil->nombre}} {{$userperfil->apellido}}
+    </p>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        
+                                                        <div class="pl-11">
+                                                            <textarea wire:model="descripcion" id="message" rows="1" oninput="autoResize(this)"
+                                                                class="block p-1.5 w-full resize-none text-sm text-gray-900 bg-none rounded-lg border border-none focus:ring-white focus:border-white dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gary-700"
+                                                                placeholder="¿Qué novedades tienes?"></textarea>
+                                                                @if ($foto)
+                                                                    <div class="md:flex-shrink pr-6 pt-2">
+                                                                        <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64"
+                                                                            style="height: 200px; background-image: url({{ is_string($foto) ? asset($foto) : $foto->temporaryUrl() }})">
+                                                                            <img src="{{ is_string($foto) ? asset($foto) : $foto->temporaryUrl() }}"
+                                                                                class="object-cover opacity-0 w-full h-full">
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
+
+                                                            <div class="flex items-center justify-between">
+                                                                <div class="flex ps-0 space-x-1 rtl:space-x-reverse sm:ps-2">
+                                                                    <button type="button"
+                                                                        class="inline-flex justify-center items-center p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                            viewBox="0 0 12 20">
+                                                                            <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
+                                                                                d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6" />
+                                                                        </svg>
+                                                                        <span class="sr-only">Attach file</span>
+                                                                    </button>
+                                                                    <button type="button"
+                                                                        class="inline-flex justify-center items-center p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                                            viewBox="0 0 16 20">
+                                                                            <path
+                                                                                d="M8 0a7.992 7.992 0 0 0-6.583 12.535 1 1 0 0 0 .12.183l.12.146c.112.145.227.285.326.4l5.245 6.374a1 1 0 0 0 1.545-.003l5.092-6.205c.206-.222.4-.455.578-.7l.127-.155a.934.934 0 0 0 .122-.192A8.001 8.001 0 0 0 8 0Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
+                                                                        </svg>
+                                                                        <span class="sr-only">Set location</span>
+                                                                    </button>
+                                                                    <label type="button" for="dropzone-file"
+                                                                        class="inline-flex justify-center items-center p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                                                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                                            viewBox="0 0 20 18">
+                                                                            <path
+                                                                                d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
+                                                                        </svg>
+                                                                        <span class="sr-only">Upload image</span>
+                                                                        <input id="dropzone-file" type="file" class="hidden" wire:model="foto"/>
+                                                                    </label>
+                                                                </div>
+                                                                <button wire:click.prevent="store" type="submit"
+                                                                    class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-yellow-500 rounded-lg focus:ring-4 focus:ring-yellow-200 dark:focus:ring-yellow-900 hover:bg-yellow-800">
+                                                                    {{ $publicacion_id ? 'Actualizar' : 'Publicar' }}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </article>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <!-- Profile info -->
@@ -581,107 +626,117 @@
                                 </div>
                                 <hr class="dark:border-gray-700">
                             </div>
+                            
                             <ul class="list-none">
-                                <li>
-                                    <!--second tweet-->
-                                    <article class="transition duration-350 ease-in-out">
-                                        <div class="flex flex-shrink-0 p-4 pb-0">
-                                            <a href="#" class="flex-shrink-0 group block">
-                                                <div class="flex items-center">
-                                                    <div>
-                                                        <img class="inline-block h-10 w-10 rounded-full"
-                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                                                            alt="">
+                                @foreach($publicaciones as $publicacion)
+                                    <li>
+                                        <!--second tweet-->
+                                        <article class="transition duration-350 ease-in-out rounded-lg">
+                                            <div class="flex flex-shrink-0 p-4 pb-0">
+                                                <a href="#" class="flex-shrink-0 group block">
+                                                    <div class="flex items-center">
+                                                        <div>
+                                                            <img class="inline-block h-10 w-10 rounded-full"
+                                                                src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="ml-3">
+                                                            <p class="text-base leading-6 font-medium dark:text-white">
+                                                            {{ $publicacion->user->nombre }} {{ $publicacion->user->apellido }}
+                                                                <span
+                                                                    class="text-sm leading-5 font-medium dark:text-gray-400 group-hover:text-gray-400 text-gray-500 transition ease-in-out duration-150">
+                                                                    {{ $publicacion->created_at->diffForHumans() }}
+                                                                </span>
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div class="ml-3">
-                                                        <p class="text-base leading-6 font-medium dark:text-white">
-                                                            Sonali Hirave
-                                                            <span
-                                                                class="text-sm leading-5 font-medium dark:text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                                                                @ShonaDesign . 16 April
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-
-                                        <div class="pl-16">
-                                            <p class="text-base width-auto font-medium dark:text-white flex-shrink">
-                                                Day 07 of the challenge <a href="#"
-                                                    class="text-yellow-400 hover:text-yellow-300">#100DaysOfCode</a>
-                                                I was wondering what I can do with <a href="#"
-                                                    class="text-yellow-400 hover:text-yellow-300">#tailwindcss</a>, so
-                                                just
-                                                started building
-                                                Twitter UI using Tailwind and so far it looks so promising. I will post
-                                                my code after completion.
-                                                [07/100]
-                                                <a href="#" class="text-yellow-400 hover:text-yellow-300"> #WomenWhoCode
-                                                    #CodeNewbie</a>
-                                            </p>
-
-                                            <div class="md:flex-shrink pr-6 pt-3">
-                                                <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64"
-                                                    style="height: 200px; background-image: url(https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80);">
-                                                    <img class="opacity-0 w-full h-full"
-                                                        src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80"
-                                                        alt="">
-                                                </div>
+                                                </a>
                                             </div>
 
-                                            <div class="flex items-center py-4">
-                                                <div
-                                                    class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-yellow-400 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                    12.3 k
+                                            <div>
+                                                <p class="pl-3 mt-4 mb-4 text-base width-auto font-medium dark:text-white flex-shrink">
+                                                    {{ $publicacion->descripcion }}
+                                                </p>
+                                                <!-- Imagen con efecto Hover para abrir Modal -->
+                                            @if($publicacion->foto)
+                                                <img src="{{ asset($publicacion->foto) }}" 
+                                                    class="cursor-pointer transition duration-300 ease-in-out w-full h-full object-cover"
+                                                    data-modal-target="imagenModal{{ $publicacion->id }}"
+                                                    data-modal-toggle="imagenModal{{ $publicacion->id }}"
+                                                >
+                                            @endif
+                                                        <!-- Modal de Flowbite para ampliar la imagen -->
+                                                <div id="imagenModal{{ $publicacion->id }}" tabindex="-1" aria-hidden="true" 
+                                                    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                                    <!-- Fondo opaco -->
+                                <div class="fixed inset-0 bg-black opacity-50"></div>
+                                                    <div class="relative w-full max-w-2xl max-h-full">
+                                                        <div class="relative bg-white rounded-lg shadow">
+                                                            <button type="button" 
+                                                                class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center" 
+                                                                data-modal-hide="imagenModal{{ $publicacion->id }}">
+                                                                ✕
+                                                            </button>
+                                                            <div class="p-5 text-center">
+                                                                <img src="{{ asset($publicacion->foto) }}" class="w-full h-auto rounded-lg">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div
-                                                    class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-green-400 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                    14 k
-                                                </div>
-                                                <div
-                                                    class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-red-600 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                    14 k
-                                                </div>
-                                                <div
-                                                    class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-yellow-400 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M17.53 7.47l-5-5c-.293-.293-.768-.293-1.06 0l-5 5c-.294.293-.294.768 0 1.06s.767.294 1.06 0l3.72-3.72V15c0 .414.336.75.75.75s.75-.336.75-.75V4.81l3.72 3.72c.146.147.338.22.53.22s.384-.072.53-.22c.293-.293.293-.767 0-1.06z">
-                                                            </path>
-                                                            <path
-                                                                d="M19.708 21.944H4.292C3.028 21.944 2 20.916 2 19.652V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 .437.355.792.792.792h15.416c.437 0 .792-.355.792-.792V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 1.264-1.028 2.292-2.292 2.292z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
+
+                                                <div class="flex items-center py-4 pl-16">
+                                                    <div
+                                                        class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-yellow-400 transition duration-350 ease-in-out">
+                                                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                            <g>
+                                                                <path
+                                                                    d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z">
+                                                                </path>
+                                                            </g>
+                                                        </svg>
+                                                        12.3 k
+                                                    </div>
+                                                    <div
+                                                        class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-green-400 transition duration-350 ease-in-out">
+                                                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                            <g>
+                                                                <path
+                                                                    d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z">
+                                                                </path>
+                                                            </g>
+                                                        </svg>
+                                                        14 k
+                                                    </div>
+                                                    <div
+                                                        class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-red-600 transition duration-350 ease-in-out">
+                                                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                            <g>
+                                                                <path
+                                                                    d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z">
+                                                                </path>
+                                                            </g>
+                                                        </svg>
+                                                        14 k
+                                                    </div>
+                                                    <div
+                                                        class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-yellow-400 transition duration-350 ease-in-out">
+                                                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                            <g>
+                                                                <path
+                                                                    d="M17.53 7.47l-5-5c-.293-.293-.768-.293-1.06 0l-5 5c-.294.293-.294.768 0 1.06s.767.294 1.06 0l3.72-3.72V15c0 .414.336.75.75.75s.75-.336.75-.75V4.81l3.72 3.72c.146.147.338.22.53.22s.384-.072.53-.22c.293-.293.293-.767 0-1.06z">
+                                                                </path>
+                                                                <path
+                                                                    d="M19.708 21.944H4.292C3.028 21.944 2 20.916 2 19.652V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 .437.355.792.792.792h15.416c.437 0 .792-.355.792-.792V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 1.264-1.028 2.292-2.292 2.292z">
+                                                                </path>
+                                                            </g>
+                                                        </svg>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <hr class="dark:border-gray-700">
-                                    </article>
-                                </li>
+                                            <hr class="dark:border-gray-700">
+                                        </article>
+                                    </li>
+                                @endforeach
                             </ul>
                         </section>
 
@@ -947,5 +1002,11 @@
                 fill: currentcolor;
             }
         </style>
+        <script>
+            function autoResize(textarea) {
+                textarea.style.height = 'auto';
+                textarea.style.height = (textarea.scrollHeight) + 'px';
+            }
+        </script>
     </x-layouts.reportes>
 </div>

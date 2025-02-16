@@ -265,7 +265,6 @@ class Diplomas extends Component
         $this->Nombre= $diploma->Nombre;
         $this->Titulo1 = $diploma->Titulo1;
         $this->NombreFirma1 = $diploma->NombreFirma1;
-
         $this->Titulo2 = $diploma->Titulo2;
         $this->NombreFirma2 = $diploma->NombreFirma2;
 
