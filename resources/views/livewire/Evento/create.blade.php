@@ -114,7 +114,6 @@
                             <input type="number" wire:model="precio"
                                 class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                 id="precio" placeholder="Precio" step="0.01" min="0">
-                            @error('precio') <span class="text-red-500">{{ $message }}</span> @enderror
                         </div>
                     @endif
 

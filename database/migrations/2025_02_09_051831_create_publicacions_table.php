@@ -14,7 +14,7 @@ return new class extends Migration {
         Schema::create('publicaciones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('IdUsuario');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->string('foto')->nullable();
             $table->date('fecha');
             $table->time('hora');

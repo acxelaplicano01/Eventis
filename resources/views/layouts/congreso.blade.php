@@ -2,6 +2,7 @@
 
 @section('styles')
     @yield('app-styles')
+    @livewireStyles
 @endsection
 
 @section('content')
@@ -10,4 +11,5 @@
 
 @section('scripts')
     @yield('app-scripts')
+    @livewireScripts
 @endsection
