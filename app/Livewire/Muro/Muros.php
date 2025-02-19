@@ -58,15 +58,26 @@ class Muros extends Component
         $publicacion = Publicacion::findOrFail($id);
         $this->publicacion_id = $id;
         $this->descripcion = $publicacion->descripcion;
-        $this->foto = asset($publicacion->foto);
+        $this->foto = asset('storage/' . $publicacion->foto);
         $this->openModal();
     }
 
     public function delete()
     {
-        if (!$this->confirmingDelete || !$this->IdAEliminar) {
-            session()->flash('error', 'No hay ninguna publicación para eliminar.');
-            return;
+        if ($this->confirmingDelete) {
+            $publicacion = Publicacion::find($this->IdAEliminar);
+
+            if (!$publicacion) {
+                session()->flash('error', 'Publicación no encontrada.');
+                $this->confirmingDelete = false;
+                return;
+            }
+
+            $publicacion->forceDelete();
+            session()->flash('message', 'Publicación eliminada correctamente!');
+            $this->confirmingDelete = false;
+            $this->IdAEliminar = null;
+            $this->closeModal();
         }
     }
 
@@ -118,11 +129,6 @@ class Muros extends Component
 
         if (!$publicacion) {
             session()->flash('error', 'Publicación no encontrada.');
-            return;
-        }
-
-        if ($publicacion->eventos()->exists()) {
-            session()->flash('error', 'No se puede eliminar la publicación porque tiene eventos asociados.');
             return;
         }
 

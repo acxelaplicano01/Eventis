@@ -46,7 +46,7 @@
                         <div id="extralarge-modal" tabindex="-1"
                             class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                             <!-- Fondo opaco -->
-                            <div class="fixed inset-0 bg-black opacity-50"></div>
+                            <div class="fixed inset-0 bg-black opacity-60"></div>
                             <div class="relative w-full max-w-xl max-h-full">
                                 <!-- Modal content -->
                                 <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
@@ -413,9 +413,6 @@
 
 
 
-
-
-
                         <!-- User card-->
                         <div>
                             <div class="w-full bg-cover bg-no-repeat bg-center"
@@ -545,6 +542,84 @@
                                                     </div>
                                                 </div>
                                             </a>
+                                            <button id="dropdownMenuIconHorizontalButton-{{$publicacion->id}}"
+                                                data-dropdown-toggle="dropdownDotsHorizontal-{{$publicacion->id}}"
+                                                class="inline-flex ml-40 items-center p-2 text-sm font-medium text-center text-gray-900 rounded-lg dark:text-white"
+                                                type="button">
+                                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                                    <path
+                                                        d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                                                </svg>
+                                            </button>
+                                            <!-- Dropdown menu -->
+                                            <div id="dropdownDotsHorizontal-{{$publicacion->id}}"
+                                                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                                    aria-labelledby="dropdownMenuIconHorizontalButton-{{$publicacion->id}}">
+                                                    <li>
+                                                        <a wire:click="edit({{ $publicacion->id }})"
+                                                            class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Editar</a>
+                                                    </li>
+                                                    <li>
+                                                        <a wire:click="confirmDelete({{ $publicacion->id }})"
+                                                            class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Eliminar</a>
+                                                    </li>
+                                                    <li>
+                                                        <a wire:click="edit({{ $publicacion->id }})"
+                                                            class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Guardar</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="py-2">
+                                                    <a href="#"
+                                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Reportar</a>
+                                                </div>
+                                            </div>
+
+                                            @if (session()->has('error'))
+                                                <div class="fixed z-50 inset-0 flex items-center justify-center overflow-y-auto ease-out duration-400">
+                                                    <div class="fixed inset-0 transition-opacity">
+                                                        <div class="absolute inset-0 bg-black opacity-60"></div>
+                                                    </div>
+
+                                                    <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                                                        role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                                                        <div class="p-6">
+                                                            <h3 class="text-lg font-semibold mb-4">Error</h3>
+                                                            <p>{{ session('error') }}</p>
+                                                            <div class="mt-4 flex justify-end">
+                                                                <button wire:click="$set('confirmingDelete', false)"
+                                                                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mr-2">
+                                                                    Aceptar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @elseif ($confirmingDelete)
+                                                <div class="fixed z-50 inset-0 flex items-center justify-center overflow-y-auto ease-out duration-400">
+                                                    <div class="fixed inset-0 transition-opacity">
+                                                        <div class="absolute inset-0 bg-black opacity-60"></div>
+                                                    </div>
+
+                                                    <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                                                        role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                                                        <div class="p-6">
+                                                            <h3 class="text-lg font-semibold mb-4">Confirmación de Eliminación</h3>
+                                                            <p>¿Estás seguro de que deseas eliminar esta publicación? Esta acción
+                                                                no se puede deshacer.</p>
+                                                            <div class="mt-4 flex justify-end">
+                                                                <button wire:click="$set('confirmingDelete', false)"
+                                                                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mr-2">
+                                                                    Cancelar
+                                                                </button>
+                                                                <button wire:click="delete" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+                                                                    Eliminar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
                                         </div>
 
                                         <div>
@@ -563,7 +638,7 @@
                                             <div id="imagenModal{{ $publicacion->id }}" tabindex="-1" aria-hidden="true"
                                                 class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                                 <!-- Fondo opaco -->
-                                                <div class="fixed inset-0 bg-black opacity-50"></div>
+                                                <div class="fixed inset-0 bg-black opacity-60"></div>
                                                 <div class="relative w-full max-w-2xl max-h-full">
                                                     <div class="relative bg-white rounded-lg shadow">
                                                         <button type="button"
@@ -669,8 +744,8 @@
                                             <!-- Imagen 1 -->
                                             <a href="{{ asset(str_replace('public', 'storage', $evento->logo)) }}"
                                                 target="_blank" class="group">
-                                                <div class="w-full h-24 bg-cover bg-no-repeat bg-center rounded-md border border-gray-300 dark:border-gray-700 group-hover:opacity-80 transition duration-300 ease-in-out shadow-sm dark:shadow-md"
-                                                    style="background-image: url({{ asset(str_replace('public', 'storage', $evento->logo)) }};">
+                                                <div class="w-full h-24 bg-cover bg-no-repeat bg-center rounded-md border border-gray-300 dark:border-gray-700 group-hover:opacity-60 transition duration-300 ease-in-out shadow-sm dark:shadow-md"
+                                                    style="background-image: url({{ asset( 'storage/'. $evento->logo) }};">
                                                     @if($evento->logo)
                                                         <img src="{{ asset(str_replace('public', 'storage', $evento->logo)) }}"
                                                             alt="Logo del Evento" class="h-full w-full">

@@ -3,7 +3,7 @@
 <div id="crud-modal" tabindex="-1" aria-hidden="true"
     class="fixed inset-0 z-50 flex items-center justify-center w-full h-full">
     <!-- Fondo opaco -->
-    <div class="fixed inset-0 bg-black opacity-50"></div>
+    <div class="fixed inset-0 bg-black opacity-60"></div>
     <div class="relative p-4 w-full max-w-xl max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
@@ -88,7 +88,7 @@
                                             d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
                                     </svg>
                                     <span class="sr-only">Upload image</span>
-                                    <input id="dropzone-file" type="file" class="hidden" wire:model="foto" />
+                                    <input id="dropzone-file" type="file" class="" wire:model="foto" />
                                 </label>
                             </div>
                             <button wire:click.prevent="store()" type="submit" data-modal-hide="crud-modal"
