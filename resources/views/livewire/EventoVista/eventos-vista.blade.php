@@ -90,15 +90,16 @@
 
                                     <div class="border-t border-gray-200 dark:border-gray-700">
                                         <div class="flex">
-                                            <div class="flex items-center flex-1 pl-6 pr-1 py-5">
+                                            <div class="flex items-center flex-1 pl-6 pr-1 py-5 w-16">
                                                <button data-popover-target="popover-company-profile-{{$evento->id}}" type="button">
-                                               <img class="object-cover w-8 h-8 rounded-full"
+                                               <a href="{{route('muro', ['userperfil' => $evento->usuario->id])}}" class="hover:underline"> 
+                                               <img class="object-cover w-9 h-9 rounded-full"
                                                     src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/3/avatar-3.jpg"
-                                                    alt="" />
+                                                    alt="" /></a>
                                                </button>
-                                                <span
+                                               <span
                                                     class="flex-1 block min-w-0 ml-3 text-base font-semibold text-gray-900 dark:text-gray-300 truncate">
-                                                        {{ $evento->usuario->persona->nombre }} {{ $evento->usuario->persona->apellido }}<p class="fecha-creacion font-medium">{{ $evento->created_at->diffForHumans() }}</p></span>
+                                                        {{ $evento->usuario->nombre }} {{ $evento->usuario->apellido }}<p class="fecha-creacion font-medium">{{ $evento->created_at->diffForHumans() }}</p></span>
                                                         <div data-popover id="popover-company-profile-{{$evento->id}}" role="tooltip"
             class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-80 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
             <div class="p-3">
@@ -111,7 +112,7 @@
                     </div>
                     <div>
                         <p class="mb-1 text-base font-semibold leading-none text-gray-900 dark:text-white">
-                            <a href="{{route('perfil', ['userperfil' => $evento->usuario->id])}}" class="hover:underline"> {{ $evento->usuario->persona->nombre }} {{ $evento->usuario->persona->apellido }}</a>
+                            <a href="{{route('muro', ['userperfil' => $evento->usuario->id])}}" class="hover:underline"> {{ $evento->usuario->nombre }} {{ $evento->usuario->apellido }}</a>
                         </p>
                         <p class="mb-3 text-sm font-normal">
                         {{ $evento->usuario->name }}
@@ -127,7 +128,7 @@
                                             d="M6.487 1.746c0 4.192 3.592 1.66 4.592 5.754 0 .828 1 1.5 2 1.5s2-.672 2-1.5a1.5 1.5 0 0 1 1.5-1.5h1.5m-16.02.471c4.02 2.248 1.776 4.216 4.878 5.645C10.18 13.61 9 19 9 19m9.366-6h-2.287a3 3 0 0 0-3 3v2m6-8a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                     </svg>
                                 </span>
-                                <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">{{ $evento->usuario->pagina }}</a>
+                                <a href="#" class="text-yellow-500 dark:text-yellow-600 hover:underline">{{ $evento->usuario->pagina }}</a>
                             </li>
                             <li class="flex items-start mb-2">
                                 <span class="me-2 font-semibold text-gray-400">
@@ -202,7 +203,7 @@
 
                                             <a href="{{ route('reporteEvento', ['evento' => $evento->id]) }}"
                                                 class="inline-flex items-center flex-shrink-0 px-4 py-5 text-base font-semibold transition-all duration-200 bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 hover:bg-yellow-500 dark:hover:bg-yellow-600 text-gray-800 dark:text-gray-300 hover:text-white">
-                                                Ver evento
+                                                 Evento
                                                 <svg class="w-5 h-5 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                     fill="currentColor">
                                                     <path fill-rule="evenodd"

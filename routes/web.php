@@ -8,6 +8,7 @@ use App\Livewire\DescargarDiploma;
 use App\Livewire\EventoConferencias;
 use App\Livewire\Gafete\Gafetes;
 use App\Livewire\HistorialEvento\HistorialEventos;
+use App\Livewire\Muro\Muros;
 use App\Livewire\PaginaInicial;
 use App\Livewire\Perfil\Perfil;
 use App\Livewire\TemasCongreso;
@@ -77,8 +78,7 @@ Route::middleware([
     Route::get('/historial-eventos', HistorialEventos::class)->name('historial-eventos');
     Route::get('/gafete/{evento}', Gafetes::class)->name('gafete');
     Route::get('/perfilconferencista', Perfilconferencista::class)->name('perfilconferencista');
-    Route::get('/publicaciones/{userperfil}', Publicaciones::class)->name('publicaciones');
-    Route::get('/perfil/{userperfil}', Perfil::class)->name('perfil');
+    Route::get('/muro/{userperfil}', Muros::class)->name('muro');
 });
 
 Route::get('/evento/{evento}', [EventoController::class, 'show'])->name('evento');
