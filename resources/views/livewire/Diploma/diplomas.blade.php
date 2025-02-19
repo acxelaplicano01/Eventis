@@ -71,7 +71,7 @@
                                     <td class="px-6 py-4">{{ $diploma->Codigo }}</td>
                                     <td class="px-6 py-4">
                                         @if($diploma->Plantilla)
-                                            <img src="{{ asset(str_replace('public', 'storage', $diploma->Plantilla)) }}"
+                                            <img src="{{ asset('storage/' . $diploma->Plantilla) }}"
                                                 alt="Foto" class="w-12 h-12 object-cover">
                                         @else
                                             Sin Plantilla
@@ -83,7 +83,7 @@
                                     <td class="px-6 py-4">{{ $diploma->NombreFirma1 }}</td>
                                     <td class="px-6 py-4">
                                         @if($diploma->Firma1)
-                                            <img src="{{ asset(str_replace('public', 'storage', $diploma->Firma1)) }}"
+                                            <img src="{{ asset('storage/' . $diploma->Firma1) }}"
                                                 alt="Foto" class="w-12 h-12 object-cover rounded-full">
                                         @else
                                             Sin Firmar
@@ -91,7 +91,7 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         @if($diploma->Sello1)
-                                            <img src="{{ asset(str_replace('public', 'storage', $diploma->Sello1)) }}"
+                                            <img src="{{ asset('storage/' . $diploma->Sello1) }}"
                                                 alt="Foto" class="w-12 h-12 object-cover rounded-full">
                                         @else
                                             Sin Sellar
@@ -101,7 +101,7 @@
                                     <td class="px-6 py-4">{{ $diploma->NombreFirma2 }}</td>
                                     <td class="px-6 py-4">
                                         @if($diploma->Firma2)
-                                            <img src="{{ asset(str_replace('public', 'storage', $diploma->Firma2)) }}"
+                                            <img src="{{ asset('storage/' . $diploma->Firma2) }}"
                                                 alt="Foto" class="w-12 h-12 object-cover rounded-full">
                                         @else
                                             Sin Firmar
@@ -109,7 +109,7 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         @if($diploma->Sello2)
-                                            <img src="{{ asset(str_replace('public', 'storage', $diploma->Sello2)) }}"
+                                            <img src="{{ asset('storage/' . $diploma->Sello2) }}"
                                                 alt="Foto" class="w-12 h-12 object-cover rounded-full">
                                         @else
                                             Sin Sellar

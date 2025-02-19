@@ -118,9 +118,9 @@ class Conferencistas extends Component
             ]);
 
             // Manejo de archivos
-            $this->foto = $this->foto ? $this->foto->store('public/conferencistas') : ($this->conferencista_id ? $this->currentFoto : 'http://www.puertopixel.com/wp-content/uploads/2011/03/Fondos-web-Texturas-web-abtacto-17.jpg');
-            $this->firma = $this->firma ? $this->firma->store('public/conferencistas') : $this->currentFirma;
-            $this->sello = $this->sello ? $this->sello->store('public/conferencistas') : $this->currentSello;
+            $this->foto = $this->foto ? $this->foto->store('conferencistas', 'public') : ($this->conferencista_id ? $this->currentFoto : 'http://www.puertopixel.com/wp-content/uploads/2011/03/Fondos-web-Texturas-web-abtacto-17.jpg');
+            $this->firma = $this->firma ? $this->firma->store('conferencistas', 'public') : $this->currentFirma;
+            $this->sello = $this->sello ? $this->sello->store('conferencistas', 'public') : $this->currentSello;
 
             // Datos del usuario autenticado
             $createdBy = auth()->id();

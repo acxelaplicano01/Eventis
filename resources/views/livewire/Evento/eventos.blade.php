@@ -73,7 +73,7 @@
                                     <td class="px-6 py-4">{{ $nombreevento->nombreevento }}</td>
                                     <td class="px-6 py-4">
                                         @if($nombreevento->logo)
-                                            <img src="{{ asset(str_replace('public', 'storage', $nombreevento->logo)) }}"
+                                            <img src="{{ asset('storage/' . $nombreevento->logo) }}"
                                                 alt="Logo del Evento" class="w-12 h-12 object-cover">
                                         @else
                                             Sin foto
@@ -85,7 +85,7 @@
                                     <td class="px-6 py-4">{{ $nombreevento->localidad->localidad }}</td>
                                     <td class="px-6 py-4">
                                         @if($nombreevento->diploma->Plantilla)
-                                            <img src="{{ asset(str_replace('public', 'storage', $nombreevento->diploma->Plantilla)) }}"
+                                            <img src="{{ asset('storage/' . $nombreevento->diploma->Plantilla) }}"
                                                 alt="Plantilla" class="w-12 h-12 object-cover">
                                         @else
                                             Sin Plantilla

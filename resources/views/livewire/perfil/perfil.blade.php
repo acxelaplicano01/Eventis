@@ -599,7 +599,7 @@
                                                 </p>
                                                 <!-- Imagen con efecto Hover para abrir Modal -->
                                                 @if($publicacion->foto)
-                                                    <img src="{{ asset($publicacion->foto) }}"
+                                                    <img src="{{ asset('storage/' . $publicacion->foto) }}"
                                                         class="cursor-pointer transition duration-300 ease-in-out w-full h-full object-cover"
                                                         data-modal-target="imagenModal{{ $publicacion->id }}"
                                                         data-modal-toggle="imagenModal{{ $publicacion->id }}">
@@ -617,7 +617,7 @@
                                                                 ✕
                                                             </button>
                                                             <div class="p-5 text-center">
-                                                                <img src="{{ asset($publicacion->foto) }}"
+                                                            <img src="{{ asset('storage/' . $publicacion->foto) }}" alt="Imagen"
                                                                     class="w-full h-auto rounded-lg">
                                                             </div>
                                                         </div>

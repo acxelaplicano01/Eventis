@@ -2,7 +2,7 @@
     <x-layouts.reportes>
     <div class="relative">
         <section class="bg-center bg-no-repeat bg-gray-700 bg-blend-multiply"
-            style="background-image: url('{{ asset(str_replace('public', 'storage', $evento->logo)) }}');">
+            style="background-image: url('{{ asset('storage/'. $evento->logo) }}');">
            <div class="flex">
                 <a  href="{{ route('eventoVista') }}">
                     <svg class="w-8 h-6 m-4 text-white dark:text-white hover:text-yellow-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -28,7 +28,7 @@
 
                         <div class="relative overflow-hidden bg-gray-300 border-8 border-yellow-500 dark:border-yellow-600 rounded-full w-28 h-28">
                             <img class="object-cover w-full h-full"
-                                src="{{ asset(str_replace('public', 'storage', $evento->logo)) }}"
+                                 src="{{ asset('storage/'. $evento->logo)}}"
                                 alt="" />
                         </div>
 
@@ -344,7 +344,7 @@ $yaInscrito = $estadoInscripcion === 'Inscrito';
                     </div>-->
                     <div class="lg:col-span-3">
                         <img class="w-full rounded-lg shadow-xl"
-                            src="{{ asset(str_replace('public', 'storage', $evento->diploma->Plantilla)) }}" alt="Diploma" />
+                        src="{{ asset('storage/'. $evento->diploma->Plantilla)}}" alt="Diploma" />
                     </div>
                 </div>
             </div>
@@ -370,7 +370,7 @@ $yaInscrito = $estadoInscripcion === 'Inscrito';
                                     Save 10%
                                 </span> -->
                                 <img class="object-cover w-full h-56 rounded-t-xl"
-                                    src="{{ asset(str_replace('public', 'storage', $conferencia->foto)) }}" alt="" />
+                                    src="{{ asset( 'storage/' . $conferencia->foto) }}" alt="" />
                             </div>
                             <div class="flex flex-col justify-between flex-1 p-6">
                                 <a class="text-gray-600 dark:text-gray-100 text-2xl font-semibold">{{$conferencia->nombre}}</a>
@@ -475,7 +475,7 @@ $yaInscrito = $estadoInscripcion === 'Inscrito';
                                     <div class="w-full h-0 mb-4 border-t-2 dark:border-gray-600 border-gray-300 border-dotted"></div>
                                     <div class="flex items-center">
                                         <img class="flex-shrink-0 object-cover w-10 h-10 rounded-full"
-                                            src="{{ asset(str_replace('public', 'storage', $conferencia->conferencista->foto)) }}"
+                                            src="{{ asset('storage/'. $conferencia->conferencista->foto)}}"
                                             alt="" />
                                         <div class="min-w-0 ml-3">
                                             <p class="text-base font-semibold text-gray-600 dark:text-gray-100 truncate">
@@ -519,7 +519,7 @@ $yaInscrito = $estadoInscripcion === 'Inscrito';
                             </svg>
                             <div class="absolute text-yellow-500 w-48 h-48">
                                 <img class="object-cover w-full h-full rounded-full"
-                                    src="{{ asset(str_replace('public', 'storage', $conferencia->conferencista->foto)) }}"
+                                     src="{{ asset('storage/'. $conferencia->conferencista->foto)}}"
                                     alt="{{$evento->logo}}" />
                             </div>
                         </div>
@@ -1002,7 +1002,7 @@ $yaInscrito = $estadoInscripcion === 'Inscrito';
                             <div class="relative">
                                 <div class="block aspect-w-4 aspect-h-3">
                                     <img class="object-cover w-full h-56"
-                                        src="{{ asset(str_replace('public', 'storage', $evento->logo)) }}"
+                                        src="{{ asset('storage/'. $evento->logo) }}"
                                         alt="" />
                                 </div>
 

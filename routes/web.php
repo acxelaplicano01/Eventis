@@ -44,6 +44,7 @@ use App\Http\Controllers\reporteQrController;
 use App\Livewire\ReciboPago\ReciboPagos;
 use App\Livewire\ReciboPago\ComprobacionPago;
 use App\Livewire\VistaConferencia\VistasConferencias;
+use App\Livewire\Publicacion\Publicaciones;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 Route::middleware([
     'auth:sanctum',
@@ -76,6 +77,7 @@ Route::middleware([
     Route::get('/historial-eventos', HistorialEventos::class)->name('historial-eventos');
     Route::get('/gafete/{evento}', Gafetes::class)->name('gafete');
     Route::get('/perfilconferencista', Perfilconferencista::class)->name('perfilconferencista');
+    Route::get('/publicaciones/{userperfil}', Publicaciones::class)->name('publicaciones');
     Route::get('/perfil/{userperfil}', Perfil::class)->name('perfil');
 });
 

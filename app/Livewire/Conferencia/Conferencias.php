@@ -180,10 +180,10 @@ public function store()
 
     // Manejo de foto
     if ($this->foto) {
-        $this->foto = $this->foto->store('public/conferencias');
+        $this->foto = $this->foto->store('conferencias', 'public');
     } else {
         $conferencia = Conferencia::find($this->conferencia_id);
-        $this->foto = $conferencia ? $conferencia->foto : 'default-image-url';
+        $this->foto = $conferencia ? $conferencia->foto : 'http://www.puertopixel.com/wp-content/uploads/2011/03/Fondos-web-Texturas-web-abtacto-17.jpg';
     }
 
     // Crear o actualizar la conferencia

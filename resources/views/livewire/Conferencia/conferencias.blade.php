@@ -62,7 +62,7 @@
                                     {{ $conferencia->id }}</td>
                                     <td class="px-6 py-4">
                                         @if($conferencia->foto)
-                                            <img src="{{ asset(str_replace('public', 'storage', $conferencia->foto)) }}"
+                                            <img src="{{ asset('storage/' . $conferencia->foto) }}"
                                                 alt="Logo del Evento" class="w-12 h-12 object-cover">
                                         @else
                                         <img src="{{ asset('images/default-profile.png') }}" alt="Imagen" class="w-12 h-12 object-cover">

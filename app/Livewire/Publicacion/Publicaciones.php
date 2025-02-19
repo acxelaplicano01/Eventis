@@ -5,7 +5,6 @@ namespace App\Livewire\Publicacion;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Evento;
-use App\Models\User;
 use App\Models\Modalidad;
 use App\Models\Localidad;
 use App\Models\Publicacion;
@@ -13,16 +12,20 @@ use App\Models\Publicacion;
 class Publicaciones extends Component
 {
     use WithFileUploads;
-    public function mount()
-    {
-        $this->userperfil = auth()->user();
-    }
-
-    public $publicacion_id, $foto, $IdUsuario, $descripcion;
+   
+    public $modalidades, $localidades;
+    public $publicacion_id, $foto, $IdUsuario, $descripcion, $search;
     public $userperfil;
     public $isOpen = false;
     public $confirmingDelete = false;
     public $IdAEliminar;
+
+    public function mount()
+    {
+        $this->userperfil = auth()->user();
+        $this->modalidades = Modalidad::all();
+        $this->localidades = Localidad::all();
+    }
 
     private function resetInputFields()
     {
@@ -45,7 +48,7 @@ class Publicaciones extends Component
       
         // Manejo de archivo logo
         if ($this->foto) {
-            $this->foto = $this->foto->store('public/fotos');
+            $this->foto = $this->foto->store('fotos', 'public');
         } elseif ($this->publicacion_id) {
             $publicacion = Publicacion::findOrFail($this->publicacion_id);
             $this->logo = $publicacion->foto; 
@@ -107,8 +110,50 @@ class Publicaciones extends Component
         $this->confirmingDelete = true;
     }
 
+
+    public function create()
+    {
+        $this->resetInputFields();
+        $this->openModal();
+    }
+
+    public function openModal()
+    {
+        $this->isOpen = true;
+    }
+
+    public function closeModal()
+    {
+        $this->isOpen = false;
+    }
+
     public function render()
     {
-        return view('livewire.publicacion.publicaciones');
+        $eventosUsuario = Evento::with('modalidad', 'localidad', 'diploma')
+            ->where('created_by', $this->userperfil->id)
+            ->where(function ($query) {
+                $query->where('nombreevento', 'like', '%' . $this->search . '%')
+                    ->orWhereHas('modalidad', function ($query) {
+                        $query->where('modalidad', 'like', '%' . $this->search . '%');
+                    })
+                    ->orWhereHas('localidad', function ($query) {
+                        $query->where('localidad', 'like', '%' . $this->search . '%');
+                    });
+            })
+            ->orderBy('id', 'DESC')
+            ->paginate(6);
+
+        $eventosCount = $this->userperfil->countEventos();
+
+        $publicaciones = Publicacion::with('user')
+            ->where('created_by', $this->userperfil->id)
+            ->orderBy('id', 'DESC')
+            ->paginate(6);
+
+        return view('livewire.publicacion.publicaciones', [
+            'eventosUsuario' => $eventosUsuario,
+            'eventosCount' => $eventosCount,
+            'publicaciones' => $publicaciones,
+        ]);
     }
 }

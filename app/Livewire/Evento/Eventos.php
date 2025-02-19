@@ -91,10 +91,11 @@ class Eventos extends Component
 
         // Manejo de archivo logo
         if ($this->logo) {
-            $this->logo = $this->logo->store('public/eventos');
+            // Guardamos el archivo en la carpeta eventos dentro de storage/app/public
+            $this->logo = $this->logo->store('eventos', 'public');
         } elseif ($this->evento_id) {
             $evento = Evento::findOrFail($this->evento_id);
-            $this->logo = $evento->logo; 
+            $this->logo = $evento->logo;
         }
 
         Evento::updateOrCreate(['id' => $this->evento_id], [

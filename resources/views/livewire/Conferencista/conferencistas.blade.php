@@ -68,7 +68,7 @@
                                     <td class="px-6 py-4 dark:text-white">{{ $conferencista->id }}</td>
                                     <td class="px-6 py-4">
                                         @if($conferencista->foto)
-                                            <img src="{{ asset(str_replace('public', 'storage', $conferencista->foto)) }}"
+                                            <img src="{{ asset('storage/' . $conferencista->foto) }}"
                                                 alt="Foto" class="w-12 h-12 object-cover rounded-full">
                                         @else
                                             Sin foto
@@ -80,7 +80,7 @@
                                     <td class="px-6 py-4">{{ $conferencista->persona->apellido }}</td>
                                     <td class="px-6 py-4">
                                         @if($conferencista->firma)
-                                            <img src="{{ asset(str_replace('public', 'storage', $conferencista->firma)) }}"
+                                            <img src="{{ asset('storage/' . $conferencista->firma) }}"
                                                 alt="firma" class="w-12 h-12 object-cover rounded-full">
                                         @else
                                             No puso firma
@@ -88,7 +88,7 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         @if($conferencista->sello)
-                                            <img src="{{ asset(str_replace('public', 'storage', $conferencista->sello)) }}"
+                                            <img src="{{ asset('storage/' . $conferencista->sello) }}"
                                                 alt="sello" class="w-12 h-12 object-cover rounded-full">
                                         @else
                                             No tiene sello

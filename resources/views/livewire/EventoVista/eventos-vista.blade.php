@@ -26,8 +26,8 @@
                             <div class="relative">
                                 <div class="block aspect-w-4 aspect-h-3">
                                     <img class="object-cover w-full h-56"
-                                        src="{{ asset(str_replace('public', 'storage', $evento->logo)) }}"
-                                        alt="" />
+                                        src="{{ asset('storage/' . $evento->logo) }}"
+                                        alt="Arte del evento" />
                                 </div>
 
                                 <div class="absolute top-4 left-4">
