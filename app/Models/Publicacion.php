@@ -17,4 +17,9 @@ class Publicacion extends BaseModel
         return $this->belongsTo(User::class, 'IdUsuario');
     }
 
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'idPublicacion');
+    }
+
 }

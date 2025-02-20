@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Modalidad;
 use App\Models\Localidad;
 use App\Models\Publicacion;
+use App\Models\Like;
 
 use Livewire\Component;
 
@@ -17,12 +18,22 @@ class Muros extends Component
     public $search = '';
     public $userperfil;
     public $modalidades, $localidades;
+    public $likes = [];
 
     public function mount(User $userperfil)
     {
         $this->userperfil = $userperfil;
+        $this->cargarLikes();
         $this->modalidades = Modalidad::all();
         $this->localidades = Localidad::all();
+    }
+
+    public function cargarLikes()
+    {
+        $this->likes = Like::where('idUsuario', auth()->id()) // Obtiene los likes solo del usuario autenticado
+            ->where('meGusta', true)
+            ->pluck('idPublicacion')
+            ->toArray();
     }
 
     public $publicacion_id, $foto, $IdUsuario, $descripcion;
@@ -92,13 +103,13 @@ class Muros extends Component
             session()->flash('error', 'Error: Usuario no encontrado.');
             return;
         }
-      
+
         // Manejo de archivo logo
         if ($this->foto) {
             $this->foto = $this->foto->store('fotos', 'public');
         } elseif ($this->publicacion_id) {
             $publicacion = Publicacion::findOrFail($this->publicacion_id);
-            $this->logo = $publicacion->foto; 
+            $this->logo = $publicacion->foto;
         }
 
         // Guardar o actualizar la publicación
@@ -134,6 +145,54 @@ class Muros extends Component
 
         $this->IdAEliminar = $id;
         $this->confirmingDelete = true;
+    }
+
+    public function like($publicacionId)
+    {
+        $usuarioId = auth()->id(); // Obtener ID del usuario autenticado
+
+        $like = Like::where('idPublicacion', $publicacionId)
+            ->where('idUsuario', $usuarioId)
+            ->first();
+
+        if ($like) {
+            $like->meGusta = !$like->meGusta;
+            $like->save();
+
+            if ($like->meGusta) {
+                $this->likes[] = $publicacionId; // Agregar a la lista de likes del usuario
+            } else {
+                $this->likes = array_values(array_diff($this->likes, [$publicacionId])); // Quitar y reindexar
+            }
+        } else {
+            Like::create([
+                'meGusta' => true,
+                'noMegusta' => false,
+                'idPublicacion' => $publicacionId,
+                'idUsuario' => $usuarioId, // Se usa el usuario autenticado
+            ]);
+
+            $this->likes[] = $publicacionId;
+        }
+    }
+
+
+
+
+
+    public function likeBool($publicacionId)
+    {
+        $user = auth()->user();
+
+        if (in_array($publicacionId, $this->likes)) {
+            // Si ya dio like, lo quita
+            $user->likes()->where('publicacion_id', $publicacionId)->delete();
+            $this->likes = array_diff($this->likes, [$publicacionId]);
+        } else {
+            // Si no ha dado like, lo agrega
+            $user->likes()->create(['publicacion_id' => $publicacionId, 'meGusta' => true]);
+            $this->likes[] = $publicacionId;
+        }
     }
 
     public function render()

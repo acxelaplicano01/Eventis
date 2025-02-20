@@ -49,6 +49,17 @@ class User extends Authenticatable
     {
         return $this->eventos()->count();
     }
+
+    public function publicaciones()
+    {
+        return $this->hasMany(Publicacion::class, 'IdUsuario');
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'idUsuario');
+    }
+    
     /**
      * The attributes that should be hidden for serialization.
      *

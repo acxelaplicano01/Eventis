@@ -546,7 +546,8 @@
                                                 data-dropdown-toggle="dropdownDotsHorizontal-{{$publicacion->id}}"
                                                 class="inline-flex ml-40 items-center p-2 text-sm font-medium text-center text-gray-900 rounded-lg dark:text-white"
                                                 type="button">
-                                                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                    fill="currentColor" viewBox="0 0 16 3">
                                                     <path
                                                         d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
                                                 </svg>
@@ -576,7 +577,8 @@
                                             </div>
 
                                             @if (session()->has('error'))
-                                                <div class="fixed z-50 inset-0 flex items-center justify-center overflow-y-auto ease-out duration-400">
+                                                <div
+                                                    class="fixed z-50 inset-0 flex items-center justify-center overflow-y-auto ease-out duration-400">
                                                     <div class="fixed inset-0 transition-opacity">
                                                         <div class="absolute inset-0 bg-black opacity-60"></div>
                                                     </div>
@@ -596,7 +598,8 @@
                                                     </div>
                                                 </div>
                                             @elseif ($confirmingDelete)
-                                                <div class="fixed z-50 inset-0 flex items-center justify-center overflow-y-auto ease-out duration-400">
+                                                <div
+                                                    class="fixed z-50 inset-0 flex items-center justify-center overflow-y-auto ease-out duration-400">
                                                     <div class="fixed inset-0 transition-opacity">
                                                         <div class="absolute inset-0 bg-black opacity-60"></div>
                                                     </div>
@@ -604,15 +607,18 @@
                                                     <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                                                         role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                                                         <div class="p-6">
-                                                            <h3 class="text-lg font-semibold mb-4">Confirmación de Eliminación</h3>
-                                                            <p>¿Estás seguro de que deseas eliminar esta publicación? Esta acción
+                                                            <h3 class="text-lg font-semibold mb-4">Confirmación de Eliminación
+                                                            </h3>
+                                                            <p>¿Estás seguro de que deseas eliminar esta publicación? Esta
+                                                                acción
                                                                 no se puede deshacer.</p>
                                                             <div class="mt-4 flex justify-end">
                                                                 <button wire:click="$set('confirmingDelete', false)"
                                                                     class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mr-2">
                                                                     Cancelar
                                                                 </button>
-                                                                <button wire:click="delete" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+                                                                <button wire:click="delete"
+                                                                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
                                                                     Eliminar
                                                                 </button>
                                                             </div>
@@ -677,17 +683,34 @@
                                                     </svg>
                                                     14 k
                                                 </div>
-                                                <div
-                                                    class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-red-600 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                    14 k
+                                                <div wire:click="like({{ $publicacion->id }})"
+                                                    class="flex-1 flex items-center cursor-pointer dark:text-red-600 hover:text-red-600  text-xs transition duration-350 ease-in-out">
+
+                                                    @if(in_array($publicacion->id, $likes))
+                                                        {{-- Corazón relleno en rojo cuando hay like --}}
+                                                        <svg class="w-6 h-6 dark:text-red-600 text-red-600" aria-hidden="true"
+                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            fill="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke="currentColor" stroke-linecap="round"
+                                                                stroke-linejoin="round" stroke-width="2"
+                                                                d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+                                                        </svg>
+                                                    @else
+                                                        {{-- Corazón solo con contorno cuando no hay like --}}
+                                                        <svg class="w-6 h-6 dark:text-red-600 hover:text-red-600"
+                                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                                            viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+                                                        </svg>
+                                                    @endif
+
+                                                    <span
+                                                        class="ml-2">{{ $publicacion->likes->where('meGusta', true)->count() }}</span>
                                                 </div>
+
+
                                                 <div
                                                     class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-yellow-400 transition duration-350 ease-in-out">
                                                     <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
@@ -745,7 +768,7 @@
                                             <a href="{{ asset(str_replace('public', 'storage', $evento->logo)) }}"
                                                 target="_blank" class="group">
                                                 <div class="w-full h-24 bg-cover bg-no-repeat bg-center rounded-md border border-gray-300 dark:border-gray-700 group-hover:opacity-60 transition duration-300 ease-in-out shadow-sm dark:shadow-md"
-                                                    style="background-image: url({{ asset( 'storage/'. $evento->logo) }};">
+                                                    style="background-image: url({{ asset('storage/' . $evento->logo) }};">
                                                     @if($evento->logo)
                                                         <img src="{{ asset(str_replace('public', 'storage', $evento->logo)) }}"
                                                             alt="Logo del Evento" class="h-full w-full">
