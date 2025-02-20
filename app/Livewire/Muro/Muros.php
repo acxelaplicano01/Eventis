@@ -1,6 +1,7 @@
 <?php
 namespace App\Livewire\Muro;
 
+use App\Models\Comentario;
 use Livewire\WithFileUploads;
 use App\Models\Evento;
 use App\Models\User;
@@ -19,6 +20,7 @@ class Muros extends Component
     public $userperfil;
     public $modalidades, $localidades;
     public $likes = [];
+    public $comentario, $fotoComentario;
 
     public function mount(User $userperfil)
     {
@@ -177,23 +179,23 @@ class Muros extends Component
     }
 
 
-
-
-
-    public function likeBool($publicacionId)
+    public function addComentario($publicacionId)
     {
-        $user = auth()->user();
+        $this->validate([
+            'comentario' => 'required|string|max:255',
+            'fotoComentario' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-        if (in_array($publicacionId, $this->likes)) {
-            // Si ya dio like, lo quita
-            $user->likes()->where('publicacion_id', $publicacionId)->delete();
-            $this->likes = array_diff($this->likes, [$publicacionId]);
-        } else {
-            // Si no ha dado like, lo agrega
-            $user->likes()->create(['publicacion_id' => $publicacionId, 'meGusta' => true]);
-            $this->likes[] = $publicacionId;
-        }
+        Comentario::create([
+            'contenido' => $this->comentario,
+            'fotoComentario' => $this->fotoComentario ? $this->fotoComentario->store('comentarios', 'public') : null,
+            'idPublicacion' => $publicacionId,
+            'idUsuario' => $this->userperfil->id,
+        ]);
+
+        $this->comentario = '';
     }
+
 
     public function render()
     {

@@ -60,6 +60,11 @@ class User extends Authenticatable
         return $this->hasMany(Like::class, 'idUsuario');
     }
     
+    public function comentarios()
+    {
+        return $this->hasMany(Comentario::class, 'IdUsuario');
+    }
+    
     /**
      * The attributes that should be hidden for serialization.
      *

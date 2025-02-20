@@ -520,7 +520,7 @@
                         <ul class="list-none">
                             @foreach($publicaciones as $publicacion)
                                 <li>
-                                    <!--second tweet-->
+                                    <!--Publicación-->
                                     <article class="transition duration-350 ease-in-out rounded-lg">
                                         <div class="flex flex-shrink-0 p-4 pb-0">
                                             <a href="#" class="flex-shrink-0 group block">
@@ -656,12 +656,32 @@
                                                             <img src="{{ asset('storage/' . $publicacion->foto) }}"
                                                                 alt="Imagen" class="w-full h-auto rounded-lg">
                                                         </div>
+                                                        <div class="p-4">
+                                                            <form
+                                                                wire:submit.prevent="addComentario({{ $publicacion->id }})">
+                                                                <textarea wire:model="comentario"
+                                                                    class="w-full p-2 border rounded"
+                                                                    placeholder="Escribe un comentario..."></textarea>
+                                                                <button type="submit"
+                                                                    class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">Comentar</button>
+                                                            </form>
+                                                            <ul class="mt-4">
+                                                                @foreach($publicacion->comentarios as $comentario)
+                                                                    <li class="border-b py-2">
+                                                                        <p class="text-sm text-gray-600">
+                                                                            {{ $comentario->user->nombre }}:</p>
+                                                                        <p>{{ $comentario->contenido }}</p>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="flex items-center py-4 pl-16">
-                                                <div
+                                                <div data-modal-target="imagenModal{{ $publicacion->id }}"
+                                                    data-modal-toggle="imagenModal{{ $publicacion->id }}"
                                                     class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-yellow-400 transition duration-350 ease-in-out">
                                                     <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
                                                         <g>
@@ -670,7 +690,7 @@
                                                             </path>
                                                         </g>
                                                     </svg>
-                                                    12.3 k
+                                                    <span class="ml-2">{{ $publicacion->comentarios->count() }}</span>
                                                 </div>
                                                 <div
                                                     class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-green-400 transition duration-350 ease-in-out">
@@ -709,8 +729,6 @@
                                                     <span
                                                         class="ml-2">{{ $publicacion->likes->where('meGusta', true)->count() }}</span>
                                                 </div>
-
-
                                                 <div
                                                     class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-yellow-400 transition duration-350 ease-in-out">
                                                     <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">

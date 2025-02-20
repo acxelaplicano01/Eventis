@@ -21,5 +21,10 @@ class Publicacion extends BaseModel
     {
         return $this->hasMany(Like::class, 'idPublicacion');
     }
+    
+    public function comentarios()
+    {
+        return $this->hasMany(Comentario::class, 'idPublicacion');
+    }
 
 }
