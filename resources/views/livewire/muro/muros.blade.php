@@ -3,8 +3,7 @@
         <div class="flex justify-center">
             <main role="main">
                 <div class="flex" style="width: 990px;">
-                    <section class="dark:bg-gray-800 w-3/5 border border-y-0 dark:border-gray-700"
-                        style="max-width:600px;">
+                    <section class="dark:bg-gray-900 w-3/5" style="max-width:600px;">
                         @if (session()->has('message'))
                             <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
                                 role="alert">
@@ -16,7 +15,7 @@
                             </div>
                         @endif
                         <div>
-                            <div class="flex justify-start">
+                            <div class="flex justify-start bg-white rounded-t-lg dark:bg-gray-800">
                                 <div class="px-4 py-2 mx-2">
                                     <a href="{{ route('eventoVista') }}"
                                         class="text-2xl font-medium rounded-full text-yellow-400 hover:bg-yellow-500 hover:text-yellow-300 float-right">
@@ -29,7 +28,7 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <div class="m-2 ">
+                                <div class="m-2">
                                     <h2 class="mb-0 text-xl font-bold dark:text-white">
                                         {{$userperfil->nombre}} {{$userperfil->apellido}}
                                     </h2>
@@ -414,7 +413,7 @@
 
 
                         <!-- User card-->
-                        <div>
+                        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-b-lg overflow-hidden">
                             <div class="w-full bg-cover bg-no-repeat bg-center"
                                 style="height: 200px; background-image: url(https://azulschool.net/wp-content/uploads/buddypress/members/34880/cover-image/673448942ac49-bp-cover-image.jpg;">
                                 <img class="opacity-0 w-full h-full"
@@ -504,7 +503,7 @@
                                         </div>
                                     </div>
                                     <div
-                                        class="pt-3 flex justify-start items-start w-full divide-x divide-gray-800 divide-solid">
+                                        class="pt-3 flex justify-start items-start w-full divide-x dark:divide-gray-500 divide-gray-800 divide-solid">
                                         <div class="text-center pr-3"><span
                                                 class="font-bold dark:text-white">520</span><span
                                                 class="dark:text-gray-400">
@@ -514,242 +513,222 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr class="dark:border-gray-700">
                         </div>
 
-                        <ul class="list-none">
-                            @foreach($publicaciones as $publicacion)
-                                <li>
-                                    <!--Publicación-->
-                                    <article class="transition duration-350 ease-in-out rounded-lg">
-                                        <div class="flex flex-shrink-0 p-4 pb-0">
-                                            <a href="#" class="flex-shrink-0 group block">
-                                                <div class="flex items-center">
-                                                    <div>
-                                                        <img class="inline-block h-10 w-10 rounded-full"
-                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="ml-3">
-                                                        <p class="text-base leading-6 font-medium dark:text-white">
-                                                            {{ $publicacion->user->nombre }}
-                                                            {{ $publicacion->user->apellido }}
-                                                            <span
-                                                                class="text-sm leading-5 font-medium dark:text-gray-400 group-hover:text-gray-400 text-gray-500 transition ease-in-out duration-150">
-                                                                {{ $publicacion->created_at->diffForHumans() }}
-                                                            </span>
-                                                        </p>
+
+                        @foreach($publicaciones as $publicacion)
+                            <div class="mt-4 mb-4 shadow-lg rounded-lg dark:bg-gray-800">
+                                <div class="bg-white p-4 border rounded-xl dark:bg-gray-800 dark:border-gray-600">
+                                    <article>
+                                        <div class="flex items-center mb-4">
+                                            <img class="w-10 h-10 me-4 rounded-full"
+                                                src="https://th.bing.com/th/id/OIP.Ei419o4f5KF2R_fSaMuLYAAAAA?pid=ImgDet&w=179&h=179&c=7&dpr=1,3"
+                                                alt="">
+                                            <div class="dark:text-white">
+                                                <span
+                                                    class="font-semibold text-gray-900 dark:text-white">{{ $publicacion->user->nombre }}
+                                                    {{ $publicacion->user->apellido }}</span>
+                                                <button id="dropdownMenuIconHorizontalButton-{{$publicacion->id}}"
+                                                    data-dropdown-toggle="dropdownDotsHorizontal-{{$publicacion->id}}"
+                                                    class="inline-flex ml-52 items-center p-2 text-sm font-medium text-center text-gray-900 rounded-lg dark:text-white"
+                                                    type="button">
+                                                    <svg class="w-4 h-4" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                        viewBox="0 0 16 3">
+                                                        <path
+                                                            d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                                                    </svg>
+                                                </button>
+                                                <!-- Dropdown menu -->
+                                                <div id="dropdownDotsHorizontal-{{$publicacion->id}}"
+                                                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                                        aria-labelledby="dropdownMenuIconHorizontalButton-{{$publicacion->id}}">
+                                                        <li>
+                                                            <a wire:click="edit({{ $publicacion->id }})"
+                                                                class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Editar</a>
+                                                        </li>
+                                                        <li>
+                                                            <a wire:click="confirmDelete({{ $publicacion->id }})"
+                                                                class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Eliminar</a>
+                                                        </li>
+                                                        <li>
+                                                            <a wire:click="edit({{ $publicacion->id }})"
+                                                                class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Guardar</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="py-2">
+                                                        <a href="#"
+                                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Reportar</a>
                                                     </div>
                                                 </div>
-                                            </a>
-                                            <button id="dropdownMenuIconHorizontalButton-{{$publicacion->id}}"
-                                                data-dropdown-toggle="dropdownDotsHorizontal-{{$publicacion->id}}"
-                                                class="inline-flex ml-40 items-center p-2 text-sm font-medium text-center text-gray-900 rounded-lg dark:text-white"
-                                                type="button">
-                                                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                    fill="currentColor" viewBox="0 0 16 3">
-                                                    <path
-                                                        d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                                                @if (session()->has('error'))
+                                                    <div class="fixed z-50 inset-0 flex items-center justify-center overflow-y-auto ease-out duration-400">
+                                                        <div class="fixed inset-0 transition-opacity">
+                                                            <div class="absolute inset-0 bg-black opacity-60"></div>
+                                                        </div>
+
+                                                        <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full dark:bg-gray-800"
+                                                            role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                                                            <div class="p-6">
+                                                                <h3 class="text-lg font-semibold mb-4 dark:text-white">Error</h3>
+                                                                <p class="dark:text-gray-300">{{ session('error') }}</p>
+                                                                <div class="mt-4 flex justify-end">
+                                                                    <button wire:click="$set('confirmingDelete', false)"
+                                                                        class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mr-2 dark:bg-gray-600 dark:hover:bg-gray-700">
+                                                                        Aceptar
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @elseif ($confirmingDelete)
+                                                    <div class="fixed z-50 inset-0 flex items-center justify-center overflow-y-auto ease-out duration-400">
+                                                        <div class="fixed inset-0 transition-opacity">
+                                                            <div class="absolute inset-0 bg-gray-800 opacity-60"></div>
+                                                        </div>
+
+                                                        <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full dark:bg-gray-800"
+                                                            role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                                                            <div class="p-6">
+                                                                <h3 class="text-lg font-semibold mb-4 dark:text-white">Confirmación de Eliminación</h3>
+                                                                <p class="dark:text-gray-300">¿Estás seguro de que deseas eliminar esta publicación? Esta acción no se puede
+                                                                    deshacer.</p>
+                                                                <div class="mt-4 flex justify-end">
+                                                                    <button wire:click="$set('confirmingDelete', false)"
+                                                                        class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mr-2 dark:bg-gray-600 dark:hover:bg-gray-700">
+                                                                        Cancelar
+                                                                    </button>
+                                                                    <button wire:click="delete"
+                                                                        class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded dark:bg-red-600 dark:hover:bg-red-700">
+                                                                        Eliminar
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                                <div class="text-xs text-gray-500 dark:text-gray-400">
+                                                    {{ $publicacion->created_at->diffForHumans() }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p
+                                            class="pl-1 mt-4 mb-2 text-base width-auto font-medium dark:text-white flex-shrink">
+                                            {{ $publicacion->descripcion }}
+                                        </p>
+                                        @if($publicacion->foto)
+                                            <img src="{{ asset('storage/' . $publicacion->foto) }}"
+                                                class="cursor-pointer transition rounded-md duration-300 ease-in-out w-full h-full object-cover"
+                                                data-modal-target="imagenModal{{ $publicacion->id }}"
+                                                data-modal-toggle="imagenModal{{ $publicacion->id }}">
+                                        @endif
+
+                                        <!-- Modal de Flowbite para ampliar la imagen -->
+                                        <div id="imagenModal{{ $publicacion->id }}" tabindex="-1" aria-hidden="true"
+                                            class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                            <!-- Fondo opaco -->
+                                            <div class="fixed inset-0 bg-black opacity-60"></div>
+                                            <div class="relative w-full max-w-2xl max-h-full">
+                                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                    <button type="button"
+                                                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                        data-modal-hide="imagenModal{{ $publicacion->id }}">
+                                                        ✕
+                                                    </button>
+                                                    <div class="p-5 text-center">
+                                                        <img src="{{ asset('storage/' . $publicacion->foto) }}" alt="Imagen"
+                                                            class="w-full h-auto rounded-lg">
+                                                    </div>
+                                                    <div class="p-4">
+                                                        <form wire:submit.prevent="addComentario({{ $publicacion->id }})">
+                                                            <textarea wire:model="comentario"
+                                                                class="w-full p-2 border rounded dark:bg-gray-600 dark:border-gray-500 dark:text-white"
+                                                                placeholder="Escribe un comentario..."></textarea>
+                                                            <button type="submit"
+                                                                class="mt-2 bg-blue-500 text-white px-4 py-2 rounded dark:bg-blue-600">Comentar</button>
+                                                        </form>
+                                                        <ul class="mt-4">
+                                                            @foreach($publicacion->comentarios as $comentario)
+                                                                <li class="border-b py-2 dark:border-gray-600">
+                                                                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                                                                        {{ $comentario->user->nombre }}:
+                                                                    </p>
+                                                                    <p class="dark:text-white">{{ $comentario->contenido }}</p>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="dark:border-gray-600 border-gray-200 border-t flex items-center py-4 mt-4 pl-16">
+                                            <div data-modal-target="imagenModal{{ $publicacion->id }}"
+                                                data-modal-toggle="imagenModal{{ $publicacion->id }}"
+                                                class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-yellow-400 dark:hover:text-yellow-400 transition duration-350 ease-in-out">
+                                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                    <g>
+                                                        <path
+                                                            d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z">
+                                                        </path>
+                                                    </g>
                                                 </svg>
-                                            </button>
-                                            <!-- Dropdown menu -->
-                                            <div id="dropdownDotsHorizontal-{{$publicacion->id}}"
-                                                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                                    aria-labelledby="dropdownMenuIconHorizontalButton-{{$publicacion->id}}">
-                                                    <li>
-                                                        <a wire:click="edit({{ $publicacion->id }})"
-                                                            class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Editar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a wire:click="confirmDelete({{ $publicacion->id }})"
-                                                            class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Eliminar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a wire:click="edit({{ $publicacion->id }})"
-                                                            class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Guardar</a>
-                                                    </li>
-                                                </ul>
-                                                <div class="py-2">
-                                                    <a href="#"
-                                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Reportar</a>
-                                                </div>
+                                                <span class="ml-2">{{ $publicacion->comentarios->count() }}</span>
                                             </div>
-
-                                            @if (session()->has('error'))
-                                                <div
-                                                    class="fixed z-50 inset-0 flex items-center justify-center overflow-y-auto ease-out duration-400">
-                                                    <div class="fixed inset-0 transition-opacity">
-                                                        <div class="absolute inset-0 bg-black opacity-60"></div>
-                                                    </div>
-
-                                                    <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                                                        role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                                                        <div class="p-6">
-                                                            <h3 class="text-lg font-semibold mb-4">Error</h3>
-                                                            <p>{{ session('error') }}</p>
-                                                            <div class="mt-4 flex justify-end">
-                                                                <button wire:click="$set('confirmingDelete', false)"
-                                                                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mr-2">
-                                                                    Aceptar
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @elseif ($confirmingDelete)
-                                                <div
-                                                    class="fixed z-50 inset-0 flex items-center justify-center overflow-y-auto ease-out duration-400">
-                                                    <div class="fixed inset-0 transition-opacity">
-                                                        <div class="absolute inset-0 bg-black opacity-60"></div>
-                                                    </div>
-
-                                                    <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                                                        role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                                                        <div class="p-6">
-                                                            <h3 class="text-lg font-semibold mb-4">Confirmación de Eliminación
-                                                            </h3>
-                                                            <p>¿Estás seguro de que deseas eliminar esta publicación? Esta
-                                                                acción
-                                                                no se puede deshacer.</p>
-                                                            <div class="mt-4 flex justify-end">
-                                                                <button wire:click="$set('confirmingDelete', false)"
-                                                                    class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mr-2">
-                                                                    Cancelar
-                                                                </button>
-                                                                <button wire:click="delete"
-                                                                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
-                                                                    Eliminar
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        </div>
-
-                                        <div>
-                                            <p
-                                                class="pl-3 mt-4 mb-4 text-base width-auto font-medium dark:text-white flex-shrink">
-                                                {{ $publicacion->descripcion }}
-                                            </p>
-                                            <!-- Imagen con efecto Hover para abrir Modal -->
-                                            @if($publicacion->foto)
-                                                <img src="{{ asset('storage/' . $publicacion->foto) }}"
-                                                    class="cursor-pointer transition duration-300 ease-in-out w-full h-full object-cover"
-                                                    data-modal-target="imagenModal{{ $publicacion->id }}"
-                                                    data-modal-toggle="imagenModal{{ $publicacion->id }}">
-                                            @endif
-                                            <!-- Modal de Flowbite para ampliar la imagen -->
-                                            <div id="imagenModal{{ $publicacion->id }}" tabindex="-1" aria-hidden="true"
-                                                class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                                <!-- Fondo opaco -->
-                                                <div class="fixed inset-0 bg-black opacity-60"></div>
-                                                <div class="relative w-full max-w-2xl max-h-full">
-                                                    <div class="relative bg-white rounded-lg shadow">
-                                                        <button type="button"
-                                                            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
-                                                            data-modal-hide="imagenModal{{ $publicacion->id }}">
-                                                            ✕
-                                                        </button>
-                                                        <div class="p-5 text-center">
-                                                            <img src="{{ asset('storage/' . $publicacion->foto) }}"
-                                                                alt="Imagen" class="w-full h-auto rounded-lg">
-                                                        </div>
-                                                        <div class="p-4">
-                                                            <form
-                                                                wire:submit.prevent="addComentario({{ $publicacion->id }})">
-                                                                <textarea wire:model="comentario"
-                                                                    class="w-full p-2 border rounded"
-                                                                    placeholder="Escribe un comentario..."></textarea>
-                                                                <button type="submit"
-                                                                    class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">Comentar</button>
-                                                            </form>
-                                                            <ul class="mt-4">
-                                                                @foreach($publicacion->comentarios as $comentario)
-                                                                    <li class="border-b py-2">
-                                                                        <p class="text-sm text-gray-600">
-                                                                            {{ $comentario->user->nombre }}:</p>
-                                                                        <p>{{ $comentario->contenido }}</p>
-                                                                    </li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div
+                                                class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 dark:hover:text-green-400 hover:text-green-400 transition duration-350 ease-in-out">
+                                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                    <g>
+                                                        <path
+                                                            d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z">
+                                                        </path>
+                                                    </g>
+                                                </svg>
+                                                14 k
                                             </div>
-
-                                            <div class="flex items-center py-4 pl-16">
-                                                <div data-modal-target="imagenModal{{ $publicacion->id }}"
-                                                    data-modal-toggle="imagenModal{{ $publicacion->id }}"
-                                                    class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-yellow-400 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z">
-                                                            </path>
-                                                        </g>
+                                            <div wire:click="like({{ $publicacion->id }})"
+                                                class="flex-1 flex items-center cursor-pointer dark:text-gray-400 hover:text-red-600 text-xs transition duration-350 ease-in-out">
+                                                @if(in_array($publicacion->id, $likes))
+                                                    <svg class="w-6 h-6 dark:text-red-600 text-red-600" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        fill="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
                                                     </svg>
-                                                    <span class="ml-2">{{ $publicacion->comentarios->count() }}</span>
-                                                </div>
-                                                <div
-                                                    class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-green-400 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                    14 k
-                                                </div>
-                                                <div wire:click="like({{ $publicacion->id }})"
-                                                    class="flex-1 flex items-center cursor-pointer dark:text-red-600 hover:text-red-600  text-xs transition duration-350 ease-in-out">
-
-                                                    @if(in_array($publicacion->id, $likes))
-                                                        {{-- Corazón relleno en rojo cuando hay like --}}
-                                                        <svg class="w-6 h-6 dark:text-red-600 text-red-600" aria-hidden="true"
-                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            fill="currentColor" viewBox="0 0 24 24">
-                                                            <path stroke="currentColor" stroke-linecap="round"
-                                                                stroke-linejoin="round" stroke-width="2"
-                                                                d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
-                                                        </svg>
-                                                    @else
-                                                        {{-- Corazón solo con contorno cuando no hay like --}}
-                                                        <svg class="w-6 h-6 dark:text-red-600 hover:text-red-600"
-                                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" fill="none" stroke="currentColor" stroke-width="2"
-                                                            viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
-                                                        </svg>
-                                                    @endif
-
                                                     <span
-                                                        class="ml-2">{{ $publicacion->likes->where('meGusta', true)->count() }}</span>
-                                                </div>
-                                                <div
-                                                    class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-yellow-400 transition duration-350 ease-in-out">
-                                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                                                        <g>
-                                                            <path
-                                                                d="M17.53 7.47l-5-5c-.293-.293-.768-.293-1.06 0l-5 5c-.294.293-.294.768 0 1.06s.767.294 1.06 0l3.72-3.72V15c0 .414.336.75.75.75s.75-.336.75-.75V4.81l3.72 3.72c.146.147.338.22.53.22s.384-.072.53-.22c.293-.293.293-.767 0-1.06z">
-                                                            </path>
-                                                            <path
-                                                                d="M19.708 21.944H4.292C3.028 21.944 2 20.916 2 19.652V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 .437.355.792.792.792h15.416c.437 0 .792-.355.792-.792V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 1.264-1.028 2.292-2.292 2.292z">
-                                                            </path>
-                                                        </g>
+                                                    class="ml-2 text-red-600">{{ $publicacion->likes->where('meGusta', true)->count() }}</span>
+                                                @else
+                                                    <svg class="w-6 h-6 dark:text-gray-400 dark:hover:text-red-600 hover:text-red-600" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
                                                     </svg>
-                                                </div>
+                                                    <span
+                                                    class="ml-2">{{ $publicacion->likes->where('meGusta', true)->count() }}</span>
+                                                @endif
+                                                
+                                            </div>
+                                            <div
+                                                class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 dark:hover:text-yellow-400 hover:text-yellow-400  transition duration-350 ease-in-out">
+                                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                                                    <g>
+                                                        <path
+                                                            d="M17.53 7.47l-5-5c-.293-.293-.768-.293-1.06 0l-5 5c-.294.293-.294.768 0 1.06s.767.294 1.06 0l3.72-3.72V15c0 .414.336.75.75.75s.75-.336.75-.75V4.81l3.72 3.72c.146.147.338.22.53.22s.384-.072.53-.22c.293-.293.293-.767 0-1.06z">
+                                                        </path>
+                                                        <path
+                                                            d="M19.708 21.944H4.292C3.028 21.944 2 20.916 2 19.652V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 .437.355.792.792.792h15.416c.437 0 .792-.355.792-.792V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 1.264-1.028 2.292-2.292 2.292z">
+                                                        </path>
+                                                    </g>
+                                                </svg>
                                             </div>
                                         </div>
-                                        <hr class="dark:border-gray-700">
                                     </article>
-                                </li>
-                            @endforeach
-                        </ul>
-
+                                </div>
+                            </div>
+                        @endforeach
                     </section>
 
 
@@ -757,7 +736,7 @@
                         <!--Aside menu (right side)-->
                         <div style="max-width:350px;">
                             <div class="overflow-y-auto fixed  h-screen">
-                                <div class="relative text-gray-400  w-full p-5">
+                                <div class="relative text-gray-400 w-full p-5">
                                     <button type="submit" class="absolute ml-4 mt-3 mr-4">
                                         <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px"
@@ -773,9 +752,9 @@
                                     <input name="buscar" wire:model.live="search" type="text" id="table-search-users"
                                         placeholder="Buscar en los eventos de {{$userperfil->nombre}} {{$userperfil->apellido}}"
                                         class="h-10 px-10 pr-5 w-full text-sm text-gray-700 dark:text-gray-200 
-               bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 
-               focus:outline-none focus:ring-2 focus:ring-yellow-500 
-               rounded border border-gray-300 dark:border-gray-600 shadow-sm">
+                                        bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 
+                                        focus:outline-none focus:ring-2 focus:ring-yellow-500 
+                                        rounded border border-gray-300 dark:border-gray-600 shadow-sm">
                                 </div>
                                 <!--trending tweet section-->
                                 <div
@@ -783,13 +762,12 @@
                                     <div class="grid grid-cols-3 gap-1">
                                         @foreach($eventosUsuario as $evento) 
                                             <!-- Imagen 1 -->
-                                            <a href="{{ asset(str_replace('public', 'storage', $evento->logo)) }}"
-                                                target="_blank" class="group">
+                                            <a href="{{ asset('storage/' . $evento->logo) }}" target="_blank" class="group">
                                                 <div class="w-full h-24 bg-cover bg-no-repeat bg-center rounded-md border border-gray-300 dark:border-gray-700 group-hover:opacity-60 transition duration-300 ease-in-out shadow-sm dark:shadow-md"
                                                     style="background-image: url({{ asset('storage/' . $evento->logo) }};">
                                                     @if($evento->logo)
-                                                        <img src="{{ asset(str_replace('public', 'storage', $evento->logo)) }}"
-                                                            alt="Logo del Evento" class="h-full w-full">
+                                                        <img src="{{ asset('storage/' . $evento->logo) }}" alt="Logo del Evento"
+                                                            class="h-full w-full">
                                                     @else
                                                         Sin foto
                                                     @endif
@@ -800,7 +778,7 @@
                                 </div>
                                 <!--trending tweet section-->
                                 <div
-                                    class="max-w-sm rounded-lg dark:bg-gray-800 overflow-hidden shadow-lg m-4 border border-gray-200 dark:border-gray-700">
+                                    class="max-w-sm rounded-lg dark:bg-gray-800 bg-white overflow-hidden shadow-lg m-4 border border-gray-200 dark:border-gray-700">
                                     <!-- Header -->
                                     <div class="flex items-center justify-between p-4">
                                         <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Germany
@@ -899,7 +877,7 @@
 
                                 <!--people suggetion to follow section-->
                                 <div
-                                    class="max-w-sm rounded-lg  dark:bg-gray-800 overflow-hidden shadow-lg m-4 border border-gray-200 dark:border-gray-700">
+                                    class="max-w-sm rounded-lg bg-white dark:bg-gray-800 overflow-hidden shadow-lg m-4 border border-gray-200 dark:border-gray-700">
                                     <!-- Header -->
                                     <div class="p-4">
                                         <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Who to
