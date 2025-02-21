@@ -438,18 +438,32 @@
                                     <!-- Botones User -->
                                     <div class="flex space-x-2 justify-end">
                                         <!-- Editar Button -->
-                                        <button data-modal-target="extralarge-modal"
-                                            data-modal-toggle="extralarge-modal"
-                                            class="flex justify-center  max-h-max whitespace-nowrap focus:outline-none  focus:ring  max-w-max border bg-transparent border-yellow-500 text-yellow-500 hover:border-yellow-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto"
-                                            type="button">
-                                            Editar
-                                        </button>
-
-                                        <!-- Publicar Button -->
-                                        <button wire:click="create"
-                                            class="flex justify-center bg-yellow-500 max-h-max whitespace-nowrap focus:outline-none  focus:ring  max-w-max border bg-transparent border-yellow-500 text-white hover:border-yellow-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
-                                            Publicar
-                                        </button>
+                                        @if(auth()->user()->id === $userperfil->id)
+                                            <button data-modal-target="extralarge-modal" data-modal-toggle="extralarge-modal"
+                                                class="flex justify-center max-h-max whitespace-nowrap focus:outline-none focus:ring max-w-max border bg-transparent border-yellow-500 text-yellow-500 hover:border-yellow-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto"
+                                                type="button">
+                                                Editar
+                                            </button>
+                                            <!-- Publicar Button -->
+                                            <button wire:click="create"
+                                                class="flex justify-center bg-yellow-500 max-h-max whitespace-nowrap focus:outline-none  focus:ring  max-w-max border bg-transparent border-yellow-500 text-white hover:border-yellow-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
+                                                Publicar
+                                            </button>
+                                        @endif
+                                        <!-- Botón para seguir o dejar de seguir -->
+                                        @if(auth()->user()->id !== $userperfil->id)
+                                            @if(auth()->user()->siguiendo->contains($userperfil->id))
+                                                <button wire:click="dejarDeSeguir({{ $userperfil->id }})"
+                                                    class="flex justify-center bg-red-500 hover:bg-red-700 max-h-max whitespace-nowrap focus:outline-none max-w-max border text-white hover:border-yellow-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
+                                                    No seguir
+                                                </button>
+                                            @else
+                                                <button wire:click="seguir({{ $userperfil->id }})"
+                                                    class="flex justify-center bg-blue-500 hover:bg-blue-700 max-h-max whitespace-nowrap focus:outline-none max-w-max border text-white hover:border-yellow-800 items-center hover:shadow-lg font-bold py-2 px-4 rounded-full mr-0 ml-auto">
+                                                    Seguir
+                                                </button>
+                                            @endif
+                                        @endif
                                     </div>
                                 </div>
 
@@ -505,10 +519,11 @@
                                     <div
                                         class="pt-3 flex justify-start items-start w-full divide-x dark:divide-gray-500 divide-gray-800 divide-solid">
                                         <div class="text-center pr-3"><span
-                                                class="font-bold dark:text-white">520</span><span
+                                                class="font-bold dark:text-white">{{ $seguidos->count() }}</span><span
                                                 class="dark:text-gray-400">
                                                 Siguiendo</span></div>
-                                        <div class="text-center px-3"><span class="font-bold dark:text-white">23,4m
+                                        <div class="text-center px-3"><span
+                                                class="font-bold dark:text-white">{{$seguidores->count()}}
                                             </span><span class="dark:text-gray-400"> Seguidores</span></div>
                                     </div>
                                 </div>
@@ -528,9 +543,22 @@
                                                 <span
                                                     class="font-semibold text-gray-900 dark:text-white">{{ $publicacion->user->nombre }}
                                                     {{ $publicacion->user->apellido }}</span>
+                                                    @if(auth()->user()->id !== $userperfil->id)
+                                                    @if(auth()->user()->siguiendo->contains($userperfil->id))
+                                                        <button wire:click="dejarDeSeguir({{ $userperfil->id }})"
+                                                            class="text-red-500">
+                                                            No seguir
+                                                        </button>
+                                                    @else
+                                                        <button wire:click="seguir({{ $userperfil->id }})"
+                                                            class="text-blue-500">
+                                                            Seguir
+                                                        </button>
+                                                    @endif
+                                                    @endif
                                                 <button id="dropdownMenuIconHorizontalButton-{{$publicacion->id}}"
                                                     data-dropdown-toggle="dropdownDotsHorizontal-{{$publicacion->id}}"
-                                                    class="inline-flex ml-52 items-center p-2 text-sm font-medium text-center text-gray-900 rounded-lg dark:text-white"
+                                                    class="inline-flex ml-24 items-center p-2 text-sm font-medium text-center text-gray-900 rounded-lg dark:text-white"
                                                     type="button">
                                                     <svg class="w-4 h-4" aria-hidden="true"
                                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -563,7 +591,8 @@
                                                     </div>
                                                 </div>
                                                 @if (session()->has('error'))
-                                                    <div class="fixed z-50 inset-0 flex items-center justify-center overflow-y-auto ease-out duration-400">
+                                                    <div
+                                                        class="fixed z-50 inset-0 flex items-center justify-center overflow-y-auto ease-out duration-400">
                                                         <div class="fixed inset-0 transition-opacity">
                                                             <div class="absolute inset-0 bg-black opacity-60"></div>
                                                         </div>
@@ -571,7 +600,8 @@
                                                         <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full dark:bg-gray-800"
                                                             role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                                                             <div class="p-6">
-                                                                <h3 class="text-lg font-semibold mb-4 dark:text-white">Error</h3>
+                                                                <h3 class="text-lg font-semibold mb-4 dark:text-white">Error
+                                                                </h3>
                                                                 <p class="dark:text-gray-300">{{ session('error') }}</p>
                                                                 <div class="mt-4 flex justify-end">
                                                                     <button wire:click="$set('confirmingDelete', false)"
@@ -583,7 +613,8 @@
                                                         </div>
                                                     </div>
                                                 @elseif ($confirmingDelete)
-                                                    <div class="fixed z-50 inset-0 flex items-center justify-center overflow-y-auto ease-out duration-400">
+                                                    <div
+                                                        class="fixed z-50 inset-0 flex items-center justify-center overflow-y-auto ease-out duration-400">
                                                         <div class="fixed inset-0 transition-opacity">
                                                             <div class="absolute inset-0 bg-gray-800 opacity-60"></div>
                                                         </div>
@@ -591,8 +622,10 @@
                                                         <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full dark:bg-gray-800"
                                                             role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                                                             <div class="p-6">
-                                                                <h3 class="text-lg font-semibold mb-4 dark:text-white">Confirmación de Eliminación</h3>
-                                                                <p class="dark:text-gray-300">¿Estás seguro de que deseas eliminar esta publicación? Esta acción no se puede
+                                                                <h3 class="text-lg font-semibold mb-4 dark:text-white">
+                                                                    Confirmación de Eliminación</h3>
+                                                                <p class="dark:text-gray-300">¿Estás seguro de que deseas
+                                                                    eliminar esta publicación? Esta acción no se puede
                                                                     deshacer.</p>
                                                                 <div class="mt-4 flex justify-end">
                                                                     <button wire:click="$set('confirmingDelete', false)"
@@ -698,18 +731,19 @@
                                                             d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
                                                     </svg>
                                                     <span
-                                                    class="ml-2 text-red-600">{{ $publicacion->likes->where('meGusta', true)->count() }}</span>
+                                                        class="ml-2 text-red-600">{{ $publicacion->likes->where('meGusta', true)->count() }}</span>
                                                 @else
-                                                    <svg class="w-6 h-6 dark:text-gray-400 dark:hover:text-red-600 hover:text-red-600" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                                    <svg class="w-6 h-6 dark:text-gray-400 dark:hover:text-red-600 hover:text-red-600"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                                        viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round"
                                                             d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
                                                     </svg>
                                                     <span
-                                                    class="ml-2">{{ $publicacion->likes->where('meGusta', true)->count() }}</span>
+                                                        class="ml-2">{{ $publicacion->likes->where('meGusta', true)->count() }}</span>
                                                 @endif
-                                                
+
                                             </div>
                                             <div
                                                 class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 dark:hover:text-yellow-400 hover:text-yellow-400  transition duration-350 ease-in-out">

@@ -66,6 +66,32 @@ class User extends Authenticatable
     }
     
     /**
+     * Los usuarios que este usuario sigue.
+     */
+    public function siguiendo()
+    {
+        return $this->belongsToMany(User::class, 'seguidor', 'user_id', 'seguido_id');
+    }
+
+    /**
+     * Los usuarios que siguen a este usuario.
+     */
+    public function seguidores()
+    {
+        return $this->belongsToMany(User::class, 'seguidor', 'seguido_id', 'user_id');
+    }
+
+    public function seguir($userId)
+    {
+        $this->siguiendo()->attach($userId);
+    }
+
+    public function dejarDeSeguir($userId)
+    {
+        $this->siguiendo()->detach($userId);
+    }
+    
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>

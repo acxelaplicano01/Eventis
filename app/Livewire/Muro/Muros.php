@@ -196,7 +196,40 @@ class Muros extends Component
         $this->comentario = '';
     }
 
+    public function getSeguidores($userId)
+    {
+        $user = User::find($userId);
+        if ($user) {
+            return $user->seguidores;
+        }
+        return collect(); // Retorna una colección vacía si el usuario no existe
+    }
 
+    public function seguir($userId)
+    {
+        $user = User::find($userId);
+        if ($user) {
+            auth()->user()->seguir($user->id);
+            session()->flash('message', 'Has seguido a ' . $user->name);
+        }
+    }
+
+    public function dejarDeSeguir($userId)
+    {
+        $user = User::find($userId);
+        if ($user) {
+            auth()->user()->dejarDeSeguir($user->id);
+            session()->flash('message', 'Has dejado de seguir a ' . $user->name);
+        }
+    }
+    public function getSeguidos($userId)
+    {
+        $user = User::find($userId);
+        if ($user) {
+            return $user->siguiendo;
+        }
+        return collect(); // Retorna una colección vacía si el usuario no existe
+    }
     public function render()
     {
         $eventosUsuario = Evento::with('modalidad', 'localidad', 'diploma')
@@ -220,10 +253,17 @@ class Muros extends Component
             ->orderBy('id', 'DESC')
             ->paginate(6);
 
+
+        // Obtener seguidores y seguidos para un usuario específico (por ejemplo, el usuario con ID 1)
+        $seguidores = $this->getSeguidores($this->userperfil->id);
+        $seguidos = $this->getSeguidos($this->userperfil->id);
+
         return view('livewire.muro.muros', [
             'eventosUsuario' => $eventosUsuario,
             'eventosCount' => $eventosCount,
             'publicaciones' => $publicaciones,
+            'seguidores' => $seguidores,
+            'seguidos' => $seguidos,
         ]);
     }
 }
