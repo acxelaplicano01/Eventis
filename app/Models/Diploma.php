@@ -13,7 +13,7 @@ class Diploma extends BaseModel
     protected $fillable = [
         'Codigo',
         'Plantilla',
-       'Nombre',
+        'Nombre',
         'Titulo1',
         'NombreFirma1',
         'Firma1',

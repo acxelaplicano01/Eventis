@@ -39,7 +39,7 @@ class ReporteEventos extends Component
             ->where('fechaFinal', '>=', Carbon::today())
             ->orderBy('id', 'DESC')
             ->paginate(9);
-        Auth::user()->persona->suscripciones;
+        Auth::user()->suscripciones;
         return view('livewire.ReporteEvento.reporte-eventos', ['Eventos' => $Eventos]);
     }  
 }

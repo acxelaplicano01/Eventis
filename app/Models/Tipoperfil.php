@@ -12,8 +12,8 @@ class Tipoperfil extends BaseModel
     
     protected $fillable = ['tipoperfil'];
 
-    public function personas()
+    public function users()
     {
-        return $this->hasMany(Persona::class, 'IdTipoPerfil');
+        return $this->hasMany(User::class, 'IdTipoPerfil');
     }
 }

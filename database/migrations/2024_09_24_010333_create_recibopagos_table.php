@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('recibopagos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('idEvento')->constrained('eventos')->onDelete('cascade');
-            $table->foreignId('idPersona')->constrained('personas')->onDelete('cascade');
+            $table->foreignId('idUser')->constrained('users')->onDelete('cascade');
             $table->date('fecha');
             $table->string('foto');
             $table->integer("created_by");

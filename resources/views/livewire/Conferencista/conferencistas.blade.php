@@ -53,12 +53,9 @@
                             <tr>
                                 <th scope="col" class="px-6 py-3">No.</th>
                                 <th scope="col" class="px-6 py-3">Foto</th>
-                                <th scope="col" class="px-6 py-3">DNI</th>
                                 <th scope="col" class="px-6 py-3">Título</th>
                                 <th scope="col" class="px-6 py-3">Nombre</th>
                                 <th scope="col" class="px-6 py-3">Apellido</th>
-                                <th scope="col" class="px-6 py-3">Firma</th>
-                                <th scope="col" class="px-6 py-3">Sello</th>
                                 <th scope="col" class="px-6 py-3">Acciones</th>
                             </tr>
                         </thead>
@@ -74,26 +71,9 @@
                                             Sin foto
                                         @endif
                                     </td>
-                                    <td class="px-6 py-4">{{ $conferencista->persona->dni }}</td>
                                     <td class="px-6 py-4">{{ $conferencista->titulo }}</td>
-                                    <td class="px-6 py-4">{{ $conferencista->persona->nombre }}</td>
-                                    <td class="px-6 py-4">{{ $conferencista->persona->apellido }}</td>
-                                    <td class="px-6 py-4">
-                                        @if($conferencista->firma)
-                                            <img src="{{ asset('storage/' . $conferencista->firma) }}"
-                                                alt="firma" class="w-12 h-12 object-cover rounded-full">
-                                        @else
-                                            No puso firma
-                                        @endif
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        @if($conferencista->sello)
-                                            <img src="{{ asset('storage/' . $conferencista->sello) }}"
-                                                alt="sello" class="w-12 h-12 object-cover rounded-full">
-                                        @else
-                                            No tiene sello
-                                        @endif
-                                    </td>
+                                    <td class="px-6 py-4">{{ $conferencista->user->nombre }}</td>
+                                    <td class="px-6 py-4">{{ $conferencista->user->apellido }}</td>
                                     <td class="px-6 py-4">
                                     <button wire:click="edit({{ $conferencista->id }})"
                                             class="mb-1 w-full px-3 py-2 text-sm font-medium text-white inline-flex items-center bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-300 rounded-lg text-center dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:ring-yellow-800">

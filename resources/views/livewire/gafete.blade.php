@@ -11,11 +11,11 @@
             </p>
 
             <img class="w-48 h-48 mb-2 border-yellow-400 border-4 rounded-full shadow-lg"
-                src="https://ui-avatars.com/api/?name={{ Auth::user()->persona->nombre }}&amp;color=000&amp;background=facc15"
+                src="https://ui-avatars.com/api/?name={{ Auth::user()->nombre }}&amp;color=000&amp;background=facc15"
                 alt="Foto de perfil predeterminada">
 
             <h5 class="mb-0 text-xl mx-8 font-bold text-yellow-400 dark:text-white text-center break-words">
-                {{Auth::user()->persona->nombre }} {{Auth::user()->persona->apellido }}
+                {{Auth::user()->nombre }} {{Auth::user()->apellido }}
             </h5>
             <span class="text-lg mb-8 text-gray-500 dark:text-gray-400">Participante</span>
             <div class="flex w-full mt-4 md:mt-6 bg-yellow-400 justify-center h-24">

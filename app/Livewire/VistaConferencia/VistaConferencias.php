@@ -27,7 +27,7 @@ class VistaConferencias extends Component
 
     public function render()
     {
-        Auth::user()->persona->suscripciones;
+        Auth::user()->suscripciones;
         return view('livewire.VistaConferencia.vista-conferencia');
     }
 
@@ -49,7 +49,7 @@ class VistaConferencias extends Component
 
         if ($conferencia) {
             // Verificar si ya está suscrito a la conferencia
-            $suscripcionExistente = Auth::user()->persona->suscripciones()
+            $suscripcionExistente = Auth::user()->suscripciones()
                 ->where('IdConferencia', $conferencia->id)
                 ->exists();
 
@@ -57,7 +57,7 @@ class VistaConferencias extends Component
                 $this->SuscripciónYaRealizada = true; 
             } else {
                 // Crear la suscripción si no existe
-                Auth::user()->persona->suscripciones()->updateOrCreate([
+                Auth::user()->suscripciones()->updateOrCreate([
                     'IdConferencia' => $conferencia->id,
                     'created_by' => Auth::id()
                 ]);

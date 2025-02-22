@@ -78,7 +78,7 @@ class Conferencias extends Component
 
     public function updatedInputSearchConferencista()
     {
-        $this->searchConferencistas = Conferencista::whereHas('persona', function ($query) {
+        $this->searchConferencistas = Conferencista::whereHas('user', function ($query) {
             $query->where('nombre', 'like', '%' . $this->inputSearchConferencista . '%')
                   ->orWhere('apellido', 'like', '%' . $this->inputSearchConferencista . '%');
         })->get();
@@ -89,7 +89,7 @@ class Conferencias extends Component
         $this->idConferencista = $conferencistaId;
         $conferencista = Conferencista::find($conferencistaId);
         if ($conferencista) {
-            $this->inputSearchConferencista = $conferencista->persona->nombre . ' ' . $conferencista->persona->apellido;
+            $this->inputSearchConferencista = $conferencista->user->nombre . ' ' . $conferencista->user->apellido;
         }
         $this->searchConferencistas = [];
     }
@@ -153,7 +153,7 @@ class Conferencias extends Component
     // Cargar el nombre del conferencista seleccionado
     $conferencista = Conferencista::find($this->idConferencista);
     if ($conferencista) {
-        $this->inputSearchConferencista = $conferencista->persona->nombre . ' ' . $conferencista->persona->apellido;
+        $this->inputSearchConferencista = $conferencista->user->nombre . ' ' . $conferencista->user->apellido;
     }
 
     // Abrir el modal para edición

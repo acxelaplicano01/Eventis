@@ -36,7 +36,7 @@ class VistasConferencias extends Component
         // Verificar si el evento es pagado
         if ($conferencia && $conferencia->estado === 'Pagado') {
             // Verificar la suscripción del usuario
-            $suscripcion = Auth::user()->persona->suscripciones()
+            $suscripcion = Auth::user()->suscripciones()
                 ->where('IdConferencia', $conferencia->id)
                 ->first();
 

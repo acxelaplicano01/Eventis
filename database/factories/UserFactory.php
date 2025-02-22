@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Nacionalidad;
 use App\Models\Team;
+use App\Models\Tipoperfil;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -26,12 +28,16 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $nacionalidadId = Nacionalidad::inRandomOrder()->first()->id;
+        $tipoPerfilId = Tipoperfil::inRandomOrder()->first()->id;
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'nombre' => fake()->name(),
             'apellido' => fake()->name(),
             'descripcion' => fake()->sentence(),
+            'IdNacionalidad' => $nacionalidadId,
+            'IdTipoPerfil' => $tipoPerfilId,
             'pagina' => fake()->url(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),

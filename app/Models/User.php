@@ -31,14 +31,11 @@ class User extends Authenticatable
         'nombre',
         'apellido',
         'descripcion',
+        'IdNacionalidad',
+        'IdTipoPerfil',
         'pagina',
         'password',
     ];
-
-    public function persona()
-    {
-        return $this->hasOne(Persona::class, 'IdUsuario'); // Ajusta 'user_id' si es necesario
-    }
 
     public function eventos()
     {
@@ -89,6 +86,29 @@ class User extends Authenticatable
     public function dejarDeSeguir($userId)
     {
         $this->siguiendo()->detach($userId);
+    }
+
+    public function nacionalidad()
+    {
+        return $this->belongsTo(Nacionalidad::class, 'IdNacionalidad');
+    }
+
+    public function conferencistas()
+    {
+        return $this->hasMany(Conferencista::class, 'IdUser');
+    }
+    public function tipoPerfil()
+    {
+        return $this->belongsTo(TipoPerfil::class, 'IdTipoPerfil');
+    }
+
+    public function suscripciones()
+    {
+        return $this->hasMany(Suscripcion::class, 'IdUser');
+    }
+    public function inscripciones()
+    {
+        return $this->hasMany(Inscripcion::class, 'IdUser');
     }
     
     /**

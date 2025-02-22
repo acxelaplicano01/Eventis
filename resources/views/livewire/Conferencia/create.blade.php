@@ -123,7 +123,7 @@
                                 @foreach($searchConferencistas as $conferencista)
                                     <li wire:click="selectConferencista({{ $conferencista->id }})"
                                         class="cursor-pointer px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                        {{ $conferencista->persona->nombre }} {{ $conferencista->persona->apellido }}
+                                        {{ $conferencista->user->nombre }} {{ $conferencista->user->apellido }}
                                     </li>
                                 @endforeach
                             </ul>

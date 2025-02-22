@@ -11,11 +11,11 @@ class Conferencista extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['titulo', 'foto', 'descripcion', 'IdPersona','firma','sello'];
+    protected $fillable = ['titulo', 'foto', 'descripcion', 'IdUser','firma','sello'];
 
-    public function persona()
+    public function user()
     {
-        return $this->belongsTo(Persona::class, 'IdPersona');
+        return $this->belongsTo(User::class, 'IdUser');
     }
     public function conferencias()
     {

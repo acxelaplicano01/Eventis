@@ -160,12 +160,12 @@
                     <div class="certificado-title">CERTIFICADO</div>
                     <div class="certificado-title2">DE RECONOCIMIENTO</div>
                     <div class="certificado-title3">OTORGADO A:</div>
-                    <div class="recipient-name" id="recipient-name">{{ $persona->nombre }} {{$persona->apellido}}</div>
+                    <div class="recipient-name" id="recipient-name">{{ $user->nombre }} {{$user->apellido}}</div>
                 </div>
                 <div class="certificado-body">
                     Por su destacada asistencia y participación en la conferencia "{{$conferencia->nombre}}", presentada
                     por el distinguido {{$conferencia->conferencista->titulo}}
-                    <span id="conferencista-name">{{ $conferencia->conferencista->persona->nombre }} {{$conferencia->conferencista->persona->apellido}}</span>,
+                    <span id="conferencista-name">{{ $conferencia->conferencista->user->nombre }} {{$conferencia->conferencista->user->apellido}}</span>,
                     celebrada el {{ \Carbon\Carbon::parse($conferencia->fecha)->format('d \d\e F \d\e Y') }} en el marco
                     del evento "{{$evento->nombreevento}}".
                     <div>
@@ -222,7 +222,7 @@
                     </div>
                     @endif
 
-                    @if($conferencia->conferencista->firma || $conferencia->conferencista->sello || $conferencia->conferencista->persona->nombre || $conferencia->conferencista->titulo)
+                    @if($conferencia->conferencista->firma || $conferencia->conferencista->sello || $conferencia->conferencista->user->nombre || $conferencia->conferencista->titulo)
                     <div class="firmas">
                         @if($conferencia->conferencista->firma)
                         <div class="firma">

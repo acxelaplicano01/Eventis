@@ -143,10 +143,10 @@ class AsistenciasConferencias extends Component
 
         // Datos del diploma
         $data = [
-            'Nombre' => $asistencia->suscripcion->persona->nombre,
-            'Apellido' => $asistencia->suscripcion->persona->apellido,
+            'Nombre' => $asistencia->suscripcion->user->nombre,
+            'Apellido' => $asistencia->suscripcion->user->apellido,
             'Conferencia' => $asistencia->suscripcion->conferencia->nombre,
-            'Conferencista' => $asistencia->suscripcion->conferencia->conferencista->persona->nombre . ' ' . $asistencia->suscripcion->conferencia->conferencista->persona->apellido,
+            'Conferencista' => $asistencia->suscripcion->conferencia->conferencista->user->nombre . ' ' . $asistencia->suscripcion->conferencia->conferencista->user->apellido,
             'TituloConferencista' => $asistencia->suscripcion->conferencia->conferencista->titulo,
             'FechaConferencia' => $asistencia->suscripcion->conferencia->fecha,
             'Evento' => $asistencia->suscripcion->conferencia->evento->nombreevento,
@@ -200,10 +200,10 @@ class AsistenciasConferencias extends Component
 
                 // Generar el contenido del diploma
                 $data = [
-                    'Nombre' => $asistencia->suscripcion->persona->nombre,
-                    'Apellido' => $asistencia->suscripcion->persona->apellido,
+                    'Nombre' => $asistencia->suscripcion->user->nombre,
+                    'Apellido' => $asistencia->suscripcion->user->apellido,
                     'Conferencia' => $asistencia->suscripcion->conferencia->nombre,
-                    'Conferencista' => $asistencia->suscripcion->conferencia->conferencista->persona->nombre . ' ' . $asistencia->suscripcion->conferencia->conferencista->persona->apellido,
+                    'Conferencista' => $asistencia->suscripcion->conferencia->conferencista->user->nombre . ' ' . $asistencia->suscripcion->conferencia->conferencista->user->apellido,
                     'TituloConferencista' => $asistencia->suscripcion->conferencia->conferencista->titulo,
                     'FechaConferencia' => $asistencia->suscripcion->conferencia->fecha,
                     'Evento' => $asistencia->suscripcion->conferencia->evento->nombreevento,
@@ -252,9 +252,9 @@ class AsistenciasConferencias extends Component
 
     public function render()
     {
-        $suscripciones = Suscripcion::with(['persona', 'conferencia', 'asistencias'])
+        $suscripciones = Suscripcion::with(['user', 'conferencia', 'asistencias'])
             ->where('IdConferencia', $this->conferencia_id)
-            ->whereHas('persona', function ($query) {
+            ->whereHas('user', function ($query) {
                 $query->where('nombre', 'like', '%' . $this->search . '%')
                     ->orWhere('apellido', 'like', '%' . $this->search . '%');
             })

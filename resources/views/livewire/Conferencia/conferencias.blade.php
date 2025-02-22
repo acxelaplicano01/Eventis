@@ -76,9 +76,9 @@
                                     {{ $conferencia->lugar }}</td>
                                 <td class="px-6 py-4 font-medium whitespace-nowrap">
                                     @if ($conferencia->conferencista)
-                                        @if ($conferencia->conferencista->persona)
-                                            {{ $conferencia->conferencista->persona->nombre }}
-                                            {{ $conferencia->conferencista->persona->apellido ?? '' }}
+                                        @if ($conferencia->conferencista->user)
+                                            {{ $conferencia->conferencista->user->nombre }}
+                                            {{ $conferencia->conferencista->user->apellido ?? '' }}
                                         @else
                                             N/A
                                         @endif
@@ -198,9 +198,9 @@
                             </tr>
                             <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600 dark:bg-gray-800 dark:border-gray-700">
                                 <td scope="row" class="flex items-center pl-2 py-4 text-gray-900 font-bold dark:text-white"><strong>Conferencista:</strong></td><td class="px-6 py-2">  @if ($selectedConferencia->conferencista)
-                            @if ($selectedConferencia->conferencista->persona)
-                                {{ $selectedConferencia->conferencista->persona->nombre }}
-                                {{ $selectedConferencia->conferencista->persona->apellido ?? '' }}
+                            @if ($selectedConferencia->conferencista->user)
+                                {{ $selectedConferencia->conferencista->user->nombre }}
+                                {{ $selectedConferencia->conferencista->user->apellido ?? '' }}
                             @else
                                 N/A
                             @endif
@@ -265,9 +265,9 @@
                             </tr>
                             <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600 dark:bg-gray-800 dark:border-gray-700">
                                 <td scope="row" class="flex items-center pl-2 py-4 text-gray-900 font-bold dark:text-white"><strong>Conferencista:</strong></td><td class="px-6 py-2">  @if ($selectedConferencia->conferencista)
-                            @if ($selectedConferencia->conferencista->persona)
-                                {{ $selectedConferencia->conferencista->persona->nombre }}
-                                {{ $selectedConferencia->conferencista->persona->apellido ?? '' }}
+                            @if ($selectedConferencia->conferencista->user)
+                                {{ $selectedConferencia->conferencista->user->nombre }}
+                                {{ $selectedConferencia->conferencista->user->apellido ?? '' }}
                             @else
                                 N/A
                             @endif

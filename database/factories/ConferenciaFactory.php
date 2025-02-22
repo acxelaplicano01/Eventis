@@ -22,7 +22,7 @@ class ConferenciaFactory extends Factory
         return [
             'IdEvento' => $eventoId,
             'Foto' => $this->faker->imageUrl(),
-           'nombre' => $this->faker->sentence,
+            'nombre' => $this->faker->sentence,
             'descripcion' => $this->faker->paragraph,
             'fecha' => $this->faker->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
             'horaInicio' => $this->faker->time(),

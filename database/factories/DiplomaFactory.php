@@ -26,18 +26,6 @@ class DiplomaFactory extends Factory
             'codigo' => $this->faker->uuid,
             'plantilla' => $this->faker->imageUrl(),
             'Nombre' => $this->faker->name(),
-          //  'IdConferencia' => $conferenciaId,
-            
-            'titulo1' => $this->faker->title(),
-            'nombrefirma1' => $this->faker->name(),
-            'firma1' => $this->faker->imageUrl(),
-            'sello1' => $this->faker->imageUrl(),
-
-            'titulo2' => $this->faker->title(),
-            'nombrefirma2' => $this->faker->name(),
-            'firma2' => $this->faker->imageUrl(),
-            'sello2' => $this->faker->imageUrl(),
-
             'created_by' => 1,
         ];
     }

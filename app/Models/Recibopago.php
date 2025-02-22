@@ -11,7 +11,7 @@ class Recibopago extends BaseModel
 
     protected $fillable = [
         'idEvento',
-        'idPersona',
+        'idUser',
         'fecha',
         'foto',
     ];
@@ -25,9 +25,9 @@ class Recibopago extends BaseModel
         return $this->hasOne(Inscripcion::class, 'idRecibo');
     }
 
-    public function persona()
+    public function user()
     {
-        return $this->hasOne(Persona::class, 'idPersona');
+        return $this->hasOne(User::class, 'idUser');
     }
     
 

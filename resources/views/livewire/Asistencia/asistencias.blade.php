@@ -56,7 +56,7 @@
                                     <td class="px-6 py-4">{{ $asistencia->Fecha }}</td>
                                     <td class="px-6 py-4">{{ $asistencia->Asistencia ? 'Presente' : 'Ausente' }}</td>
                                     <td class="px-6 py-4">{{ $asistencia->suscripcion->id }}</td>
-                                    <td class="px-6 py-4">{{ $asistencia->suscripcion->persona->nombre }} {{ $asistencia->suscripcion->persona->apellido }}</td>
+                                    <td class="px-6 py-4">{{ $asistencia->suscripcion->user->nombre }} {{ $asistencia->suscripcion->user->apellido }}</td>
                                     <td class="px-6 py-4">{{ $asistencia->suscripcion->conferencia->nombre }}</td>
                                     <td class="px-6 py-4">
                                     <button wire:click="edit({{ $asistencia->id }})"

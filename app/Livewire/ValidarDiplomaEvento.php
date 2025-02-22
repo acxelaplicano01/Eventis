@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class ValidarDiplomaEvento extends Component
 {
-    public $persona;
+    public $user;
     public $conferencia;
     public $codigoDiploma;
     public $asistencia;
@@ -21,7 +21,7 @@ class ValidarDiplomaEvento extends Component
         if ($diploma) {
             $diploma = Inscripcion::where('id', $diploma->id)->first(); // Acceder al primer elemento de la colección
             if ($diploma) {
-                $this->persona = $diploma->persona;
+                $this->user = $diploma->user;
                 $this->conferencia = $diploma->suscripcion->conferencia;
                 $this->codigoDiploma = $diploma->suscripcion->conferencia->evento->diploma;
                 $this->asistencia = $diploma;
@@ -32,7 +32,7 @@ class ValidarDiplomaEvento extends Component
     public function render()
     {
         return view('livewire.validar-diploma-evento', [
-            'persona' => $this->persona,
+            'user' => $this->user,
             'conferencia' => $this->conferencia,
             'uuid' => $this->uuid,
             'asistencia' => $this->asistencia,

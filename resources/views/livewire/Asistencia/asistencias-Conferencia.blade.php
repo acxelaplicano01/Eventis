@@ -102,7 +102,7 @@
                                                                 {{ $suscripcion->id }}
                                                             </td>
                                                             <td class="px-6 py-4 dark:text-gray-400">
-                                                                {{ $suscripcion->persona->nombre }} {{ $suscripcion->persona->apellido }}
+                                                                {{ $suscripcion->user->nombre }} {{ $suscripcion->user->apellido }}
                                                             </td>
                                                             <td class="px-6 py-4 dark:text-gray-400">
                                                                 {{ $suscripcion->conferencia->nombre }}

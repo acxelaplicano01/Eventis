@@ -41,10 +41,10 @@ class HistorialEventos extends Component
     }
     public function loadEventos()
     {
-        $personaId = Auth::user()->persona->id;
+        $userId = Auth::user()->id;
     
-        $inscripciones = Inscripcion::whereHas('evento', function ($query) use ($personaId) {
-                $query->where('IdPersona', $personaId);
+        $inscripciones = Inscripcion::whereHas('evento', function ($query) use ($userId) {
+                $query->where('IdUser', $userId);
             })
             ->with('evento')
             ->get()
@@ -91,20 +91,9 @@ class HistorialEventos extends Component
 
         // Generar el PDF del diploma
         $pdf = PDF::loadView('livewire.diploma-evento', [
-            'Nombre' => $inscripcion->persona->nombre,
-            'Apellido' => $inscripcion->persona->apellido,
-            'FechaInicio' => $inscripcion->evento->fechainicio,
-            'Organizador' => $inscripcion->evento->organizador,
-            'Evento' => $inscripcion->evento->nombreevento,
-            'NombreFirma1' => $inscripcion->evento->diploma->NombreFirma1,
-            'NombreFirma2' => $inscripcion->evento->diploma->NombreFirma2,
-            'Titulo1' => $inscripcion->evento->diploma->Titulo1,
-            'Titulo2' => $inscripcion->evento->diploma->Titulo2,
+            'Nombre' => $inscripcion->user->nombre,
+            'Apellido' => $inscripcion->user->apellido,
             'Plantilla' => $inscripcion->evento->diploma->Plantilla,
-            'Firma1' => $inscripcion->evento->diploma->Firma1,
-            'Firma2' => $inscripcion->evento->diploma->Firma2,
-            'Sello1' => $inscripcion->evento->diploma->Sello1,
-            'Sello2' => $inscripcion->evento->diploma->Sello2,
             'uuid' => $uuidDiploma,
             'qrcode' => $qrcode,
         ])->setPaper('a4', 'landscape');
@@ -119,8 +108,8 @@ class HistorialEventos extends Component
         // Guardar el PDF temporalmente
         $pdfPath = sprintf(
             'diplomas/Diploma_%s%s_%s.pdf',
-            $inscripcion->persona->nombre,
-            $inscripcion->persona->apellido,
+            $inscripcion->user->nombre,
+            $inscripcion->user->apellido,
             $uuidDiploma
         );
         Storage::put($pdfPath, $pdf->output());

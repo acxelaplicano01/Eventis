@@ -23,7 +23,7 @@ class HistorialConferencias extends Component
     public $search = '';
     public $diploma;
     public $qrcode;
-    public $persona;
+    public $user;
     public $conferencia;
     public $evento;
 
@@ -41,13 +41,13 @@ class HistorialConferencias extends Component
 
     public function loadConferencias()
     {
-        $personaId = Auth::user()->persona->id;
+        $userId = Auth::user()->id;
 
         $suscripciones = Asistencia::where('asistencia', 1)
-            ->whereHas('suscripcion', function ($query) use ($personaId) {
-                $query->where('IdPersona', $personaId);
+            ->whereHas('suscripcion', function ($query) use ($userId) {
+                $query->where('IdUser', $userId);
             })
-            ->with('suscripcion.conferencia.evento', 'suscripcion.conferencia.conferencista.persona')
+            ->with('suscripcion.conferencia.evento', 'suscripcion.conferencia.conferencista.user')
             ->get()
             ->map(function ($asistencia) {
                 return [
@@ -89,10 +89,10 @@ class HistorialConferencias extends Component
 
         // Generar el PDF del diploma
         $pdf = PDF::loadView('livewire.descargarDiploma', [
-            'Nombre' => $asistencia->suscripcion->persona->nombre,
-            'Apellido' => $asistencia->suscripcion->persona->apellido,
+            'Nombre' => $asistencia->suscripcion->user->nombre,
+            'Apellido' => $asistencia->suscripcion->user->apellido,
             'Conferencia' => $asistencia->suscripcion->conferencia->nombre,
-            'Conferencista' => $asistencia->suscripcion->conferencia->conferencista->persona->nombre . ' ' . $asistencia->suscripcion->conferencia->conferencista->persona->apellido,
+            'Conferencista' => $asistencia->suscripcion->conferencia->conferencista->user->nombre . ' ' . $asistencia->suscripcion->conferencia->conferencista->user->apellido,
             'TituloConferencista' => $asistencia->suscripcion->conferencia->conferencista->titulo,
             'FirmaConferencista' =>  $asistencia->suscripcion->conferencia->conferencista->firma,
             'SelloConferencista' =>  $asistencia->suscripcion->conferencia->conferencista->sello,
@@ -121,8 +121,8 @@ class HistorialConferencias extends Component
         // Guardar el PDF temporalmente
         $pdfPath = sprintf(
             'diplomas/Diploma_%s%s_%s.pdf',
-            $asistencia->suscripcion->persona->nombre,
-            $asistencia->suscripcion->persona->apellido,
+            $asistencia->suscripcion->user->nombre,
+            $asistencia->suscripcion->user->apellido,
             $uuidDiploma
         );
         Storage::put($pdfPath, $pdf->output());
@@ -137,8 +137,8 @@ class HistorialConferencias extends Component
         $conferencias = collect($this->conferencias)->filter(function ($item) {
             return str_contains(strtolower($item['conferencia']->nombre), strtolower($this->search)) ||
                 str_contains(strtolower($item['conferencia']->evento->nombreevento), strtolower($this->search)) ||
-                str_contains(strtolower($item['conferencia']->conferencista->persona->nombre), strtolower($this->search)) ||
-                str_contains(strtolower($item['conferencia']->conferencista->persona->apellido), strtolower($this->search));
+                str_contains(strtolower($item['conferencia']->conferencista->user->nombre), strtolower($this->search)) ||
+                str_contains(strtolower($item['conferencia']->conferencista->user->apellido), strtolower($this->search));
         });
         return view('livewire.HistorialConferencia.historial-conferencias', [
             'conferencias' => $this->conferencias,

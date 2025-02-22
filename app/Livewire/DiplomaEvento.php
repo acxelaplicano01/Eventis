@@ -10,7 +10,7 @@ use App\Services\QRCodeService;
 class DiplomaEvento extends Component
 {
     public $qrcode;
-    public $persona;
+    public $user;
     public $asistencia;
     public $conferencia;
 
@@ -23,7 +23,7 @@ class DiplomaEvento extends Component
     public function mount(Asistencia $asistencia)
     {
         $this->asistencia = $asistencia;
-        $this->persona = $asistencia->suscripcion->persona;
+        $this->user = $asistencia->suscripcion->user;
         $this->evento = $asistencia->suscripcion->conferencia->evento;
         $this->conferencia = $asistencia->suscripcion->conferencia;
         $this->diploma = $asistencia->suscripcion->conferencia->evento->diploma;
@@ -31,7 +31,7 @@ class DiplomaEvento extends Component
 
         // obtener el diploma asociado a la persona y la conferencia
 
-        dd($this->persona);
+        dd($this->user);
 
         if ($this->validacionesPersonaConferencia()) {
             $ruta = is_null($this->uuid) ? 'No verificable' : config('app.url') . '/validarDiploma/' . $this->uuid;

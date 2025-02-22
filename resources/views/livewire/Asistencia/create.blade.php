@@ -26,7 +26,7 @@
                                     @foreach($searchSuscripciones as $suscripcion)
                                         <li wire:click="selectSuscripcion({{ $suscripcion->id }})"
                                             class="p-2 hover:bg-gray-200 cursor-pointer dark:hover:bg-gray-600 dark:text-white">
-                                            {{ $suscripcion->persona->nombre }} {{ $suscripcion->persona->apellido }} - {{ $suscripcion->conferencia->nombre }}
+                                            {{ $suscripcion->user->nombre }} {{ $suscripcion->user->apellido }} - {{ $suscripcion->conferencia->nombre }}
                                         </li>
                                     @endforeach
                                 </ul>

@@ -38,7 +38,7 @@
                                 </div>
                                 </div>
                                     @php
-    $inscripcion = Auth::user()->persona->inscripciones()->where('IdEvento', $evento->id)->first();
+    $inscripcion = Auth::user()->inscripciones()->where('IdEvento', $evento->id)->first();
     $estadoInscripcion = $inscripcion ? $inscripcion->Status : null;
     $yaInscrito = $estadoInscripcion === 'Inscrito';
                                     @endphp

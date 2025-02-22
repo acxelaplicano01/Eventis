@@ -21,6 +21,8 @@ class UserTableSeeder extends Seeder
             'nombre' => 'Acxel Fernando',
             'apellido' => 'Aplicano',
             'descripcion' => 'Administrador',
+            'IdNacionalidad' => null,
+            'IdTipoPerfil' => null,
             'pagina' => 'https://www.google.com',
             'password' => bcrypt('12345678')
         ]);

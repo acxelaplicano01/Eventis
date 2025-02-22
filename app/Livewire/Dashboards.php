@@ -82,7 +82,7 @@ class Dashboards extends Component
 
     public function updatedInputSearchConferencista()
     {
-        $this->searchConferencistas = Conferencista::whereHas('persona', function ($query) {
+        $this->searchConferencistas = Conferencista::whereHas('user', function ($query) {
             $query->where('nombre', 'like', '%' . $this->inputSearchConferencista . '%')
                   ->orWhere('apellido', 'like', '%' . $this->inputSearchConferencista . '%');
         })->get();
@@ -93,7 +93,7 @@ class Dashboards extends Component
         $this->idConferencista = $conferencistaId;
         $conferencista = Conferencista::find($conferencistaId);
         if ($conferencista) {
-            $this->inputSearchConferencista = $conferencista->persona->nombre . ' ' . $conferencista->persona->apellido;
+            $this->inputSearchConferencista = $conferencista->user->nombre . ' ' . $conferencista->user->apellido;
         }
         $this->searchConferencistas = [];
     }
@@ -194,7 +194,7 @@ class Dashboards extends Component
 
         $conferencista = Conferencista::find($this->idConferencista);
         if ($conferencista) {
-            $this->inputSearchConferencista = $conferencista->persona->nombre . ' ' . $conferencista->persona->apellido;
+            $this->inputSearchConferencista = $conferencista->user->nombre . ' ' . $conferencista->user->apellido;
         }
 
         $this->openModal();

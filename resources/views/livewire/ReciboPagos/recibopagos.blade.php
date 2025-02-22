@@ -21,13 +21,13 @@
                     <div class="mb-4">
                         <label class="block mb-1 dark:text-gray-300">Nombre completo:</label>
                         <input type="text" class="bg-gray-100 dark:bg-gray-700 dark:text-white w-full p-2 rounded"
-                            disabled value="{{ $persona->nombre }} {{ $persona->apellido }}">
+                            disabled value="{{ $user->nombre }} {{ $user->apellido }}">
                     </div>
 
                     <div class="mb-4">
                         <label class="block mb-1 dark:text-gray-300">Correo:</label>
                         <input type="email" class="bg-gray-100 dark:bg-gray-700 dark:text-white w-full p-2 rounded"
-                            disabled value="{{ $persona->correo }}">
+                            disabled value="{{ $user->correo }}">
                     </div>
 
                     <div class="mb-4">

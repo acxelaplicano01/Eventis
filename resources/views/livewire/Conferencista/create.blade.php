@@ -43,48 +43,22 @@
                             <input type="text" wire:model="nombre"
                                 class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                 id="nombre" placeholder="Nombre">
-                            @error('persona.nombre') <span class="text-red-500">{{ $message }}</span> @enderror
+                            @error('user.nombre') <span class="text-red-500">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-4">
                             <label for="apellido" class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Apellido:</label>
                             <input type="text" wire:model="apellido"
                                 class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                 id="apellido" placeholder="Apellido">
-                            @error('persona.apellido') <span class="text-red-500">{{ $message }}</span> @enderror
+                            @error('user.apellido') <span class="text-red-500">{{ $message }}</span> @enderror
                         </div>
-                        <div class="mb-4">
-                            <label for="dni" class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">DNI:</label>
-                            <input type="text" wire:model="dni"
-                                class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                id="dni" placeholder="DNI">
-                            @error('Conferencistas.dni') <span class="text-red-500">{{ $message }}</span> @enderror
-                        </div>
+                        
                         <div class="mb-4">
                             <label for="correo" class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Correo:</label>
                             <input type="email" wire:model="correo"
                                 class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                 id="correo" placeholder="Correo">
-                            @error('persona.correo') <span class="text-red-500">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="mb-4">
-                            <label for="fechaNacimiento" class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Fecha de Nacimiento:</label>
-                            <input type="date" wire:model="fechaNacimiento"
-                                class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                id="fechaNacimiento">
-                            @error('persona.fechaNacimiento') <span class="text-red-500">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="mb-4">
-                            <label for="sexo" class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Sexo:</label>
-                            <select wire:model="sexo"
-                                class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                id="sexo">
-                                <option value="" disabled selected>Seleccione un sexo</option>
-                                <option value="Masculino">Masculino</option>
-                                <option value="Femenino">Femenino</option>
-                                <option value="Otro">Otro</option>
-                                
-                            </select>
-                            @error('persona.sexo') <span class="text-red-500">{{ $message }}</span> @enderror
+                            @error('user.correo') <span class="text-red-500">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-4">
                             <label for="nacionalidad" class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Nacionalidad:</label>
@@ -96,14 +70,7 @@
                                     <option value="{{ $nacionalidad->id }}">{{ $nacionalidad->nombreNacionalidad }}</option>
                                 @endforeach
                             </select>
-                            @error('persona.IdNacionalidad') <span class="text-red-500">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="mb-4">
-                            <label for="telefono" class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Número de Teléfono:</label>
-                            <input type="text" wire:model="telefono"
-                                class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                id="telefono" placeholder="Número de Teléfono">
-                            @error('persona.telefono') <span class="text-red-500">{{ $message }}</span> @enderror
+                            @error('user.IdNacionalidad') <span class="text-red-500">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-4">
                             <label for="titulo" class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Título:</label>
@@ -244,7 +211,7 @@
                             <input type="text" wire:model="direccion"
                                 class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                 id="direccion" placeholder="Dirección">
-                            @error('persona.direccion') <span class="text-red-500">{{ $message }}</span> @enderror
+                            @error('user.direccion') <span class="text-red-500">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-4">
                             <label for="tipoPerfil" class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Tipo de Perfil:</label>
@@ -256,7 +223,7 @@
                                     <option value="{{ $tipoPerfil->id }}">{{ $tipoPerfil->tipoperfil }}</option>
                                 @endforeach
                             </select>
-                            @error('persona.IdTipoPerfil') <span class="text-red-500">{{ $message }}</span> @enderror
+                            @error('user.IdTipoPerfil') <span class="text-red-500">{{ $message }}</span> @enderror
                         </div>
 
 
@@ -266,7 +233,7 @@
                                 <input type="email" wire:model="correoInstitucional"
                                     class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                     id="correoInstitucional" placeholder="Correo Institucional">
-                                @error('persona.correoInstitucional') <span class="text-red-500">{{ $message }}</span> @enderror
+                                @error('user.correoInstitucional') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
 
                             <div class="mb-4">
@@ -274,7 +241,7 @@
                                 <input type="text" wire:model="numeroCuenta"
                                     class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                     id="numeroCuenta" placeholder="Número de Cuenta">
-                                @error('persona.numeroCuenta') <span class="text-red-500">{{ $message }}</span> @enderror
+                                @error('user.numeroCuenta') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                         @endif
                         @if($IdTipoPerfil == 3) 
@@ -283,7 +250,7 @@
                                 <input type="email" wire:model="correoInstitucional"
                                     class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                     id="correoInstitucional" placeholder="Correo Institucional">
-                                @error('persona.correoInstitucional') <span class="text-red-500">{{ $message }}</span> @enderror
+                                @error('user.correoInstitucional') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
 
                             <div class="mb-4">
@@ -291,7 +258,7 @@
                                 <input type="text" wire:model="numeroCuenta"
                                     class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                     id="numeroCuenta" placeholder="Número de Cuenta">
-                                @error('persona.numeroCuenta') <span class="text-red-500">{{ $message }}</span> @enderror
+                                @error('user.numeroCuenta') <span class="text-red-500">{{ $message }}</span> @enderror
                             </div>
                         @endif
 
@@ -303,24 +270,6 @@
                                 id="descripcion" placeholder="Descripción"></textarea>
                             @error('descripcion') <span class="text-red-500">{{ $message }}</span> @enderror
                         </div>
-                        <div class="mb-4">
-                            <label for="firma" class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Firma:</label>
-                            <input type="file" wire:model="firma"
-                                class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500">
-                            @if ($firma && $firma instanceof \Illuminate\Http\UploadedFile)
-                                <img src="{{ $firma->temporaryUrl() }}" class="mt-2 w-20 h-20 object-cover rounded-full">
-                            @endif
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="sello" class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Sello:</label>
-                            <input type="file" wire:model="sello"
-                                class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500">
-                            @if ($sello && $sello instanceof \Illuminate\Http\UploadedFile)
-                                <img src="{{ $sello->temporaryUrl() }}" class="mt-2 w-20 h-20 object-cover rounded-full">
-                            @endif
-                        </div>
-
                     </div>
 
 

@@ -12,16 +12,16 @@ class Inscripcion extends Model
     use SoftDeletes;
 
     
-    protected $fillable = ['IdEvento', 'IdPersona', 'IdRecibo', 'Status'];
+    protected $fillable = ['IdEvento', 'IdUser', 'IdRecibo', 'Status'];
 
     public function evento()
     {
         return $this->belongsTo(Evento::class, 'IdEvento');
     }
 
-    public function persona()
+    public function user()
     {
-        return $this->belongsTo(Persona::class, 'IdPersona');
+        return $this->belongsTo(User::class, 'IdUser');
     }
     public function recibo()
     {

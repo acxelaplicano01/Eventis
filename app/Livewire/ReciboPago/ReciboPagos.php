@@ -13,14 +13,14 @@ class ReciboPagos extends Component
     use WithFileUploads;
 
     public $evento;
-    public $persona;
+    public $user;
     public $fecha;
     public $foto;
 
     public function mount(Evento $evento)
     {
         $this->evento = $evento;
-        $this->persona = auth()->user()->persona;
+        $this->user = auth()->user();
         $this->fecha = now()->format('Y-m-d');
     }
 
@@ -37,7 +37,7 @@ class ReciboPagos extends Component
         // Crear el recibo
         $recibo = Recibopago::updateOrCreate(
             [
-                'idPersona' => $this->persona->id,
+                'idUser' => $this->user->id,
                 'idEvento' => $this->evento->id,
             ],
             [
@@ -50,7 +50,7 @@ class ReciboPagos extends Component
         Inscripcion::updateOrCreate(
             [
                 'IdEvento' => $this->evento->id,
-                'IdPersona' => $this->persona->id,
+                'IdUser' => $this->user->id,
             ],
             [
                 'IdRecibo' => $recibo->id,
@@ -71,7 +71,7 @@ class ReciboPagos extends Component
     {
         return view('livewire.ReciboPagos.recibopagos', [
             'evento' => $this->evento,
-            'persona' => $this->persona,
+            'user' => $this->user,
         ]);
     }
 }

@@ -45,7 +45,7 @@
                 <div class="flex flex-col space-y-4 mb-12 sm:flex-row sm:justify-center sm:space-y-0">
                 @if ($evento->estado === 'Pagado')
                 @php
-    $yaInscrito = Auth::user()->persona->inscripciones()
+    $yaInscrito = Auth::user()->inscripciones()
         ->where('IdEvento', $evento->id)
         ->exists();
                 @endphp
@@ -88,7 +88,7 @@
                                                         aceptado ya debes poder inscribirte a las conferencias de este evento.</p>
                                                     <!-- Modal footer -->
                                                     @php
-$inscripcion = Auth::user()->persona->inscripciones()->where('IdEvento', $evento->id)->first();
+$inscripcion = Auth::user()->inscripciones()->where('IdEvento', $evento->id)->first();
 $estadoInscripcion = $inscripcion ? $inscripcion->Status : null;
 $yaInscrito = $estadoInscripcion === 'Inscrito';
                             @endphp
@@ -480,9 +480,9 @@ $yaInscrito = $estadoInscripcion === 'Inscrito';
                                         <div class="min-w-0 ml-3">
                                             <p class="text-base font-semibold text-gray-600 dark:text-gray-100 truncate">
                                                 @if ($conferencia->conferencista)
-                                                    @if ($conferencia->conferencista->persona)
-                                                        {{ $conferencia->conferencista->persona->nombre }}
-                                                        {{ $conferencia->conferencista->persona->apellido ?? '' }}
+                                                    @if ($conferencia->conferencista->user)
+                                                        {{ $conferencia->conferencista->user->nombre }}
+                                                        {{ $conferencia->conferencista->user->apellido ?? '' }}
                                                     @else
                                                         N/A
                                                     @endif
@@ -523,8 +523,8 @@ $yaInscrito = $estadoInscripcion === 'Inscrito';
                                     alt="{{$evento->logo}}" />
                             </div>
                         </div>
-                        <h3 class="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-100">{{$conferencia->conferencista->persona->nombre}} {{$conferencia->conferencista->persona->apellido}}</h3>
-                        <h4 class="text-md font-medium text-gray-900 dark:text-gray-500">{{$conferencia->conferencista->persona->nacionalidad->nombreNacionalidad}}</h4>
+                        <h3 class="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-100">{{$conferencia->conferencista->user->nombre}} {{$conferencia->conferencista->user->apellido}}</h3>
+                        <h4 class="text-md font-medium text-gray-900 dark:text-gray-500">{{$conferencia->conferencista->user->nacionalidad->nombreNacionalidad}}</h4>
                         <p class="mt-2 text-base text-gray-900 dark:text-gray-400">Amet minim mollit non deserunt ullamco est sit aliqua dolor do
                             amet sint. Velit officia consequat duis enim velit mollit.</p>
                     </div>
@@ -1014,7 +1014,7 @@ $yaInscrito = $estadoInscripcion === 'Inscrito';
                                 </div>
                                 </div>
                                     @php
-    $inscripcion = Auth::user()->persona->inscripciones()->where('IdEvento', $evento->id)->first();
+    $inscripcion = Auth::user()->inscripciones()->where('IdEvento', $evento->id)->first();
     $estadoInscripcion = $inscripcion ? $inscripcion->Status : null;
     $yaInscrito = $estadoInscripcion === 'Inscrito';
                                     @endphp
@@ -1074,7 +1074,7 @@ $yaInscrito = $estadoInscripcion === 'Inscrito';
                                                </button>
                                                 <span
                                                     class="flex-1 block min-w-0 ml-3 text-base font-semibold text-gray-900 dark:text-gray-300 truncate">
-                                                    {{ $evento->usuario->persona->nombre }} {{ $evento->usuario->persona->apellido }}<p class="fecha-creacion font-medium">{{ $evento->created_at->diffForHumans() }}</p></span>
+                                                    {{ $evento->usuario->nombre }} {{ $evento->usuario->apellido }}<p class="fecha-creacion font-medium">{{ $evento->created_at->diffForHumans() }}</p></span>
                                                         <div data-popover id="popover-company-profile-{{$evento->id}}" role="tooltip"
             class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-80 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
             <div class="p-3">
@@ -1087,7 +1087,7 @@ $yaInscrito = $estadoInscripcion === 'Inscrito';
                     </div>
                     <div>
                         <p class="mb-1 text-base font-semibold leading-none text-gray-900 dark:text-white">
-                            <a href="#" class="hover:underline"> {{ $evento->usuario->persona->nombre }} {{ $evento->usuario->persona->apellido }}</a>
+                            <a href="#" class="hover:underline"> {{ $evento->usuario->nombre }} {{ $evento->usuario->apellido }}</a>
                         </p>
                         <p class="mb-3 text-sm font-normal">
                         {{ $evento->usuario->name }}

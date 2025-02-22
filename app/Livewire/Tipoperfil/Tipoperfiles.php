@@ -5,7 +5,7 @@ namespace App\Livewire\TipoPerfil;
 use Livewire\WithPagination;
 use Livewire\Component;
 use App\Models\Tipoperfil;
-use App\Models\Persona;
+use App\Models\User;
 class Tipoperfiles extends Component
 {
     use WithPagination;
@@ -99,7 +99,7 @@ class Tipoperfiles extends Component
             return;
         }
 
-        if ($tipoperfil->personas()->exists()) {
+        if ($tipoperfil->users()->exists()) {
             session()->flash('error', 'No se puede eliminar el tipo de perfil: ' .  $this->nombreAEliminar. ', porque está enlazado a una persona.');
             return;
         }

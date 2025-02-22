@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Persona;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Conferencista>
  */
@@ -16,12 +16,12 @@ class ConferencistaFactory extends Factory
      */
     public function definition(): array
     {
-        $PersonaId = Persona::inRandomOrder()->first()->id;
+        $UserId = User::inRandomOrder()->first()->id;
         return [
          'Titulo' => $this->faker->sentence,
          'Descripcion' => $this->faker->paragraph,
          'Foto' => $this->faker->imageUrl(),
-         'IdPersona' => $PersonaId,
+         'IdUser' => $UserId,
          'created_by' => 1
         ];
     }

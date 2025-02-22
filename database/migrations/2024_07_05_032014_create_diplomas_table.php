@@ -16,15 +16,6 @@ return new class extends Migration
             $table->string('Codigo')->unique();
             $table->string('Plantilla');
             $table->string('Nombre');
-            $table->string('Titulo1');
-            $table->string('NombreFirma1');
-            $table->string('Firma1');
-            $table->string('Sello1')->nullable();
-            $table->string('Titulo2')->nullable();
-            $table->string('NombreFirma2')->nullable();
-            $table->string('Firma2')->nullable();
-            $table->string('Sello2')->nullable();
-           
             $table->integer("created_by");
             $table->integer("deleted_by")->nullable();
             $table->integer("updated_by")->nullable();

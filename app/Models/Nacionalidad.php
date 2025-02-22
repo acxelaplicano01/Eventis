@@ -11,9 +11,9 @@ class Nacionalidad extends Model
     use HasFactory;
     use SoftDeletes;
     protected $fillable = ['nombreNacionalidad'];
-    public function personas()
+    public function users()
     {
-        return $this->hasMany(Persona::class, 'IdNacionalidad');
+        return $this->hasMany(User::class, 'IdNacionalidad');
     }
 
     protected $table = 'nacionalidads'; 

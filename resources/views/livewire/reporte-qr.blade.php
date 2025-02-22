@@ -79,9 +79,9 @@
                                     alt="Foto conferencista">
                                 <div class="text-base font-semibold">
                                     @if ($conferencia->conferencista)
-                                        @if ($conferencia->conferencista->persona)
-                                            {{ $conferencia->conferencista->persona->nombre }}
-                                            {{ $conferencia->conferencista->persona->apellido ?? '' }}
+                                        @if ($conferencia->conferencista->user)
+                                            {{ $conferencia->conferencista->user->nombre }}
+                                            {{ $conferencia->conferencista->user->apellido ?? '' }}
                                         @else
                                             N/A
                                         @endif

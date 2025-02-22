@@ -5,7 +5,7 @@ use App\Models\Asistencia;
 use Livewire\Component;
 use App\Models\Suscripcion;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Persona;
+use App\Models\User;
 
 class ConferenciasInscritas extends Component
 {
@@ -24,10 +24,10 @@ class ConferenciasInscritas extends Component
     {
         $this->modoHistorial = $modoHistorial;
         $IdUsuario = Auth::id();
-        $IdPersona = Persona::where('IdUsuario', $IdUsuario)->value('id');
+        $IdUser = User::where('id', $IdUsuario)->value('id');
 
-        if ($IdPersona) {
-            $this->conferencias = Suscripcion::where('IdPersona', $IdPersona)
+        if ($IdUser) {
+            $this->conferencias = Suscripcion::where('IdUser', $IdUser)
                 ->whereDoesntHave('asistencias') // Excluir conferencias que tienen cualquier registro de asistencia
                 ->with('conferencia')
                 ->get();
@@ -42,7 +42,7 @@ class ConferenciasInscritas extends Component
         $this->confirmCancelacion = true;
 
         $suscripcion = Suscripcion::where('id', $id)
-            ->where('IdPersona', Auth::id())
+            ->where('IdUser', Auth::id())
             ->first();
         
         if (!$suscripcion) {
@@ -59,7 +59,7 @@ class ConferenciasInscritas extends Component
     public function confirmarCancelacion()
     {
         $suscripcion = Suscripcion::where('id', $this->IdAConfirmarCancelacion)
-            ->where('IdPersona', Auth::id())
+            ->where('IdUser', Auth::id())
             ->first();
 
         if (!$suscripcion) {

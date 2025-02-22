@@ -4,7 +4,7 @@ namespace App\Livewire\Nacionalidad;
 use Livewire\WithPagination;
 use Livewire\Component;
 use App\Models\Nacionalidad;
-use App\Models\Persona;
+use App\Models\User;
 class Nacionalidades extends Component
 {
     use WithPagination;
@@ -93,7 +93,7 @@ class Nacionalidades extends Component
             return;
         }
 
-        if ($nacionalidad->personas()->exists()) {
+        if ($nacionalidad->users()->exists()) {
             session()->flash('error', 'No se puede eliminar la nacionalidad: '. $nacionalidad->nombreNacionalidad . ', porque está enlazado a una  o más personas:');
             return;
         }

@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('users'); // Eliminar la tabla si ya existe
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -18,6 +19,8 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->string('descripcion');
+            $table->unsignedBigInteger('IdNacionalidad')->nullable();
+            $table->unsignedBigInteger('IdTipoPerfil')->nullable(); 
             $table->string('pagina');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -25,6 +28,9 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
+        
+            $table->foreign('IdNacionalidad')->references('id')->on('nacionalidads')->onDelete('restrict');
+            $table->foreign('IdTipoPerfil')->references('id')->on('tipoperfils')->onDelete('restrict');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

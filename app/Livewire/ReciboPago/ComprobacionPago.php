@@ -122,8 +122,8 @@ class ComprobacionPago extends Component
 
         // Generar el PDF del diploma
         $pdf = PDF::loadView('livewire.diploma-evento', [
-            'Nombre' => $inscripcion->persona->nombre,
-            'Apellido' => $inscripcion->persona->apellido,
+            'Nombre' => $inscripcion->user->nombre,
+            'Apellido' => $inscripcion->user->apellido,
             'FechaInicio' => $inscripcion->evento->fechainicio,
             'Organizador' => $inscripcion->evento->organizador,
             'Evento' => $inscripcion->evento->nombreevento,
@@ -150,8 +150,8 @@ class ComprobacionPago extends Component
         // Guardar el PDF temporalmente
         $pdfPath = sprintf(
             'diplomas/Diploma_%s%s_%s.pdf',
-            $inscripcion->persona->nombre,
-            $inscripcion->persona->apellido,
+            $inscripcion->user->nombre,
+            $inscripcion->user->apellido,
             $uuidDiploma
         );
         Storage::put($pdfPath, $pdf->output());
@@ -187,8 +187,8 @@ class ComprobacionPago extends Component
 
             // Generar el HTML del diploma
             $data = [
-                'Nombre' => $inscripcion->persona->nombre,
-                'Apellido' => $inscripcion->persona->apellido,
+                'Nombre' => $inscripcion->user->nombre,
+                'Apellido' => $inscripcion->user->apellido,
                 'FechaInicio' => $inscripcion->evento->fechainicio,
                 'Organizador' => $inscripcion->evento->organizador,
                 'Evento' => $inscripcion->evento->nombreevento,
@@ -231,9 +231,9 @@ class ComprobacionPago extends Component
 
     public function render()
     {
-        $inscripciones = Inscripcion::with(['persona', 'evento', 'recibo'])
+        $inscripciones = Inscripcion::with(['user', 'evento', 'recibo'])
             ->where('IdEvento', $this->evento_id)
-            ->whereHas('persona', function ($query) {
+            ->whereHas('user', function ($query) {
                 $query->where('nombre', 'like', '%' . $this->search . '%')
                     ->orWhere('apellido', 'like', '%' . $this->search . '%')
                     ->orWhere('Status', 'like', '%' . $this->search . '%');
@@ -259,12 +259,12 @@ class ComprobacionPago extends Component
             }
 
             // Enviar notificación por correo electrónico
-            Notification::route('mail', $inscripcion->persona->correo)
+            Notification::route('mail', $inscripcion->user->correo)
                 ->notify(new ComprobanteRechazado($inscripcion));
 
 
             $inscripcion->forceDelete();
-            session()->flash('message', 'Inscripción rechazada! Se ha enviado un correo electrónico a ' . $inscripcion->persona->nombre . ' ' . $inscripcion->persona->apellido . ' (' . $inscripcion->persona->correo . ') notificandole.');
+            session()->flash('message', 'Inscripción rechazada! Se ha enviado un correo electrónico a ' . $inscripcion->user->nombre . ' ' . $inscripcion->user->apellido . ' (' . $inscripcion->user->correo . ') notificandole.');
             $this->confirmingDelete = false;
         }
     }
@@ -285,7 +285,7 @@ class ComprobacionPago extends Component
         }
 
         $this->IdAEliminar = $id;
-        $this->nombreAEliminar = $comprobacion->persona->nombre . ' ' . $comprobacion->persona->apellido;
+        $this->nombreAEliminar = $comprobacion->user->nombre . ' ' . $comprobacion->user->apellido;
         $this->confirmingDelete = true;
     }
 }

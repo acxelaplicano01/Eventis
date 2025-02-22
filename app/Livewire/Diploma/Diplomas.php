@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Diploma;
 
-use App\Models\Persona;
+use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -18,20 +18,8 @@ class Diplomas extends Component
 
     public// $Codigo,
     $Plantilla,
-    $Nombre,
-    $Titulo1,
-    $NombreFirma1,
-    $Firma1,
-    $Sello1,
-    $Titulo2,
-    $NombreFirma2,
-    $Firma2,
-    $Sello2,
-    $Titulo3,
-    $NombreFirma3,
-    $Firma3,
-    $Sello3,
     $diploma_id,
+    $Nombre,
     $search;
 
     public $isOpen = false;
@@ -52,18 +40,7 @@ class Diplomas extends Component
         // 'Codigo' => 'required',
         'Plantilla' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         'Nombre' => 'required',
-        'Titulo1' => 'required',
-        'NombreFirma1' => 'required',
-        'Firma1' => 'required|image|mimes:jpeg,png,jpg,gif',
-        'Sello1' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-        'Titulo2' => 'nullable',
-        'NombreFirma2' => 'nullable',
-        'Firma2' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-        'Sello2' => 'nullable|image|mimes:jpeg,png,jpg,gif',
     ];
-
-    public $conferencias;
-    public $firmas;
 
     public function mount()
     {
@@ -114,11 +91,7 @@ class Diplomas extends Component
              ->get();
      }
  */
-    public function updatedInputSearchFirma()
-    {
-        $this->searchFirmas = Firma::where('nombre', 'like', '%' . $this->inputSearchFirma . '%')
-            ->get();
-    }
+
 
     /*  public function selectConferencia($conferenciaId)
       {
@@ -127,14 +100,6 @@ class Diplomas extends Component
           $this->inputSearchConferencia = $conferencia->nombre;
           $this->searchConferencias = [];
       }*/
-
-    public function selectFirma($firmaId)
-    {
-        $this->IdFirma = $firmaId;
-        $firma = Firma::find($firmaId);
-        $this->inputSearchFirma = $firma->Nombre;
-        $this->searchFirmas = [];
-    }
 
     public function create()
     {
@@ -156,15 +121,6 @@ class Diplomas extends Component
     {
         $this->Plantilla = '';
         $this->Nombre = '';
-        $this->Titulo1 = '';
-        $this->NombreFirma1 = '';
-        $this->Firma1 = '';
-        $this->Sello1 = '';
-        $this->Titulo2 = '';
-        $this->NombreFirma2 = '';
-        $this->Firma2 = '';
-        $this->Sello2 = '';
-
         $this->diploma_id = null;
         //  $this->inputSearchConferencia = '';
         //   $this->searchConferencias = [];
@@ -185,59 +141,12 @@ class Diplomas extends Component
             $this->Plantilla = null;
         }
 
-        // Guardar la Firma1 en el storage
-        if ($this->Firma1) {
-            $this->Firma1 = $this->Firma1->store('firmas', 'public');
-        } elseif ($this->diploma_id) {
-            $diploma = Diploma::findOrFail($this->diploma_id);
-            $this->Firma1 = $diploma->Firma1;
-        } else {
-            $this->Firma1 = null;
-        }
-
-        // Guardar la Firma2 en el storage
-        if ($this->Firma2) {
-            $this->Firma2 = $this->Firma2->store('firmas', 'public');
-        } elseif ($this->diploma_id) {
-            $diploma = Diploma::findOrFail($this->diploma_id);
-            $this->Firma2 = $diploma->Firma2;
-        } else {
-            $this->Firma2 = null;
-        }
-
-        // Guardar el Sello1 en el storage
-        if ($this->Sello1) {
-            $this->Sello1 = $this->Sello1->store('sellos', 'public');
-        } elseif ($this->diploma_id) {
-            $diploma = Diploma::findOrFail($this->diploma_id);
-            $this->Sello1 = $diploma->Sello1;
-        } else {
-            $this->Sello1 = null;
-        }
-
-        // Guardar el Sello2 en el storage
-        if ($this->Sello2) {
-            $this->Sello2 = $this->Sello2->store('sellos', 'public');
-        } elseif ($this->diploma_id) {
-            $diploma = Diploma::findOrFail($this->diploma_id);
-            $this->Sello2 = $diploma->Sello2;
-        } else {
-            $this->Sello2 = null;
-        }
-
+       
         // Actualizar o crear el diploma
         Diploma::updateOrCreate(['id' => $this->diploma_id], [
             'Codigo' => $this->generateUniqueCode(),
             'Plantilla' => $this->Plantilla ? str_replace('public/', 'storage/', $this->Plantilla) : null,
             'Nombre' => $this->Nombre,
-            'Titulo1' => $this->Titulo1,
-            'NombreFirma1' => $this->NombreFirma1,
-            'Firma1' => $this->Firma1 ? str_replace('public/', 'storage/', $this->Firma1) : null,
-            'Sello1' => $this->Sello1 ? str_replace('public/', 'storage/', $this->Sello1) : null,
-            'Titulo2' => $this->Titulo2,
-            'NombreFirma2' => $this->NombreFirma2,
-            'Firma2' => $this->Firma2 ? str_replace('public/', 'storage/', $this->Firma2) : null,
-            'Sello2' => $this->Sello2 ? str_replace('public/', 'storage/', $this->Sello2) : null,
         ]);
 
         session()->flash('message', $this->diploma_id ? 'Diploma actualizado correctamente!' : 'Diploma creado correctamente!');
@@ -261,12 +170,7 @@ class Diplomas extends Component
         $diploma = Diploma::findOrFail($id);
         $this->diploma_id = $id;
         $this->Nombre = $diploma->Nombre;
-        $this->Titulo1 = $diploma->Titulo1;
-        $this->NombreFirma1 = $diploma->NombreFirma1;
-        $this->Titulo2 = $diploma->Titulo2;
-        $this->NombreFirma2 = $diploma->NombreFirma2;
-
-
+        $this->Plantilla = $diploma->Plantilla;
         $this->openModal();
     }
 
@@ -276,13 +180,13 @@ class Diplomas extends Component
             $diploma = Diploma::find($this->IdAEliminar);
 
             if (!$diploma) {
-                session()->flash('error', 'localidad no encontrada.');
+                session()->flash('error', 'Diploma no encontrado.');
                 $this->confirmingDelete = false;
                 return;
             }
 
             $diploma->forceDelete();
-            session()->flash('message', 'modalidad eliminada correctamente!');
+            session()->flash('message', 'Diploma eliminado correctamente!');
             $this->confirmingDelete = false;
         }
     }

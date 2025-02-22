@@ -28,6 +28,8 @@ class Usuarios extends Component
     public $confirmingDelete = false;
     public $IdAEliminar;
     public $nombreAEliminar;
+    public $IdNacionalidad;
+    public $IdTipoPerfil;
 
     protected $rules = [
         'name' => 'required',
@@ -130,6 +132,8 @@ class Usuarios extends Component
             'nombre' => 'required',
             'apellido' => 'required',
             'descripcion' => 'required',
+            'IdNacionalidad' => 'required',
+            'IdTipoPerfil' => 'required',
             'password' => 'nullable|min:8',
             'selectedRoles' => 'required|array',
             'selectedRoles.*' => 'exists:roles,id',
@@ -146,6 +150,8 @@ class Usuarios extends Component
                 'nombre' => $this->nombre,
                 'apellido' => $this->apellido,
                 'descripcion' => $this->descripcion,
+                'IdNacionalidad' => $this->IdNacionalidad,
+                'IdTipoPerfil' => $this->IdTipoPerfil,
                 'password' => $this->password ? Hash::make($this->password) : $user->password,
             ]);
 
@@ -191,11 +197,6 @@ class Usuarios extends Component
             return;
         }
 
-        if ($user ->persona) {
-            session()->flash('error', 'No se puede eliminar el usuario : '. $user ->name . ', con correo: '. $user ->email . ', porque está enlazado a una persona');
-            return;
-        }
-
         $this->IdAEliminar = $id;
         $this->nombreAEliminar = $user->name . ' ' . $user ->email;
         $this->confirmingDelete = true;
@@ -213,6 +214,8 @@ class Usuarios extends Component
         $this->nombre = '';
         $this->apellido = '';
         $this->descripcion = '';
+        $this->IdNacionalidad = '';
+        $this->IdTipoPerfil = '';
         $this->password = '';
         $this->selectedRoles = [];
     }

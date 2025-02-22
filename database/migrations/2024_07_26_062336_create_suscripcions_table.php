@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('suscripcions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('IdConferencia');
-            $table->unsignedBigInteger('IdPersona');
+            $table->unsignedBigInteger('IdUser');
             $table->integer("created_by");
             $table->integer("deleted_by")->nullable();
             $table->integer("updated_by")->nullable();
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->softDeletes();
 
             $table->foreign('IdConferencia')->references('id')->on('conferencias')->onDelete('restrict');
-            $table->foreign('IdPersona')->references('id')->on('personas')->onDelete('restrict');
+            $table->foreign('IdUser')->references('id')->on('users')->onDelete('restrict');
         });
     }
 

@@ -9,13 +9,13 @@ use Livewire\Component;
 class Pagos extends Component
 {
     public $conferencia;
-    public $persona;
+    public $user;
     public function mount($conferencia)
     {
         $conferenciaId = Conferencia::find($conferencia);
         $this->conferencia = $conferenciaId;
 
-        $this->persona = auth()->user()->persona;
+        $this->user = auth()->user();
     }
 
     public function realizarPago(){
@@ -31,7 +31,7 @@ class Pagos extends Component
     {
         return view('livewire.Pagos.pagos', [
             'conferencia' => $this->conferencia,
-            'persona' => $this->persona
+            'user' => $this->user
         ]); 
     }
 }

@@ -58,7 +58,7 @@ class EventosVistas extends Component
 
         if ($evento) {
             // Verificar si ya está suscrito a la conferencia
-            $suscripcionExistente = Auth::user()->persona->inscripciones()
+            $suscripcionExistente = Auth::user()->inscripciones()
                 ->where('IdEvento', $evento->id)
                 ->exists();
 
@@ -66,7 +66,7 @@ class EventosVistas extends Component
                 $this->SuscripciónYaRealizada = true; 
             } else {
                 // Crear la suscripción si no existe
-                Auth::user()->persona->inscripciones()->updateOrCreate([
+                Auth::user()->inscripciones()->updateOrCreate([
                     'IdEvento' => $evento->id,
                     'created_by' => Auth::id()
                 ]);

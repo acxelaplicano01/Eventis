@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('inscripcions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('IdEvento');
-            $table->unsignedBigInteger('IdPersona');
+            $table->unsignedBigInteger('IdUser');
             $table->unsignedBigInteger('IdRecibo');
             $table->string('Status')->default('pendiente'); 
             $table->integer("created_by")->nullable();
@@ -25,7 +25,7 @@ return new class extends Migration
 
             $table->foreign('IdEvento')->references('id')->on('eventos')->onDelete('restrict');
             $table->foreign('IdRecibo')->references('id')->on('recibopagos')->onDelete('restrict');
-            $table->foreign('IdPersona')->references('id')->on('personas')->onDelete('restrict');
+            $table->foreign('IdUser')->references('id')->on('users')->onDelete('restrict');
         });
     }
 

@@ -76,8 +76,8 @@
                                     class="hover:bg-gray-50 dark:hover:bg-gray-600 bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <td class="px-6 py-4">{{ $item['conferencia']->evento->nombreevento }}</td>
                                     <td class="px-6 py-4">{{ $item['conferencia']->nombre }}</td>
-                                    <td class="px-6 py-4">{{ $item['conferencia']->conferencista->persona->nombre }}
-                                        {{ $item['conferencia']->conferencista->persona->apellido }}</td>
+                                    <td class="px-6 py-4">{{ $item['conferencia']->conferencista->user->nombre }}
+                                        {{ $item['conferencia']->conferencista->user->apellido }}</td>
                                     <td class="px-6 py-4">{{ $item['conferencia']->fecha }}</td>
                                     <td class="px-6 py-4">{{ $item['conferencia']->lugar }}</td>
                                     <td class="px-6 py-4">

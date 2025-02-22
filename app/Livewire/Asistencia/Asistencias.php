@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Asistencia;
 
-use App\Models\Persona;
 use App\Models\Conferencia;
 use App\Models\Suscripcion;
 use Livewire\Component;
@@ -28,7 +27,7 @@ class Asistencias extends Component
     {
         $searchTerm = '%' . $this->inputSearchSuscripcion . '%';
         
-        $this->searchSuscripciones = Suscripcion::whereHas('persona', function($query) use ($searchTerm) {
+        $this->searchSuscripciones = Suscripcion::whereHas('user', function($query) use ($searchTerm) {
             $query->where('nombre', 'like', $searchTerm)
                 ->orWhere('apellido', 'like', $searchTerm);
         })->orWhereHas('conferencia', function($query) use ($searchTerm) {
@@ -42,7 +41,7 @@ class Asistencias extends Component
         $suscripcion = Suscripcion::find($suscripcionId);
         if ($suscripcion) {
             $this->IdSuscripcion = $suscripcion->id;
-            $this->inputSearchSuscripcion = $suscripcion->persona->nombre . ' ' . $suscripcion->persona->apellido . ' - ' . $suscripcion->conferencia->nombre;
+            $this->inputSearchSuscripcion = $suscripcion->user->nombre . ' ' . $suscripcion->user->apellido . ' - ' . $suscripcion->conferencia->nombre;
             $this->searchSuscripciones = [];
         }
     }
@@ -132,7 +131,7 @@ class Asistencias extends Component
         $asistencia = Asistencia::find($id);
         if ($asistencia) {
             $this->IdAEliminar = $id;
-            $this->nombreAEliminar = $asistencia->suscripcion->persona->nombre . ' ' . $asistencia->suscripcion->persona->apellido . ' - ' . $asistencia->suscripcion->conferencia->nombre;; // Obtén el nombre del evento
+            $this->nombreAEliminar = $asistencia->suscripcion->user->nombre . ' ' . $asistencia->suscripcion->user->apellido . ' - ' . $asistencia->suscripcion->conferencia->nombre;; // Obtén el nombre del evento
             $this->confirmingDelete = true;
         }
     }
@@ -145,7 +144,7 @@ class Asistencias extends Component
             $this->Fecha = $asistencia->Fecha;
             $this->Asistencia = $asistencia->Asistencia;
             $this->IdSuscripcion = $asistencia->IdSuscripcion;
-            $this->inputSearchSuscripcion = $asistencia->suscripcion->persona->nombre . ' ' . $asistencia->suscripcion->persona->apellido . ' - ' . $asistencia->suscripcion->conferencia->nombre;
+            $this->inputSearchSuscripcion = $asistencia->suscripcion->user->nombre . ' ' . $asistencia->suscripcion->user->apellido . ' - ' . $asistencia->suscripcion->conferencia->nombre;
             $this->openModal();
         }
     }

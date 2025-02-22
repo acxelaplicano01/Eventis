@@ -12,16 +12,16 @@ class Suscripcion extends Model
     use SoftDeletes;
 
     
-    protected $fillable = ['IdConferencia', 'IdPersona', 'created_by', 'deleted_by'];
+    protected $fillable = ['IdConferencia', 'IdUser', 'created_by', 'deleted_by'];
 
     public function conferencia()
     {
         return $this->belongsTo(Conferencia::class, 'IdConferencia');
     }
 
-    public function persona()
+    public function user()
     {
-        return $this->belongsTo(Persona::class, 'IdPersona');
+        return $this->belongsTo(User::class, 'IdUser');
     }
 
     public function asistencias()

@@ -1,9 +1,6 @@
 <?php
 
 namespace Database\Factories;
-use App\Models\Asistencia;
-use App\Models\Persona;
-use App\Models\Conferencia;
 use App\Models\Suscripcion;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

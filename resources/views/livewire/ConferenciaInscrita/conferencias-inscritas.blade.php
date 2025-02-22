@@ -122,9 +122,9 @@
                                 </td>
                                 <td class="px-6 py-2">
                                     @if ($suscripcion->conferencia->conferencista)
-                                        @if ($suscripcion->conferencia->conferencista->persona)
-                                            {{ $suscripcion->conferencia->conferencista->persona->nombre }}
-                                            {{ $suscripcion->conferencia->conferencista->persona->apellido ?? '' }}
+                                        @if ($suscripcion->conferencia->conferencista->user)
+                                            {{ $suscripcion->conferencia->conferencista->user->nombre }}
+                                            {{ $suscripcion->conferencia->conferencista->user->apellido ?? '' }}
                                         @else
                                             N/A
                                         @endif

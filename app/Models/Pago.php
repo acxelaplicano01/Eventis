@@ -12,7 +12,7 @@ class Pago extends BaseModel
     protected $fillable = [
         'NumTransaccion',
         'IdConferencia',
-        'IdPersona',
+        'IdUser',
         'Monto',
         'NombreTarjeta',
         'NumeroTarjeta',
@@ -27,8 +27,8 @@ class Pago extends BaseModel
         return $this->belongsTo(Conferencia::class, 'IdConferencia');
     }
 
-    public function persona()
+    public function user()
     {
-        return $this->belongsTo(Persona::class, 'IdPersona');
+        return $this->belongsTo(User::class, 'IdUser');
     }
 }
