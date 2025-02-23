@@ -94,7 +94,7 @@
                             <div>
                                 <button type="submit"
                                     class="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-yellow-600 border border-transparent rounded-md focus:outline-none hover:bg-yellow-700 focus:bg-yellow-700">
-                                    Siguiente
+                                    Iniciar
                                 </button>
                             </div>
                         </div>

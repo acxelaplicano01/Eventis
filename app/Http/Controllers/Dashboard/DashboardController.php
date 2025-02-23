@@ -25,7 +25,7 @@ class DashboardController extends Controller
         $eventosFinalizados = Evento::where('fechafinal', '<', Carbon::now())->count();
 
         $conferenciass = Conferencia::withCount(['suscripciones as unique_subscriptions' => function ($query) {
-            $query->select(DB::raw('count(distinct IdPersona)'));
+            $query->select(DB::raw('count(distinct IdUser)'));
         }])
         ->having('unique_subscriptions', '>', 0)
         ->get();

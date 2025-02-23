@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Login;
 
+use App\Actions\Fortify\CreateNewUser;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -26,35 +27,46 @@ class RegistrarUsarioController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
-    {
-        return view('auth.register');
-    }
+     protected $createNewUser;
 
-    public function store(Request $request)
-    {
+     public function __construct(CreateNewUser $createNewUser)
+     {
+         $this->createNewUser = $createNewUser;
+     }
+ 
+     public function index()
+     {
+         return response()->view('auth.register');
+     }
 
+     public function store(Request $request)
+    {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => $this->passwordRules(),
-        ]);
-        $user = new User([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']),
+            'password' => 'required|string|min:8|confirmed',
+            'nombre' => 'nullable|string|max:255',
+            'apellido' => 'nullable|string|max:255',
+            'descripcion' => 'nullable|string|max:255',
+            'IdNacionalidad' => 'nullable|integer',
+            'IdTipoPerfil' => 'nullable|integer',
+            'pagina' => 'nullable|string|max:255',
         ]);
 
-        return $this->storePersona($user);
+        $user = $this->createNewUser->create($request->all());
+        $user->roles()->attach(2);
+        Auth::login($user);
+
+        return redirect()->route('eventoVista');
     }
 
-    public function storePersona(User $user)
+/*    public function storePersona(User $user)
     {
         // dd($user->password);
         $nacionalidades = Nacionalidad::all();
         $tipoperfiles = Tipoperfil::all();
         return view('auth.nueva-persona', ['user' => $user, 'password' => $user->password, 'nacionalidades' => $nacionalidades, 'tipoperfiles' => $tipoperfiles]);
-    }
+    }*/
 
     public function passwordRules()
     {
@@ -65,7 +77,7 @@ class RegistrarUsarioController extends Controller
             'confirmed'
         ];
     }
-
+/*
     public function registrarPersona(Request $request)
     {
         // Validar los campos de nombre y apellido
@@ -86,7 +98,7 @@ class RegistrarUsarioController extends Controller
         ]);
 
         // Función para formatear nombres y apellidos
-        function formatName($name)
+        function formatName($name): string
         {
             return ucwords(strtolower($name));
         }
@@ -131,5 +143,5 @@ class RegistrarUsarioController extends Controller
         Auth::login($user);
 
         return redirect()->route('eventoVista');
-    }
+    }*/
 }

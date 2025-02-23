@@ -8,7 +8,7 @@ use App\Models\DiplomaGenerado;
 
 class ValidarDiplomaController extends Controller
 {
-    public $persona;
+    public $user;
     public $conferencia;
     public $codigoDiploma;
     public $asistencia;
@@ -24,13 +24,13 @@ class ValidarDiplomaController extends Controller
         if ($diploma) {
             $asistencia = Asistencia::where('id', $diploma->id)->first(); // Acceder al primer elemento de la colección
             if ($asistencia) {
-                $this->persona = $asistencia->suscripcion->persona;
+                $this->user = $asistencia->suscripcion->user;
                 $this->conferencia = $asistencia->suscripcion->conferencia;
                 $this->codigoDiploma = $asistencia->suscripcion->conferencia->evento->diploma;
                 $this->asistencia = $diploma;
 
                 return view('livewire.validar-diploma', [
-                    'persona' => $this->persona,
+                    'user' => $this->user,
                     'conferencia' => $this->conferencia,
                     'uuid' => $this->uuid,
                     'asistencia' => $this->asistencia,
@@ -38,7 +38,7 @@ class ValidarDiplomaController extends Controller
             }
         }
         return view('livewire.validar-diploma', [
-            'persona' => null,
+            'user' => null,
             'conferencia' => null,
             'uuid' => null,
             'asistencia' => null,
@@ -54,12 +54,12 @@ class ValidarDiplomaController extends Controller
         if ($diploma) {
             $inscripcion = Inscripcion::where('id', $diploma->id)->first(); // Acceder al primer elemento de la colección
             if ($inscripcion) {
-                $this->persona = $inscripcion->persona;
+                $this->user = $inscripcion->user;
                 $this->evento = $inscripcion->evento;
                 $this->codigoDiploma = $inscripcion->evento->diploma;
                 
                 return view('livewire.validar-diploma-evento', [
-                    'persona' => $this->persona,
+                    'user' => $this->user,
                     'evento' => $this->evento,
                     'uuid' => $this->uuid,
                     'inscripcion' => $this->inscripcion,

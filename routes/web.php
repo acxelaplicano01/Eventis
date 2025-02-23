@@ -84,7 +84,6 @@ Route::middleware([
 Route::get('/evento/{evento}', [EventoController::class, 'show'])->name('evento');
 Route::get('/registrar', [RegistrarUsarioController::class, 'index'])->name('register');
 Route::post('/registrar', [RegistrarUsarioController::class, 'store'])->name('registerpost');
-Route::post('/nueva-persona', [RegistrarUsarioController::class, 'registrarPersona'])->name('nueva-persona');
 // VALIDAR DIPLOMA
 Route::get('/validarDiploma/{uuid}', [ValidarDiplomaController::class, 'validarDiploma'])->name('validarDiploma');
 Route::get('/validarDiplomaEvento/{uuid}', [ValidarDiplomaController::class, 'validarDiplomaEvento'])->name('validarDiplomaEvento');

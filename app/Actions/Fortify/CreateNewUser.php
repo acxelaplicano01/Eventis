@@ -24,25 +24,31 @@ class CreateNewUser implements CreatesNewUsers
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'nombre' => ['required', 'string', 'max:255'],
-            'apellido' => ['required', 'string', 'max:255'],
-            'descripcion' => ['required', 'string', 'max:255'],
+            'nombre' => ['nullable', 'string', 'max:255'],
+            'apellido' => ['nullable', 'string', 'max:255'],
+            'descripcion' => ['nullable', 'string', 'max:255'],
+            'IdNacionalidad' => ['nullable', 'integer'],
+            'IdTipoPerfil' => ['nullable', 'integer'],
+            'pagina' => ['nullable', 'string', 'max:255'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
         
 
-       $user = User::create([
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
-            'nombre' => $input['nombre'],
-            'apellido' => $input['apellido'],
-            'descripcion' => $input['descripcion'],
+            'nombre' => $input['nombre'] ?? null,
+            'apellido' => $input['apellido'] ?? null,
+            'descripcion' => $input['descripcion'] ?? null,
+            'IdNacionalidad' => $input['IdNacionalidad'] ?? null,
+            'IdTipoPerfil' => $input['IdTipoPerfil'] ?? null,
+            'pagina' => $input['pagina'] ?? null,
             'password' => Hash::make($input['password']),
         ]);
 
-        return redirect()->route('register');
+        return $user;
 
 
     }
