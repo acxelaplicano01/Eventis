@@ -30,6 +30,7 @@ class Usuarios extends Component
     public $nombreAEliminar;
     public $IdNacionalidad;
     public $IdTipoPerfil;
+    public $profile_photo_path;
 
     protected $rules = [
         'name' => 'required',
@@ -74,6 +75,9 @@ class Usuarios extends Component
             'nombre' => 'nullable',
             'apellido' => 'nullable',
             'descripcion' => 'nullable',
+            'IdNacionalidad' => 'nullable',
+            'IdTipoPerfil' => 'nullable',
+            'profile_photo_path' => 'nullable',
             'password' => 'nullable|min:8',
             'selectedRoles' => 'required|array',
             'selectedRoles.*' => 'exists:roles,id',
@@ -94,6 +98,9 @@ class Usuarios extends Component
             'nombre' => $this->nombre,
             'apellido' => $this->apellido,
             'descripcion' => $this->descripcion,
+            'IdNacionalidad' => $this->IdNacionalidad,
+            'IdTipoPerfil' => $this->IdTipoPerfil,
+            'profile_photo_path' => $this->profile_photo_path,
             'password' => Hash::make($this->password),
         ]);
 
@@ -119,6 +126,9 @@ class Usuarios extends Component
         $this->nombre = $user->nombre;
         $this->apellido = $user->apellido;
         $this->descripcion =$user->descripcion;
+        $this->IdNacionalidad = $user->IdNacionalidad;
+        $this->IdTipoPerfil = $user->IdTipoPerfil;
+        $this->profile_photo_path = $user->profile_photo_path;
         $this->selectedRoles = $user->roles->pluck('id')->toArray();
         $this->roles = Role::all();
         $this->isOpen = true;
@@ -134,6 +144,7 @@ class Usuarios extends Component
             'descripcion' => 'nullable',
             'IdNacionalidad' => 'nullable',
             'IdTipoPerfil' => 'nullable',
+            'profile_photo_path' => 'nullable',
             'password' => 'nullable|min:8',
             'selectedRoles' => 'required|array',
             'selectedRoles.*' => 'exists:roles,id',
@@ -152,6 +163,7 @@ class Usuarios extends Component
                 'descripcion' => $this->descripcion,
                 'IdNacionalidad' => $this->IdNacionalidad,
                 'IdTipoPerfil' => $this->IdTipoPerfil,
+                'profile_photo_path' => $this->profile_photo_path,
                 'password' => $this->password ? Hash::make($this->password) : $user->password,
             ]);
 
@@ -216,6 +228,7 @@ class Usuarios extends Component
         $this->descripcion = '';
         $this->IdNacionalidad = '';
         $this->IdTipoPerfil = '';
+        $this->profile_photo_path = '';
         $this->password = '';
         $this->selectedRoles = [];
     }

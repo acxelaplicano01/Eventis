@@ -24,6 +24,7 @@ class UserTableSeeder extends Seeder
             'IdNacionalidad' => null,
             'IdTipoPerfil' => null,
             'pagina' => 'https://www.google.com',
+            'profile_photo_path' => 'fotos\JOltUe53pyu8MmbMTfniJp1RvxAGrgCJvkwQlFHI.jpg',
             'password' => bcrypt('12345678')
         ]);
         $role = Role::create(['name' => 'root']);

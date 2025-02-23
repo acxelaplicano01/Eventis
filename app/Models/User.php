@@ -34,6 +34,7 @@ class User extends Authenticatable
         'IdNacionalidad',
         'IdTipoPerfil',
         'pagina',
+        'profile_photo_path',
         'password',
     ];
 

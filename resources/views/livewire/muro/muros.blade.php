@@ -57,7 +57,7 @@
                                                 class="md rounded-full relative avatar">
                                                 <img style="height:9rem; width:9rem;"
                                                     class="md rounded-full relative border-4 border-yellow-500"
-                                                    src="{{ asset( $userperfil->profile_photo_path) }}"
+                                                    src="{{ asset('storage/' . $userperfil->profile_photo_path) }}"
                                                     alt="">
                                                 <div class="absolute"></div>
                                             </div>
@@ -164,7 +164,7 @@
                                     <article>
                                         <div class="flex items-center mb-4">
                                             <img class="w-10 h-10 me-2 rounded-full"
-                                            src="{{ asset( $userperfil->profile_photo_path) }}" alt="">
+                                            src="{{ asset('storage/' . $userperfil->profile_photo_path) }}" alt="">
                                             <div wire:click="create"
                                                 class="dark:bg-white-800 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 bg-gray-100 dark:bg-gray-700 p-2 w-full rounded-full">
                                                 <span class="font-medium ml-2 text-gray-600 dark:text-white">{{ $userperfil->nombre }}, ¿Qué novedades
@@ -218,7 +218,7 @@
                                     <article>
                                         <div class="flex items-center mb-4">
                                             <img class="w-10 h-10 me-4 rounded-full"
-                                            src="{{ asset( $userperfil->profile_photo_path) }}" alt="">
+                                            src="{{ asset('storage/' . $userperfil->profile_photo_path) }}" alt="">
                                             <div class="dark:text-white">
                                                 <a href="{{ route('muro', $publicacion->user->id) }}"
                                                     class="font-semibold text-gray-900 dark:text-white">{{ $publicacion->user->nombre }}
@@ -441,7 +441,7 @@
                                         </div>
                                         <div class="flex items-center">
                                             <img class="w-8 h-8 me-2 rounded-full"
-                                            src="{{ asset( $userperfil->profile_photo_path) }}" alt="">
+                                            src="{{ asset('storage/' . $userperfil->profile_photo_path) }}" alt="">
                                             <div data-modal-target="imagenModal{{ $publicacion->id }}"
                                                 data-modal-toggle="imagenModal{{ $publicacion->id }}"
                                                 class="dark:bg-white-800 cursor-text hover:bg-gray-200 dark:hover:bg-gray-600 bg-gray-100 dark:bg-gray-700 p-2 w-full rounded-full">
