@@ -2,6 +2,7 @@
 namespace App\Livewire\Muro;
 
 use App\Models\Comentario;
+use App\Models\Diploma;
 use Livewire\WithFileUploads;
 use App\Models\Evento;
 use App\Models\User;
@@ -15,17 +16,19 @@ use Livewire\Component;
 class Muros extends Component
 {
     use WithFileUploads;
+    public $logo, $nombreevento, $estado,$precio, $descripcion, $organizador, $fechainicio, $fechafinal, $horainicio, $horafin, $idmodalidad, $idlocalidad, $IdDiploma, $evento_id;
 
     public $search = '';
     public $userperfil;
     public $modalidades, $localidades;
     public $likes = [];
-    public $comentario, $fotoComentario;
+    public $comentario, $fotoComentario,  $diplomas;
 
     public function mount(User $userperfil)
     {
         $this->userperfil = $userperfil;
         $this->cargarLikes();
+        $this->diplomas = Diploma::all();
         $this->modalidades = Modalidad::all();
         $this->localidades = Localidad::all();
     }
@@ -38,8 +41,10 @@ class Muros extends Component
             ->toArray();
     }
 
-    public $publicacion_id, $foto, $IdUsuario, $descripcion;
+    public $publicacion_id, $foto, $IdUsuario;
     public $isOpen = 0;
+
+    public $isOpenEvento = 0;
     public $confirmingDelete = false;
     public $IdAEliminar;
 
@@ -49,9 +54,26 @@ class Muros extends Component
         $this->openModal();
     }
 
+    public function createEvento()
+    {
+        $this->resetInputFieldsEvento();
+        $this->openModalEvento();
+    }
+
     public function openModal()
     {
         $this->isOpen = true;
+    }
+
+    public function openModalEvento()
+    {
+        $this->isOpenEvento = true;
+    }
+
+    public function closeModalEvento()
+    {
+        $this->isOpenEvento = false;
+        $this->resetInputFieldsEvento();
     }
 
     public function closeModal()
@@ -64,6 +86,83 @@ class Muros extends Component
         $this->descripcion = '';
         $this->publicacion_id = null;
         $this->foto = null;
+    }
+
+    private function resetInputFieldsEvento()
+    {
+        $this->logo = '';
+        $this->nombreevento = '';
+        $this->descripcion = '';
+        $this->organizador = '';
+        $this->fechainicio = '';
+        $this->fechafinal = '';
+        $this->horainicio = '';
+        $this->horafin = '';
+        $this->idmodalidad = '';
+        $this->idlocalidad = '';
+        $this->IdDiploma = '';
+    }
+
+    public function storEvento()
+    {
+        $this->validate([
+            'logo' => 'nullable|image',
+            'nombreevento' => 'required',
+            'descripcion' => 'required',
+            'organizador' => 'required',
+            'fechainicio' => 'required',
+            'fechafinal' => 'required',
+            'horainicio' => 'required',
+            'horafin' => 'required',
+            'idmodalidad' => 'required',
+            'idlocalidad' => 'required',
+            'IdDiploma' => 'required',
+            'estado' => 'required|string|max:255',
+            'precio' => 'nullable',
+        ]);
+
+        // Manejo de archivo logo
+        if ($this->logo) {
+            // Guardamos el archivo en la carpeta eventos dentro de storage/app/public
+            $this->logo = $this->logo->store('eventos', 'public');
+        } elseif ($this->evento_id) {
+            $evento = Evento::findOrFail($this->evento_id);
+            $this->logo = $evento->logo;
+        }
+
+        Evento::updateOrCreate(['id' => $this->evento_id], [
+            'logo' => $this->logo ? str_replace('public/', 'storage/', $this->logo) : null,
+            'nombreevento' => $this->nombreevento,
+            'descripcion' => $this->descripcion,
+            'organizador' => $this->organizador,
+            'fechainicio' => $this->fechainicio,
+            'fechafinal' => $this->fechafinal,
+            'horainicio' => $this->horainicio,
+            'horafin' => $this->horafin,
+            'idmodalidad' => $this->idmodalidad,
+            'idlocalidad' => $this->idlocalidad,
+            'IdDiploma' => $this->IdDiploma,
+            'estado' => $this->estado,
+            'precio' => $this->precio ?: null,
+        ]);
+
+        session()->flash('message', 
+            $this->evento_id ? 'Evento creado correctamente!' : 'Evento actualizado correctamente!');
+
+
+        $this->resetInputFieldsEvento();
+        $this->closeModalEvento();
+    }
+
+    public function viewDetails($id)
+    {
+        $this->selectedEvento = Evento::find($id);
+        $this->showDetails = true;
+    }
+
+    public function closeDetails()
+    {
+        $this->showDetails = false;
     }
 
     public function edit($id)
@@ -230,6 +329,7 @@ class Muros extends Component
         }
         return collect(); // Retorna una colección vacía si el usuario no existe
     }
+    
     public function render()
     {
         $eventosUsuario = Evento::with('modalidad', 'localidad', 'diploma')

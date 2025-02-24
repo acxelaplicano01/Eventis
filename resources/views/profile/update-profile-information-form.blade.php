@@ -1,48 +1,54 @@
 <form class="max-w-sm mx-auto" wire:submit.prevent="updateProfileInformation">
     <!-- Profile Photo -->
     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-            <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
-                <!-- Profile Photo File Input -->
-                <input type="file" id="photo" class="hidden"
-                            wire:model.live="photo"
-                            x-ref="photo"
-                            x-on:change="
-                                    photoName = $refs.photo.files[0].name;
-                                    const reader = new FileReader();
-                                    reader.onload = (e) => {
-                                        photoPreview = e.target.result;
-                                    };
-                                    reader.readAsDataURL($refs.photo.files[0]);
-                            " />
+        <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
+            <!-- Profile Photo File Input -->
+            <input type="file" id="photo" class="hidden"
+                        wire:model.live="photo"
+                        x-ref="photo"
+                        x-on:change="
+                                photoName = $refs.photo.files[0].name;
+                                const reader = new FileReader();
+                                reader.onload = (e) => {
+                                    photoPreview = e.target.result;
+                                };
+                                reader.readAsDataURL($refs.photo.files[0]);
+                        " />
 
-                <x-label for="photo" value="{{ __('Photo') }}" />
+            <x-label for="photo" value="{{ __('Foto de perfil') }}" />
 
-                <!-- Current Profile Photo -->
-                <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{  asset( 'storage/' . auth()->user()->profile_photo_path)  }}" alt="{{ auth()->user()->name }}" class="rounded-full h-20 w-20 object-cover">
-                </div>
-
-                <!-- New Profile Photo Preview -->
-                <div class="mt-2" x-show="photoPreview" style="display: none;">
-                    <span class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
-                          x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
-                    </span>
-                </div>
-
-                <x-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.photo.click()">
-                    {{ __('Select A New Photo') }}
-                </x-secondary-button>
-
-                @if (auth()->user()->profile_photo_path)
-                    <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
-                        {{ __('Remove Photo') }}
-                    </x-secondary-button>
-                @endif
-
-                <x-input-error for="photo" class="mt-2" />
+            <!-- Current Profile Photo -->
+            <div class="mt-2" x-show="! photoPreview">
+            @if (Auth::user()->profile_photo_path)
+                <img class="h-36 w-36 rounded-full object-cover" src="/storage/{{Auth::user()->profile_photo_path }}"
+                    alt="{{ Auth::user()->name }}" />
+            @else
+                <img class="h-36 w-36 rounded-full object-cover" src="{{Auth::user()->profile_photo_url }}"
+                    alt="{{ Auth::user()->name }}" />
+            @endif
             </div>
-        @endif
-    <div class="mb-2">
+
+            <!-- New Profile Photo Preview -->
+            <div class="mt-2" x-show="photoPreview" style="display: none;">
+                <span class="block rounded-full w-36 h-36 bg-cover bg-no-repeat bg-center"
+                      x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
+                </span>
+            </div>
+
+            <x-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.photo.click()">
+                {{ __('Nueva foto') }}
+            </x-secondary-button>
+
+            @if (Auth::user()->profile_photo_path)
+                <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
+                    {{ __('Eliminar foto') }}
+                </x-secondary-button>
+            @endif
+
+            <x-input-error for="photo" class="mt-2" />
+        </div>
+    @endif
+    <div class="mb-2 mt-2">
         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
             Correo
         </label>
