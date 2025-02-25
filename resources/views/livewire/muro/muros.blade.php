@@ -1,5 +1,5 @@
 <div>
-    <div class="p-relative h-auto dark:bg-gray-900">
+    <div class="relative h-auto dark:bg-gray-900">
         <div class="flex justify-center">
             <main role="main">
                 <div class="flex" style="width: 990px;">
@@ -553,11 +553,11 @@
                     </section>
 
 
-                    <aside class="w-2/5 h-12 position-relative">
+                    <aside class="w-2/5 h-12 relative">
                         <!--Aside menu (right side)-->
                         <div style="max-width:350px;">
-                            <div class="overflow-y-auto fixed  h-screen">
-                                <div class="relative text-gray-400 w-full p-5">
+                            <div class="overflow-y-auto fixed h-[calc(100%-4rem)]">
+                                <div class="relative text-gray-400 w-full py-1 px-4">
                                     <button type="submit" class="absolute ml-4 mt-3 mr-4">
                                         <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px"
