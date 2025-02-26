@@ -36,9 +36,9 @@
                     <hr class="dark:border-gray-700">
                 </div>
                 <!-- User card-->
-                <div class="bg-white dark:bg-gray-800 shadow-sm rounded-b-lg overflow-hidden">
+                <div class="bg-white dark:bg-gray-800 shadow-sm overflow-hidden">
                     <div class="w-full bg-cover bg-no-repeat bg-center"
-                        style="height: 200px; background-image: url(https://azulschool.net/wp-content/uploads/buddypress/members/34880/cover-image/673448942ac49-bp-cover-image.jpg;">
+                        style="height: 350px; background-image: url(https://azulschool.net/wp-content/uploads/buddypress/members/34880/cover-image/673448942ac49-bp-cover-image.jpg;">
                         <img class="opacity-0 w-full h-full"
                             src="https://azulschool.net/wp-content/uploads/buddypress/members/34880/cover-image/673448942ac49-bp-cover-image.jpg"
                             alt="">
@@ -47,21 +47,58 @@
                         <div class="relative flex w-full">
                             <!-- Avatar -->
                             <div class="flex flex-1">
-                                <div style="margin-top: -6rem;">
-                                    <div style="height:9rem; width:9rem;"
-                                        class="object-cover rounded-full relative avatar">
+                                <div style="margin-top: -4rem;">
+                                    <div style="height:12rem; width:12rem;"
+                                        class="object-cover rounded-full relative ms-2">
                                         @if ($userperfil->profile_photo_path)
-                                            <img style="height:9rem; width:9rem;"
+                                            <img style="height:12rem; width:12rem;"
                                                 class="object-cover rounded-full relative border-4 border-yellow-500"
                                                 src="/storage/{{$userperfil->profile_photo_path }}" alt="">
                                         @else 
-
-
-                                            <img style="height:9rem; width:9rem;"
-                                                class="rounded-full relative border-4 border-yellow-500"
+                                            <img style="height:12rem; width:12rem;"
+                                                class="object-cover rounded-full relative border-4 border-yellow-500"
                                                 src="https://ui-avatars.com/api/?name={{ $userperfil->name }}&amp;color=000&amp;background=facc15">
                                         @endif
                                         <div class="absolute"></div>
+                                    </div>
+                                </div>
+                                <!-- Profile info -->
+                                <div class="space-y-1 justify-center w-full mt-3 ml-3">
+                                    <!-- User basic-->
+                                    <div>
+                                        <span class="text-2xl leading-6 font-bold dark:text-white">
+                                            {{$userperfil->nombre}} {{$userperfil->apellido}}
+                                        </span>
+                                    </div>
+                                    <!-- User stats -->
+                                    <div
+                                        class="flex justify-start items-start w-full divide-x dark:divide-gray-500 divide-gray-800 divide-solid">
+                                        <div class="text-center pr-3"><span
+                                                class="font-bold dark:text-white">{{ $seguidos->count() }}</span><span
+                                                class="dark:text-gray-400">
+                                                Siguiendo</span></div>
+                                        <div class="text-center px-3"><span
+                                                class="font-bold dark:text-white">{{$seguidores->count()}}
+                                            </span><span class="dark:text-gray-400"> Seguidores</span></div>
+                                    </div>
+                                    
+                                    <div class="flex -space-x-4 rtl:space-x-reverse">
+                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+                                            src="/storage/{{$userperfil->profile_photo_path }}" alt="">
+                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+                                            src="/storage/{{$userperfil->profile_photo_path }}" alt="">
+                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+                                            src="/storage/{{$userperfil->profile_photo_path }}" alt="">
+                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+                                            src="/storage/{{$userperfil->profile_photo_path }}" alt="">
+                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+                                            src="/storage/{{$userperfil->profile_photo_path }}" alt="">
+                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+                                            src="/storage/{{$userperfil->profile_photo_path }}" alt="">
+                                        <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
+                                            src="/storage/{{$userperfil->profile_photo_path }}" alt="">
+                                        <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800"
+                                            href="#">+99</a>
                                     </div>
                                 </div>
                             </div>
@@ -75,10 +112,10 @@
                                         Editar
                                     </button>
                                     <!-- Publicar Button 
-                                                    <button wire:click="create"
-                                                        class="flex justify-center bg-yellow-500 max-h-max whitespace-nowrap focus:outline-none  focus:ring  max-w-max border bg-transparent border-yellow-500 text-white hover:border-yellow-800 items-center hover:shadow-sm font-bold py-2 px-4 rounded-full mr-0 ml-auto">
-                                                        Publicar
-                                                    </button>-->
+                                                        <button wire:click="create"
+                                                            class="flex justify-center bg-yellow-500 max-h-max whitespace-nowrap focus:outline-none  focus:ring  max-w-max border bg-transparent border-yellow-500 text-white hover:border-yellow-800 items-center hover:shadow-sm font-bold py-2 px-4 rounded-full mr-0 ml-auto">
+                                                            Publicar
+                                                        </button>-->
                                 @endif
                                 <!-- Botón para seguir o dejar de seguir -->
                                 @if(auth()->user()->id !== $userperfil->id)
@@ -105,68 +142,13 @@
                             @include('livewire.muro.evento')
                         @endif
 
-                        <!-- Profile info -->
-                        <div class="space-y-1 justify-center w-full mt-3 ml-3">
-                            <!-- User basic-->
-                            <div>
-                                <h2 class="text-xl leading-6 font-bold dark:text-white">
-                                    {{$userperfil->nombre}} {{$userperfil->apellido}}
-                                </h2>
-                                <p class="text-sm leading-5 font-medium dark:text-gray-400">@
-                                    {{$userperfil->name}}
-                                </p>
-                            </div>
-                            <!-- Description and others -->
-                            <div class="mt-3">
-                                <p class="dark:text-white leading-tight mb-2">{{ $userperfil->descripcion }}
-                                </p>
-                                <div class="dark:text-gray-400 flex">
-                                    <span class="flex mr-2"><svg viewBox="0 0 24 24" class="h-5 w-5 paint-icon">
-                                            <g>
-                                                <path
-                                                    d="M11.96 14.945c-.067 0-.136-.01-.203-.027-1.13-.318-2.097-.986-2.795-1.932-.832-1.125-1.176-2.508-.968-3.893s.942-2.605 2.068-3.438l3.53-2.608c2.322-1.716 5.61-1.224 7.33 1.1.83 1.127 1.175 2.51.967 3.895s-.943 2.605-2.07 3.438l-1.48 1.094c-.333.246-.804.175-1.05-.158-.246-.334-.176-.804.158-1.05l1.48-1.095c.803-.592 1.327-1.463 1.476-2.45.148-.988-.098-1.975-.69-2.778-1.225-1.656-3.572-2.01-5.23-.784l-3.53 2.608c-.802.593-1.326 1.464-1.475 2.45-.15.99.097 1.975.69 2.778.498.675 1.187 1.15 1.992 1.377.4.114.633.528.52.928-.092.33-.394.547-.722.547z">
-                                                </path>
-                                                <path
-                                                    d="M7.27 22.054c-1.61 0-3.197-.735-4.225-2.125-.832-1.127-1.176-2.51-.968-3.894s.943-2.605 2.07-3.438l1.478-1.094c.334-.245.805-.175 1.05.158s.177.804-.157 1.05l-1.48 1.095c-.803.593-1.326 1.464-1.475 2.45-.148.99.097 1.975.69 2.778 1.225 1.657 3.57 2.01 5.23.785l3.528-2.608c1.658-1.225 2.01-3.57.785-5.23-.498-.674-1.187-1.15-1.992-1.376-.4-.113-.633-.527-.52-.927.112-.4.528-.63.926-.522 1.13.318 2.096.986 2.794 1.932 1.717 2.324 1.224 5.612-1.1 7.33l-3.53 2.608c-.933.693-2.023 1.026-3.105 1.026z">
-                                                </path>
-                                            </g>
-                                        </svg> <a href="{{ $userperfil->pagina }}" target="#"
-                                            class="leading-5 ml-1 text-yellow-500">{{ $userperfil->pagina }}</a></span>
-                                    <span class="flex mr-2"><svg viewBox="0 0 24 24" class="h-5 w-5 paint-icon">
-                                            <g>
-                                                <path
-                                                    d="M19.708 2H4.292C3.028 2 2 3.028 2 4.292v15.416C2 20.972 3.028 22 4.292 22h15.416C20.972 22 22 20.972 22 19.708V4.292C22 3.028 20.972 2 19.708 2zm.792 17.708c0 .437-.355.792-.792.792H4.292c-.437 0-.792-.355-.792-.792V6.418c0-.437.354-.79.79-.792h15.42c.436 0 .79.355.79.79V19.71z">
-                                                </path>
-                                                <circle cx="7.032" cy="8.75" r="1.285"></circle>
-                                                <circle cx="7.032" cy="13.156" r="1.285"></circle>
-                                                <circle cx="16.968" cy="8.75" r="1.285"></circle>
-                                                <circle cx="16.968" cy="13.156" r="1.285"></circle>
-                                                <circle cx="12" cy="8.75" r="1.285"></circle>
-                                                <circle cx="12" cy="13.156" r="1.285"></circle>
-                                                <circle cx="7.032" cy="17.486" r="1.285"></circle>
-                                                <circle cx="12" cy="17.486" r="1.285"></circle>
-                                            </g>
-                                        </svg> <span class="leading-5 ml-1">Desde el
-                                            {{ \Carbon\Carbon::parse($userperfil->created_at)->locale('es')->isoFormat('D [de] MMMM [de] YYYY ') }}</span></span>
-                                </div>
-                            </div>
-                            <div
-                                class="pt-3 flex justify-start items-start w-full divide-x dark:divide-gray-500 divide-gray-800 divide-solid">
-                                <div class="text-center pr-3"><span
-                                        class="font-bold dark:text-white">{{ $seguidos->count() }}</span><span
-                                        class="dark:text-gray-400">
-                                        Siguiendo</span></div>
-                                <div class="text-center px-3"><span
-                                        class="font-bold dark:text-white">{{$seguidores->count()}}
-                                    </span><span class="dark:text-gray-400"> Seguidores</span></div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
-                <div class="mb-4">
-                    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-styled-tab"
+                <div class="mb-1 bg-white dark:bg-gray-800 rounded-b-lg border-t dark:border-gray-700 shadow-sm">
+                    <ul class="flex flex-wrap ml-1 -mb-px text-sm font-medium text-center" id="default-styled-tab"
                         data-tabs-toggle="#default-styled-tab-content"
-                        data-tabs-active-classes="text-purple-600 hover:text-purple-600 dark:text-purple-500 dark:hover:text-purple-500 border-purple-600 dark:border-purple-500"
+                        data-tabs-active-classes="text-yellow-500 hover:text-yellow-500 dark:text-yellow-500 dark:hover:text-yellow-500 border-yellow-500 dark:border-yellow-500"
                         data-tabs-inactive-classes="dark:border-transparent text-gray-500 hover:text-gray-600 dark:text-gray-400 border-gray-100 hover:border-gray-300 dark:border-gray-700 dark:hover:text-gray-300"
                         role="tablist">
                         <li class="me-2" role="presentation">
@@ -174,17 +156,18 @@
                                 data-tabs-target="#styled-profile" type="button" role="tab" aria-controls="profile"
                                 aria-selected="false">Publicaciones</button>
                         </li>
-                        <li class="me-2" role="presentation">
-                            <button
-                                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                                id="dashboard-styled-tab" data-tabs-target="#styled-dashboard" type="button" role="tab"
-                                aria-controls="dashboard" aria-selected="false">Información</button>
-                        </li>
+
                         <li class="me-2" role="presentation">
                             <button
                                 class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                                 id="settings-styled-tab" data-tabs-target="#styled-settings" type="button" role="tab"
-                                aria-controls="settings" aria-selected="false">Eventos</button>
+                                aria-controls="settings" aria-selected="false">Información</button>
+                        </li>
+                        <li class="me-2" role="presentation">
+                            <button
+                                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                                id="dashboard-styled-tab" data-tabs-target="#styled-dashboard" type="button" role="tab"
+                                aria-controls="dashboard" aria-selected="false">Eventos</button>
                         </li>
                         <li role="presentation">
                             <button
@@ -197,261 +180,281 @@
                 <div id="default-styled-tab-content">
                     <div class="hidden" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="flex" style="width: 1130px;">
-                        <aside class="w-2/5 h-12 -top-[460px] sticky">
-                        <!--Aside menu (right side)-->
-                        <div style="max-width:380px;">
-                            <div class="overflow-y-auto">
-                                <div class="relative text-gray-400 w-full mt-3 py-1 pr-4">
-                                    <button type="submit" class="absolute ml-4 mt-3 mr-4">
-                                        <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px"
-                                            y="0px" viewBox="0 0 56.966 56.966"
-                                            style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
-                                            width="512px" height="512px">
-                                            <path
-                                                d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z">
-                                            </path>
-                                        </svg>
-                                    </button>
+                            <aside class="w-2/5 h-12 -top-[460px] sticky">
+                                <!--Aside menu (right side)-->
+                                <div style="max-width:380px;">
+                                    <div class="overflow-y-auto">
+                                        <div class="relative text-gray-400 w-full mt-3 py-1 pr-4">
+                                            <button type="submit" class="absolute ml-4 mt-3 mr-4">
+                                                <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
+                                                    x="0px" y="0px" viewBox="0 0 56.966 56.966"
+                                                    style="enable-background:new 0 0 56.966 56.966;"
+                                                    xml:space="preserve" width="512px" height="512px">
+                                                    <path
+                                                        d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z">
+                                                    </path>
+                                                </svg>
+                                            </button>
 
-                                    <input name="buscar" wire:model.live="search" type="text" id="table-search-users"
-                                        placeholder="Buscar en los eventos de {{$userperfil->nombre}} {{$userperfil->apellido}}"
-                                        class="h-10 px-10 pr-5 w-full text-sm text-gray-700 dark:text-gray-200 
+                                            <input name="buscar" wire:model.live="search" type="text"
+                                                id="table-search-users"
+                                                placeholder="Buscar en los eventos de {{$userperfil->nombre}} {{$userperfil->apellido}}"
+                                                class="h-10 px-10 pr-5 w-full text-sm text-gray-700 dark:text-gray-200 
                                         bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 
                                         focus:outline-none focus:ring-2 focus:ring-yellow-500 
                                         rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm">
-                                </div>
-                                <!--trending tweet section-->
-                                <div
-                                    class="max-w-sm rounded-lg bg-white dark:bg-gray-800 p-3 dark:bg-dim-700 bg-dim-700 overflow-hidden shadow-sm mr-4 mt-4">
-                                    <h2 class="mb-0 text-xl font-bold dark:text-white">Fotos</h2>
-                                    <p class="w-48 text-xs dark:text-gray-400 mb-2">{{$eventosCount}} Fotos</p>
-                                    <div class="grid grid-cols-3 gap-1">
-                                        @foreach($Eventos as $evento) 
-                                                <div data-popover-target="popover-user-profile-{{ $evento->id }}"
-                                                class="max-w-sm truncate dark:text-white bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-                                                <a href="{{ route('reporteEvento', ['evento' => $evento->id]) }}"
-                                                    target="_blank">
-                                                    <img class="rounded-t-lg w-full h-24 object-cover"
-                                                        src="{{ asset('storage/' . $evento->logo) }}"
-                                                        alt="Logo del Evento" />
-                                                </a>
-                                                <span class="p-1">{{ $evento->nombreevento }}</span>
-                                            </div>
-                                            <div data-popover id="popover-user-profile-{{ $evento->id }}" role="tooltip"
-                                                class="absolute z-50 invisible shadow-2xl inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
-                                                <div class="p-3">
-                                                    <div class="flex items-center justify-between mb-2">
-                                                            <img class="w-60 h-32 me-4 object-cover rounded-lg" src="/storage/{{$evento->logo }}" alt="">
+                                        </div>
+                                        <!--trending tweet section-->
+                                        <div
+                                            class="max-w-sm rounded-lg bg-white dark:bg-gray-800 p-3 dark:bg-dim-700 bg-dim-700 overflow-hidden shadow-sm mr-4 mt-4">
+                                            <h2 class="mb-0 text-xl font-bold dark:text-white">Fotos</h2>
+                                            <p class="w-48 text-xs dark:text-gray-400 mb-2">{{$eventosCount}} Fotos</p>
+                                            <div class="grid grid-cols-3 gap-1">
+                                                @foreach($Eventos as $evento) 
+                                                    <div data-popover-target="popover-user-profile-{{ $evento->id }}"
+                                                        class="max-w-sm truncate dark:text-white bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                                                        <a href="{{ route('reporteEvento', ['evento' => $evento->id]) }}"
+                                                            target="_blank">
+                                                            <img class="rounded-t-lg w-full h-24 object-cover"
+                                                                src="{{ asset('storage/' . $evento->logo) }}"
+                                                                alt="Logo del Evento" />
+                                                        </a>
+                                                        <span class="p-1">{{ $evento->nombreevento }}</span>
                                                     </div>
-                                                    <p
-                                                        class="text-base font-semibold leading-none text-gray-900 dark:text-white">
-                                                        <a href="#">{{ $evento->nombreevento }}</a>
-                                                    </p>
-                                                    <p class="mb-4 text-sm line-clamp-4 text-ellipsis">{{ $evento->descripcion }}</p>
-                                                    <ul class="flex text-sm">
-                                                        <li class="me-2">
-                                                            <a href="#" class="py-1 hover:underline">
-                                                                <span
-                                                                    class="font-semibold text-gray-900 dark:text-white">{{ $evento->inscripciones->count() }}</span>
-                                                                <span>Inscritos</span>
-                                                            </a>
-                                                        </li>
-                                                        @if($evento->estado === 'Pagado')
-                                                        <li class="me-2">
-                                                            <a href="{{ route('reporteEvento', ['evento' => $evento->id]) }}" class="hover:underline">
-                                                            <div>
-                                                                <button type="button"
-                                                                    class="text-white -mt-2.5 bg-yellow-500 hover:bg-yellow-600 focus:ring-4 font-medium rounded-lg text-xs px-3 py-1.5 dark:bg-yellow-500 dark:hover:bg-yellow-600">Inscribirse</button>
+                                                    <div data-popover id="popover-user-profile-{{ $evento->id }}"
+                                                        role="tooltip"
+                                                        class="absolute z-50 invisible shadow-2xl inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
+                                                        <div class="p-3">
+                                                            <div class="flex items-center justify-between mb-2">
+                                                                <img class="w-60 h-32 me-4 object-cover rounded-lg"
+                                                                    src="/storage/{{$evento->logo }}" alt="">
                                                             </div>
-                                                            </a>
-                                                        </li>
-                                                        @endif
-                                                    </ul>
+                                                            <p
+                                                                class="text-base font-semibold leading-none text-gray-900 dark:text-white">
+                                                                <a href="#">{{ $evento->nombreevento }}</a>
+                                                            </p>
+                                                            <p class="mb-4 text-sm line-clamp-4 text-ellipsis">
+                                                                {{ $evento->descripcion }}</p>
+                                                            <ul class="flex text-sm">
+                                                                <li class="me-2">
+                                                                    <a href="#" class="py-1 hover:underline">
+                                                                        <span
+                                                                            class="font-semibold text-gray-900 dark:text-white">{{ $evento->inscripciones->count() }}</span>
+                                                                        <span>Inscritos</span>
+                                                                    </a>
+                                                                </li>
+                                                                @if($evento->estado === 'Pagado')
+                                                                    <li class="me-2">
+                                                                        <a href="{{ route('reporteEvento', ['evento' => $evento->id]) }}"
+                                                                            class="hover:underline">
+                                                                            <div>
+                                                                                <button type="button"
+                                                                                    class="text-white -mt-2.5 bg-yellow-500 hover:bg-yellow-600 focus:ring-4 font-medium rounded-lg text-xs px-3 py-1.5 dark:bg-yellow-500 dark:hover:bg-yellow-600">Inscribirse</button>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                @endif
+                                                            </ul>
+                                                        </div>
+                                                        <div data-popper-arrow></div>
+                                                    </div>
+
+                                                @endforeach
+                                            </div>
+
+                                        </div>
+                                        <!--trending tweet section-->
+                                        <div
+                                            class="max-w-sm rounded-lg dark:bg-gray-800 bg-white overflow-hidden shadow-sm mr-4 mt-4 border border-gray-200 dark:border-gray-700">
+                                            <!-- Header -->
+                                            <div class="flex items-center justify-between p-4">
+                                                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Germany
+                                                    Trends</h2>
+                                                <a href="#" aria-label="Settings"
+                                                    class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                                                    <svg class="h-6 w-6 text-gray-500 dark:text-gray-300" fill="none"
+                                                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                                        <path
+                                                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+
+                                            <hr class="border-gray-300 dark:border-gray-600">
+
+                                            <!-- Trending Items -->
+                                            <div class="divide-y divide-gray-300 dark:divide-gray-600">
+                                                <!-- Trending Item Template -->
+                                                <div
+                                                    class="flex justify-between items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                                    <div>
+                                                        <p class="text-xs text-gray-500 dark:text-gray-400">1 · Trending
+                                                        </p>
+                                                        <h3 class="font-bold text-gray-900 dark:text-white">
+                                                            #Microsoft363
+                                                        </h3>
+                                                        <p class="text-xs text-gray-500 dark:text-gray-400">5,466 Tweets
+                                                        </p>
+                                                    </div>
+                                                    <a href="#" aria-label="More options"
+                                                        class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                                                        <svg class="h-5 w-5 text-gray-500 dark:text-gray-300"
+                                                            fill="none" stroke="currentColor" stroke-width="2"
+                                                            viewBox="0 0 24 24">
+                                                            <path d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                    </a>
                                                 </div>
-                                                <div data-popper-arrow></div>
+
+                                                <!-- Additional trending items (copy the block above and update the content as needed) -->
+                                                <div
+                                                    class="flex justify-between items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                                    <div>
+                                                        <p class="text-xs text-gray-500 dark:text-gray-400">2 · Politics
+                                                            ·
+                                                            Trending</p>
+                                                        <h3 class="font-bold text-gray-900 dark:text-white">#HI-Fashion
+                                                        </h3>
+                                                        <p class="text-xs text-gray-500 dark:text-gray-400">8,464 Tweets
+                                                        </p>
+                                                    </div>
+                                                    <a href="#" aria-label="More options"
+                                                        class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                                                        <svg class="h-5 w-5 text-gray-500 dark:text-gray-300"
+                                                            fill="none" stroke="currentColor" stroke-width="2"
+                                                            viewBox="0 0 24 24">
+                                                            <path d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+
+                                                <div
+                                                    class="flex justify-between items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                                    <div>
+                                                        <p class="text-xs text-gray-500 dark:text-gray-400">3 · Rock ·
+                                                            Trending</p>
+                                                        <h3 class="font-bold text-gray-900 dark:text-white">#Ferrari
+                                                        </h3>
+                                                        <p class="text-xs text-gray-500 dark:text-gray-400">5,586 Tweets
+                                                        </p>
+                                                    </div>
+                                                    <a href="#" aria-label="More options"
+                                                        class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                                                        <svg class="h-5 w-5 text-gray-500 dark:text-gray-300"
+                                                            fill="none" stroke="currentColor" stroke-width="2"
+                                                            viewBox="0 0 24 24">
+                                                            <path d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+
+                                                <div
+                                                    class="flex justify-between items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                                    <div>
+                                                        <p class="text-xs text-gray-500 dark:text-gray-400">4 · Auto
+                                                            Racing
+                                                            · Trending</p>
+                                                        <h3 class="font-bold text-gray-900 dark:text-white">#Vettel</h3>
+                                                        <p class="text-xs text-gray-500 dark:text-gray-400">9,416 Tweets
+                                                        </p>
+                                                    </div>
+                                                    <a href="#" aria-label="More options"
+                                                        class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                                                        <svg class="h-5 w-5 text-gray-500 dark:text-gray-300"
+                                                            fill="none" stroke="currentColor" stroke-width="2"
+                                                            viewBox="0 0 24 24">
+                                                            <path d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                    </a>
+                                                </div>
                                             </div>
 
-                                        @endforeach
-                                    </div>
+                                            <div
+                                                class="p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition text-center cursor-pointer">
+                                                <h2 class="text-yellow-500 hover:underline">Show more</h2>
+                                            </div>
+                                        </div>
 
-                                </div>
-                                <!--trending tweet section-->
-                                <div
-                                    class="max-w-sm rounded-lg dark:bg-gray-800 bg-white overflow-hidden shadow-sm mr-4 mt-4 border border-gray-200 dark:border-gray-700">
-                                    <!-- Header -->
-                                    <div class="flex items-center justify-between p-4">
-                                        <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Germany
-                                            Trends</h2>
-                                        <a href="#" aria-label="Settings"
-                                            class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-                                            <svg class="h-6 w-6 text-gray-500 dark:text-gray-300" fill="none"
-                                                stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                                <path
-                                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            </svg>
-                                        </a>
-                                    </div>
-
-                                    <hr class="border-gray-300 dark:border-gray-600">
-
-                                    <!-- Trending Items -->
-                                    <div class="divide-y divide-gray-300 dark:divide-gray-600">
-                                        <!-- Trending Item Template -->
+                                        <!--people suggetion to follow section-->
                                         <div
-                                            class="flex justify-between items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                            <div>
-                                                <p class="text-xs text-gray-500 dark:text-gray-400">1 · Trending</p>
-                                                <h3 class="font-bold text-gray-900 dark:text-white">#Microsoft363
-                                                </h3>
-                                                <p class="text-xs text-gray-500 dark:text-gray-400">5,466 Tweets</p>
+                                            class="max-w-sm rounded-lg bg-white dark:bg-gray-800 overflow-hidden shadow-sm mr-4 mt-4 border border-gray-200 dark:border-gray-700">
+                                            <!-- Header -->
+                                            <div class="p-4">
+                                                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Who to
+                                                    Follow</h2>
                                             </div>
-                                            <a href="#" aria-label="More options"
-                                                class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition">
-                                                <svg class="h-5 w-5 text-gray-500 dark:text-gray-300" fill="none"
-                                                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                                    <path d="M19 9l-7 7-7-7"></path>
-                                                </svg>
-                                            </a>
-                                        </div>
 
-                                        <!-- Additional trending items (copy the block above and update the content as needed) -->
-                                        <div
-                                            class="flex justify-between items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                            <div>
-                                                <p class="text-xs text-gray-500 dark:text-gray-400">2 · Politics ·
-                                                    Trending</p>
-                                                <h3 class="font-bold text-gray-900 dark:text-white">#HI-Fashion</h3>
-                                                <p class="text-xs text-gray-500 dark:text-gray-400">8,464 Tweets</p>
+                                            <hr class="border-gray-300 dark:border-gray-600">
+
+                                            <!-- User Item Template -->
+                                            <div
+                                                class="flex items-center justify-between p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                                <div class="flex items-center">
+                                                    <img class="h-10 w-10 rounded-full"
+                                                        src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+                                                        alt="Sonali Hirave Profile">
+                                                    <div class="ml-3">
+                                                        <p class="text-base font-medium text-gray-900 dark:text-white">
+                                                            Sonali Hirave</p>
+                                                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                                            @ShonaDesign</p>
+                                                    </div>
+                                                </div>
+                                                <button
+                                                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-4 rounded-full transition duration-300">
+                                                    Follow
+                                                </button>
                                             </div>
-                                            <a href="#" aria-label="More options"
-                                                class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition">
-                                                <svg class="h-5 w-5 text-gray-500 dark:text-gray-300" fill="none"
-                                                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                                    <path d="M19 9l-7 7-7-7"></path>
-                                                </svg>
-                                            </a>
-                                        </div>
 
-                                        <div
-                                            class="flex justify-between items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                            <div>
-                                                <p class="text-xs text-gray-500 dark:text-gray-400">3 · Rock ·
-                                                    Trending</p>
-                                                <h3 class="font-bold text-gray-900 dark:text-white">#Ferrari</h3>
-                                                <p class="text-xs text-gray-500 dark:text-gray-400">5,586 Tweets</p>
+                                            <hr class="border-gray-300 dark:border-gray-600">
+
+                                            <!-- Second User (duplicate the structure for more users) -->
+                                            <div
+                                                class="flex items-center justify-between p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                                <div class="flex items-center">
+                                                    <img class="h-10 w-10 rounded-full"
+                                                        src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+                                                        alt="Sonali Hirave Profile">
+                                                    <div class="ml-3">
+                                                        <p class="text-base font-medium text-gray-900 dark:text-white">
+                                                            Sonali Hirave</p>
+                                                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                                            @ShonaDesign</p>
+                                                    </div>
+                                                </div>
+                                                <button
+                                                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-4 rounded-full transition duration-300">
+                                                    Follow
+                                                </button>
                                             </div>
-                                            <a href="#" aria-label="More options"
-                                                class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition">
-                                                <svg class="h-5 w-5 text-gray-500 dark:text-gray-300" fill="none"
-                                                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                                    <path d="M19 9l-7 7-7-7"></path>
-                                                </svg>
-                                            </a>
-                                        </div>
 
-                                        <div
-                                            class="flex justify-between items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                            <div>
-                                                <p class="text-xs text-gray-500 dark:text-gray-400">4 · Auto Racing
-                                                    · Trending</p>
-                                                <h3 class="font-bold text-gray-900 dark:text-white">#Vettel</h3>
-                                                <p class="text-xs text-gray-500 dark:text-gray-400">9,416 Tweets</p>
-                                            </div>
-                                            <a href="#" aria-label="More options"
-                                                class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition">
-                                                <svg class="h-5 w-5 text-gray-500 dark:text-gray-300" fill="none"
-                                                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                                    <path d="M19 9l-7 7-7-7"></path>
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
+                                            <hr class="border-gray-300 dark:border-gray-600">
 
-                                    <div
-                                        class="p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition text-center cursor-pointer">
-                                        <h2 class="text-yellow-500 hover:underline">Show more</h2>
-                                    </div>
-                                </div>
-
-                                <!--people suggetion to follow section-->
-                                <div
-                                    class="max-w-sm rounded-lg bg-white dark:bg-gray-800 overflow-hidden shadow-sm mr-4 mt-4 border border-gray-200 dark:border-gray-700">
-                                    <!-- Header -->
-                                    <div class="p-4">
-                                        <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Who to
-                                            Follow</h2>
-                                    </div>
-
-                                    <hr class="border-gray-300 dark:border-gray-600">
-
-                                    <!-- User Item Template -->
-                                    <div
-                                        class="flex items-center justify-between p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                        <div class="flex items-center">
-                                            <img class="h-10 w-10 rounded-full"
-                                                src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                                                alt="Sonali Hirave Profile">
-                                            <div class="ml-3">
-                                                <p class="text-base font-medium text-gray-900 dark:text-white">
-                                                    Sonali Hirave</p>
-                                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                                                    @ShonaDesign</p>
+                                            <!-- Show More -->
+                                            <div
+                                                class="p-4 text-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                                <h2 class="font-bold text-yellow-500 hover:underline">Show more</h2>
                                             </div>
                                         </div>
-                                        <button
-                                            class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-4 rounded-full transition duration-300">
-                                            Follow
-                                        </button>
-                                    </div>
-
-                                    <hr class="border-gray-300 dark:border-gray-600">
-
-                                    <!-- Second User (duplicate the structure for more users) -->
-                                    <div
-                                        class="flex items-center justify-between p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                        <div class="flex items-center">
-                                            <img class="h-10 w-10 rounded-full"
-                                                src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                                                alt="Sonali Hirave Profile">
-                                            <div class="ml-3">
-                                                <p class="text-base font-medium text-gray-900 dark:text-white">
-                                                    Sonali Hirave</p>
-                                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                                                    @ShonaDesign</p>
+                                        <div class="flow-root m-6">
+                                            <div class="flex-1">
+                                                <a href="#">
+                                                    <p class="text-sm leading-6 font-medium text-gray-500">Terms Privacy
+                                                        Policy Cookies Imprint Ads info
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <div class="flex-2">
+                                                <p class="text-sm leading-6 font-medium text-gray-600"> © 2020 Eventis,
+                                                    Inc.
+                                                </p>
                                             </div>
                                         </div>
-                                        <button
-                                            class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-4 rounded-full transition duration-300">
-                                            Follow
-                                        </button>
-                                    </div>
-
-                                    <hr class="border-gray-300 dark:border-gray-600">
-
-                                    <!-- Show More -->
-                                    <div
-                                        class="p-4 text-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                        <h2 class="font-bold text-yellow-500 hover:underline">Show more</h2>
                                     </div>
                                 </div>
-                                <div class="flow-root m-6">
-                                    <div class="flex-1">
-                                        <a href="#">
-                                            <p class="text-sm leading-6 font-medium text-gray-500">Terms Privacy
-                                                Policy Cookies Imprint Ads info
-                                            </p>
-                                        </a>
-                                    </div>
-                                    <div class="flex-2">
-                                        <p class="text-sm leading-6 font-medium text-gray-600"> © 2020 Eventis, Inc.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </aside>
+                            </aside>
                             <div class="dark:bg-gray-900 w-4/5" style="max-width:600px;">
                                 @if(auth()->user()->id === $userperfil->id)
                                     <div class="mt-4 mb-4 shadow-sm rounded-lg dark:bg-gray-800">
@@ -463,6 +466,7 @@
                                                         <img class="w-10 h-10 me-2 object-cover rounded-full"
                                                             src="/storage/{{$userperfil->profile_photo_path }}" alt="">
                                                     @else 
+
 
                                                         <img class="w-10 h-10 me-2 object-cover rounded-full"
                                                             src="https://ui-avatars.com/api/?name={{ $userperfil->name }}&amp;color=000&amp;background=facc15">
@@ -534,6 +538,7 @@
                                                 </a>
                                             @else 
 
+
                                                 <a href="#">
                                                     <img data-popover-target="popover-user-publicacion-{{ $userperfil->id }}"
                                                         class="w-10 h-10 me-2 object-cover rounded-full"
@@ -595,6 +600,7 @@
                                                             class="w-10 h-10 me-2 object-cover rounded-full"
                                                             src="/storage/{{$userperfil->profile_photo_path }}" alt="">
                                                     @else 
+
 
 
                                                         <img data-popover-target="popover-user-publicacion-{{ $userperfil->id }}"
@@ -761,7 +767,8 @@
                                                                                 {{ $comentario->user->nombre }}:
                                                                             </p>
                                                                             <p class="dark:text-white">
-                                                                                {{ $comentario->contenido }}</p>
+                                                                                {{ $comentario->contenido }}
+                                                                            </p>
                                                                         </li>
                                                                     @endforeach
                                                                 </ul>
@@ -842,6 +849,7 @@
                                                         @else 
 
 
+
                                                             <img class="w-8 h-8 me-2 object-cover rounded-full"
                                                                 src="https://ui-avatars.com/api/?name={{ $userperfil->name }}&amp;color=000&amp;background=facc15">
                                                         @endif
@@ -859,311 +867,360 @@
                                     </div>
                                 @endforeach
                             </div>
-                            
+
                             <aside class="w-2/5 h-12 -top-[460px] sticky">
-                        <!--Aside menu (right side)-->
-                        <div style="max-width:380px;">
-                            <div class="overflow-y-auto">
-                                <div class="relative text-gray-400 w-full mt-3 py-1 px-4">
-                                    <button type="submit" class="absolute ml-4 mt-3 mr-4">
-                                        <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px"
-                                            y="0px" viewBox="0 0 56.966 56.966"
-                                            style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
-                                            width="512px" height="512px">
-                                            <path
-                                                d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z">
-                                            </path>
-                                        </svg>
-                                    </button>
+                                <!--Aside menu (right side)-->
+                                <div style="max-width:380px;">
+                                    <div class="overflow-y-auto">
+                                        <div class="relative text-gray-400 w-full mt-3 py-1 px-4">
+                                            <button type="submit" class="absolute ml-4 mt-3 mr-4">
+                                                <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
+                                                    x="0px" y="0px" viewBox="0 0 56.966 56.966"
+                                                    style="enable-background:new 0 0 56.966 56.966;"
+                                                    xml:space="preserve" width="512px" height="512px">
+                                                    <path
+                                                        d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z">
+                                                    </path>
+                                                </svg>
+                                            </button>
 
-                                    <input name="buscar" wire:model.live="search" type="text" id="table-search-users"
-                                        placeholder="Buscar en los eventos de {{$userperfil->nombre}} {{$userperfil->apellido}}"
-                                        class="h-10 px-10 pr-5 w-full text-sm text-gray-700 dark:text-gray-200 
+                                            <input name="buscar" wire:model.live="search" type="text"
+                                                id="table-search-users"
+                                                placeholder="Buscar en los eventos de {{$userperfil->nombre}} {{$userperfil->apellido}}"
+                                                class="h-10 px-10 pr-5 w-full text-sm text-gray-700 dark:text-gray-200 
                                         bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 
                                         focus:outline-none focus:ring-2 focus:ring-yellow-500 
                                         rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm">
-                                </div>
-                                <!--trending tweet section-->
-                                <div
-                                    class="max-w-sm rounded-lg bg-white dark:bg-gray-800 p-3 dark:bg-dim-700 bg-dim-700 overflow-hidden shadow-sm m-4">
-                                    <h2 class="mb-0 text-xl font-bold dark:text-white">Eventos</h2>
-                                    <p class="w-48 text-xs dark:text-gray-400 mb-2">{{$eventosCount}} Eventos</p>
-                                    <div class="grid grid-cols-3 gap-1">
-                                        @foreach($Eventos as $evento) 
-                                                <div data-popover-target="popover-user-profile-{{ $evento->id }}"
-                                                class="max-w-sm truncate dark:text-white bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-                                                <a href="{{ route('reporteEvento', ['evento' => $evento->id]) }}"
-                                                    target="_blank">
-                                                    <img class="rounded-t-lg w-full h-24 object-cover"
-                                                        src="{{ asset('storage/' . $evento->logo) }}"
-                                                        alt="Logo del Evento" />
-                                                </a>
-                                                <span class="p-1">{{ $evento->nombreevento }}</span>
-                                            </div>
-                                            <div data-popover id="popover-user-profile-{{ $evento->id }}" role="tooltip"
-                                                class="absolute z-50 invisible shadow-2xl inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
-                                                <div class="p-3">
-                                                    <div class="flex items-center justify-between mb-2">
-                                                            <img class="w-60 h-32 me-4 object-cover rounded-lg" src="/storage/{{$evento->logo }}" alt="">
-                                                    </div>
-                                                    <p
-                                                        class="text-base font-semibold leading-none text-gray-900 dark:text-white">
-                                                        <a href="#">{{ $evento->nombreevento }}</a>
-                                                    </p>
-                                                    <p class="mb-4 text-sm line-clamp-4 text-ellipsis">{{ $evento->descripcion }}</p>
-                                                    <ul class="flex text-sm">
-                                                        <li class="me-2">
-                                                            <a href="#" class="py-1 hover:underline">
-                                                                <span
-                                                                    class="font-semibold text-gray-900 dark:text-white">{{ $evento->inscripciones->count() }}</span>
-                                                                <span>Inscritos</span>
-                                                            </a>
-                                                        </li>
-                                                        @if($evento->estado === 'Pagado')
-                                                        <li class="me-2">
-                                                            <a href="{{ route('reporteEvento', ['evento' => $evento->id]) }}" class="hover:underline">
-                                                            <div>
-                                                                <button type="button"
-                                                                    class="text-white -mt-2.5 bg-yellow-500 hover:bg-yellow-600 focus:ring-4 font-medium rounded-lg text-xs px-3 py-1.5 dark:bg-yellow-500 dark:hover:bg-yellow-600">Inscribirse</button>
-                                                            </div>
-                                                            </a>
-                                                        </li>
-                                                        @endif
-                                                    </ul>
-                                                </div>
-                                                <div data-popper-arrow></div>
-                                            </div>
-
-                                        @endforeach
-                                    </div>
-
-                                </div>
-                                <!--Personas seguidas/seguidos-->
-                                <div
-                                    class=" max-w-md mx-4 p-2 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-4 dark:bg-gray-800 dark:border-gray-700">
-                                    <div class="flex items-center justify-between mb-4">
-                                        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Amigos</h5>
-                                        <a href="#" class="text-sm font-medium text-yellow-500 hover:underline dark:text-yellow-500">
-                                            Ver todos
-                                        </a>
-                                        
-                                    </div>
-                                    <div class="relative text-gray-400 w-full mt-2">
-                                    <button type="submit" class="absolute ml-4 mt-3 mr-4">
-                                        <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px"
-                                            y="0px" viewBox="0 0 56.966 56.966"
-                                            style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
-                                            width="512px" height="512px">
-                                            <path
-                                                d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z">
-                                            </path>
-                                        </svg>
-                                    </button>
-
-                                    <input name="buscar" wire:model.live="search" type="text" id="table-search-users"
-                                        placeholder="Buscar amigos..."
-                                        class="h-10 px-10 pr-5 w-full text-sm text-gray-700 dark:text-gray-200 
-                                        bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 
-                                        focus:outline-none focus:ring-2 focus:ring-yellow-500 
-                                        rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm">
-                                </div>
-                                    <div class="flow-root">
-                                        <ul role="list">
-                                            <li class="pt-1 sm:pt-2">
-                                                <div class="flex items-center">
-                                                    <div class="relative">
-                                                    <img class="w-8 h-8 rounded-full" src="/storage/{{$userperfil->profile_photo_path }}" alt="">
-                                                    <span class="bottom-0 left-6 absolute  w-2.5 h-2.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                                                </div>
-                                                    <div class="flex-1 min-w-0 ms-2">
-                                                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                        {{ $userperfil->nombre }} {{ $userperfil->apellido }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="pt-1 sm:pt-2">
-                                                <div class="flex items-center">
-                                                <div class="relative">
-                                                <img class="w-8 h-8 rounded-full" src="/storage/{{$userperfil->profile_photo_path }}" alt="">
-                                                    <span class="bottom-0 left-6 absolute  w-2.5 h-2.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                                            </div>
-                                                    <div class="flex-1 min-w-0 ms-2">
-                                                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                        {{ $userperfil->nombre }} {{ $userperfil->apellido }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="pt-1 sm:pt-2">
-                                                <div class="flex items-center">
-                                                    <div class="relative">
-                                                    <img class="w-8 h-8 rounded-full" src="/storage/{{$userperfil->profile_photo_path }}" alt="">
-                                                    <span class="bottom-0 left-6 absolute  w-2.5 h-2.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                                                    </div>
-                                                    <div class="flex-1 min-w-0 ms-2">
-                                                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                           {{ $userperfil->nombre }} {{ $userperfil->apellido }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="pt-1 sm:pt-2">
-                                                <div class="flex items-center">
-                                                    <div class="relative">
-                                                    <img class="w-8 h-8 rounded-full" src="/storage/{{$userperfil->profile_photo_path }}" alt="">
-                                                    <span class="bottom-0 left-6 absolute  w-2.5 h-2.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                                                    </div>
-                                                    <div class="flex-1 min-w-0 ms-2">
-                                                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                           {{ $userperfil->nombre }} {{ $userperfil->apellido }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="pt-1 sm:pt-2">
-                                                <div class="flex items-center">
-                                                    <div class="relative">
-                                                    <img class="w-8 h-8 rounded-full" src="/storage/{{$userperfil->profile_photo_path }}" alt="">
-                                                    <span class="bottom-0 left-6 absolute  w-2.5 h-2.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                                                    </div>
-                                                    <div class="flex-1 min-w-0 ms-2">
-                                                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                           {{ $userperfil->nombre }} {{ $userperfil->apellido }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="pt-1 sm:pt-2">
-                                                <div class="flex items-center">
-                                                    <div class="relative">
-                                                    <img class="w-8 h-8 rounded-full" src="/storage/{{$userperfil->profile_photo_path }}" alt="">
-                                                    <span class="bottom-0 left-6 absolute  w-2.5 h-2.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                                                    </div>
-                                                    <div class="flex-1 min-w-0 ms-2">
-                                                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                           {{ $userperfil->nombre }} {{ $userperfil->apellido }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="pt-1 sm:pt-2">
-                                                <div class="flex items-center">
-                                                    <div class="relative">
-                                                    <img class="w-8 h-8 rounded-full" src="/storage/{{$userperfil->profile_photo_path }}" alt="">
-                                                    <span class="bottom-0 left-6 absolute  w-2.5 h-2.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                                                    </div>
-                                                    <div class="flex-1 min-w-0 ms-2">
-                                                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                           {{ $userperfil->nombre }} {{ $userperfil->apellido }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="pt-1 sm:pt-2">
-                                                <div class="flex items-center">
-                                                    <div class="relative">
-                                                    <img class="w-8 h-8 rounded-full" src="/storage/{{$userperfil->profile_photo_path }}" alt="">
-                                                    <span class="bottom-0 left-6 absolute  w-2.5 h-2.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                                                    </div>
-                                                    <div class="flex-1 min-w-0 ms-2">
-                                                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                           {{ $userperfil->nombre }} {{ $userperfil->apellido }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!--people suggetion to follow section-->
-                                <div
-                                    class="max-w-sm rounded-lg bg-white dark:bg-gray-800 overflow-hidden shadow-sm m-4 border border-gray-200 dark:border-gray-700">
-                                    <!-- Header -->
-                                    <div class="p-4">
-                                        <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Who to
-                                            Follow</h2>
-                                    </div>
-
-                                    <hr class="border-gray-300 dark:border-gray-600">
-
-                                    <!-- User Item Template -->
-                                    <div
-                                        class="flex items-center justify-between p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                        <div class="flex items-center">
-                                            <img class="h-10 w-10 rounded-full"
-                                                src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                                                alt="Sonali Hirave Profile">
-                                            <div class="ml-3">
-                                                <p class="text-base font-medium text-gray-900 dark:text-white">
-                                                    Sonali Hirave</p>
-                                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                                                    @ShonaDesign</p>
-                                            </div>
                                         </div>
-                                        <button
-                                            class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-4 rounded-full transition duration-300">
-                                            Follow
-                                        </button>
-                                    </div>
-
-                                    <hr class="border-gray-300 dark:border-gray-600">
-
-                                    <!-- Second User (duplicate the structure for more users) -->
-                                    <div
-                                        class="flex items-center justify-between p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                        <div class="flex items-center">
-                                            <img class="h-10 w-10 rounded-full"
-                                                src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                                                alt="Sonali Hirave Profile">
-                                            <div class="ml-3">
-                                                <p class="text-base font-medium text-gray-900 dark:text-white">
-                                                    Sonali Hirave</p>
-                                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                                                    @ShonaDesign</p>
-                                            </div>
-                                        </div>
-                                        <button
-                                            class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-4 rounded-full transition duration-300">
-                                            Follow
-                                        </button>
-                                    </div>
-
-                                    <hr class="border-gray-300 dark:border-gray-600">
-
-                                    <!-- Show More -->
-                                    <div
-                                        class="p-4 text-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                        <h2 class="font-bold text-yellow-500 hover:underline">Show more</h2>
-                                    </div>
-                                </div>
-                                <div class="flow-root m-6">
-                                    <div class="flex-1">
-                                        <a href="#">
-                                            <p class="text-sm leading-6 font-medium text-gray-500">Terms Privacy
-                                                Policy Cookies Imprint Ads info
+                                        <!--trending tweet section-->
+                                        <div
+                                            class="max-w-sm rounded-lg bg-white dark:bg-gray-800 p-3 dark:bg-dim-700 bg-dim-700 overflow-hidden shadow-sm m-4">
+                                            <h2 class="mb-0 text-xl font-bold dark:text-white">Eventos</h2>
+                                            <p class="w-48 text-xs dark:text-gray-400 mb-2">{{$eventosCount}} Eventos
                                             </p>
-                                        </a>
-                                    </div>
-                                    <div class="flex-2">
-                                        <p class="text-sm leading-6 font-medium text-gray-600"> © 2020 Twitter, Inc.
-                                        </p>
+                                            <div class="grid grid-cols-3 gap-1">
+                                                @foreach($Eventos as $evento) 
+                                                    <div data-popover-target="popover-user-profile-{{ $evento->id }}"
+                                                        class="max-w-sm truncate dark:text-white bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                                                        <a href="{{ route('reporteEvento', ['evento' => $evento->id]) }}"
+                                                            target="_blank">
+                                                            <img class="rounded-t-lg w-full h-24 object-cover"
+                                                                src="{{ asset('storage/' . $evento->logo) }}"
+                                                                alt="Logo del Evento" />
+                                                        </a>
+                                                        <span class="p-1">{{ $evento->nombreevento }}</span>
+                                                    </div>
+                                                    <div data-popover id="popover-user-profile-{{ $evento->id }}"
+                                                        role="tooltip"
+                                                        class="absolute z-50 invisible shadow-2xl inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
+                                                        <div class="p-3">
+                                                            <div class="flex items-center justify-between mb-2">
+                                                                <img class="w-60 h-32 me-4 object-cover rounded-lg"
+                                                                    src="/storage/{{$evento->logo }}" alt="">
+                                                            </div>
+                                                            <p
+                                                                class="text-base font-semibold leading-none text-gray-900 dark:text-white">
+                                                                <a href="#">{{ $evento->nombreevento }}</a>
+                                                            </p>
+                                                            <p class="mb-4 text-sm line-clamp-4 text-ellipsis">
+                                                                {{ $evento->descripcion }}</p>
+                                                            <ul class="flex text-sm">
+                                                                <li class="me-2">
+                                                                    <a href="#" class="py-1 hover:underline">
+                                                                        <span
+                                                                            class="font-semibold text-gray-900 dark:text-white">{{ $evento->inscripciones->count() }}</span>
+                                                                        <span>Inscritos</span>
+                                                                    </a>
+                                                                </li>
+                                                                @if($evento->estado === 'Pagado')
+                                                                    <li class="me-2">
+                                                                        <a href="{{ route('reporteEvento', ['evento' => $evento->id]) }}"
+                                                                            class="hover:underline">
+                                                                            <div>
+                                                                                <button type="button"
+                                                                                    class="text-white -mt-2.5 bg-yellow-500 hover:bg-yellow-600 focus:ring-4 font-medium rounded-lg text-xs px-3 py-1.5 dark:bg-yellow-500 dark:hover:bg-yellow-600">Inscribirse</button>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                @endif
+                                                            </ul>
+                                                        </div>
+                                                        <div data-popper-arrow></div>
+                                                    </div>
+
+                                                @endforeach
+                                            </div>
+
+                                        </div>
+                                        <!--Personas seguidas/seguidos-->
+                                        <div
+                                            class=" max-w-md mx-4 p-2 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-4 dark:bg-gray-800 dark:border-gray-700">
+                                            <div class="flex items-center justify-between mb-4">
+                                                <h5
+                                                    class="text-xl font-bold leading-none text-gray-900 dark:text-white">
+                                                    Amigos</h5>
+                                                <a href="#"
+                                                    class="text-sm font-medium text-yellow-500 hover:underline dark:text-yellow-500">
+                                                    Ver todos
+                                                </a>
+
+                                            </div>
+                                            <div class="relative text-gray-400 w-full mt-2">
+                                                <button type="submit" class="absolute ml-4 mt-3 mr-4">
+                                                    <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                                        id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966"
+                                                        style="enable-background:new 0 0 56.966 56.966;"
+                                                        xml:space="preserve" width="512px" height="512px">
+                                                        <path
+                                                            d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+
+                                                <input name="buscar" wire:model.live="search" type="text"
+                                                    id="table-search-users" placeholder="Buscar amigos..." class="h-10 px-10 pr-5 w-full text-sm text-gray-700 dark:text-gray-200 
+                                        bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 
+                                        focus:outline-none focus:ring-2 focus:ring-yellow-500 
+                                        rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm">
+                                            </div>
+                                            <div class="flow-root">
+                                                <ul role="list">
+                                                    <li class="pt-1 sm:pt-2">
+                                                        <div class="flex items-center">
+                                                            <div class="relative">
+                                                                <img class="w-8 h-8 rounded-full"
+                                                                    src="/storage/{{$userperfil->profile_photo_path }}"
+                                                                    alt="">
+                                                                <span
+                                                                    class="bottom-0 left-6 absolute  w-2.5 h-2.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                                                            </div>
+                                                            <div class="flex-1 min-w-0 ms-2">
+                                                                <p
+                                                                    class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                                    {{ $userperfil->nombre }}
+                                                                    {{ $userperfil->apellido }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="pt-1 sm:pt-2">
+                                                        <div class="flex items-center">
+                                                            <div class="relative">
+                                                                <img class="w-8 h-8 rounded-full"
+                                                                    src="/storage/{{$userperfil->profile_photo_path }}"
+                                                                    alt="">
+                                                                <span
+                                                                    class="bottom-0 left-6 absolute  w-2.5 h-2.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                                                            </div>
+                                                            <div class="flex-1 min-w-0 ms-2">
+                                                                <p
+                                                                    class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                                    {{ $userperfil->nombre }}
+                                                                    {{ $userperfil->apellido }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="pt-1 sm:pt-2">
+                                                        <div class="flex items-center">
+                                                            <div class="relative">
+                                                                <img class="w-8 h-8 rounded-full"
+                                                                    src="/storage/{{$userperfil->profile_photo_path }}"
+                                                                    alt="">
+                                                                <span
+                                                                    class="bottom-0 left-6 absolute  w-2.5 h-2.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                                                            </div>
+                                                            <div class="flex-1 min-w-0 ms-2">
+                                                                <p
+                                                                    class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                                    {{ $userperfil->nombre }}
+                                                                    {{ $userperfil->apellido }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="pt-1 sm:pt-2">
+                                                        <div class="flex items-center">
+                                                            <div class="relative">
+                                                                <img class="w-8 h-8 rounded-full"
+                                                                    src="/storage/{{$userperfil->profile_photo_path }}"
+                                                                    alt="">
+                                                                <span
+                                                                    class="bottom-0 left-6 absolute  w-2.5 h-2.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                                                            </div>
+                                                            <div class="flex-1 min-w-0 ms-2">
+                                                                <p
+                                                                    class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                                    {{ $userperfil->nombre }}
+                                                                    {{ $userperfil->apellido }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="pt-1 sm:pt-2">
+                                                        <div class="flex items-center">
+                                                            <div class="relative">
+                                                                <img class="w-8 h-8 rounded-full"
+                                                                    src="/storage/{{$userperfil->profile_photo_path }}"
+                                                                    alt="">
+                                                                <span
+                                                                    class="bottom-0 left-6 absolute  w-2.5 h-2.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                                                            </div>
+                                                            <div class="flex-1 min-w-0 ms-2">
+                                                                <p
+                                                                    class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                                    {{ $userperfil->nombre }}
+                                                                    {{ $userperfil->apellido }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="pt-1 sm:pt-2">
+                                                        <div class="flex items-center">
+                                                            <div class="relative">
+                                                                <img class="w-8 h-8 rounded-full"
+                                                                    src="/storage/{{$userperfil->profile_photo_path }}"
+                                                                    alt="">
+                                                                <span
+                                                                    class="bottom-0 left-6 absolute  w-2.5 h-2.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                                                            </div>
+                                                            <div class="flex-1 min-w-0 ms-2">
+                                                                <p
+                                                                    class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                                    {{ $userperfil->nombre }}
+                                                                    {{ $userperfil->apellido }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="pt-1 sm:pt-2">
+                                                        <div class="flex items-center">
+                                                            <div class="relative">
+                                                                <img class="w-8 h-8 rounded-full"
+                                                                    src="/storage/{{$userperfil->profile_photo_path }}"
+                                                                    alt="">
+                                                                <span
+                                                                    class="bottom-0 left-6 absolute  w-2.5 h-2.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                                                            </div>
+                                                            <div class="flex-1 min-w-0 ms-2">
+                                                                <p
+                                                                    class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                                    {{ $userperfil->nombre }}
+                                                                    {{ $userperfil->apellido }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="pt-1 sm:pt-2">
+                                                        <div class="flex items-center">
+                                                            <div class="relative">
+                                                                <img class="w-8 h-8 rounded-full"
+                                                                    src="/storage/{{$userperfil->profile_photo_path }}"
+                                                                    alt="">
+                                                                <span
+                                                                    class="bottom-0 left-6 absolute  w-2.5 h-2.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                                                            </div>
+                                                            <div class="flex-1 min-w-0 ms-2">
+                                                                <p
+                                                                    class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                                    {{ $userperfil->nombre }}
+                                                                    {{ $userperfil->apellido }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <!--people suggetion to follow section-->
+                                        <div
+                                            class="max-w-sm rounded-lg bg-white dark:bg-gray-800 overflow-hidden shadow-sm m-4 border border-gray-200 dark:border-gray-700">
+                                            <!-- Header -->
+                                            <div class="p-4">
+                                                <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Who to
+                                                    Follow</h2>
+                                            </div>
+
+                                            <hr class="border-gray-300 dark:border-gray-600">
+
+                                            <!-- User Item Template -->
+                                            <div
+                                                class="flex items-center justify-between p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                                <div class="flex items-center">
+                                                    <img class="h-10 w-10 rounded-full"
+                                                        src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+                                                        alt="Sonali Hirave Profile">
+                                                    <div class="ml-3">
+                                                        <p class="text-base font-medium text-gray-900 dark:text-white">
+                                                            Sonali Hirave</p>
+                                                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                                            @ShonaDesign</p>
+                                                    </div>
+                                                </div>
+                                                <button
+                                                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-4 rounded-full transition duration-300">
+                                                    Follow
+                                                </button>
+                                            </div>
+
+                                            <hr class="border-gray-300 dark:border-gray-600">
+
+                                            <!-- Second User (duplicate the structure for more users) -->
+                                            <div
+                                                class="flex items-center justify-between p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                                <div class="flex items-center">
+                                                    <img class="h-10 w-10 rounded-full"
+                                                        src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
+                                                        alt="Sonali Hirave Profile">
+                                                    <div class="ml-3">
+                                                        <p class="text-base font-medium text-gray-900 dark:text-white">
+                                                            Sonali Hirave</p>
+                                                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                                            @ShonaDesign</p>
+                                                    </div>
+                                                </div>
+                                                <button
+                                                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-4 rounded-full transition duration-300">
+                                                    Follow
+                                                </button>
+                                            </div>
+
+                                            <hr class="border-gray-300 dark:border-gray-600">
+
+                                            <!-- Show More -->
+                                            <div
+                                                class="p-4 text-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                                                <h2 class="font-bold text-yellow-500 hover:underline">Show more</h2>
+                                            </div>
+                                        </div>
+                                        <div class="flow-root m-6">
+                                            <div class="flex-1">
+                                                <a href="#">
+                                                    <p class="text-sm leading-6 font-medium text-gray-500">Terms Privacy
+                                                        Policy Cookies Imprint Ads info
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <div class="flex-2">
+                                                <p class="text-sm leading-6 font-medium text-gray-600"> © 2020 Twitter,
+                                                    Inc.
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </aside>
-                    
+                            </aside>
+
                         </div>
                     </div>
-                    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-dashboard" role="tabpanel"
-                        aria-labelledby="dashboard-tab">
+                    <div class="hidden p-4 rounded-lg bg-gray-100 dark:bg-gray-900" id="styled-dashboard"
+                        role="tabpanel" aria-labelledby="dashboard-tab">
                         <div>
                             <div class="content-wrapper">
-                                <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white mb-2 ml-2">
+                                <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white mb-2">
                                     Eventos Disponibles
                                 </h2>
                                 @if($Eventos->isEmpty())
@@ -1203,9 +1260,9 @@
                                                                                                                             </div>
                                                                                                                         </div>
                                                                                                                         @php
-        $inscripcion = Auth::user()->inscripciones()->where('IdEvento', $evento->id)->first();
-        $estadoInscripcion = $inscripcion ? $inscripcion->Status : null;
-        $yaInscrito = $estadoInscripcion === 'Inscrito';
+                                                                                                                            $inscripcion = Auth::user()->inscripciones()->where('IdEvento', $evento->id)->first();
+                                                                                                                            $estadoInscripcion = $inscripcion ? $inscripcion->Status : null;
+                                                                                                                            $yaInscrito = $estadoInscripcion === 'Inscrito';
                                                                                                                         @endphp
                                                                                                                         <div class="p-5">
                                                                                                                             @if ($evento->estado === 'Pagado')
@@ -1226,32 +1283,32 @@
                                                                                                                             <span
                                                                                                                                 class="block mt-4 text-sm font-semibold tracking-widest text-gray-500 dark:text-gray-400">
                                                                                                                                 <?php
-        // Obtener el timestamp de la fecha
-        $timestamp = strtotime($evento->fechainicio);
+                                                                            // Obtener el timestamp de la fecha
+                                                                            $timestamp = strtotime($evento->fechainicio);
 
-        // Obtener el día de la semana en formato textual completo (por ejemplo, "Sunday")
-        $diaSemana = date('l', $timestamp);
+                                                                            // Obtener el día de la semana en formato textual completo (por ejemplo, "Sunday")
+                                                                            $diaSemana = date('l', $timestamp);
 
-        // Traducir el día de la semana al español
-        $diasSemana = [
-            'Monday' => 'Lunes',
-            'Tuesday' => 'Martes',
-            'Wednesday' => 'Miércoles',
-            'Thursday' => 'Jueves',
-            'Friday' => 'Viernes',
-            'Saturday' => 'Sábado',
-            'Sunday' => 'Domingo'
-        ];
+                                                                            // Traducir el día de la semana al español
+                                                                            $diasSemana = [
+                                                                                'Monday' => 'Lunes',
+                                                                                'Tuesday' => 'Martes',
+                                                                                'Wednesday' => 'Miércoles',
+                                                                                'Thursday' => 'Jueves',
+                                                                                'Friday' => 'Viernes',
+                                                                                'Saturday' => 'Sábado',
+                                                                                'Sunday' => 'Domingo'
+                                                                            ];
 
-        $diaSemanaEsp = $diasSemana[$diaSemana];
-                                                                                                                                                                                                                                            ?>
+                                                                            $diaSemanaEsp = $diasSemana[$diaSemana];
+                                                                                                                                                                                                                                                                                                                ?>
                                                                                                                                 {{$diaSemanaEsp}},
                                                                                                                                 {{ \Carbon\Carbon::parse($evento->fechainicio)->format('d \d\e F \d\e Y') }}
                                                                                                                             </span>
                                                                                                                             <p class="text-2xl font-semibold">
                                                                                                                                 <a href="{{($evento->estado === 'Pagado' && !$yaInscrito)
-            ? route('subir-comprobante', ['evento' => $evento->id])
-            : route('reporteEvento', ['evento' => $evento->id]) }}"
+                                                                                ? route('subir-comprobante', ['evento' => $evento->id])
+                                                                                : route('reporteEvento', ['evento' => $evento->id]) }}"
                                                                                                                                     class="text-black dark:text-gray-300">{{$evento->nombreevento}}
                                                                                                                                 </a>
                                                                                                                             </p>
@@ -1349,13 +1406,13 @@
                                                                                                                                                     <div
                                                                                                                                                         class="flex mb-3 -space-x-3 rtl:space-x-reverse">
                                                                                                                                                         <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
-                                                                                                                                                            src="/docs/images/people/profile-picture-5.jpg"
+                                                                                                                                                            src="/storage/{{$userperfil->profile_photo_path }}"
                                                                                                                                                             alt="">
                                                                                                                                                         <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
-                                                                                                                                                            src="/docs/images/people/profile-picture-2.jpg"
+                                                                                                                                                            src="/storage/{{$userperfil->profile_photo_path }}"
                                                                                                                                                             alt="">
                                                                                                                                                         <img class="w-8 h-8 border-2 border-white rounded-full dark:border-gray-800"
-                                                                                                                                                            src="/docs/images/people/profile-picture-3.jpg"
+                                                                                                                                                            src="/storage/{{$userperfil->profile_photo_path }}"
                                                                                                                                                             alt="">
                                                                                                                                                         <a class="flex items-center justify-center w-8 h-8 text-xs font-medium text-white bg-gray-400 border-2 border-white rounded-full hover:bg-gray-500 dark:border-gray-800"
                                                                                                                                                             href="#">+3</a>
