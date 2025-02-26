@@ -332,7 +332,7 @@ class Muros extends Component
     
     public function render()
     {
-        $eventosUsuario = Evento::with('modalidad', 'localidad', 'diploma')
+        $Eventos = Evento::with('modalidad', 'localidad', 'diploma')
             ->where('created_by', $this->userperfil->id)
             ->where(function ($query) {
                 $query->where('nombreevento', 'like', '%' . $this->search . '%')
@@ -359,7 +359,7 @@ class Muros extends Component
         $seguidos = $this->getSeguidos($this->userperfil->id);
 
         return view('livewire.muro.muros', [
-            'eventosUsuario' => $eventosUsuario,
+            'Eventos' => $Eventos,
             'eventosCount' => $eventosCount,
             'publicaciones' => $publicaciones,
             'seguidores' => $seguidores,

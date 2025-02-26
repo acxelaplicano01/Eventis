@@ -44,10 +44,10 @@
                         aria-expanded="false" data-dropdown-toggle="dropdown-user">
                         <span class="sr-only">Open user menu</span>
                         @if (Auth::user()->profile_photo_path)
-                        <img class="w-9 h-9 rounded-full"
+                        <img class="w-9 h-9 rounded-full object-cover"
                           src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}">
                         @else 
-                        <img class="w-9 h-9 rounded-full"
+                        <img class="w-9 h-9 rounded-full object-cover"
                           src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}&amp;color=000&amp;background=facc15">
                         @endif
                      </button>
