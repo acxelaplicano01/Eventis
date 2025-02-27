@@ -336,6 +336,12 @@ class Muros extends Component
     {
         return view('livewire.placeholder.loaders');
     }
+    public $perPage = 7;
+    public function loadMore()
+    {
+        $this->perPage += 7;
+    }
+
     
     public function render()
     {
@@ -358,9 +364,10 @@ class Muros extends Component
         $publicaciones = Publicacion::with('user')
             ->where('created_by', $this->userperfil->id)
             ->orderBy('id', 'DESC')
-            ->paginate(6);
+            ->paginate($this->perPage);
 
-
+        $publicacionesCount = $this->userperfil->countPublicaciones();
+        
         // Obtener seguidores y seguidos para un usuario específico (por ejemplo, el usuario con ID 1)
         $seguidores = $this->getSeguidores($this->userperfil->id);
         $seguidos = $this->getSeguidos($this->userperfil->id);
@@ -368,6 +375,7 @@ class Muros extends Component
         return view('livewire.muro.muros', [
             'Eventos' => $Eventos,
             'eventosCount' => $eventosCount,
+            'publicacionesCount' => $publicacionesCount,
             'publicaciones' => $publicaciones,
             'seguidores' => $seguidores,
             'seguidos' => $seguidos,

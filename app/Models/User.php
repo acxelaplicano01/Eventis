@@ -48,6 +48,11 @@ class User extends Authenticatable
         return $this->eventos()->count();
     }
 
+    public function countPublicaciones()
+    {
+        return $this->publicaciones()->count();
+    }
+
     public function publicaciones()
     {
         return $this->hasMany(Publicacion::class, 'IdUsuario');
