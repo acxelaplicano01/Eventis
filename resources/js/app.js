@@ -1,6 +1,10 @@
 import './bootstrap';
 import 'flowbite';
+import Alpine from 'alpinejs'
 
+window.Alpine = Alpine
+Alpine.start()
+ 
 const menuButtons = document.querySelectorAll(".menu-button");
   const screenOverlay = document.querySelector(".main-layout .screen-overlay");
   const themeButton = document.querySelector(".navbar .theme-button i");

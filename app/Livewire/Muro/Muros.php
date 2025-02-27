@@ -3,6 +3,7 @@ namespace App\Livewire\Muro;
 
 use App\Models\Comentario;
 use App\Models\Diploma;
+use Livewire\Attributes\Lazy;
 use Livewire\WithFileUploads;
 use App\Models\Evento;
 use App\Models\User;
@@ -10,9 +11,9 @@ use App\Models\Modalidad;
 use App\Models\Localidad;
 use App\Models\Publicacion;
 use App\Models\Like;
-
 use Livewire\Component;
 
+#[Lazy]
 class Muros extends Component
 {
     use WithFileUploads;
@@ -328,6 +329,12 @@ class Muros extends Component
             return $user->siguiendo;
         }
         return collect(); // Retorna una colección vacía si el usuario no existe
+    }
+
+    //crear funcion para placeholder
+    public function placeholder()
+    {
+        return view('livewire.placeholder.loaders');
     }
     
     public function render()
