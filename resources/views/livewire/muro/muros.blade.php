@@ -338,196 +338,6 @@
                                                 </div>
                                             </div>
 
-                                            <!--trending tweet section-->
-                                            <div
-                                                class="max-w-sm rounded-lg dark:bg-gray-800 bg-white overflow-hidden shadow-sm mr-4 mt-4 border border-gray-200 dark:border-gray-700">
-                                                <!-- Header -->
-                                                <div class="flex items-center justify-between p-4">
-                                                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                                        Germany
-                                                        Trends</h2>
-                                                    <a href="#" aria-label="Settings"
-                                                        class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-                                                        <svg class="h-6 w-6 text-gray-500 dark:text-gray-300"
-                                                            fill="none" stroke="currentColor" stroke-width="2"
-                                                            viewBox="0 0 24 24">
-                                                            <path
-                                                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                                            <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-
-                                                <hr class="border-gray-300 dark:border-gray-600">
-
-                                                <!-- Trending Items -->
-                                                <div class="divide-y divide-gray-300 dark:divide-gray-600">
-                                                    <!-- Trending Item Template -->
-                                                    <div
-                                                        class="flex justify-between items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                                        <div>
-                                                            <p class="text-xs text-gray-500 dark:text-gray-400">1 ·
-                                                                Trending
-                                                            </p>
-                                                            <h3 class="font-bold text-gray-900 dark:text-white">
-                                                                #Microsoft363
-                                                            </h3>
-                                                            <p class="text-xs text-gray-500 dark:text-gray-400">5,466
-                                                                Tweets
-                                                            </p>
-                                                        </div>
-                                                        <a href="#" aria-label="More options"
-                                                            class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition">
-                                                            <svg class="h-5 w-5 text-gray-500 dark:text-gray-300"
-                                                                fill="none" stroke="currentColor" stroke-width="2"
-                                                                viewBox="0 0 24 24">
-                                                                <path d="M19 9l-7 7-7-7"></path>
-                                                            </svg>
-                                                        </a>
-                                                    </div>
-
-                                                    <!-- Additional trending items (copy the block above and update the content as needed) -->
-                                                    <div
-                                                        class="flex justify-between items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                                        <div>
-                                                            <p class="text-xs text-gray-500 dark:text-gray-400">2 ·
-                                                                Politics
-                                                                ·
-                                                                Trending</p>
-                                                            <h3 class="font-bold text-gray-900 dark:text-white">
-                                                                #HI-Fashion
-                                                            </h3>
-                                                            <p class="text-xs text-gray-500 dark:text-gray-400">8,464
-                                                                Tweets
-                                                            </p>
-                                                        </div>
-                                                        <a href="#" aria-label="More options"
-                                                            class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition">
-                                                            <svg class="h-5 w-5 text-gray-500 dark:text-gray-300"
-                                                                fill="none" stroke="currentColor" stroke-width="2"
-                                                                viewBox="0 0 24 24">
-                                                                <path d="M19 9l-7 7-7-7"></path>
-                                                            </svg>
-                                                        </a>
-                                                    </div>
-
-                                                    <div
-                                                        class="flex justify-between items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                                        <div>
-                                                            <p class="text-xs text-gray-500 dark:text-gray-400">3 · Rock
-                                                                ·
-                                                                Trending</p>
-                                                            <h3 class="font-bold text-gray-900 dark:text-white">#Ferrari
-                                                            </h3>
-                                                            <p class="text-xs text-gray-500 dark:text-gray-400">5,586
-                                                                Tweets
-                                                            </p>
-                                                        </div>
-                                                        <a href="#" aria-label="More options"
-                                                            class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition">
-                                                            <svg class="h-5 w-5 text-gray-500 dark:text-gray-300"
-                                                                fill="none" stroke="currentColor" stroke-width="2"
-                                                                viewBox="0 0 24 24">
-                                                                <path d="M19 9l-7 7-7-7"></path>
-                                                            </svg>
-                                                        </a>
-                                                    </div>
-
-                                                    <div
-                                                        class="flex justify-between items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                                        <div>
-                                                            <p class="text-xs text-gray-500 dark:text-gray-400">4 · Auto
-                                                                Racing
-                                                                · Trending</p>
-                                                            <h3 class="font-bold text-gray-900 dark:text-white">#Vettel
-                                                            </h3>
-                                                            <p class="text-xs text-gray-500 dark:text-gray-400">9,416
-                                                                Tweets
-                                                            </p>
-                                                        </div>
-                                                        <a href="#" aria-label="More options"
-                                                            class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition">
-                                                            <svg class="h-5 w-5 text-gray-500 dark:text-gray-300"
-                                                                fill="none" stroke="currentColor" stroke-width="2"
-                                                                viewBox="0 0 24 24">
-                                                                <path d="M19 9l-7 7-7-7"></path>
-                                                            </svg>
-                                                        </a>
-                                                    </div>
-                                                </div>
-
-                                                <div
-                                                    class="p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition text-center cursor-pointer">
-                                                    <h2 class="text-yellow-500 hover:underline">Show more</h2>
-                                                </div>
-                                            </div>
-
-                                            <!--people suggetion to follow section-->
-                                            <div
-                                                class="max-w-sm rounded-lg bg-white dark:bg-gray-800 overflow-hidden shadow-sm mr-4 mt-4 border border-gray-200 dark:border-gray-700">
-                                                <!-- Header -->
-                                                <div class="p-4">
-                                                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Who
-                                                        to
-                                                        Follow</h2>
-                                                </div>
-
-                                                <hr class="border-gray-300 dark:border-gray-600">
-
-                                                <!-- User Item Template -->
-                                                <div
-                                                    class="flex items-center justify-between p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                                    <div class="flex items-center">
-                                                        <img class="h-10 w-10 rounded-full"
-                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                                                            alt="Sonali Hirave Profile">
-                                                        <div class="ml-3">
-                                                            <p
-                                                                class="text-base font-medium text-gray-900 dark:text-white">
-                                                                Sonali Hirave</p>
-                                                            <p
-                                                                class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                                                                @ShonaDesign</p>
-                                                        </div>
-                                                    </div>
-                                                    <button
-                                                        class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-4 rounded-full transition duration-300">
-                                                        Follow
-                                                    </button>
-                                                </div>
-
-                                                <hr class="border-gray-300 dark:border-gray-600">
-
-                                                <!-- Second User (duplicate the structure for more users) -->
-                                                <div
-                                                    class="flex items-center justify-between p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                                    <div class="flex items-center">
-                                                        <img class="h-10 w-10 rounded-full"
-                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                                                            alt="Sonali Hirave Profile">
-                                                        <div class="ml-3">
-                                                            <p
-                                                                class="text-base font-medium text-gray-900 dark:text-white">
-                                                                Sonali Hirave</p>
-                                                            <p
-                                                                class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                                                                @ShonaDesign</p>
-                                                        </div>
-                                                    </div>
-                                                    <button
-                                                        class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-4 rounded-full transition duration-300">
-                                                        Follow
-                                                    </button>
-                                                </div>
-
-                                                <hr class="border-gray-300 dark:border-gray-600">
-
-                                                <!-- Show More -->
-                                                <div
-                                                    class="p-4 text-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                                    <h2 class="font-bold text-yellow-500 hover:underline">Show more</h2>
-                                                </div>
-                                            </div>
                                             <div class="flow-root m-6">
                                                 <div class="flex-1">
                                                     <a href="#">
@@ -539,7 +349,7 @@
                                                 </div>
                                                 <div class="flex-2">
                                                     <p class="text-sm leading-6 font-medium text-gray-600"> © 2020
-                                                        Eventis,
+                                                        EVENTIS,
                                                         Inc.
                                                     </p>
                                                 </div>
@@ -1271,72 +1081,6 @@
                                                 </div>
                                             </div>
 
-                                            <!--people suggetion to follow section-->
-                                            <div
-                                                class="max-w-sm rounded-lg bg-white dark:bg-gray-800 overflow-hidden shadow-sm m-4 border border-gray-200 dark:border-gray-700">
-                                                <!-- Header -->
-                                                <div class="p-4">
-                                                    <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Who
-                                                        to
-                                                        Follow</h2>
-                                                </div>
-
-                                                <hr class="border-gray-300 dark:border-gray-600">
-
-                                                <!-- User Item Template -->
-                                                <div
-                                                    class="flex items-center justify-between p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                                    <div class="flex items-center">
-                                                        <img class="h-10 w-10 rounded-full"
-                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                                                            alt="Sonali Hirave Profile">
-                                                        <div class="ml-3">
-                                                            <p
-                                                                class="text-base font-medium text-gray-900 dark:text-white">
-                                                                Sonali Hirave</p>
-                                                            <p
-                                                                class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                                                                @ShonaDesign</p>
-                                                        </div>
-                                                    </div>
-                                                    <button
-                                                        class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-4 rounded-full transition duration-300">
-                                                        Follow
-                                                    </button>
-                                                </div>
-
-                                                <hr class="border-gray-300 dark:border-gray-600">
-
-                                                <!-- Second User (duplicate the structure for more users) -->
-                                                <div
-                                                    class="flex items-center justify-between p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                                    <div class="flex items-center">
-                                                        <img class="h-10 w-10 rounded-full"
-                                                            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                                                            alt="Sonali Hirave Profile">
-                                                        <div class="ml-3">
-                                                            <p
-                                                                class="text-base font-medium text-gray-900 dark:text-white">
-                                                                Sonali Hirave</p>
-                                                            <p
-                                                                class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                                                                @ShonaDesign</p>
-                                                        </div>
-                                                    </div>
-                                                    <button
-                                                        class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-4 rounded-full transition duration-300">
-                                                        Follow
-                                                    </button>
-                                                </div>
-
-                                                <hr class="border-gray-300 dark:border-gray-600">
-
-                                                <!-- Show More -->
-                                                <div
-                                                    class="p-4 text-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition">
-                                                    <h2 class="font-bold text-yellow-500 hover:underline">Show more</h2>
-                                                </div>
-                                            </div>
                                             <div class="flow-root m-6">
                                                 <div class="flex-1">
                                                     <a href="#">
@@ -1348,7 +1092,7 @@
                                                 </div>
                                                 <div class="flex-2">
                                                     <p class="text-sm leading-6 font-medium text-gray-600"> © 2020
-                                                        Twitter,
+                                                        EVENTIS,
                                                         Inc.
                                                     </p>
                                                 </div>
