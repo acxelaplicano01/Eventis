@@ -1,7 +1,7 @@
 <div>
     <main role="main">
         <div class="flex">
-            <section class="dark:bg-gray-900 w-full">
+            <section class="dark:bg-gray-900 w-[1130px]">
                 @if (session()->has('message'))
                     <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b-lg text-teal-900 px-4 py-3 shadow-sm my-3"
                         role="alert">
@@ -100,7 +100,7 @@
                                         <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800"
                                             src="/storage/{{$userperfil->profile_photo_path }}" alt="">
                                         <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800"
-                                            href="#">+99</a>
+                                            href="#">+14</a>
                                     </div>
                                 </div>
                             </div>
@@ -818,7 +818,7 @@
                                         <div class="overflow-y-auto">
                                             <!--trending tweet section-->
                                             <div
-                                                class="max-w-sm rounded-lg bg-white dark:bg-gray-800 p-3 dark:bg-dim-700 bg-dim-700 overflow-hidden shadow-sm m-4">
+                                                class="max-w-sm rounded-lg bg-white dark:bg-gray-800 p-3 dark:bg-dim-700 bg-dim-700 overflow-hidden shadow-sm my-4 ml-4">
                                                 <h2 class="mb-0 text-xl font-bold dark:text-white">Eventos</h2>
                                                 <p class="w-48 text-xs dark:text-gray-400 mb-2">{{$eventosCount}}
                                                     Eventos
@@ -845,8 +845,8 @@
                                                 </div>
                                                 <div class="grid grid-cols-3 gap-1">
                                                     @foreach($Eventos as $evento) 
-                                                            <div data-popover-target="popover-user-profile-{{ $evento->id }}"
-                                                            class="max-w-sm truncate dark:text-white bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                                                            <div
+                                                                class="max-w-sm truncate dark:text-white bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                                                             <a href="{{ route('reporteEvento', ['evento' => $evento->id]) }}"
                                                                 target="_blank">
                                                                 <img class="rounded-t-lg w-full h-24 object-cover"
@@ -855,52 +855,13 @@
                                                             </a>
                                                             <span class="p-1">{{ $evento->nombreevento }}</span>
                                                         </div>
-                                                        <div data-popover id="popover-user-profile-{{ $evento->id }}"
-                                                            role="tooltip"
-                                                            class="absolute z-50 invisible shadow-2xl inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
-                                                            <div class="p-3">
-                                                                <div class="flex items-center justify-between mb-2">
-                                                                    <img class="w-60 h-32 me-4 object-cover rounded-lg"
-                                                                        src="/storage/{{$evento->logo }}" alt="">
-                                                                </div>
-                                                                <p
-                                                                    class="text-base font-semibold leading-none text-gray-900 dark:text-white">
-                                                                    <a href="#">{{ $evento->nombreevento }}</a>
-                                                                </p>
-                                                                <p class="mb-4 text-sm line-clamp-4 text-ellipsis">
-                                                                    {{ $evento->descripcion }}
-                                                                </p>
-                                                                <ul class="flex text-sm">
-                                                                    <li class="me-2">
-                                                                        <a href="#" class="py-1 hover:underline">
-                                                                            <span
-                                                                                class="font-semibold text-gray-900 dark:text-white">{{ $evento->inscripciones->count() }}</span>
-                                                                            <span>Inscritos</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    @if($evento->estado === 'Pagado')
-                                                                        <li class="me-2">
-                                                                            <a href="{{ route('reporteEvento', ['evento' => $evento->id]) }}"
-                                                                                class="hover:underline">
-                                                                                <div>
-                                                                                    <button type="button"
-                                                                                        class="text-white -mt-2.5 bg-yellow-500 hover:bg-yellow-600 focus:ring-4 font-medium rounded-lg text-xs px-3 py-1.5 dark:bg-yellow-500 dark:hover:bg-yellow-600">Inscribirse</button>
-                                                                                </div>
-                                                                            </a>
-                                                                        </li>
-                                                                    @endif
-                                                                </ul>
-                                                            </div>
-                                                            <div data-popper-arrow></div>
-                                                        </div>
-
                                                     @endforeach
                                                 </div>
 
                                             </div>
                                             <!--Personas seguidas/seguidos-->
                                             <div
-                                                class=" max-w-md mx-4 p-2 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-4 dark:bg-gray-800 dark:border-gray-700">
+                                                class="max-w-md my-4 ml-4 p-2 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-4 dark:bg-gray-800 dark:border-gray-700">
                                                 <div class="flex items-center justify-between mb-4">
                                                     <h5
                                                         class="text-xl font-bold leading-none text-gray-900 dark:text-white">
