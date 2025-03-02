@@ -65,6 +65,11 @@
                      </div>
                      <ul class="py-1" role="none">
                         <li>
+                           <x-dropdown-link href="{{ route('muro', ['userperfil' =>  Auth::user()->id]) }}">
+                              {{ __('Perfil') }}
+                           </x-dropdown-link>
+                        </li>
+                        <li>
                            <x-dropdown-link href="{{ route('profile.show') }}">
                               {{ __('Cuenta') }}
                            </x-dropdown-link>

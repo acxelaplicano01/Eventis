@@ -13,7 +13,7 @@ use App\Models\Publicacion;
 use App\Models\Like;
 use Livewire\Component;
 
-#[Lazy]
+#[Lazy] 
 class Muros extends Component
 {
     use WithFileUploads;
@@ -44,9 +44,20 @@ class Muros extends Component
 
     public $publicacion_id, $foto, $IdUsuario;
     public $isOpen = 0;
-
+    public $mostrarModal = 0;
     public $isOpenEvento = 0;
-    public $confirmingDelete = false;
+    public function abrirModal()
+    {
+        $this->mostrarModal = true;
+    }
+
+    public function cerrarModal()
+    {
+        $this->mostrarModal = false;
+    }
+
+
+    public $confirmingDelete = 0;
     public $IdAEliminar;
 
     public function create()
