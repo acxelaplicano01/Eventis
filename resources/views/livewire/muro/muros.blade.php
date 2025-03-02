@@ -226,13 +226,6 @@
                                 </div>
                             </div>
                         </section>
-                        @if($isOpen)
-                            @include('livewire.muro.create')
-                        @endif
-
-                        @if($isOpenEvento)
-                            @include('livewire.muro.evento')
-                        @endif
                     </div>
                 </div>
                 <div x-data="{ activeTab: localStorage.getItem('activeTab') || 'styled-profile', activeModal: null }"
@@ -468,7 +461,7 @@
                                                             <img class="w-10 h-10 me-2 object-cover rounded-full"
                                                                 src="https://ui-avatars.com/api/?name={{ $userperfil->name }}&amp;color=000&amp;background=facc15">
                                                         @endif
-                                                        <div wire:click="create"
+                                                        <div @click="activeModal = 'modal2'"
                                                             class="dark:bg-white-800 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 bg-gray-100 dark:bg-gray-700 p-2 w-full rounded-full">
                                                             <span
                                                                 class="font-medium ml-2 text-gray-600 dark:text-white">{{ $userperfil->nombre }},
@@ -478,7 +471,7 @@
                                                     </div>
                                                     <div
                                                         class="dark:border-gray-600 border-gray-200 border-t flex items-center py-3 px-6">
-                                                        <div wire:click="create"
+                                                        <div @click="activeModal = 'modal2'"
                                                             class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 p-1.5 rounded-full hover:bg-green-50 hover:text-green-600 dark:hover:text-green-600 font-semibold ml-2 text-gray-500 transition duration-350 ease-in-out">
                                                             <svg class="w-7 h-7 ml-7 text-green-600 dark:text-green-600"
                                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -493,7 +486,7 @@
                                                             </svg>
                                                             Foto/video
                                                         </div>
-                                                        <div wire:click="createEvento"
+                                                        <div @click="activeModal = 'modal3'"
                                                             class="flex-1 ml-4 flex items-center p-1.5 rounded-full hover:bg-yellow-50 cursor-pointer text-xs dark:text-gray-400 dark:hover:text-yellow-500 hover:text-yellow-500 text-gray-500 font-semibold transition duration-350 ease-in-out">
                                                             <svg class="w-7 h-7 ml-7 text-yellow-500 dark:text-yellow-500"
                                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -508,7 +501,7 @@
                                                             </svg>
                                                             Evento
                                                         </div>
-                                                        <div wire:click="create"
+                                                        <div @click="activeModal = 'modal2'"
                                                             class="flex-1 ml-4 flex items-center cursor-pointer text-xs dark:text-gray-400 p-1.5 rounded-full hover:bg-blue-50 dark:hover:text-blue-500 hover:text-blue-500 text-gray-500 font-semibold transition duration-350 ease-in-out">
                                                             <svg class="w-7 h-7 ml-7 text-blue-500 dark:text-blue-500"
                                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -1220,9 +1213,9 @@
                                                                                                                                         </div>
                                                                                                                                     </div>
                                                                                                                                     @php
-                                                                                                                                        $inscripcion = Auth::user()->inscripciones()->where('IdEvento', $evento->id)->first();
-                                                                                                                                        $estadoInscripcion = $inscripcion ? $inscripcion->Status : null;
-                                                                                                                                        $yaInscrito = $estadoInscripcion === 'Inscrito';
+        $inscripcion = Auth::user()->inscripciones()->where('IdEvento', $evento->id)->first();
+        $estadoInscripcion = $inscripcion ? $inscripcion->Status : null;
+        $yaInscrito = $estadoInscripcion === 'Inscrito';
                                                                                                                                     @endphp
                                                                                                                                     <div class="p-5">
                                                                                                                                         @if ($evento->estado === 'Pagado')
@@ -1243,32 +1236,32 @@
                                                                                                                                         <span
                                                                                                                                             class="block mt-4 text-sm font-semibold tracking-widest text-gray-500 dark:text-gray-400">
                                                                                                                                             <?php
-                                                                                    // Obtener el timestamp de la fecha
-                                                                                    $timestamp = strtotime($evento->fechainicio);
+        // Obtener el timestamp de la fecha
+        $timestamp = strtotime($evento->fechainicio);
 
-                                                                                    // Obtener el día de la semana en formato textual completo (por ejemplo, "Sunday")
-                                                                                    $diaSemana = date('l', $timestamp);
+        // Obtener el día de la semana en formato textual completo (por ejemplo, "Sunday")
+        $diaSemana = date('l', $timestamp);
 
-                                                                                    // Traducir el día de la semana al español
-                                                                                    $diasSemana = [
-                                                                                        'Monday' => 'Lunes',
-                                                                                        'Tuesday' => 'Martes',
-                                                                                        'Wednesday' => 'Miércoles',
-                                                                                        'Thursday' => 'Jueves',
-                                                                                        'Friday' => 'Viernes',
-                                                                                        'Saturday' => 'Sábado',
-                                                                                        'Sunday' => 'Domingo'
-                                                                                    ];
+        // Traducir el día de la semana al español
+        $diasSemana = [
+            'Monday' => 'Lunes',
+            'Tuesday' => 'Martes',
+            'Wednesday' => 'Miércoles',
+            'Thursday' => 'Jueves',
+            'Friday' => 'Viernes',
+            'Saturday' => 'Sábado',
+            'Sunday' => 'Domingo'
+        ];
 
-                                                                                    $diaSemanaEsp = $diasSemana[$diaSemana];
+        $diaSemanaEsp = $diasSemana[$diaSemana];
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ?>
                                                                                                                                             {{$diaSemanaEsp}},
                                                                                                                                             {{ \Carbon\Carbon::parse($evento->fechainicio)->format('d \d\e F \d\e Y') }}
                                                                                                                                         </span>
                                                                                                                                         <p class="text-2xl font-semibold">
                                                                                                                                             <a href="{{($evento->estado === 'Pagado' && !$yaInscrito)
-                                                                                        ? route('subir-comprobante', ['evento' => $evento->id])
-                                                                                        : route('reporteEvento', ['evento' => $evento->id]) }}"
+            ? route('subir-comprobante', ['evento' => $evento->id])
+            : route('reporteEvento', ['evento' => $evento->id]) }}"
                                                                                                                                                 class="text-black dark:text-gray-300">{{$evento->nombreevento}}
                                                                                                                                             </a>
                                                                                                                                         </p>
@@ -1842,6 +1835,14 @@
                                 </div>
                             </div>
                         </div>
+                    </template>
+                    <template x-if="activeModal === 'modal2'">
+                        <!-- Main modal Publicar -->
+                        @include('livewire.muro.create')
+                    </template>
+                    <template x-if="activeModal === 'modal3'">
+                        <!-- Main modal Publicar -->
+                        @include('livewire.muro.evento')
                     </template>
                 </div>
 

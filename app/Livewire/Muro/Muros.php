@@ -43,55 +43,9 @@ class Muros extends Component
     }
 
     public $publicacion_id, $foto, $IdUsuario;
-    public $isOpen = 0;
-    public $mostrarModal = 0;
-    public $isOpenEvento = 0;
-    public function abrirModal()
-    {
-        $this->mostrarModal = true;
-    }
-
-    public function cerrarModal()
-    {
-        $this->mostrarModal = false;
-    }
-
-
+   
     public $confirmingDelete = 0;
     public $IdAEliminar;
-
-    public function create()
-    {
-        $this->resetInputFields();
-        $this->openModal();
-    }
-
-    public function createEvento()
-    {
-        $this->resetInputFieldsEvento();
-        $this->openModalEvento();
-    }
-
-    public function openModal()
-    {
-        $this->isOpen = true;
-    }
-
-    public function openModalEvento()
-    {
-        $this->isOpenEvento = true;
-    }
-
-    public function closeModalEvento()
-    {
-        $this->isOpenEvento = false;
-        $this->resetInputFieldsEvento();
-    }
-
-    public function closeModal()
-    {
-        $this->isOpen = false;
-    }
 
     private function resetInputFields()
     {
