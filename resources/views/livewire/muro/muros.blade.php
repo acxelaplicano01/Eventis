@@ -1602,7 +1602,7 @@
 
 
                                                             @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                                                                @include('profile.update-profile-information-form')
+                                                                @livewire('profile.update-profile-information-form')
                                                             @endif
 
 
