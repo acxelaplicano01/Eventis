@@ -10,7 +10,7 @@ class Publicacion extends BaseModel
     use HasFactory;
     use SoftDeletes;
     protected $table = 'publicaciones';
-    protected $fillable = ['descripcion','foto', 'IdUsuario', 'fecha','hora','lugar', 'created_by'];
+    protected $fillable = ['descripcion','foto', 'IdUsuario', 'created_by'];
 
     public function user()
     {

@@ -16,9 +16,6 @@ return new class extends Migration {
             $table->unsignedBigInteger('IdUsuario');
             $table->string('descripcion')->nullable();
             $table->string('foto')->nullable();
-            $table->date('fecha');
-            $table->time('hora');
-            $table->string('lugar');
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();

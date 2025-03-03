@@ -23,16 +23,19 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form class="p-4 md:p-5" wire:submit.prevent="store" x-data="{ descripcion: '', foto: null }">
+            <form class="p-4 md:p-5" wire:submit.prevent="store">
                 @csrf
                 <article class="transition duration-350 ease-in-out">
                     <div class="flex flex-shrink-0 pb-0">
                         <a href="#" class="flex-shrink-0 group block">
                             <div class="flex items-center">
                                 <div>
-                                    <img class="inline-block h-10 w-10 rounded-full"
-                                        src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png"
-                                        alt="">
+                                @if ($userperfil->profile_photo_path)
+                                    <img class="w-10 h-10 object-cover rounded-full" src="/storage/{{$userperfil->profile_photo_path }}" alt="">
+                                @else
+                                    <img class="w-10 h-10 object-cover rounded-full"
+                                        src="https://ui-avatars.com/api/?name={{ $userperfil->name }}&amp;color=000&amp;background=facc15">
+                                @endif
                                 </div>
                                 <div class="ml-3">
                                     <p class="text-base leading-6 font-medium dark:text-white">
@@ -47,7 +50,7 @@
                     <div class="pl-11">
                         <textarea wire:model="descripcion" id="descripcion" rows="1" oninput="autoResize(this)"
                             class="block p-1.5 w-full resize-none text-sm text-gray-900 bg-none rounded-lg border border-none focus:ring-white focus:border-white dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gary-700"
-                            placeholder="¿Qué novedades tienes?" x-model="descripcion"></textarea>
+                            placeholder="¿Qué novedades tienes?"></textarea>
                         @if ($foto)
                             <div class="md:flex-shrink pr-6 pt-2">
                                 <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64"
@@ -60,24 +63,6 @@
 
                         <div class="flex items-center mt-6 justify-between">
                             <div class="flex ps-0 space-x-1 rtl:space-x-reverse sm:ps-2">
-                                <button type="button"
-                                    class="inline-flex justify-center items-center p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 12 20">
-                                        <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
-                                            d="M1 6v8a5 5 0 1 0 10 0V4.5a3.5 3.5 0 1 0-7 0V13a2 2 0 0 0 4 0V6" />
-                                    </svg>
-                                    <span class="sr-only">Attach file</span>
-                                </button>
-                                <button type="button"
-                                    class="inline-flex justify-center items-center p-2 text-gray-500 rounded-sm cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="currentColor" viewBox="0 0 16 20">
-                                        <path
-                                            d="M8 0a7.992 7.992 0 0 0-6.583 12.535 1 1 0 0 0 .12.183l.12.146c.112.145.227.285.326.4l5.245 6.374a1 1 0 0 0 1.545-.003l5.092-6.205c.206-.222.4-.455.578-.7l.127-.155a.934.934 0 0 0 .122-.192A8.001 8.001 0 0 0 8 0Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
-                                    </svg>
-                                    <span class="sr-only">Set location</span>
-                                </button>
                                 <div class="file-upload-container">
                                     <!-- Label como ícono para cargar el archivo -->
                                     <label for="dropzone-file"
@@ -89,9 +74,8 @@
                                         </svg>
                                         <span class="sr-only">Upload image</span>
                                     </label>
-                                
                                     <!-- Input file oculto -->
-                                    <input id="dropzone-file" type="file" class="hidden" wire:model="foto"  x-on:change="foto = $event.target.files[0]"/>
+                                    <input id="dropzone-file" type="file" class="hidden" wire:model="foto"/>
                                 </div>
 
                             </div>
@@ -99,8 +83,7 @@
                             <button wire:click.prevent="store()" type="submit" data-modal-hide="crud-modal"
                                 wire:loading.attr="disabled" wire:loading.class="bg-gray-300 cursor-not-allowed"
                                 class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-yellow-500 rounded-lg focus:ring-4 hover:bg-yellow-600"
-                                :disabled="!descripcion && !foto"
-                                :class="{ 'bg-gray-300 cursor-not-allowed': !descripcion && !foto }">
+                                >
                                 <!-- Texto dinámico -->
                                 {{ $publicacion_id ? 'Actualizar' : 'Publicar' }}
                                 <!-- Mostrar el ícono de carga cuando está en proceso -->

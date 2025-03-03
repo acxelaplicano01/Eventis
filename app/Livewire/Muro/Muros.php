@@ -25,28 +25,24 @@ class Muros extends Component
     public $likes = [];
     public $comentario, $fotoComentario,  $diplomas;
 
-
     public $activeTab = 'styled-publicaciones';
     public $activeModal = null;
-
-    public $isOpenComentaro = 0;
-
     public function setTab($tab)
     {
         $this->activeTab = $tab;
     }
 
-    public function openModal($modal)
+    public function openModal($modalId)
     {
-        $this->activeModal = $modal;
+        $this->activeModal = $modalId;
     }
 
     public function closeModal()
     {
         $this->activeModal = null;
+        $this->resetInputFields();
+        $this->resetInputFieldsEvento();
     }
-
-
 
     public function mount(User $userperfil)
     {
@@ -140,7 +136,7 @@ class Muros extends Component
 
 
         $this->resetInputFieldsEvento();
-        $this->closeModalEvento();
+        $this->closeModal();
     }
 
     public function viewDetails($id)
@@ -154,13 +150,14 @@ class Muros extends Component
         $this->showDetails = false;
     }
 
-    public function edit($id)
+
+    function edit($id)
     {
         $publicacion = Publicacion::findOrFail($id);
         $this->publicacion_id = $id;
         $this->descripcion = $publicacion->descripcion;
         $this->foto = asset('storage/' . $publicacion->foto);
-        $this->openModal('modal'.$id);
+        $this->openModal("modal1");
     }
 
     public function delete()
@@ -183,46 +180,54 @@ class Muros extends Component
     }
 
     public function store()
-    {
-        $this->validate([
-            'descripcion' => 'nullable|string|max:525',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-        // Verificar si el usuario está definido
-        if (!$this->userperfil) {
-            session()->flash('error', 'Error: Usuario no encontrado.');
-            return;
-        }
+{
+    $rules = [
+        'descripcion' => 'nullable|string|max:525',
+    ];
 
-        // Manejo de archivo logo
-        if ($this->foto) {
-            $this->foto = $this->foto->store('fotos', 'public');
-        } elseif ($this->publicacion_id) {
-            $publicacion = Publicacion::findOrFail($this->publicacion_id);
-            $this->logo = $publicacion->foto;
-        }
-
-        // Guardar o actualizar la publicación
-        Publicacion::updateOrCreate(['id' => $this->publicacion_id], [
-            'descripcion' => $this->descripcion,
-            'foto' => $this->foto ? str_replace('public/', 'storage/', $this->foto) : null,
-            'IdUsuario' => $this->userperfil->id,
-            'fecha' => now()->toDateString(),
-            'hora' => now()->toTimeString(),
-            'lugar' => 'Lugar de ejemplo',
-            'created_by' => $this->userperfil->id,
-        ]);
-
-        // Mensaje de éxito
-        session()->flash(
-            'message',
-            $this->publicacion_id ? 'Publicación actualizada correctamente!' : 'Has publicado!'
-        );
-
-        // limpiar los campos
-        $this->resetInputFields();
-        $this->closeModal();
+    // Validar solo si se subió una nueva imagen
+    if ($this->foto instanceof \Livewire\TemporaryUploadedFile) {
+        $rules['foto'] = 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
     }
+
+    $this->validate($rules);
+
+    // Verificar si el usuario está definido
+    if (!$this->userperfil) {
+        session()->flash('error', 'Error: Usuario no encontrado.');
+        return;
+    }
+
+    // Si se sube una nueva imagen, guardarla; si no, mantener la existente
+    if ($this->foto instanceof \Livewire\TemporaryUploadedFile) {
+        $this->foto = $this->foto->store('fotos', 'public');
+    } elseif ($this->publicacion_id) {
+        $publicacion = Publicacion::findOrFail($this->publicacion_id);
+        $this->foto = $publicacion->foto;
+    }
+
+    // Guardar o actualizar la publicación
+    Publicacion::updateOrCreate(['id' => $this->publicacion_id], [
+        'descripcion' => $this->descripcion,
+        'foto' => $this->foto,
+        'IdUsuario' => $this->userperfil->id,
+        'fecha' => now()->toDateString(),
+        'hora' => now()->toTimeString(),
+        'lugar' => 'Lugar de ejemplo',
+        'created_by' => $this->userperfil->id,
+    ]);
+
+    // Mensaje de éxito
+    session()->flash(
+        'message',
+        $this->publicacion_id ? 'Publicación actualizada correctamente!' : 'Has publicado!'
+    );
+
+    // limpiar los campos
+    $this->resetInputFields();
+    $this->closeModal();
+}
+
 
     public function confirmDelete($id)
     {
@@ -328,9 +333,7 @@ class Muros extends Component
     public function loadMore()
     {
         $this->perPage += 7;
-    }
-
-    
+    }  
     public function render()
     {
         $Eventos = Evento::with('modalidad', 'localidad', 'diploma')

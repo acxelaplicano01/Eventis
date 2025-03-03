@@ -61,6 +61,7 @@
 
 
 
+
                                             <img style="height:12rem; width:12rem;"
                                                 class="object-cover rounded-full relative border-4 border-yellow-500"
                                                 src="https://ui-avatars.com/api/?name={{ $userperfil->name }}&amp;color=000&amp;background=facc15">
@@ -443,7 +444,7 @@
                                             </div>
                                         </div>
                                     </aside>
-
+                                        <!-- Espacio de en medio -->
                                     <div class="dark:bg-gray-900 w-4/5" style="max-width:600px;">
                                         <!--Publica si es el perfil propio-->
                                         @if(auth()->user()->id === $userperfil->id)
@@ -599,6 +600,8 @@
                                                                 <a href="{{ route('muro', $publicacion->user->id) }}"
                                                                     class="font-semibold text-gray-900 dark:text-white">{{ $publicacion->user->nombre }}
                                                                     {{ $publicacion->user->apellido }}</a>
+
+                                                                <!-- Botones seguir o dejar de seguir -->
                                                                 @if(auth()->user()->id !== $userperfil->id)
                                                                     @if(auth()->user()->siguiendo->contains($userperfil->id))
                                                                         <button wire:click="dejarDeSeguir({{ $userperfil->id }})"
@@ -615,42 +618,40 @@
                                                                     @endif
                                                                 @endif
 
-                                                                <!--Acciones tres puntitos-->
-                                                                <button wire:click="openModal('modal{{$publicacion->id}}')"
+                                                                                                                                <!-- Botón de tres puntitos -->
+                                                                <button wire:click="openModal('modalPuntitos{{ $publicacion->id }}')"
                                                                     class="inline-flex ml-24 items-center p-2 text-sm font-medium text-center text-gray-900 rounded-lg dark:text-white"
                                                                     type="button">
-                                                                    <svg class="w-4 h-4" aria-hidden="true"
-                                                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                                        viewBox="0 0 16 3">
-                                                                        <path
-                                                                            d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                                                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                                                                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
                                                                     </svg>
                                                                 </button>
+
                                                                 <!-- Dropdown menu tres puntitos -->
-                                                                @if($activeModal === 'modal{{$publicacion->id}}')
-                                                                <div id="{{$publicacion->id}}"
-                                                                    class="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                                                        aria-labelledby="{{$publicacion->id}}">
-                                                                        <li>
-                                                                            <a wire:click="edit({{ $publicacion->id }})"
-                                                                                class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Editar</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a wire:click="confirmDelete({{ $publicacion->id }})"
-                                                                                class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Eliminar</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a wire:click="edit({{ $publicacion->id }})"
-                                                                                class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Guardar</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                    <div class="py-2">
-                                                                        <a href="#"
-                                                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Reportar</a>
+                                                                @if($activeModal === "modalPuntitos{$publicacion->id}")
+                                                                    <div class="absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
+                                                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+                                                                            <li>
+                                                                                <a wire:click="edit({{ $publicacion->id }})"
+                                                                                    class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Editar</a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a wire:click="confirmDelete({{ $publicacion->id }})"
+                                                                                    class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Eliminar</a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a wire:click="edit({{ $publicacion->id }})"
+                                                                                    class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Guardar</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <div class="py-2">
+                                                                            <a href="#"
+                                                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                                                                                wire:click="closeModal">Reportar</a>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
                                                                 @endif
+
                                                                 <!--Confirmacion de eliminar-->
                                                                 @if (session()->has('error'))
                                                                     <div
@@ -714,11 +715,14 @@
                                                                         </div>
                                                                     </div>
                                                                 @endif
+                                                                <!-- fecha de publicación -->
                                                                 <div class="text-xs text-gray-500 dark:text-gray-400">
                                                                     {{ $publicacion->created_at->diffForHumans() }}
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <!-- Descripcion publicación -->
                                                         <p
                                                             class="pl-1 mt-4 mb-2 text-base width-auto font-medium dark:text-white flex-shrink">
                                                             {{ $publicacion->descripcion }}
@@ -726,61 +730,63 @@
                                                         @if($publicacion->foto)
                                                             <img src="{{ asset('storage/' . $publicacion->foto) }}"
                                                                 class="cursor-pointer transition rounded-lg duration-300 ease-in-out w-full h-full object-cover"
-                                                                wire:click="openModal('modal5')">
+                                                                wire:click="openModal('modalComentario{{ $publicacion->id }}')">
                                                         @endif
-                                                        <!-- Modal comentario -->
-                                                        @if($activeModal === 'modal5')
-                                                            <!-- Modal de Flowbite para ampliar la imagen -->
-                                                            <div
-                                                                class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                                                <!-- Fondo opaco -->
-                                                                <div class="fixed inset-0 bg-black opacity-60"></div>
-                                                                <div class="relative w-full max-w-2xl max-h-full">
-                                                                    <div
-                                                                        class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                                                        <button type="button"
-                                                                            class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                                                            wire:click="closeModal">
-                                                                            ✕
-                                                                        </button>
-                                                                        <div class="p-5 text-center">
-                                                                            @if($publicacion->foto)
-                                                                                <img src="{{ asset('storage/' . $publicacion->foto) }}"
-                                                                                    class="cursor-pointer transition rounded-lg duration-300 ease-in-out w-full h-full object-cover"
-                                                                                >
-                                                                            @endif
-                                                                        </div>
-                                                                        <div class="p-4">
-                                                                            <form
-                                                                                wire:submit.prevent="addComentario({{ $publicacion->id }})">
-                                                                                <textarea wire:model="comentario"
-                                                                                    class="w-full p-2 border rounded-lg dark:bg-gray-600 dark:border-gray-500 dark:text-white"
-                                                                                    placeholder="Escribe un comentario..."></textarea>
-                                                                                <button type="submit"
-                                                                                    class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg dark:bg-blue-600">Comentar</button>
-                                                                            </form>
-                                                                            <ul class="mt-4">
-                                                                                @foreach($publicacion->comentarios as $comentario)
-                                                                                    <li class="border-b py-2 dark:border-gray-600">
-                                                                                        <p
-                                                                                            class="text-sm text-gray-600 dark:text-gray-400">
-                                                                                            {{ $comentario->user->nombre }}:
-                                                                                        </p>
-                                                                                        <p class="dark:text-white">
-                                                                                            {{ $comentario->contenido }}
-                                                                                        </p>
-                                                                                    </li>
-                                                                                @endforeach
-                                                                            </ul>
+                                                        <!-- Modal -->
+                                                        @if($activeModal)
+                                                            <!-- Modal comentario -->
+                                                            @if($activeModal === "modalComentario{$publicacion->id}")
+                                                                <!-- Modal para ampliar la imagen -->
+                                                                <div
+                                                                    class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                                                    <!-- Fondo opaco -->
+                                                                    <div class="fixed inset-0 bg-black opacity-60"></div>
+                                                                    <div class="relative w-full max-w-2xl max-h-full">
+                                                                        <div
+                                                                            class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                                            <button type="button"
+                                                                                class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                                                wire:click="closeModal">
+                                                                                ✕
+                                                                            </button>
+                                                                            <div class="p-5 text-center">
+                                                                                @if($publicacion->foto)
+                                                                                    <img src="{{ asset('storage/' . $publicacion->foto) }}"
+                                                                                        class="cursor-pointer transition rounded-lg duration-300 ease-in-out w-full h-full object-cover">
+                                                                                @endif
+                                                                            </div>
+                                                                            <div class="p-4">
+                                                                                <form
+                                                                                    wire:submit.prevent="addComentario({{ $publicacion->id }})">
+                                                                                    <textarea wire:model="comentario"
+                                                                                        class="w-full p-2 border rounded-lg dark:bg-gray-600 dark:border-gray-500 dark:text-white"
+                                                                                        placeholder="Escribe un comentario..."></textarea>
+                                                                                    <button type="submit"
+                                                                                        class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg dark:bg-blue-600">Comentar</button>
+                                                                                </form>
+                                                                                <ul class="mt-4">
+                                                                                    @foreach($publicacion->comentarios as $comentario)
+                                                                                        <li class="border-b py-2 dark:border-gray-600">
+                                                                                            <p
+                                                                                                class="text-sm text-gray-600 dark:text-gray-400">
+                                                                                                {{ $comentario->user->nombre }}:
+                                                                                            </p>
+                                                                                            <p class="dark:text-white">
+                                                                                                {{ $comentario->contenido }}
+                                                                                            </p>
+                                                                                        </li>
+                                                                                    @endforeach
+                                                                                </ul>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            @endif
                                                         @endif
                                                         <!-- Acciones publicacion -->
                                                         <div
                                                             class="dark:border-gray-600 border-gray-200 border-t flex items-center py-2.5 mt-4 pl-16">
-                                                            <div wire:click="openModal('modal5')"
+                                                            <div  wire:click="openModal('modalComentario{{ $publicacion->id }}')"
                                                                 class="flex-1 flex items-center cursor-pointer text-xs dark:text-gray-400 hover:text-yellow-400 dark:hover:text-yellow-400 transition duration-350 ease-in-out">
                                                                 <svg viewBox="0 0 24 24" fill="currentColor"
                                                                     class="w-5 h-5 mr-2">
@@ -857,7 +863,7 @@
                                                                     <img class="w-8 h-8 me-2 object-cover rounded-full"
                                                                         src="https://ui-avatars.com/api/?name={{ $userperfil->name }}&amp;color=000&amp;background=facc15">
                                                                 @endif
-                                                                <div wire:click="openModal('modal5')"
+                                                                <div  wire:click="openModal('modalComentario{{ $publicacion->id }}')"
                                                                     class="dark:bg-white-800 cursor-text hover:bg-gray-200 dark:hover:bg-gray-600 bg-gray-100 dark:bg-gray-700 p-2 w-full rounded-full">
                                                                     <span
                                                                         class="font-medium ml-2 text-gray-600 dark:text-white">Escribe
@@ -870,6 +876,7 @@
                                                 </div>
                                             </div>
                                         @endforeach
+                                        <!-- Boton ver mas publicaciones -->
                                         @if ($publicaciones->hasMorePages())
                                             <div class="mt-4 text-center">
                                                 <button wire:click="loadMore"
@@ -927,13 +934,13 @@
 
                                                         <input name="buscar" wire:model.live="search" type="text"
                                                             id="table-search-users" placeholder="Buscar eventos..." class="h-10 px-10 pr-5 w-full text-sm text-gray-700 dark:text-gray-200 
-                                                bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 
-                                                focus:outline-none focus:ring-2 focus:ring-yellow-500 
-                                                rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm">
+                                                    bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 
+                                                    focus:outline-none focus:ring-2 focus:ring-yellow-500 
+                                                    rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm">
                                                     </div>
                                                     <div class="grid grid-cols-3 gap-1">
                                                         @foreach($Eventos as $evento) 
-                                                                                        <div
+                                                                                                <div
                                                                 class="max-w-sm truncate dark:text-white bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                                                                 <a href="{{ route('reporteEvento', ['evento' => $evento->id]) }}"
                                                                     target="_blank">
@@ -976,9 +983,9 @@
 
                                                         <input name="buscar" wire:model.live="search" type="text"
                                                             id="table-search-users" placeholder="Buscar amigos..." class="h-10 px-10 pr-5 w-full text-sm text-gray-700 dark:text-gray-200 
-                                                bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 
-                                                focus:outline-none focus:ring-2 focus:ring-yellow-500 
-                                                rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm">
+                                                    bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 
+                                                    focus:outline-none focus:ring-2 focus:ring-yellow-500 
+                                                    rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm">
                                                     </div>
                                                     <div class="flow-root">
                                                         <ul role="list">
@@ -1149,7 +1156,6 @@
                                             </div>
                                         </div>
                                     </aside>
-
                                 </div>
                             </div>
                         @endif
@@ -1240,7 +1246,7 @@
                                                                                                 ];
 
                                                                                                 $diaSemanaEsp = $diasSemana[$diaSemana];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ?>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ?>
                                                                                                                                                     {{$diaSemanaEsp}},
                                                                                                                                                     {{ \Carbon\Carbon::parse($evento->fechainicio)->format('d \d\e F \d\e Y') }}
                                                                                                                                                 </span>
@@ -1824,12 +1830,9 @@
                         @endif
                     @endif
                 </div>
+            </section>
         </div>
-
-        </section>
-</div>
-</main>
-
+    </main>
 <style>
     .overflow-y-auto::-webkit-scrollbar,
     .overflow-y-scroll::-webkit-scrollbar,
@@ -1884,10 +1887,4 @@
         };
     }
 </script>
-
-<style>
-    [x-cloak] {
-        display: none !important;
-    }
-</style>
 </div>

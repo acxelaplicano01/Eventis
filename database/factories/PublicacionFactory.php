@@ -21,9 +21,6 @@ class PublicacionFactory extends Factory
             'IdUsuario' => $usuarioId,
             'descripcion' => $this->faker->address(),
             'foto' => $this->faker->imageUrl(), 
-            'fecha' => $this->faker->date(),
-            'hora' => $this->faker->time(),
-            'lugar' => $this->faker->address(),
             'created_by' => 1
         ];
     }
