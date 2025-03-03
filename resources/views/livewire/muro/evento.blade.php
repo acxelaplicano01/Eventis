@@ -15,7 +15,7 @@
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                             {{ $evento_id ? 'Editar Evento' : 'Crear Evento' }}
                         </h3>
-                        <button @click="activeModal = null" type="button"
+                        <button wire:click="closeModal" type="button"
                             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -169,7 +169,7 @@
                         </button>
                     </span>
                     <span class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
-                        <button @click="activeModal = null" type="button"
+                        <button wire:click="closeModal" type="button"
                             class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                             Cancelar
                         </button>

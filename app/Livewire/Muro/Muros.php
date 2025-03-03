@@ -25,6 +25,29 @@ class Muros extends Component
     public $likes = [];
     public $comentario, $fotoComentario,  $diplomas;
 
+
+    public $activeTab = 'styled-publicaciones';
+    public $activeModal = null;
+
+    public $isOpenComentaro = 0;
+
+    public function setTab($tab)
+    {
+        $this->activeTab = $tab;
+    }
+
+    public function openModal($modal)
+    {
+        $this->activeModal = $modal;
+    }
+
+    public function closeModal()
+    {
+        $this->activeModal = null;
+    }
+
+
+
     public function mount(User $userperfil)
     {
         $this->userperfil = $userperfil;
@@ -137,7 +160,7 @@ class Muros extends Component
         $this->publicacion_id = $id;
         $this->descripcion = $publicacion->descripcion;
         $this->foto = asset('storage/' . $publicacion->foto);
-        $this->openModal();
+        $this->openModal('modal'.$id);
     }
 
     public function delete()
