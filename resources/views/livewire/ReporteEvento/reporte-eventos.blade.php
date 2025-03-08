@@ -310,7 +310,11 @@ $yaInscrito = $estadoInscripcion === 'Inscrito';
                             <div class="ml-5">
                                 <h3 class="text-xl font-semibold text-black dark:text-gray-100">Localidad / Modalidad</h3>
                                 <p class="mt-3 text-base text-gray-600 dark:text-gray-400">
-                                    {{$evento->localidad->localidad}}
+                                    @if($evento->localidad)
+                                        {{$evento->localidad->localidad}}
+                                    @else
+                                        Evento virtual
+                                    @endif
                                 </p>
                                 <p class="mt-3 text-base text-gray-600 dark:text-gray-400">
                                     {{$evento->modalidad->modalidad}}
@@ -343,9 +347,13 @@ $yaInscrito = $estadoInscripcion === 'Inscrito';
                             </iframe></div>
                     </div>-->
                     <div class="lg:col-span-3">
-                        <img class="w-full rounded-lg shadow-xl"
-                        src="{{ asset('storage/'. $evento->diploma->Plantilla)}}" alt="Diploma" />
+                        @if($evento->diploma && $evento->diploma->Plantilla)
+                            <img class="w-full rounded-lg shadow-xl" src="{{ asset('storage/' . $evento->diploma->Plantilla) }}" alt="Diploma" />
+                        @else
+                            <img class="w-full rounded-lg shadow-xl" src="{{ asset('storage/default_diploma.jpg') }}" alt="Diploma Predeterminado" />
+                        @endif
                     </div>
+
                 </div>
             </div>
         </section>
@@ -475,21 +483,13 @@ $yaInscrito = $estadoInscripcion === 'Inscrito';
                                     <div class="w-full h-0 mb-4 border-t-2 dark:border-gray-600 border-gray-300 border-dotted"></div>
                                     <div class="flex items-center">
                                         <img class="flex-shrink-0 object-cover w-10 h-10 rounded-full"
-                                            src="{{ asset('storage/'. $conferencia->conferencista->foto)}}"
+                                            src="{{ asset('storage/'. $conferencia->fotoConferencista)}}"
                                             alt="" />
                                         <div class="min-w-0 ml-3">
-                                            <p class="text-base font-semibold text-gray-600 dark:text-gray-100 truncate">
-                                                @if ($conferencia->conferencista)
-                                                    @if ($conferencia->conferencista->user)
-                                                        {{ $conferencia->conferencista->user->nombre }}
-                                                        {{ $conferencia->conferencista->user->apellido ?? '' }}
-                                                    @else
-                                                        N/A
-                                                    @endif
-                                                @else
-                                                    N/A
-                                                @endif
-                                            </p>
+                                        <p class="text-base font-semibold text-gray-600 dark:text-gray-100 truncate">
+                                            {{ $conferencia->idConferencista ?? 'N/A' }}
+                                        </p>
+
                                             <p class="text-base text-gray-400 dark:text-gray-400 truncate">Conferencista</p>
                                         </div>
                                     </div>
@@ -519,12 +519,11 @@ $yaInscrito = $estadoInscripcion === 'Inscrito';
                             </svg>
                             <div class="absolute text-yellow-500 w-48 h-48">
                                 <img class="object-cover w-full h-full rounded-full"
-                                     src="{{ asset('storage/'. $conferencia->conferencista->foto)}}"
+                                     src="{{ asset('storage/'. $conferencia->fotoConferencista)}}"
                                     alt="{{$evento->logo}}" />
                             </div>
                         </div>
-                        <h3 class="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-100">{{$conferencia->conferencista->user->nombre}} {{$conferencia->conferencista->user->apellido}}</h3>
-                        <h4 class="text-md font-medium text-gray-900 dark:text-gray-500">{{$conferencia->conferencista->user->nacionalidad->nombreNacionalidad}}</h4>
+                        <h3 class="mt-1 text-lg font-semibold text-gray-900 dark:text-gray-100">{{$conferencia->idConferencista}} </h3>
                         <p class="mt-2 text-base text-gray-900 dark:text-gray-400">Amet minim mollit non deserunt ullamco est sit aliqua dolor do
                             amet sint. Velit officia consequat duis enim velit mollit.</p>
                     </div>

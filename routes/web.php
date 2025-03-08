@@ -25,7 +25,7 @@ use App\Livewire\Rol\Roles;
 use App\Livewire\Diploma\Diplomas;
 use App\Livewire\Conferencia\Conferencias;
 use App\Livewire\VistaConferencia\VistaConferencias;
-use App\Livewire\Conferencista\Conferencistas;
+
 use App\Livewire\Evento\Eventos;
 use App\Livewire\ConferenciaInscrita\ConferenciasInscritas;
 use App\Livewire\Asistencia\Asistencias;
@@ -47,6 +47,7 @@ use App\Livewire\ReciboPago\ComprobacionPago;
 use App\Livewire\VistaConferencia\VistasConferencias;
 use App\Livewire\Publicacion\Publicaciones;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
+use App\Livewire\Patrocinador\Patrocinadores;
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -59,8 +60,7 @@ Route::middleware([
     Route::get('/localidad', Localidades::class)->name('localidad');
     Route::get('/asistencia', Asistencias::class)->name('asistencia');
     Route::get('/rol', Roles::class)->name('rol');
-    Route::get('/conferencia/{evento?}', Conferencias::class)->name('conferencia');
-    Route::get('/conferencista', Conferencistas::class)->name('conferencista');
+    Route::get('/agenda/{evento?}', Conferencias::class)->name('conferencia');
     Route::get('/eventos', Eventos::class)->name('eventos');
     Route::get('/persona', Personas::class)->name('persona');
     Route::get('/recibo/{evento}', ReciboPagos::class)->name('recibo');
@@ -77,7 +77,7 @@ Route::middleware([
     Route::get('/evento/{evento}/reporteEvento', ReporteEventos::class)->name('reporteEvento');
     Route::get('/historial-eventos', HistorialEventos::class)->name('historial-eventos');
     Route::get('/gafete/{evento}', Gafetes::class)->name('gafete');
-    Route::get('/perfilconferencista', Perfilconferencista::class)->name('perfilconferencista');
+    Route::get('/patrocinador', Patrocinadores::class)->name('patrocinador');
     Route::get('/muro/{userperfil}', Muros::class)->name('muro');
 });
 

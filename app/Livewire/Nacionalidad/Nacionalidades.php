@@ -56,6 +56,7 @@ class Nacionalidades extends Component
 
     $this->closeModal();
     $this->resetInputFields();
+    return redirect()->route('nacionalidad');
 }
 
     public function edit($id)
@@ -82,6 +83,7 @@ class Nacionalidades extends Component
             session()->flash('message', 'nacionalidad eliminada correctamente!');
             $this->confirmingDelete = false;
         }
+        return redirect()->route('nacionalidad');
     }
 
     public function confirmDelete($id)

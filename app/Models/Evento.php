@@ -42,5 +42,13 @@ class Evento extends BaseModel
 
 
     }
+    // En el modelo Evento
+    
+    public function patrocinadores()
+    {
+        return $this->belongsToMany(Patrocinador::class, 'patrocinador_evento')
+                    ->withPivot('cantidad_invitados')
+                    ->withTimestamps();
+    }
 
 }

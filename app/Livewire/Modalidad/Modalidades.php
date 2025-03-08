@@ -22,20 +22,25 @@ class Modalidades extends Component
         return view('livewire.Modalidad.modalidades', ['modalidades' => $modalidades]);
     }
 
-    public function create()
+    public function create($modalId)
     {
         $this->resetInputFields();
-        $this->openModal();
+        $this->openModal($modalId);
+        $this->render();
+        $this->resetPage();
     }
 
-    public function openModal()
+   
+    public function openModal($modalId)
     {
-        $this->isOpen = true;
+        $this->isOpen = $modalId;
     }
 
-    public function closeModal()
+    public function closeModal(): void
     {
-        $this->isOpen = false;
+        $this->isOpen= null;
+        $this->resetInputFields();
+        $this->resetInputFieldsEvento();
     }
 
     private function resetInputFields(){
@@ -43,6 +48,10 @@ class Modalidades extends Component
         $this->modalidad_id = null;
     }
 
+    private function resetInputFieldsEvento(){
+        $this->modalidad = '';
+        $this->modalidad_id = null;
+    }
     public function store()
     {
         $this->validate([
@@ -62,6 +71,9 @@ class Modalidades extends Component
 
         $this->closeModal();
         $this->resetInputFields();
+        $this->render();
+        $this->resetPage();
+
     }
 
     public function edit($id)
@@ -70,7 +82,7 @@ class Modalidades extends Component
         $this->modalidad_id = $id;
         $this->modalidad = $modalidad->modalidad;
 
-        $this->openModal();
+        $this->openModal("modal2");
     }
 
     public function delete()
@@ -88,6 +100,7 @@ class Modalidades extends Component
             session()->flash('message', 'modalidad eliminada correctamente!');
             $this->confirmingDelete = false;
         }
+        $this->render();
     }
 
     public function confirmDelete($id)
@@ -106,6 +119,7 @@ class Modalidades extends Component
         $this->IdAEliminar = $id;
         $this->nombreAEliminar = $modalidad->modalidad;
         $this->confirmingDelete = true;
+        $this->render();
     }
 
 }

@@ -118,6 +118,7 @@
         </div>
 
     </div>
+    
     @if (session()->has('error'))
                     <div class="fixed z-50 inset-0 flex items-center justify-center overflow-y-auto ease-out duration-400">
                         <div class="fixed inset-0 transition-opacity">

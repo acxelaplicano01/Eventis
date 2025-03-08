@@ -6,17 +6,17 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\Conferencia;
-use App\Models\Conferencista;
+
 use App\Models\Evento;
 
 class Conferencias extends Component
 {
     use WithPagination, WithFileUploads;
 
-    public $foto, $nombre, $descripcion, $estado, $precio, $fecha, $horaInicio, $horaFin, $lugar, $linkreunion, $idConferencista, $conferencia_id, $search, $IdEvento;
+    public $foto, $fotoConferencista, $nombre, $descripcion, $estado, $precio, $fecha, $horaInicio, $horaFin, $lugar, $linkreunion, $idConferencista, $conferencia_id, $search, $IdEvento;
     public $isOpen = false;
     public $inputSearchConferencista = '';
-    public $searchConferencistas = [];
+
     public $inputSearchEvento = '';
     public $searchEventos = [];
     public $showDetails = false;
@@ -38,7 +38,7 @@ class Conferencias extends Component
 
     public function render()
     {
-        $conferencias = Conferencia::with('conferencista', 'evento')
+        $conferencias = Conferencia::with( 'evento')
             ->where('IdEvento', $this->IdEvento)
             ->where('nombre', 'like', '%'.$this->search.'%')
             ->orderBy('id', 'DESC')
@@ -49,7 +49,7 @@ class Conferencias extends Component
         return view('livewire.Conferencia.conferencias', [
             'conferencias' => $conferencias,
             'eventos' => $eventos,
-            'searchConferencistas' => $this->searchConferencistas
+           
         ]);
     }
 
@@ -76,24 +76,8 @@ class Conferencias extends Component
         $this->searchEventos = [];
     }
 
-    public function updatedInputSearchConferencista()
-    {
-        $this->searchConferencistas = Conferencista::whereHas('user', function ($query) {
-            $query->where('nombre', 'like', '%' . $this->inputSearchConferencista . '%')
-                  ->orWhere('apellido', 'like', '%' . $this->inputSearchConferencista . '%');
-        })->get();
-    }
-
-    public function selectConferencista($conferencistaId)
-    {
-        $this->idConferencista = $conferencistaId;
-        $conferencista = Conferencista::find($conferencistaId);
-        if ($conferencista) {
-            $this->inputSearchConferencista = $conferencista->user->nombre . ' ' . $conferencista->user->apellido;
-        }
-        $this->searchConferencistas = [];
-    }
-
+   
+   
     public function create()
     {
         $this->resetInputFields();
@@ -127,8 +111,7 @@ class Conferencias extends Component
         $this->lugar = '';
         $this->linkreunion = '';
         $this->idConferencista = '';
-        $this->inputSearchConferencista = '';
-        $this->searchConferencistas = [];
+        $this->fotoConferencista= '';
         $this->IdEvento = '';
         $this->estado = '';
         $this->precio = '';
@@ -147,14 +130,10 @@ class Conferencias extends Component
     $this->lugar = $conferencia->lugar;
     $this->linkreunion = $conferencia->linkreunion;
     $this->idConferencista = $conferencia->idConferencista;
+    $this->fotoConferencista = $conferencia->fotoConferencista;
     $this->estado = $conferencia->estado;
     $this->precio = $conferencia->precio;
 
-    // Cargar el nombre del conferencista seleccionado
-    $conferencista = Conferencista::find($this->idConferencista);
-    if ($conferencista) {
-        $this->inputSearchConferencista = $conferencista->user->nombre . ' ' . $conferencista->user->apellido;
-    }
 
     // Abrir el modal para edición
     $this->openModal();
@@ -172,7 +151,8 @@ public function store()
         'horaFin' => 'required|after:horaInicio',
         'lugar' => 'required|string|max:255',
         'linkreunion' => 'nullable|url',
-        'idConferencista' => 'required|exists:conferencistas,id',
+        'idConferencista' => 'required|string|max:500',
+        'fotoConferencista' => 'nullable|image',
         'estado' => 'required|string|max:255',
         'precio' => 'nullable',
 
@@ -180,12 +160,22 @@ public function store()
 
     // Manejo de foto
     if ($this->foto) {
-        $this->foto = $this->foto->store('conferencias', 'public');
+        $this->foto = $this->foto->store('foto', 'public');
+    } elseif ($this->conferencia_id) {
+        $foto = Conferencia::findOrFail($this->conferencia_id);
+        $this->foto= $foto->foto;
     } else {
-        $conferencia = Conferencia::find($this->conferencia_id);
-        $this->foto = $conferencia ? $conferencia->foto : 'http://www.puertopixel.com/wp-content/uploads/2011/03/Fondos-web-Texturas-web-abtacto-17.jpg';
+        $this->foto = null;
     }
 
+    if ($this->fotoConferencista) {
+        $this->fotoConferencista = $this->fotoConferencista->store('fotoConferencista', 'public');
+    } elseif ($this->conferencia_id) {
+        $fotoConferencista = Conferencia::findOrFail($this->conferencia_id);
+        $this->fotoConferencista= $fotoConferencista->fotoConferencista;
+    } else {
+        $this->fotoConferencista = null;
+    }
     // Crear o actualizar la conferencia
     Conferencia::updateOrCreate(['id' => $this->conferencia_id], [
         'IdEvento' => $this->IdEvento,
@@ -198,11 +188,12 @@ public function store()
         'lugar' => $this->lugar,
         'linkreunion' => $this->linkreunion,
         'idConferencista' => $this->idConferencista,
+        'fotoConferencista' => $this->fotoConferencista,
         'estado' => $this->estado,
         'precio' => $this->precio,
     ]);
 
-    session()->flash('message', $this->conferencia_id ? 'Conferencia actualizada correctamente!' : 'Conferencia creada correctamente!');
+    session()->flash('message', $this->conferencia_id ? 'Actividad actualizada correctamente!' : 'Actividad creada correctamente!');
     $this->closeModal();
     $this->resetInputFields();
     return redirect(request()->header('Referer'));  // Recarga la página
@@ -215,13 +206,13 @@ public function store()
             $conferencia = Conferencia::find($this->IdAEliminar);
 
             if (!$conferencia) {
-                session()->flash('error', 'Conferencia no encontrada.');
+                session()->flash('error', 'Actividad no encontrada.');
                 $this->confirmingDelete = false;
                 return;
             }
 
             $conferencia->delete();
-            session()->flash('message', 'Conferencia eliminada correctamente!');
+            session()->flash('message', 'Actividad eliminada correctamente!');
             $this->confirmingDelete = false;
             return redirect(request()->header('Referer'));  // Recarga la página
         }
@@ -232,12 +223,12 @@ public function store()
         $conferencia = Conferencia::find($id);
 
         if (!$conferencia) {
-            session()->flash('error', 'Conferencia no encontrada.');
+            session()->flash('error', 'Actividad no encontrada.');
             return;
         }
 
         if ($conferencia->suscripciones()->exists()) {
-            session()->flash('error', 'No se puede eliminar la conferencia:'.$conferencia->nombre .'porque está enlazada a una o más suscripciones.');
+            session()->flash('error', 'No se puede eliminar la Actividad:'.$conferencia->nombre .'porque está enlazada a una o más suscripciones.');
             return;
         }
 

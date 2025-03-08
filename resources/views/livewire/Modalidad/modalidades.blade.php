@@ -22,9 +22,10 @@
 
 
 
-                @if($isOpen)
+                @if($isOpen === 'modal2')
+                    <!-- Main modal Publicar -->
                     @include('livewire.Modalidad.create')
-                @endif
+                @endif
 
 
 
@@ -33,7 +34,7 @@
                     <div
                         class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
                         <div>
-                            <button wire:click="create()"
+                            <button wire:click="openModal('modal2')"
                                 class="bg-yellow-500 hover:bg-yellow-600 hover:bg-ywllow-600 text-white font-bold py-2 px-4 rounded my-3">Nuevo</button>
                         </div>
                         <label for="table-search" class="sr-only">Search</label>

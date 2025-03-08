@@ -62,6 +62,7 @@ class Tipoperfiles extends Component
 
         $this->closeModal();
         $this->resetInputFields();
+        return redirect()->route('tipoperfil');
     }
 
     public function edit($id)
@@ -87,6 +88,7 @@ class Tipoperfiles extends Component
             $tipoperfil->delete();
             session()->flash('message', 'Tipo de perfil eliminado correctamente!');
             $this->confirmingDelete = false;
+            return redirect()->route('tipoperfil');
         }
     }
 

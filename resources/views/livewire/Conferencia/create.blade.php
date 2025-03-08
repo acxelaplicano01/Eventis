@@ -11,7 +11,7 @@
             <form wire:submit.prevent="store">
                 <div class="bg-white px-6 pt-5 pb-4 sm:p-6 sm:pb-6 dark:bg-gray-900">
                     <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Conferencia</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Agenda</h3>
                         <button wire:click="closeModal()" type="button"
                             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -46,11 +46,10 @@
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="mb-4">
                             <label for="nombre"
-                                class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Nombre de la
-                                Conferencia:</label>
+                                class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Nombre de la Actividad:</label>
                             <input type="text"
                                 class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                id="nombre" placeholder="Nombre de la Conferencia" wire:model="nombre">
+                                id="nombre" placeholder="Nombre de la actividad" wire:model="nombre">
                             @error('nombre') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
 
@@ -112,25 +111,20 @@
                     </div>
 
                     <div class="mb-4 col-span-2">
-                        <label for="conferencistaSearch"
-                            class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Conferencista:</label>
-                        <input type="text" wire:model.live="inputSearchConferencista"
-                            class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                            id="conferencistaSearch" placeholder="Buscar conferencista...">
-                        @if (count($searchConferencistas) > 0)
-                            <ul
-                                class="mt-2 bg-white border border-gray-300 rounded-lg shadow-lg dark:bg-gray-800 dark:border-gray-700">
-                                @foreach($searchConferencistas as $conferencista)
-                                    <li wire:click="selectConferencista({{ $conferencista->id }})"
-                                        class="cursor-pointer px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                        {{ $conferencista->user->nombre }} {{ $conferencista->user->apellido }}
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @endif
+                    <label for="idConferencista"
+                                class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Ponentes:</label>
+                            <textarea
+                                class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                                id="idConferencista" placeholder="Ponentes" wire:model="idConferencista"></textarea>
                         @error('idConferencista') <span class="text-red-500">{{ $message }}</span> @enderror
                     </div>
-
+                    <div class="mb-4">
+                        <label for="fotoConferencista"
+                            class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Foto del ponente:</label>
+                        <input type="file" wire:model="fotoConferencista"
+                            class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500">
+                       
+                    </div>
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Estado:</label>
                         <select class="focus:ring-yellow-500 focus:border-yellow-500 mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"
@@ -148,7 +142,7 @@
                             <input type="number" wire:model="precio"
                                 class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                                 id="precio" placeholder="Precio" step="0.01" min="0">
-                            @error('precio') <span class="text-red-500">{{ $message }}</span> @enderror
+                            @error('precio') <span class="text-red-500"></span> @enderror
                         </div>
                     @endif
 

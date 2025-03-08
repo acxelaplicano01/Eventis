@@ -18,6 +18,13 @@ class Localidades extends Component
     public $confirmingDelete = false;
     public $IdAEliminar;
     public $nombreAEliminar;
+    public function create($modalId)
+    {
+        $this->resetInputFields();
+        $this->openModal($modalId);
+        $this->render();
+        $this->resetPage();
+    }
 
     public function render()
     {
@@ -25,22 +32,19 @@ class Localidades extends Component
         return view('livewire.Localidad.localidades', ['localidades' => $localidades]);
     }
 
-    public function create()
+    public function openModal($modalId)
     {
+        $this->isOpen = $modalId;
+    }
+    public function closeModal(): void
+    {
+        $this->isOpen= null;
         $this->resetInputFields();
-        $this->openModal();
+        $this->resetInputFieldsEvento();;
     }
-
-    public function openModal()
-    {
-        $this->isOpen = true;
+    private function resetInputFieldsEvento(){
+        $this->localidad_id = null;
     }
-
-    public function closeModal()
-    {
-        $this->isOpen = false;
-    }
-
     private function resetInputFields()
     {
         $this->localidad = '';
@@ -60,6 +64,7 @@ class Localidades extends Component
 
         $this->closeModal();
         $this->resetInputFields();
+        return redirect()->route('localidad');
     }
 
     public function edit($id)
@@ -68,29 +73,38 @@ class Localidades extends Component
         $this->localidad_id = $id;
         $this->localidad = $localidad->localidad;
 
-        $this->openModal();
+        $this->openModal('modal3');
+        
     }
      
     public function delete()
-    {
-        if ($this->confirmingDelete) {
-            $localidad = Localidad::find($this->IdAEliminar);
+{
+    if ($this->confirmingDelete) {
+        $localidad = Localidad::find($this->IdAEliminar);
 
-            if (!$localidad) {
-                session()->flash('error', 'localidad no encontrada.');
-                $this->confirmingDelete = false;
-                return;
-            }
-
-            $localidad->forceDelete();
-            session()->flash('message', 'localidad eliminada correctamente!');
+        if (!$localidad) {
+            session()->flash('error', 'localidad no encontrada.');
             $this->confirmingDelete = false;
+            return;
         }
 
-        Localidad::destroy($this->IdAEliminar);
-        session()->flash('message', 'Localidad eliminada correctamente!');
+        $localidad->delete();
+        session()->flash('message', 'localidad eliminada correctamente!');
         $this->confirmingDelete = false;
+        
+        // Restablece la confirmación de eliminación y refresca el componente
+        $this->IdAEliminar = null;
+        $this->nombreAEliminar = null;
+        $this->resetPage();
+        
+       
+        return redirect()->route('localidad'); 
     }
+
+    $this->render();
+}
+
+    
 
     public function confirmDelete($id)
     {

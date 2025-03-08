@@ -1,6 +1,6 @@
 <div>
     <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white mb-7">
-        Conferencias
+       AGENDA
     </h2>
 
     <div class="dark:bg-gray-900">
@@ -51,7 +51,8 @@
                             <th scope="col" class="px-6 py-3">Evento</th>
                             <th scope="col" class="px-6 py-3">Nombre</th>
                             <th scope="col" class="px-6 py-3">Lugar</th>
-                            <th scope="col" class="px-6 py-3">Conferencista</th>
+                            <th scope="col" class="px-6 py-3">Ponentes</th>
+                            <th scope="col" class="px-6 py-3">Foto ponente</th>
                             <th scope="col" class="px-6 py-3">Acciones</th>
                         </tr>
                     </thead>
@@ -62,8 +63,8 @@
                                     {{ $conferencia->id }}</td>
                                     <td class="px-6 py-4">
                                         @if($conferencia->foto)
-                                            <img src="{{ asset('storage/' . $conferencia->foto) }}"
-                                                alt="Logo del Evento" class="w-12 h-12 object-cover">
+                                        <img src="{{ asset('storage/' . $conferencia->foto) }}" alt="Logo del Evento" class="w-12 h-12 object-cover">
+
                                         @else
                                         <img src="{{ asset('images/default-profile.png') }}" alt="Imagen" class="w-12 h-12 object-cover">
                                         @endif
@@ -75,16 +76,15 @@
                                 <td class="px-6 py-4 font-medium whitespace-nowrap">
                                     {{ $conferencia->lugar }}</td>
                                 <td class="px-6 py-4 font-medium whitespace-nowrap">
-                                    @if ($conferencia->conferencista)
-                                        @if ($conferencia->conferencista->user)
-                                            {{ $conferencia->conferencista->user->nombre }}
-                                            {{ $conferencia->conferencista->user->apellido ?? '' }}
+                                 {{ $conferencia->idConferencista }}
+                                </td>
+                                <td class="px-6 py-4">
+                                        @if($conferencia->fotoConferencista)
+                                        <img src="{{ asset('storage/' . $conferencia->fotoConferencista) }}" alt="Foto Conferencista" class="w-12 h-12 object-cover">
+
                                         @else
-                                            N/A
+                                        <img src="{{ asset('images/default-profile.png') }}" alt="Imagen" class="w-12 h-12 object-cover">
                                         @endif
-                                    @else
-                                        N/A
-                                    @endif
                                 </td>
                                 <td class="px-6 py-4">
                                         <button wire:click="viewDetails({{ $conferencia->id }})"
@@ -196,18 +196,7 @@
                             <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600 dark:bg-gray-800 dark:border-gray-700">
                                 <td scope="row" class="flex items-center pl-2 py-4 text-gray-900 font-bold dark:text-white"><strong>Link Reunión:</strong></td><td class="px-6 py-2">  <a href="{{ $selectedConferencia->linkreunion }}" target="_blank">{{ $selectedConferencia->linkreunion }}</a></td>
                             </tr>
-                            <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600 dark:bg-gray-800 dark:border-gray-700">
-                                <td scope="row" class="flex items-center pl-2 py-4 text-gray-900 font-bold dark:text-white"><strong>Conferencista:</strong></td><td class="px-6 py-2">  @if ($selectedConferencia->conferencista)
-                            @if ($selectedConferencia->conferencista->user)
-                                {{ $selectedConferencia->conferencista->user->nombre }}
-                                {{ $selectedConferencia->conferencista->user->apellido ?? '' }}
-                            @else
-                                N/A
-                            @endif
-                        @else
-                            N/A
-                        @endif</td>
-                            </tr>
+                           
                         </table>
                     </div>
                     <div class="mt-4">
@@ -263,18 +252,7 @@
                             <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600 dark:bg-gray-800 dark:border-gray-700">
                                 <td scope="row" class="flex items-center pl-2 py-4 text-gray-900 font-bold dark:text-white"><strong>Link Reunión:</strong></td><td class="px-6 py-2">  <a href="{{ $selectedConferencia->linkreunion }}" target="_blank">{{ $selectedConferencia->linkreunion }}</a></td>
                             </tr>
-                            <tr class="bg-white border-b hover:bg-gray-50 dark:hover:bg-gray-600 dark:bg-gray-800 dark:border-gray-700">
-                                <td scope="row" class="flex items-center pl-2 py-4 text-gray-900 font-bold dark:text-white"><strong>Conferencista:</strong></td><td class="px-6 py-2">  @if ($selectedConferencia->conferencista)
-                            @if ($selectedConferencia->conferencista->user)
-                                {{ $selectedConferencia->conferencista->user->nombre }}
-                                {{ $selectedConferencia->conferencista->user->apellido ?? '' }}
-                            @else
-                                N/A
-                            @endif
-                        @else
-                            N/A
-                        @endif</td>
-                            </tr>
+                           
                         </table>
                     </div>
                     <div class="mt-4">

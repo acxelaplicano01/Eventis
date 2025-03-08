@@ -160,10 +160,10 @@
 
                   </li>
 
-                  @can("admin-conferencista")
+                  @can("admin-Patrocinador")
                  <li>
-                   <x-nav-link href="{{ route('conferencista') }}" :active="request()->routeIs('conferencista')"
-                     class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group dark:text-white hover:bg-yellow-400 dark:hover:bg-gray-700 ">Conferencista</x-nav-link>
+                   <x-nav-link href="{{ route('patrocinador') }}" :active="request()->routeIs('patrocinador')"
+                     class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group dark:text-white hover:bg-yellow-400 dark:hover:bg-gray-700 ">Patrocinadores</x-nav-link>
                  </li>
               @endcan
             </li>

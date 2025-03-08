@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('estado');
             $table->decimal('precio', 12, 2)->nullable(); 
             $table->unsignedBigInteger('idmodalidad');
-            $table->unsignedBigInteger('idlocalidad');
-            $table->unsignedBigInteger('IdDiploma');
+            $table->unsignedBigInteger('idlocalidad')->nullable();
+            $table->unsignedBigInteger('IdDiploma')->nullable();
             $table->integer("created_by");
             $table->integer("deleted_by")->nullable();
             $table->integer("updated_by")->nullable();

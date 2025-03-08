@@ -21,7 +21,7 @@
 
 
 
-                @if($isOpen)
+                @if($isOpen === 'modal3')
                     @include('livewire.Evento.create')
                 @endif               
 
@@ -32,7 +32,7 @@
                     <div
                         class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4 ">
                         <div>
-                            <button wire:click="create()"
+                            <button wire:click="openModal('modal3')"
                                 class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded my-3">Nuevo</button>
 
                         </div>
@@ -59,6 +59,7 @@
                                 <th scope="col" class="px-6 py-3">Logo</th>
                                 <th scope="col" class="px-6 py-3">Descripción</th>
                                 <th scope="col" class="px-6 py-3">Organizador</th>
+                                <th scope="col" class="px-6 py-3">Patrocinadores</th>
                                 <th scope="col" class="px-6 py-3">Modalidad</th>
                                 <th scope="col" class="px-6 py-3">Localidad</th>
                                 <th scope="col" class="px-6 py-3">Plantilla Diploma</th>
@@ -81,16 +82,31 @@
                                     </td>
                                     <td class="px-6 py-4">{{ $nombreevento->descripcion }}</td>
                                     <td class="px-6 py-4">{{ $nombreevento->organizador }}</td>
-                                    <td class="px-6 py-4">{{ $nombreevento->modalidad->modalidad }}</td>
-                                    <td class="px-6 py-4">{{ $nombreevento->localidad->localidad }}</td>
                                     <td class="px-6 py-4">
-                                        @if($nombreevento->diploma->Plantilla)
-                                            <img src="{{ asset('storage/' . $nombreevento->diploma->Plantilla) }}"
-                                                alt="Plantilla" class="w-12 h-12 object-cover">
+                                        @if($nombreevento->patrocinadores->isEmpty())
+                                            <p>No hay patrocinadores asociados a este evento.</p>
+                                        @else
+                                            <ul>
+                                                @foreach($nombreevento->patrocinadores as $patrocinador)
+                                                    <li>{{ $patrocinador->descripcion }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                    </td>
+
+                                    <td class="px-6 py-4">{{ $nombreevento->modalidad->modalidad }}</td>
+                                    <td class="px-6 py-4">
+                                        {{ $nombreevento->localidad ? $nombreevento->localidad->localidad : 'Evento virtual' }}
+                                    </td>
+
+                                    <td class="px-6 py-4">
+                                        @if($nombreevento->diploma?->Plantilla)
+                                            <img src="{{ asset('storage/' . $nombreevento->diploma->Plantilla) }}" alt="Plantilla" class="w-12 h-12 object-cover">
                                         @else
                                             Sin Plantilla
                                         @endif
                                     </td>
+
                                     <td class="px-6 py-4">
                                         <a href="{{ route('reporteEvento', ['evento' => $nombreevento->id]) }}"
                                             class="mb-1 w-full px-3 py-2 text-sm font-medium text-white inline-flex items-center bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">

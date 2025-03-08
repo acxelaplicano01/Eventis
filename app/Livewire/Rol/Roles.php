@@ -58,6 +58,7 @@ class Roles extends Component
         } else {
             $this->createRole();
         }
+        return redirect()->route('rol');
     }
 
     private function createRole()
@@ -130,6 +131,7 @@ class Roles extends Component
             $role ->forceDelete();
             session()->flash('message', 'Rol eliminado correctamente!');
             $this->confirmingDelete = false;
+            return redirect()->route('rol');
         }
     }
 

@@ -123,27 +123,30 @@
                                     class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Modalidad:</label>
                                 <select id="modalidadSelect"
                                     class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                    wire:model="idmodalidad">
+                                    wire:model.live="idmodalidad">
                                     <option value="">Seleccione una Modalidad</option>
                                     @foreach($modalidades as $modalidad)
                                         <option value="{{ $modalidad->id }}">{{ $modalidad->modalidad }}</option>
                                     @endforeach
                                 </select>
+                                
                                 @error('idmodalidad') <span class="text-red-500">{{ $message }}</span>@enderror
                             </div>
-                            <div class="mb-4">
-                                <label for="localidadSelect"
-                                    class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Localidad:</label>
-                                <select id="localidadSelect"
-                                    class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                                    wire:model="idlocalidad">
-                                    <option value="">Seleccione una Localidad</option>
-                                    @foreach($localidades as $localidad)
-                                        <option value="{{ $localidad->id }}">{{ $localidad->localidad }}</option>
-                                    @endforeach
-                                </select>
-                                @error('idlocalidad') <span class="text-red-500">{{ $message }}</span>@enderror
-                            </div>
+                            @if($idmodalidad == 2 || $idmodalidad == 3) 
+                                <div class="mb-4" wire:key="localidad-section">
+                                    <label for="localidadSelect" class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Localidad:</label>
+                                    <select id="localidadSelect"
+                                        class="shadow bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                                        wire:model.live="idlocalidad">
+                                        <option value="">Seleccione una Localidad</option>
+                                        @foreach($localidades as $localidad)
+                                            <option value="{{ $localidad->id }}">{{ $localidad->localidad }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('idlocalidad') <span class="text-red-500"></span>@enderror
+                                </div>
+                            @endif
+
                             <div class="mb-4">
                                 <label for="diplomasSelect"
                                     class="block text-gray-700 text-sm font-bold mb-2 dark:text-white">Plantilla del diploma:</label>
@@ -156,6 +159,7 @@
                                     @endforeach
                                 </select>
                                 @error('IdDiploma') <span class="text-red-500">{{ $message }}</span>@enderror
+                           
                             </div>
                         </div>
                     </div>

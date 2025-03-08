@@ -16,14 +16,14 @@
                     </div>
                 @endif
 
-                @if($isOpen)
+                @if($isOpen === 'modal3')
                     @include('livewire.Localidad.create')
                 @endif
 
                 <div class="relative overflow-x-auto sm:rounded-lg dark:bg-gray-800">
                     <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
                         <div>
-                            <button wire:click="create()" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded my-3">Nuevo</button>
+                            <button wire:click="openModal('modal3')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded my-3">Nuevo</button>
                         </div>
                         <label for="table-search" class="sr-only">Search</label>
                         <div class="relative">

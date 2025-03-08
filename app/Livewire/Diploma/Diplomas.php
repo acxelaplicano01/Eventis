@@ -78,7 +78,7 @@ class Diplomas extends Component
 
     public function selectEvento($eventoId)
     {
-        $this->IdEvento = $eventoId;
+        $this-> evento->IdEvento = $eventoId;
         $evento = Evento::find($eventoId);
         $this->inputSearchEvento = $evento->nombreevento;
         $this->searchEventos = [];
@@ -101,20 +101,25 @@ class Diplomas extends Component
           $this->searchConferencias = [];
       }*/
 
-    public function create()
+    public function create($modalId)
     {
         $this->resetInputFields();
-        $this->openModal();
+        $this->openModal($modalId);
     }
-
-    public function openModal()
+  
+     
+    public function openModal($modalId)
     {
-        $this->isOpen = true;
+        $this->isOpen = $modalId;
     }
-
-    public function closeModal()
+    public function closeModal(): void
     {
-        $this->isOpen = false;
+        $this->isOpen= null;
+        $this->resetInputFields();
+        $this->resetInputFieldsEvento();;
+    }
+    private function resetInputFieldsEvento(){
+        $this->diploma_id = null;
     }
 
     private function resetInputFields()
@@ -171,7 +176,7 @@ class Diplomas extends Component
         $this->diploma_id = $id;
         $this->Nombre = $diploma->Nombre;
         $this->Plantilla = $diploma->Plantilla;
-        $this->openModal();
+        $this->openModal('modal2');
     }
 
     public function delete()

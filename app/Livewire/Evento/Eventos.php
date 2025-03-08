@@ -22,7 +22,30 @@ class Eventos extends Component
     public $showDetails = false;
     public $selectedEvento;
     public $modalidades, $localidades, $diplomas;
+    public $patrocinadoresSeleccionados = [];
+    public $cantidadInvitados = [];
+    private function resetInputFieldsEvento(){
+        $this->evento_id = null;
+    }
+    public function create($modalId)
+    {
+        $this->resetInputFields();
+        $this->openModal($modalId);
+    }
+
    
+    public function openModal($modalId)
+    {
+        $this->isOpen = $modalId;
+    }
+
+    public function closeModal(): void
+    {
+        $this->isOpen= null;
+        $this->resetInputFields();
+        $this->resetInputFieldsEvento();;
+    }
+
     public function mount()
     {
         $this->modalidades = Modalidad::all();
@@ -32,7 +55,7 @@ class Eventos extends Component
 
     public function render()
     {
-        $eventos = Evento::with('modalidad', 'localidad', 'diploma')
+        $eventos = Evento::with('modalidad', 'localidad', 'diploma', 'patrocinadores') // Traemos la relación patrocinadores
             ->where('nombreevento', 'like', '%' . $this->search . '%')
             ->orderBy('id', 'DESC')
             ->paginate(8);
@@ -40,21 +63,6 @@ class Eventos extends Component
         return view('livewire.Evento.eventos', ['eventos' => $eventos]);
     }
 
-    public function create()
-    {
-        $this->resetInputFields();
-        $this->openModal();
-    }
-
-    public function openModal()
-    {
-        $this->isOpen = true;
-    }
-
-    public function closeModal()
-    {
-        $this->isOpen = false;
-    }
 
     private function resetInputFields()
     {
@@ -83,8 +91,8 @@ class Eventos extends Component
             'horainicio' => 'required',
             'horafin' => 'required',
             'idmodalidad' => 'required',
-            'idlocalidad' => 'required',
-            'IdDiploma' => 'required',
+            'idlocalidad' => 'nullable',
+            'IdDiploma' => 'nullable',
             'estado' => 'required|string|max:255',
             'precio' => 'nullable',
         ]);
@@ -108,8 +116,8 @@ class Eventos extends Component
             'horainicio' => $this->horainicio,
             'horafin' => $this->horafin,
             'idmodalidad' => $this->idmodalidad,
-            'idlocalidad' => $this->idlocalidad,
-            'IdDiploma' => $this->IdDiploma,
+            'idlocalidad' => $this->idlocalidad  ?: null,
+            'IdDiploma' => $this->IdDiploma ?: null,
             'estado' => $this->estado,
             'precio' => $this->precio ?: null,
         ]);
@@ -123,24 +131,24 @@ class Eventos extends Component
 
 
     public function edit($id)
-{
-    $evento = Evento::findOrFail($id);
-    $this->evento_id = $id;
-    $this->nombreevento = $evento->nombreevento;
-    $this->descripcion = $evento->descripcion;
-    $this->organizador = $evento->organizador;
-    $this->fechainicio = $evento->fechainicio;
-    $this->fechafinal = $evento->fechafinal;
-    $this->horainicio = $evento->horainicio;
-    $this->horafin = $evento->horafin;
-    $this->idmodalidad = $evento->idmodalidad;
-    $this->idlocalidad = $evento->idlocalidad;
-    $this->IdDiploma = $evento->IdDiploma;
-    $this->logo = null; // Mantener el logo existente sin sobrescribirlo
-    $this->estado = $evento->estado;
-    $this->precio = $evento->precio;
-    $this->openModal();
-}
+    {
+        $evento = Evento::findOrFail($id);
+        $this->evento_id = $id;
+        $this->nombreevento = $evento->nombreevento;
+        $this->descripcion = $evento->descripcion;
+        $this->organizador = $evento->organizador;
+        $this->fechainicio = $evento->fechainicio;
+        $this->fechafinal = $evento->fechafinal;
+        $this->horainicio = $evento->horainicio;
+        $this->horafin = $evento->horafin;
+        $this->idmodalidad = $evento->idmodalidad;
+        $this->idlocalidad = $evento->idlocalidad;
+        $this->IdDiploma = $evento->IdDiploma;
+        $this->logo = null; // Mantener el logo existente sin sobrescribirlo
+        $this->estado = $evento->estado;
+        $this->precio = $evento->precio;
+        $this->openModal("modal3");
+    }
 
     public function delete()
     {

@@ -41,7 +41,7 @@
                                 <option value="1">Presente</option>
                                 <option value="0">Ausente</option>
                             </select>
-                            @error('Asistencia') <span class="text-red-500">{{ $message }}</span> @enderror
+                            @error('Asistencia') <span class="text-red-500">{{  }}</span> @enderror
                         </div>
 
                         <div class="flex justify-end space-x-2">
